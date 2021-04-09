@@ -44,7 +44,6 @@ const corsAnyOrigin = "*"
 //a JSON-encoded PageSummary struct containing the page summary
 //meta-data.
 func SummaryHandler(w http.ResponseWriter, r *http.Request) {
-
 	w.Header().Add(headerCORS, corsAnyOrigin)
 
 	url := r.URL.Query().Get("url")
@@ -68,7 +67,6 @@ func SummaryHandler(w http.ResponseWriter, r *http.Request) {
 //Errors are returned if the response status code is an error (>=400),
 //or if the content type indicates the URL is not an HTML page.
 func fetchHTML(pageURL string) (io.ReadCloser, error) {
-
 	resp, err := http.Get(pageURL)
 
 	if err != nil {
@@ -132,7 +130,6 @@ func extractSummary(pageURL string, htmlStream io.ReadCloser) (*PageSummary, err
 							content, _ := getAttr(token.Attr, "content")
 							u, _ := url.Parse(content)
 							imgs[counter].URL = base.ResolveReference(u).String()
-							//summy.Images = append(summy.Images, &currentImg)
 						} else if val == "og:image:secure_url" {
 							base, _ := url.Parse(pageURL)
 							content, _ := getAttr(token.Attr, "content")
