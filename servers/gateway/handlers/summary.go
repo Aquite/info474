@@ -48,13 +48,21 @@ func SummaryHandler(w http.ResponseWriter, r *http.Request) {
 
 	url := r.URL.Query().Get("url")
 	if len(url) == 0 {
-		http.Error(w, "Bad status request", 400)
+		http.Error(w, "Bad status request", http.StatusBadRequest)
 		return
 	}
 
-	io, _ := fetchHTML(url)
+	io, err := fetchHTML(url)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 
-	summ, _ := extractSummary(url, io)
+	summ, err := extractSummary(url, io)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 	io.Close()
 
 	w.Header().Add("Content-Type", "application/json")
