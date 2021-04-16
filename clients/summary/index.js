@@ -9,7 +9,13 @@ let videos = $('videos');
 submitbtn.addEventListener('click', (e) => {
     e.preventDefault();
     let websiteInput = $('websiteInput');
-    let failed = false
+    let failed = false;
+    title.innerHTML = "";
+    description.innerHTML = "";
+    images.innerHTML = "";
+    videos.innerHTML = "";
+    errors.innerHTML = "";
+
     fetch(`https://api.pavelsrinidhi.me/v1/summary?url=${websiteInput.value}`).then(d => {
         if (d.status >= 400) {
             // console.log(d.text())
@@ -22,18 +28,18 @@ submitbtn.addEventListener('click', (e) => {
             throw new Error(d);
         }
 
+
         if (d.title) {
-            title.innerHTML = "";
             title.innerText = d.title
         }
 
+
         if (d.description) {
-            description.innerHTML = "";
             description.innerText = d.description;
         }
 
+
         if (d.images && d.images.length > 0) {
-            images.innerHTML = "";
             d.images.forEach(image => {
                 let imageEl = document.createElement('img');
                 imageEl.src = image.url;
@@ -41,8 +47,8 @@ submitbtn.addEventListener('click', (e) => {
             });
         }
 
+
         if (d.videos && d.videos.length > 0) {
-            videos.innerHTML = "";
             console.log(d.videos);
             d.videos.forEach(video => {
                 let videoEl;
@@ -56,7 +62,6 @@ submitbtn.addEventListener('click', (e) => {
             })
         }
     }).catch(e => {
-        errors.innerHTML = "";
         errors.innerText = e;
     });
 });

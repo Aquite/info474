@@ -1,6 +1,4 @@
-GOOS=linux go build
 docker build -t pbatalov/summaryclient .
-go clean
 
 docker push pbatalov/summaryclient
 
