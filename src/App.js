@@ -27,10 +27,6 @@ const [data, loading] = useFetch(
     })
   );
 
-  const projection = d3.geoNaturalEarth1();
-
-  const path = d3.geoPath(projection);
-
   const s = 500;
   const margin = 20;
   const axisTextAlignmentFactor = 3;
@@ -52,12 +48,7 @@ const [data, loading] = useFetch(
     <div>
       <h1>Exploratory Data Analysis, Assignment 2, INFO 474 SP 2021</h1>
       <p>{ loading && "loading data!" }</p>
-
-      <h3>Working with geo data</h3>
-      <svg width={s} height={s} style={{ border: "1px solid black"}}>
-
-      </svg>
-
+      
       <h3>Binning</h3>
       <svg width={s} height={s} style={{ border: "1px solid black"}}>
         {bucketsTMAX.map((bin, i) => {
