@@ -2,7 +2,7 @@
   "name": "info474",
   "version": "1.0.0",
   "description": "",
-  "main": "docs/index.html",
+  "main": "dist/index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --public-url https://aquite.github.io/info474/ && rm -rf docs && mv dist docs",
