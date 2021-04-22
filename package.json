@@ -8,16 +8,8 @@
     "build": "parcel build index.html --public-url https://aquite.github.io/info474/ && rm -rf docs && mv dist docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Aquite/info474.git"
-  },
-  "author": "",
+  "author": "Pavel Batalov",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Aquite/info474/issues"
-  },
-  "homepage": "https://github.com/Aquite/info474#readme",
   "dependencies": {
     "d3-array": "^2.12.1",
     "d3-fetch": "^2.0.0",

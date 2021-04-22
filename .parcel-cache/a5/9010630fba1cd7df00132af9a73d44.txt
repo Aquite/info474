@@ -6,7 +6,7 @@
 111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-unique-selectors\node_modules\color-name\README.md131339336430000000 0
 69C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\des.js\.jshintrc121436361000000000 0
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-ordered-values132636079394849139 1
-52C:\Users\Pavel\Desktop\INFO\474\info474\package.json132636086041800865 0
+52C:\Users\Pavel\Desktop\INFO\474\info474\package.json132636090676095562 0
 72C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\nanomatch\README.md121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@nodelib\fs.scandir\out\settings.d.ts121436361000000000 0
 64C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\url\LICENSE130646432370000000 0
@@ -30,7 +30,7 @@
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\relateurl\lib\relate132636079285661237 1
 77C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\emojis-list\package.json132636079415191959 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\number\parse-float.js121436361000000000 0
-44C:\Users\Pavel\Desktop\INFO\474\info474\dist132636086204636890 1
+44C:\Users\Pavel\Desktop\INFO\474\info474\dist132636090947656957 1
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\cssesc\LICENSE-MIT.txt121436361000000000 0
 108C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-merge-rules\node_modules\postcss\docs\syntax.md121436361000000000 0
 88C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\es-abstract\2016\QuoteJSONString.js121436361000000000 0
@@ -80,7 +80,7 @@
 62C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\is-buffer132636079411862021 1
 98C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\regenerate-unicode-properties\Script\Nushu.js121436361000000000 0
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\caniuse-lite\data\features\upgradeinsecurerequests.js121436361000000000 0
-44C:\Users\Pavel\Desktop\INFO\474\info474\docs132636082770150552 1
+44C:\Users\Pavel\Desktop\INFO\474\info474\docs132636086204636890 1
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\purgecss\node_modules\commander\LICENSE121436361000000000 0
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\_lazyReverse.js121436361000000000 0
 78C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\http-signature\CHANGES.md131480975920000000 0
@@ -4038,6 +4038,7 @@
 103C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-discard-empty\node_modules\chalk\readme.md121436361000000000 0
 108C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-modules-values\node_modules\color-name\index.js131446304070000000 0
 79C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\object.values\CHANGELOG.md121436361000000000 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.71dfdcf7.js132636086204546916 0
 74C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\svgo\plugins\_path.js121436361000000000 0
 118C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\uncss\node_modules\postcss-selector-parser\dist\__tests__\node.js121436361000000000 0
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\node-forge\lib\baseN.js121436361000000000 0
@@ -12291,6 +12292,7 @@
 84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\icss-utils\node_modules\postcss132636079396469153 1
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\nanomatch\package.json132636079389149063 0
 65C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\nanoid\async132636079302298102 1
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.71dfdcf7.js.map132636086204626885 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\reporter-cli\src\render.js121436361000000000 0
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\nanoid\index.browser.js121436361000000000 0
 89C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\string\pad-start.js121436361000000000 0
@@ -13365,7 +13367,7 @@
 109C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\css-modules-loader-core\node_modules\postcss\lib\node.js131386303530000000 0
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema-traverse\spec\index.spec.js131702816850000000 0
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-format\locale\ar-EH.json121436361000000000 0
-55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132636082769870492 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132636086204517021 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-00132636079306238131 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-01132636079303388119 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-03132636079305008142 1
@@ -17967,7 +17969,7 @@
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\at.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\copy-within.js121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\flat-map.js121436361000000000 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.71dfdcf7.js.map132636086204626885 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.71dfdcf7.js.map132636090947646927 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\for-each.js121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\includes.js121436361000000000 0
 88C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\array\last-item.js121436361000000000 0
@@ -21316,7 +21318,5 @@
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uncss.ps1132636079427981963 0
 66C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uuid.ps1132636079427541948 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\which.ps1132636079427631968 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132636082770050650 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132636082770140587 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.71dfdcf7.js132636086204546916 0
-55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132636086204517021 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.71dfdcf7.js132636090947556968 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132636090947516954 0
