@@ -1,0 +1,405 @@
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _hooksUseFetch = require("./hooks/useFetch");
+  var _d3Scale = require("d3-scale");
+  var _d3Array = require("d3-array");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
+  const Assignment2 = () => {
+    _s();
+    const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/Aquite/react-parcel-example-1/main/weather.csv");
+    const dataSmallSample = data.slice(0, 5000);
+    const extentTMAX = _d3Array.extent(dataSmallSample, d => {
+      return d.TMAX;
+    });
+    const maxValueOfTMAX = _d3Array.max(dataSmallSample.map(measurement => {
+      return +measurement.TMAX;
+    }));
+    const minValueOfTMAX = _d3Array.min(dataSmallSample.map(measurement => {
+      return +measurement.TMAX;
+    }));
+    const s = 500;
+    const margin = 20;
+    const axisTextAlignmentFactor = 3;
+    const yScale = _d3Scale.scaleLinear().domain([minValueOfTMAX, maxValueOfTMAX]).range([s, s - 250]);
+    const binTMAX = _d3Array.bin().thresholds(30);
+    const bucketsTMAX = binTMAX(data.map(d => {
+      return +d.TMAX;
+    }));
+    const histogramLeftPadding = 20;
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 48,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h1", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 49,
+          columnNumber: 7
+        }
+      }, "Exploratory Data Analysis, Assignment 2, INFO 474 SP 2021"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 50,
+          columnNumber: 7
+        }
+      }, loading && "loading data!"), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52,
+          columnNumber: 7
+        }
+      }, "Binning"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 53,
+          columnNumber: 7
+        }
+      }, bucketsTMAX.map((bin, i) => {
+        // const binHeight = bin.length && bin.length * 0.001 < 1 ? 1 : bin.length * 0.001
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("rect", {
+            y: s - 50 - bin.length,
+            width: "10",
+            height: bin.length,
+            x: histogramLeftPadding + i * 11,
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 57,
+              columnNumber: 13
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64,
+          columnNumber: 7
+        }
+      }, "Barcode plot at TMAX - linear scaling"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - 10,
+        textAnchor: "end",
+        y: s - margin + axisTextAlignmentFactor,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67,
+          columnNumber: 9
+        }
+      }, "0"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - 10,
+        textAnchor: "end",
+        y: s - margin - 100 + axisTextAlignmentFactor,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 75,
+          columnNumber: 9
+        }
+      }, "100"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - 10,
+        y1: s - margin - 100,
+        x2: s / 2 - 5,
+        y2: s - margin - 100,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 83,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - 10,
+        y1: s - margin,
+        x2: s / 2 - 5,
+        y2: s - margin,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 90,
+          columnNumber: 9
+        }
+      }), dataSmallSample.map((measurement, index) => {
+        const highlight = measurement.station === "KALISPELL GLACIER AP";
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("line", {
+            key: index,
+            x1: s / 2,
+            y1: yScale(measurement.TMAX),
+            x2: s / 2 + 20,
+            y2: yScale(measurement.TMAX),
+            r: "3",
+            fill: "none",
+            stroke: highlight ? "red" : "steelblue",
+            strokeOpacity: highlight ? 1 : 0.1,
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 101,
+              columnNumber: 13
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 118,
+          columnNumber: 7
+        }
+      }, "Scatterplot"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 119,
+          columnNumber: 7
+        }
+      }, data.slice(0, 300).map((measurement, index) => {
+        const highlight = measurement.station === "KALISPELL GLACIER AP";
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: index,
+            cx: 100 - measurement.TMIN,
+            cy: s - margin - measurement.TMAX,
+            r: "3",
+            fill: "none",
+            stroke: highlight ? "red" : "steelblue",
+            strokeOpacity: "0.2",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 123,
+              columnNumber: 13
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 138,
+          columnNumber: 7
+        }
+      }, "Barcode plot at TMAX"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 139,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - 10,
+        textAnchor: "end",
+        y: s - margin + axisTextAlignmentFactor,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 141,
+          columnNumber: 9
+        }
+      }, "0"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - 10,
+        textAnchor: "end",
+        y: s - margin - 100 + axisTextAlignmentFactor,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 149,
+          columnNumber: 9
+        }
+      }, "100"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - 10,
+        y1: s - margin - 100,
+        x2: s / 2 - 5,
+        y2: s - margin - 100,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 157,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - 10,
+        y1: s - margin,
+        x2: s / 2 - 5,
+        y2: s - margin,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 164,
+          columnNumber: 9
+        }
+      }), data.slice(0, 1000).map((measurement, index) => {
+        const highlight = measurement.station === "KALISPELL GLACIER AP";
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("line", {
+            key: index,
+            x1: s / 2,
+            y1: s - margin - measurement.TMAX,
+            x2: s / 2 + 20,
+            y2: s - margin - measurement.TMAX,
+            r: "3",
+            fill: "none",
+            stroke: highlight ? "red" : "steelblue",
+            strokeOpacity: highlight ? 1 : 0.1,
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 175,
+              columnNumber: 13
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 191,
+          columnNumber: 7
+        }
+      }, "TMAX at KALISPELL GLACIER AP is lower than average"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 192,
+          columnNumber: 7
+        }
+      }, data.slice(0, 300).map((measurement, index) => {
+        const highlight = measurement.station === "KALISPELL GLACIER AP";
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: index,
+            cx: highlight ? s / 2 + 20 : s / 2,
+            cy: s - margin - measurement.TMAX,
+            r: "3",
+            fill: "none",
+            stroke: highlight ? "red" : "steelblue",
+            strokeOpacity: "0.2",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 196,
+              columnNumber: 13
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("h3", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 210,
+          columnNumber: 7
+        }
+      }, "TMAX"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 211,
+          columnNumber: 7
+        }
+      }, data.slice(0, 300).map((measurement, index) => {
+        const highlight = measurement.station === "KALISPELL GLACIER AP";
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: index,
+            cx: s / 2,
+            cy: s - margin - measurement.TMAX,
+            r: "3",
+            fill: "none",
+            stroke: "steelblue",
+            strokeOpacity: "0.2",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 215,
+              columnNumber: 13
+            }
+          })
+        );
+      })))
+    );
+  };
+  _s(Assignment2, "Jm65JCcgUFoenM4DufkEA80vRVI=", false, function () {
+    return [_hooksUseFetch.useFetch];
+  });
+  _c = Assignment2;
+  exports.default = Assignment2;
+  var _c;
+  $RefreshReg$(_c, "Assignment2");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

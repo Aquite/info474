@@ -1,0 +1,134 @@
+var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _reactRouterDom = require('react-router-dom');
+  require('bootstrap/dist/css/bootstrap.min.css');
+  var _HeaderJs = require('./Header.js');
+  require('./assignment2/Assignment2.js');
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\App.js";
+  const App = () => {
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        className: "App",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 11,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_HeaderJs.Header, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12,
+          columnNumber: 7
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("main", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Switch, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/",
+        component: Home,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 15,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/about",
+        component: About,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/contact",
+        component: Contact,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/diet",
+        component: Diet,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/profile",
+        component: Profile,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/settings",
+        component: Settings,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        path: "/restaurants",
+        component: Restaurants,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Redirect, {
+        to: "/",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 22,
+          columnNumber: 11
+        }
+      }))))
+    );
+  };
+  _c = App;
+  exports.default = App;
+  var _c;
+  $RefreshReg$(_c, "App");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

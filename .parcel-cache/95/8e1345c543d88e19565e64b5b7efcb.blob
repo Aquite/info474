@@ -1,0 +1,11 @@
+main {
+  padding-top: 4em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+Navbar {
+  background-color: #0E2F44;
+}
