@@ -1,8 +1,15 @@
 package handlers
 
 import (
+	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"strconv"
+	"strings"
+
+	"golang.org/x/net/html"
 )
 
 //PreviewImage represents a preview image for a page
@@ -28,72 +35,187 @@ type PageSummary struct {
 	Images      []*PreviewImage `json:"images,omitempty"`
 }
 
+const headerCORS = "Access-Control-Allow-Origin"
+const corsAnyOrigin = "*"
+
 //SummaryHandler handles requests for the page summary API.
 //This API expects one query string parameter named `url`,
 //which should contain a URL to a web page. It responds with
 //a JSON-encoded PageSummary struct containing the page summary
 //meta-data.
 func SummaryHandler(w http.ResponseWriter, r *http.Request) {
-	/*TODO: add code and additional functions to do the following:
-	- Add an HTTP header to the response with the name
-	 `Access-Control-Allow-Origin` and a value of `*`. This will
-	  allow cross-origin AJAX requests to your server.
-	- Get the `url` query string parameter value from the request.
-	  If not supplied, respond with an http.StatusBadRequest error.
-	- Call fetchHTML() to fetch the requested URL. See comments in that
-	  function for more details.
-	- Call extractSummary() to extract the page summary meta-data,
-	  as directed in the assignment. See comments in that function
-	  for more details
-	- Close the response HTML stream so that you don't leak resources.
-	- Finally, respond with a JSON-encoded version of the PageSummary
-	  struct. That way the client can easily parse the JSON back into
-	  an object
+	w.Header().Add(headerCORS, corsAnyOrigin)
 
-	Helpful Links:
-	https://golang.org/pkg/net/http/#Request.FormValue
-	https://golang.org/pkg/net/http/#Error
-	https://golang.org/pkg/encoding/json/#NewEncoder
-	*/
+	url := r.URL.Query().Get("url")
+	if len(url) == 0 {
+		http.Error(w, "Bad status request", http.StatusBadRequest)
+		return
+	}
+
+	io, err := fetchHTML(url)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	summ, err := extractSummary(url, io)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	io.Close()
+
+	w.Header().Add("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(summ)
+
 }
 
 //fetchHTML fetches `pageURL` and returns the body stream or an error.
 //Errors are returned if the response status code is an error (>=400),
 //or if the content type indicates the URL is not an HTML page.
 func fetchHTML(pageURL string) (io.ReadCloser, error) {
-	/*TODO: Do an HTTP GET for the page URL. If the response status
-	code is >= 400, return a nil stream and an error. If the response
-	content type does not indicate that the content is a web page, return
-	a nil stream and an error. Otherwise return the response body and
-	no (nil) error.
+	resp, err := http.Get(pageURL)
 
-	To test your implementation of this function, run the TestFetchHTML
-	test in summary_test.go. You can do that directly in Visual Studio Code,
-	or at the command line by running:
-		go test -run TestFetchHTML
+	if err != nil {
+		return nil, err
+	}
 
-	Helpful Links:
-	https://golang.org/pkg/net/http/#Get
-	*/
-	return nil, nil
+	if resp.StatusCode >= 400 {
+		return nil, fmt.Errorf("err is: %s", "bad status code")
+	}
+
+	ctype := resp.Header.Get("Content-Type")
+	if !strings.HasPrefix(ctype, "text/html") {
+		return nil, fmt.Errorf("err is: %s", "bad content type")
+	}
+
+	return resp.Body, nil
 }
 
 //extractSummary tokenizes the `htmlStream` and populates a PageSummary
 //struct with the page's summary meta-data.
 func extractSummary(pageURL string, htmlStream io.ReadCloser) (*PageSummary, error) {
-	/*TODO: tokenize the `htmlStream` and extract the page summary meta-data
-	according to the assignment description.
+	tokenizer := html.NewTokenizer(htmlStream)
 
-	To test your implementation of this function, run the TestExtractSummary
-	test in summary_test.go. You can do that directly in Visual Studio Code,
-	or at the command line by running:
-		go test -run TestExtractSummary
+	summy := PageSummary{}
 
-	Helpful Links:
-	https://drstearns.github.io/tutorials/tokenizing/
-	http://ogp.me/
-	https://developers.facebook.com/docs/reference/opengraph/
-	https://golang.org/pkg/net/url/#URL.ResolveReference
-	*/
-	return nil, nil
+	imgs := []*PreviewImage{}
+	imgs = append(imgs, &PreviewImage{})
+	counter := 0
+
+	for {
+		tokenType := tokenizer.Next()
+
+		if tokenType == html.ErrorToken {
+			if tokenizer.Err() == io.EOF {
+				break
+			}
+		}
+
+		if tokenType == html.SelfClosingTagToken || tokenType == html.StartTagToken {
+			token := tokenizer.Token()
+			if token.Attr != nil {
+				if token.Data == "meta" {
+					val, err := getAttr(token.Attr, "property")
+					if err == nil {
+						if val == "og:type" {
+							summy.Type, _ = getAttr(token.Attr, "content")
+						} else if val == "og:url" {
+							summy.URL, _ = getAttr(token.Attr, "content")
+						} else if val == "og:title" {
+							summy.Title, _ = getAttr(token.Attr, "content")
+						} else if val == "og:site_name" {
+							summy.SiteName, _ = getAttr(token.Attr, "content")
+						} else if val == "og:description" {
+							summy.Description, _ = getAttr(token.Attr, "content")
+						} else if val == "og:image" {
+							if imgs[counter].URL != "" {
+								imgs = append(imgs, &PreviewImage{})
+								counter++
+							}
+							base, _ := url.Parse(pageURL)
+							content, _ := getAttr(token.Attr, "content")
+							u, _ := url.Parse(content)
+							imgs[counter].URL = base.ResolveReference(u).String()
+						} else if val == "og:image:secure_url" {
+							base, _ := url.Parse(pageURL)
+							content, _ := getAttr(token.Attr, "content")
+							u, _ := url.Parse(content)
+							imgs[counter].SecureURL = base.ResolveReference(u).String()
+						} else if val == "og:image:type" {
+							imgs[counter].Type, _ = getAttr(token.Attr, "content")
+						} else if val == "og:image:width" {
+							width, _ := getAttr(token.Attr, "content")
+							imgs[counter].Width, _ = strconv.Atoi(width)
+						} else if val == "og:image:height" {
+							height, _ := getAttr(token.Attr, "content")
+							imgs[counter].Height, _ = strconv.Atoi(height)
+						} else if val == "og:image:alt" {
+							imgs[counter].Alt, _ = getAttr(token.Attr, "content")
+						}
+					}
+
+					val, err = getAttr(token.Attr, "name")
+					if err == nil {
+						if val == "author" {
+							summy.Author, _ = getAttr(token.Attr, "content")
+						} else if val == "keywords" {
+							content, _ := getAttr(token.Attr, "content")
+							slc := strings.Split(content, ",")
+							for i := range slc {
+								slc[i] = strings.TrimSpace(slc[i])
+							}
+							summy.Keywords = slc
+						} else if val == "description" {
+							if summy.Description == "" {
+								summy.Description, _ = getAttr(token.Attr, "content")
+							}
+						}
+					}
+
+				} else if token.Data == "link" {
+					val, err := getAttr(token.Attr, "rel")
+					if err == nil && val == "icon" {
+						icon := PreviewImage{}
+						icon.Type, _ = getAttr(token.Attr, "type")
+						base, _ := url.Parse(pageURL)
+						lin, _ := getAttr(token.Attr, "href")
+						u, _ := url.Parse(lin)
+						icon.URL = base.ResolveReference(u).String()
+						size, _ := getAttr(token.Attr, "sizes")
+						if size != "any" && strings.Contains(size, "x") {
+							dim := strings.Split(size, "x")
+							icon.Width, _ = strconv.Atoi(dim[1])
+							icon.Height, _ = strconv.Atoi(dim[0])
+						}
+						summy.Icon = &icon
+					}
+				}
+			} else if token.Data == "title" {
+				tokenType = tokenizer.Next()
+				if tokenType == html.TextToken && summy.Title == "" {
+					summy.Title = tokenizer.Token().Data
+				}
+			}
+		} else if tokenType == html.EndTagToken {
+			token := tokenizer.Token()
+			if token.Data == "head" {
+				break
+			}
+		}
+	}
+	if imgs[0].URL != "" {
+		summy.Images = imgs
+	}
+	return &summy, nil
+}
+
+func getAttr(attrs []html.Attribute, target string) (string, error) {
+	for i := 0; i < len(attrs); i++ {
+		if attrs[i].Key == target {
+			return attrs[i].Val, nil
+		}
+	}
+	return "", fmt.Errorf("err is: %s", "n/a")
 }
