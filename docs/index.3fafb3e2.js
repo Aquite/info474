@@ -33837,6 +33837,7 @@ try {
   var _reactBootstrapTabDefault = _parcelHelpers.interopDefault(_reactBootstrapTab);
   var _d3Array = require("d3-array");
   var _d3Scale = require("d3-scale");
+  var _reactSimpleMaps = require("react-simple-maps");
   var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
   const Assignment2 = () => {
     _s();
@@ -33845,7 +33846,7 @@ try {
     // Isolate to countries
     // List of country codes that aren't countries
     // Should not be included in the data set
-    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
     // Checks whether a country's code is included in the dataset
     const checkCode = d => {
       return !badCodes.includes(d["Country Code"]);
@@ -33872,7 +33873,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 95,
+        lineNumber: 103,
         columnNumber: 5
       }
     }, /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -33886,7 +33887,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 96,
+        lineNumber: 104,
         columnNumber: 7
       }
     }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -33900,7 +33901,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 104,
+        lineNumber: 112,
         columnNumber: 7
       }
     }, "0%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -33914,7 +33915,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 112,
+        lineNumber: 120,
         columnNumber: 7
       }
     }, "50%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -33926,7 +33927,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 120,
+        lineNumber: 128,
         columnNumber: 7
       }
     }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -33938,7 +33939,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 121,
+        lineNumber: 129,
         columnNumber: 7
       }
     }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -33950,7 +33951,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 122,
+        lineNumber: 130,
         columnNumber: 7
       }
     }));
@@ -33977,37 +33978,18 @@ try {
     const radScale = _d3Scale.scaleSqrt().domain(_d3Array.extent(dataFemChange.map(d => {
       return +d[1][women] * 0.01 * +d[1]["Labor force, total"];
     }))).range([1, 30]);
-    // Visualization Five: Female Labor force
-    /*const binFemale = bin().thresholds([0, 10, 20, 30, 40, 50, 60, 70, 80, 90]);
-    const bucketsFemale = binFemale(
-    data2017.map((d) => {
-    if (+d[women] != 0) {
-    console.log(d["Country Name"], d[women]);
-    return +d[women];
-    }
-    })
-    );
-    console.log(
-    extent(
-    data2017.map((d) => {
-    if (d[women] != 0) {
-    return +d[women];
-    }
-    })
-    )
-    );
-    console.log(bucketsFemale);
-    const femYScale = scaleLinear()
-    .domain([
-    0,
-    max(
-    bucketsFemale.map((bin) => {
-    return bin.length;
-    })
-    ),
-    ])
-    .range([0, s - m * 2]);*/
-    // Visualization Six: Unemployment by country in 2015
+    // Visualization Seven: Change in Deltas (histogram)
+    const binForce = _d3Array.bin().thresholds(20);
+    const bucketsForce = binForce(dataFemChange.map(d => {
+      return +d[1][women] - d[0][women];
+    }));
+    const forceYScale = _d3Scale.scaleLinear().domain([0, _d3Array.max(bucketsForce.map(bin => {
+      return bin.length;
+    }))]).range([0, s - m * 2]);
+    console.log(bucketsForce);
+    // Visualization Eight: Choropleth
+    const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+    const colorScale = _d3Scale.scaleLinear().domain([0, 60]).range(["aliceblue", "steelblue"]);
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
@@ -34016,28 +33998,140 @@ try {
           lineNumber: 233,
           columnNumber: 5
         }
-      }, /*#__PURE__*/_reactDefault.default.createElement("h4", {
+      }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 234,
           columnNumber: 7
         }
-      }, "These are my assignment 2 visualizations"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+      }, "Assignment 2"), /*#__PURE__*/_reactDefault.default.createElement("h4", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 235,
           columnNumber: 7
         }
-      }, loading && "loading data!"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabsDefault.default, {
-        defaultActiveKey: "women",
-        id: "assignment-2-tabs",
+      }, "Data Choice"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 236,
           columnNumber: 7
+        }
+      }, "For my exploratory data analysis, I took World Bank data on Social Protection and Labor, specifically focusing on the metric of the number of women in the workforce as a percentage of the total workforce."), /*#__PURE__*/_reactDefault.default.createElement("h4", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 241,
+          columnNumber: 7
+        }
+      }, "Questions"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 242,
+          columnNumber: 7
+        }
+      }, "I had many questions about the dataset, specifically focusing on issues regarding inequality in the workforce:"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 246,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 247,
+          columnNumber: 9
+        }
+      }, "What is the percentage of women in the workforce of the total workforce globally?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 251,
+          columnNumber: 9
+        }
+      }, "How does this percentage vary by country?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 252,
+          columnNumber: 9
+        }
+      }, "How has this percentage varied over time"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 253,
+          columnNumber: 9
+        }
+      }, "Do specific geopolitical regions have lower percentages of women versus men in their workforce?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 257,
+          columnNumber: 9
+        }
+      }, "Does the size of the workforce alter the female percentage?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 258,
+          columnNumber: 9
+        }
+      }, "What can we do to reach 50% globally?")), /*#__PURE__*/_reactDefault.default.createElement("h4", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 260,
+          columnNumber: 7
+        }
+      }, "Analysis Process"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 261,
+          columnNumber: 7
+        }
+      }, "This dataset was somewhat difficult to work with. It was formatted to work in Tableau, which unfortunately resulted in all \"null\" values being inputed as \"0\". Logically, I can assume that none of the fields I worked with would actually be zero, but it is still awkward to filter out data points at \"0\" instead of null. The other difficult part about working with this data is that it included entries for entities that were not countries. Including this data, with the European Union for example, would double-count some countries. I couldn't find a comprehensive list of codes this applies to on the World Bank website so I had to manually find and remove them."), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 273,
+          columnNumber: 7
+        }
+      }, "To prepare this data set for analysis, after filtering out the 0 values and entries with bad codes, I performed different functions for some of my visualizations. For most of the visualizations, I filtered the data to only include entries from 2017. For one visualization, I used a rollup function to take the mean of all countries for each year. For ones comparing data from 1991 and 2017, I filtered the data for both years and organized it into a two-dimensional array. I used a bin function after eliminating two outliers to create my histogram."), /*#__PURE__*/_reactDefault.default.createElement("h4", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 283,
+          columnNumber: 7
+        }
+      }, "Lessons Learned"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 284,
+          columnNumber: 7
+        }
+      }, "I learned that in most countries, just under 50% of the workforce is female. The size of the workforce does not appear to affect this percentage, however the geographical location is correlated, with MENA countries having significantly smaller percentage of the workforce being female. The percentage has increased slightly over time, but individual countries may vary wildly. Future analysis could focus on countries that saw a decrease in this percentage, and countries at the lower end of the scale. It would be interesting to see whether countries with robust FMLA leave and support for working parents see an increase in this percentage."), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 297,
+          columnNumber: 9
+        }
+      }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabsDefault.default, {
+        defaultActiveKey: "women",
+        id: "assignment-2-tabs",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 299,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "women",
@@ -34045,15 +34139,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 237,
-          columnNumber: 9
+          lineNumber: 300,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 238,
-          columnNumber: 11
+          lineNumber: 301,
+          columnNumber: 13
         }
       }, "Female labor force as a percentage of the total labor force in 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34064,8 +34158,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 241,
-          columnNumber: 11
+          lineNumber: 305,
+          columnNumber: 13
         }
       }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
         if (d[women] != 0) {
@@ -34082,8 +34176,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 246,
-                columnNumber: 19
+                lineNumber: 310,
+                columnNumber: 21
               }
             })
           );
@@ -34092,8 +34186,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 260,
-          columnNumber: 11
+          lineNumber: 324,
+          columnNumber: 13
         }
       }, "This chart shows the female to male ratio of the world labor force. Each line on the bar graph represents a country. Most countries appear to be roughly evenly divided, with just under 50% of the workforce being female. However, the data also skews left, indicating many countries contain few women in the workforce while no countries contain few men.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "menawomen",
@@ -34101,15 +34195,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 269,
-          columnNumber: 9
+          lineNumber: 333,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 273,
-          columnNumber: 11
+          lineNumber: 337,
+          columnNumber: 13
         }
       }, "Female labor force as a percentage of the total labor force in 2017 with the MENA region in red"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34120,8 +34214,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 277,
-          columnNumber: 11
+          lineNumber: 341,
+          columnNumber: 13
         }
       }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
         if (d[women] != 0) {
@@ -34139,8 +34233,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 283,
-                columnNumber: 19
+                lineNumber: 347,
+                columnNumber: 21
               }
             })
           );
@@ -34149,8 +34243,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 297,
-          columnNumber: 11
+          lineNumber: 361,
+          columnNumber: 13
         }
       }, "The MENA region consists of countries from the Middle East and North Africa. I've highlighted those countries in red and extended them to be visible without requiring color. All of the MENA countries fail to pass 25% female workforce, with the solitary of outlier of Israel at around 46%. Palestine is not included in the dataset.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "averagefemale",
@@ -34158,15 +34252,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 305,
-          columnNumber: 9
+          lineNumber: 370,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 309,
-          columnNumber: 11
+          lineNumber: 374,
+          columnNumber: 13
         }
       }, "Average female labor force among recorded countries as a percentage of total labor force among recorded countries from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34177,8 +34271,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 313,
-          columnNumber: 11
+          lineNumber: 379,
+          columnNumber: 13
         }
       }, yLabels(m + 30), femaleWorldTimeline.map((d, i) => {
         if (i != 0) {
@@ -34187,8 +34281,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 318,
-                columnNumber: 19
+                lineNumber: 384,
+                columnNumber: 21
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("line", {
               key: i,
@@ -34201,8 +34295,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 319,
-                columnNumber: 21
+                lineNumber: 385,
+                columnNumber: 23
               }
             }), /*#__PURE__*/_reactDefault.default.createElement("line", {
               key: "label " + i,
@@ -34216,8 +34310,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 328,
-                columnNumber: 21
+                lineNumber: 394,
+                columnNumber: 23
               }
             }), d[0] % 5 == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
               key: "year" + i,
@@ -34231,15 +34325,15 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 339,
-                columnNumber: 23
+                lineNumber: 405,
+                columnNumber: 25
               }
             }, d[0]) : /*#__PURE__*/_reactDefault.default.createElement("text", {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 352,
-                columnNumber: 23
+                lineNumber: 418,
+                columnNumber: 25
               }
             }))
           );
@@ -34249,8 +34343,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 358,
-                columnNumber: 19
+                lineNumber: 424,
+                columnNumber: 21
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("line", {
               key: "label " + i,
@@ -34264,8 +34358,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 359,
-                columnNumber: 21
+                lineNumber: 425,
+                columnNumber: 23
               }
             }))
           );
@@ -34274,24 +34368,24 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 374,
-          columnNumber: 11
+          lineNumber: 440,
+          columnNumber: 13
         }
       }, "Although we can see the female labor force roughly increasing, it isn't at a significant enough pace to reach 50% anytime soon. This indicates that globally, the world is unequal. Note: this is an average of all countries, not weighted by population, so it is not the percentage of the world labor force that is female.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "changes",
-        title: "Change in Female Labor, 1991-2017 (idk what to call this one)",
+        title: "Change in Female Labor, 1991-2017 (line2)",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 382,
-          columnNumber: 9
+          lineNumber: 448,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 386,
-          columnNumber: 11
+          lineNumber: 452,
+          columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34302,8 +34396,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 390,
-          columnNumber: 11
+          lineNumber: 456,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: s / 4,
@@ -34314,8 +34408,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 391,
-          columnNumber: 13
+          lineNumber: 457,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: s - s / 4,
@@ -34326,8 +34420,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 392,
-          columnNumber: 13
+          lineNumber: 458,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34340,8 +34434,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 399,
-          columnNumber: 13
+          lineNumber: 465,
+          columnNumber: 15
         }
       }, "1991"), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34354,8 +34448,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 410,
-          columnNumber: 13
+          lineNumber: 476,
+          columnNumber: 15
         }
       }, "2017"), yLabels(s / 4), dataFemChange.map((d, i) => {
         const highlight = +d[0][women] < +d[1][women];
@@ -34372,8 +34466,8 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 425,
-              columnNumber: 17
+              lineNumber: 491,
+              columnNumber: 19
             }
           })
         );
@@ -34381,24 +34475,24 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 438,
-          columnNumber: 11
+          lineNumber: 504,
+          columnNumber: 13
         }
       }, "This chart shows the net change in female labor force as a percentage of the total labor force by country between 1991 and 2017. Countries that increased the percentage of women in the workforce are depicted in blue while countries that decreased the percentage are depicted in red. Despite the previous observation's findings that the total percentage barely changed, from this graph we can see that individual countries frequently changed significantly.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "changesMENA",
-        title: "Change in Female Labor with MENA focus, 1991-2017 (idk what to call this one)",
+        title: "Change in Female Labor with MENA focus, 1991-2017 (line2)",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 449,
-          columnNumber: 9
+          lineNumber: 515,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 453,
-          columnNumber: 11
+          lineNumber: 519,
+          columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017 (MENA)"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34409,8 +34503,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 457,
-          columnNumber: 11
+          lineNumber: 523,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: s / 4,
@@ -34421,8 +34515,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 458,
-          columnNumber: 13
+          lineNumber: 524,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: s - s / 4,
@@ -34433,8 +34527,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 459,
-          columnNumber: 13
+          lineNumber: 525,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34447,8 +34541,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 466,
-          columnNumber: 13
+          lineNumber: 532,
+          columnNumber: 15
         }
       }, "1991"), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34461,8 +34555,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 477,
-          columnNumber: 13
+          lineNumber: 543,
+          columnNumber: 15
         }
       }, "2017"), yLabels(s / 4), dataFemChange.filter(d => {
         return MENA.includes(d[0]["Country Code"]) === true;
@@ -34481,8 +34575,8 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 496,
-              columnNumber: 19
+              lineNumber: 562,
+              columnNumber: 21
             }
           })
         );
@@ -34490,8 +34584,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 509,
-          columnNumber: 11
+          lineNumber: 575,
+          columnNumber: 13
         }
       }, "This chart is identical to the previous chart, except filtered for MENA countries. While MENA countries still remain significantly lower than average, most increased the female percentage of their workforce. More data is needed as to why, but we can say MENA as a whole is slightly improving.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
         eventKey: "femchangescatter",
@@ -34499,15 +34593,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 517,
-          columnNumber: 9
+          lineNumber: 583,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 521,
-          columnNumber: 11
+          lineNumber: 587,
+          columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -34518,8 +34612,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 525,
-          columnNumber: 11
+          lineNumber: 591,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m - 12,
@@ -34532,8 +34626,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 526,
-          columnNumber: 13
+          lineNumber: 592,
+          columnNumber: 15
         }
       }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: m + 10 + 2,
@@ -34546,8 +34640,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 534,
-          columnNumber: 13
+          lineNumber: 600,
+          columnNumber: 15
         }
       }, "0%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: s - m - 10,
@@ -34558,8 +34652,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 542,
-          columnNumber: 13
+          lineNumber: 608,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: m,
@@ -34570,8 +34664,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 543,
-          columnNumber: 13
+          lineNumber: 609,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
         x1: m,
@@ -34582,8 +34676,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 544,
-          columnNumber: 13
+          lineNumber: 610,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34596,8 +34690,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 545,
-          columnNumber: 13
+          lineNumber: 611,
+          columnNumber: 15
         }
       }, "2017"), /*#__PURE__*/_reactDefault.default.createElement("text", {
         textAnchor: "middle",
@@ -34610,14 +34704,11 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 556,
-          columnNumber: 13
+          lineNumber: 622,
+          columnNumber: 15
         }
       }, "1991"), dataFemChange.map((d, i) => {
         const highlight = +d[0][women] < +d[1][women];
-        if (d[0]["Country Code"] == "CHN" || d[0]["Country Code"] == "IND") {
-          console.log(d);
-        }
         return (
           /*#__PURE__*/_reactDefault.default.createElement("circle", {
             key: "changescatter" + i,
@@ -34631,8 +34722,8 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 577,
-              columnNumber: 17
+              lineNumber: 636,
+              columnNumber: 19
             }
           })
         );
@@ -34640,10 +34731,236 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 592,
+          lineNumber: 651,
+          columnNumber: 13
+        }
+      }, "This chart shows the net change in female labor force as a percentage of the total labor force by country between 1991 and 2017. Countries that increased the % of women in their labor force are higher than they are farther, and are represented in blue above the dividing line. Points further from the line have the biggest change. I also set the radius of the circles to represent the raw number of female workers in 2017.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "force",
+        title: "Total Labor Force By Country (Histogram)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 661,
           columnNumber: 11
         }
-      }, "This chart shows the net change in female labor force as a percentage of the total labor force by country between 1991 and 2017. Countries that increased the % of women in their labor force are higher than they are farther, and are represented in blue above the dividing line. Points further from the line have the biggest change. I also set the radius of the circles to represent the raw number of female workers in 2017."))))
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 665,
+          columnNumber: 13
+        }
+      }, "Change in Female Labor, 1991-2017 (Histogram)"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 666,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: m,
+        y: s - m / 2,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 667,
+          columnNumber: 15
+        }
+      }, "-12"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: m + 11 * 12,
+        y: s - m / 2 - 3,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 678,
+          columnNumber: 15
+        }
+      }, "0"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: m + 11 * 26,
+        y: s - m / 2,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 689,
+          columnNumber: 15
+        }
+      }, "+14"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "end",
+        x: m - 1,
+        y: m + 3,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 700,
+          columnNumber: 15
+        }
+      }, "27"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: m - 8,
+        y: s / 2,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif",
+          textOrientation: "mixed",
+          writingMode: "vertical-lr"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 711,
+          columnNumber: 15
+        }
+      }, "# of Countries"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: m + 11 * 13,
+        y: s - m / 2 + 5,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 724,
+          columnNumber: 15
+        }
+      }, "Change from 1997-2017"), bucketsForce.map((bin, i) => {
+        const highlight = i < 12;
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("rect", {
+            key: "force " + i,
+            y: s - m - forceYScale(bin.length),
+            width: "10",
+            height: forceYScale(bin.length),
+            x: 20 + i * 11,
+            fill: highlight ? "palevioletred" : "steelblue",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 738,
+              columnNumber: 19
+            }
+          })
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 749,
+          columnNumber: 13
+        }
+      }, "This chart depicts a histogram of the percentage of the labor force that is female in 1997 subtracted from the same number in 2017. Most countries experienced a slight shift higher. This chart, with other data removed, makes it easy to see that most countries experienced a positive shift, with positive changes in blue and negative changes in red.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "chloro",
+        title: "Female Labor Force 2017 (Chloropleth)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 758,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 759,
+          columnNumber: 13
+        }
+      }, "Female labor force as a percentage of the total labor force in 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 763,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
+        projectionConfig: {
+          rotate: [-10, 0, 0],
+          scale: 147
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 764,
+          columnNumber: 15
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
+        stroke: "#E4E5E6",
+        strokeWidth: 0.5,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 770,
+          columnNumber: 17
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Graticule, {
+        stroke: "#E4E5E6",
+        strokeWidth: 0.5,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 771,
+          columnNumber: 17
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
+        geography: geoUrl,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 772,
+          columnNumber: 17
+        }
+      }, ({geographies}) => geographies.map(geo => {
+        const d = data2017.find(s => s["Country Code"] === geo.properties.ISO_A3);
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            key: geo.rsmKey,
+            geography: geo,
+            fill: d ? colorScale(d[women]) : "#F5F4F6",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 779,
+              columnNumber: 25
+            }
+          })
+        );
+      })))), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 790,
+          columnNumber: 13
+        }
+      }, "This is a choropleth map of female to male ratio of the world labor force. The darker the map color the higher ratio of women, capping at 60% with the color 'steelblue'. My predictions about the MENA region holding the lowest ration turned out to be correct, with a visible lighter belt from it's neighbors. No data exists for some countries like Greenland, denoted in an off-white color. I used react-simple-maps to build my map because I'd rather not deal with topojson, thanks, so sue me."))))
     );
   };
   _s(Assignment2, "Jm65JCcgUFoenM4DufkEA80vRVI=", false, function () {
@@ -34659,7 +34976,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"4xX9x","react-bootstrap/Tabs":"6YwyY","react-bootstrap/Tab":"2o9hU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-array":"7CLUA","d3-scale":"2UZ4X"}],"4xX9x":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"4xX9x","react-bootstrap/Tabs":"6YwyY","react-bootstrap/Tab":"2o9hU","d3-array":"7CLUA","d3-scale":"2UZ4X","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-simple-maps":"5OxNq"}],"4xX9x":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39436,7 +39753,5931 @@ var define;
   });
 });
 
-},{"d3-time":"JGVPX"}],"44uys":[function(require,module,exports) {
+},{"d3-time":"JGVPX"}],"5OxNq":[function(require,module,exports) {
+var define;
+!(function (e, o) {
+  "object" == typeof exports && "undefined" != typeof module ? o(exports, require("react"), require("prop-types"), require("d3-geo"), require("topojson-client"), require("d3-zoom"), require("d3-selection")) : "function" == typeof define && define.amd ? define(["exports", "react", "prop-types", "d3-geo", "topojson-client", "d3-zoom", "d3-selection"], o) : o((e = e || self).reactSimpleMaps = e.reactSimpleMaps || ({}), e.React, e.PropTypes, e.d3, e.topojson, e.d3, e.d3);
+})(this, function (e, o, t, r, n, a, s) {
+  "use strict";
+  var i = ("default" in o) ? o.default : o;
+  t = t && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+  var c = Object.assign || (function (e) {
+    for (var o = 1; o < arguments.length; o++) {
+      var t = arguments[o];
+      for (var r in t) Object.prototype.hasOwnProperty.call(t, r) && (e[r] = t[r]);
+    }
+    return e;
+  }), u = function (e, o) {
+    var t = {};
+    for (var r in e) o.indexOf(r) >= 0 || Object.prototype.hasOwnProperty.call(e, r) && (t[r] = e[r]);
+    return t;
+  }, l = function (e, o) {
+    if (Array.isArray(e)) return e;
+    if ((Symbol.iterator in Object(e))) return (function (e, o) {
+      var t = [], r = !0, n = !1, a = void 0;
+      try {
+        for (var s, i = e[Symbol.iterator](); !(r = (s = i.next()).done) && (t.push(s.value), !o || t.length !== o); r = !0) ;
+      } catch (e) {
+        (n = !0, a = e);
+      } finally {
+        try {
+          !r && i.return && i.return();
+        } finally {
+          if (n) throw a;
+        }
+      }
+      return t;
+    })(e, o);
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }, p = r.geoPath, f = u(r, ["geoPath"]), d = o.createContext(), m = function (e) {
+    var t = e.width, r = e.height, n = e.projection, a = e.projectionConfig, s = u(e, ["width", "height", "projection", "projectionConfig"]), m = a.center || [], h = l(m, 2), v = h[0], g = h[1], y = a.rotate || [], M = l(y, 3), b = M[0], E = M[1], j = M[2], k = a.parallels || [], x = l(k, 2), N = x[0], w = x[1], C = a.scale || null, O = o.useMemo(function () {
+      return (function (e) {
+        var o = e.projectionConfig, t = void 0 === o ? {} : o, r = e.projection, n = void 0 === r ? "geoEqualEarth" : r, a = e.width, s = void 0 === a ? 800 : a, i = e.height, c = void 0 === i ? 600 : i;
+        if ("function" == typeof n) return n;
+        var u = f[n]().translate([s / 2, c / 2]);
+        return ([u.center ? "center" : null, u.rotate ? "rotate" : null, u.scale ? "scale" : null, u.parallels ? "parallels" : null].forEach(function (e) {
+          e && (u = u[e](t[e] || u[e]()));
+        }), u);
+      })({
+        projectionConfig: {
+          center: v || 0 === v || g || 0 === g ? [v, g] : null,
+          rotate: b || 0 === b || E || 0 === E ? [b, E, j] : null,
+          parallels: N || 0 === N || w || 0 === w ? [N, w] : null,
+          scale: C
+        },
+        projection: n,
+        width: t,
+        height: r
+      });
+    }, [t, r, n, v, g, b, E, j, N, w, C]), T = o.useCallback(O, [O]), S = o.useMemo(function () {
+      return {
+        width: t,
+        height: r,
+        projection: T,
+        path: p().projection(T)
+      };
+    }, [t, r, T]);
+    return i.createElement(d.Provider, c({
+      value: S
+    }, s));
+  };
+  m.propTypes = {
+    width: t.number,
+    height: t.number,
+    projection: t.oneOfType([t.string, t.func]),
+    projectionConfig: t.object
+  };
+  var h = function (e) {
+    var o = e.width, t = void 0 === o ? 800 : o, r = e.height, n = void 0 === r ? 600 : r, a = e.projection, s = void 0 === a ? "geoEqualEarth" : a, l = e.projectionConfig, p = void 0 === l ? {} : l, f = e.className, d = void 0 === f ? "" : f, h = u(e, ["width", "height", "projection", "projectionConfig", "className"]);
+    return i.createElement(m, {
+      width: t,
+      height: n,
+      projection: s,
+      projectionConfig: p
+    }, i.createElement("svg", c({
+      viewBox: "0 0 " + t + " " + n,
+      className: "rsm-svg " + d
+    }, h)));
+  };
+  function v(e, o, t) {
+    var r = (e * t.k - e) / 2, n = (o * t.k - o) / 2;
+    return [e / 2 - (r + t.x) / t.k, o / 2 - (n + t.y) / t.k];
+  }
+  function g(e, o) {
+    if (!("Topology" === e.type)) return o ? o(e.features || e) : e.features || e;
+    var t = n.feature(e, e.objects[Object.keys(e.objects)[0]]).features;
+    return o ? o(t) : t;
+  }
+  function y(e) {
+    return "Topology" === e.type ? {
+      outline: n.mesh(e, e.objects[Object.keys(e.objects)[0]], function (e, o) {
+        return e === o;
+      }),
+      borders: n.mesh(e, e.objects[Object.keys(e.objects)[0]], function (e, o) {
+        return e !== o;
+      })
+    } : null;
+  }
+  function M(e, o) {
+    return e ? e.map(function (e, t) {
+      return c({}, e, {
+        rsmKey: "geo-" + t,
+        svgPath: o(e)
+      });
+    }) : [];
+  }
+  function b(e) {
+    var t = e.geography, r = e.parseGeographies, n = o.useContext(d).path, a = o.useState({}), s = l(a, 2), i = s[0], u = s[1];
+    o.useEffect(function () {
+      var e;
+      "undefined" != typeof window && (t && ("string" == typeof t ? (e = t, fetch(e).then(function (e) {
+        if (!e.ok) throw Error(e.statusText);
+        return e.json();
+      }).catch(function (e) {
+        console.log("There was a problem when fetching the data: ", e);
+      })).then(function (e) {
+        e && u({
+          geographies: g(e, r),
+          mesh: y(e)
+        });
+      }) : u({
+        geographies: g(t, r),
+        mesh: y(t)
+      })));
+    }, [t, r]);
+    var p = o.useMemo(function () {
+      var e = i.mesh || ({}), o = (function (e, o, t) {
+        return e && o ? {
+          outline: c({}, e, {
+            rsmKey: "outline",
+            svgPath: t(e)
+          }),
+          borders: c({}, o, {
+            rsmKey: "borders",
+            svgPath: t(o)
+          })
+        } : {};
+      })(e.outline, e.borders, n);
+      return {
+        geographies: M(i.geographies, n),
+        outline: o.outline,
+        borders: o.borders
+      };
+    }, [i, n]);
+    return {
+      geographies: p.geographies,
+      outline: p.outline,
+      borders: p.borders
+    };
+  }
+  h.propTypes = {
+    width: t.number,
+    height: t.number,
+    projection: t.oneOfType([t.string, t.func]),
+    projectionConfig: t.object,
+    className: t.string
+  };
+  var E = function (e) {
+    var t = e.geography, r = e.children, n = e.parseGeographies, a = e.className, s = void 0 === a ? "" : a, l = u(e, ["geography", "children", "parseGeographies", "className"]), p = o.useContext(d), f = p.path, m = p.projection, h = b({
+      geography: t,
+      parseGeographies: n
+    }), v = h.geographies, g = h.outline, y = h.borders;
+    return i.createElement("g", c({
+      className: "rsm-geographies " + s
+    }, l), v && v.length > 0 && r({
+      geographies: v,
+      outline: g,
+      borders: y,
+      path: f,
+      projection: m
+    }));
+  };
+  E.propTypes = {
+    geography: t.oneOfType([t.string, t.object, t.array]),
+    children: t.func,
+    parseGeographies: t.func,
+    className: t.string
+  };
+  var j = function (e) {
+    var t = e.geography, r = e.onMouseEnter, n = e.onMouseLeave, a = e.onMouseDown, s = e.onMouseUp, p = e.onFocus, f = e.onBlur, d = e.style, m = void 0 === d ? {} : d, h = e.className, v = void 0 === h ? "" : h, g = u(e, ["geography", "onMouseEnter", "onMouseLeave", "onMouseDown", "onMouseUp", "onFocus", "onBlur", "style", "className"]), y = o.useState(!1), M = l(y, 2), b = M[0], E = M[1], j = o.useState(!1), k = l(j, 2), x = k[0], N = k[1];
+    return i.createElement("path", c({
+      tabIndex: "0",
+      className: "rsm-geography " + v,
+      d: t.svgPath,
+      onMouseEnter: function (e) {
+        (N(!0), r && r(e));
+      },
+      onMouseLeave: function (e) {
+        (N(!1), b && E(!1), n && n(e));
+      },
+      onFocus: function (e) {
+        (N(!0), p && p(e));
+      },
+      onBlur: function (e) {
+        (N(!1), b && E(!1), f && f(e));
+      },
+      onMouseDown: function (e) {
+        (E(!0), a && a(e));
+      },
+      onMouseUp: function (e) {
+        (E(!1), s && s(e));
+      },
+      style: m[b || x ? b ? "pressed" : "hover" : "default"]
+    }, g));
+  };
+  j.propTypes = {
+    geography: t.object,
+    onMouseEnter: t.func,
+    onMouseLeave: t.func,
+    onMouseDown: t.func,
+    onMouseUp: t.func,
+    onFocus: t.func,
+    onBlur: t.func,
+    style: t.object,
+    className: t.string
+  };
+  var k = o.memo(j), x = function (e) {
+    var t = e.fill, n = void 0 === t ? "transparent" : t, a = e.stroke, s = void 0 === a ? "currentcolor" : a, l = e.step, p = void 0 === l ? [10, 10] : l, f = e.className, m = void 0 === f ? "" : f, h = u(e, ["fill", "stroke", "step", "className"]), v = o.useContext(d).path;
+    return i.createElement("path", c({
+      d: v(r.geoGraticule().step(p)()),
+      fill: n,
+      stroke: s,
+      className: "rsm-graticule " + m
+    }, h));
+  };
+  x.propTypes = {
+    fill: t.string,
+    stroke: t.string,
+    step: t.array,
+    className: t.string
+  };
+  var N = o.memo(x);
+  function w(e) {
+    var t = e.center, r = e.filterZoomEvent, n = e.onMoveStart, i = e.onMoveEnd, c = e.onMove, u = e.translateExtent, p = void 0 === u ? [[-1 / 0, -1 / 0], [1 / 0, 1 / 0]] : u, f = e.scaleExtent, m = void 0 === f ? [1, 8] : f, h = e.zoom, g = void 0 === h ? 1 : h, y = o.useContext(d), M = y.width, b = y.height, E = y.projection, j = l(t, 2), k = j[0], x = j[1], N = o.useState({
+      x: 0,
+      y: 0,
+      k: 1
+    }), w = l(N, 2), C = w[0], O = w[1], T = o.useRef({
+      x: 0,
+      y: 0,
+      k: 1
+    }), S = o.useRef(), P = o.useRef(), z = o.useRef(!1), Z = l(p, 2), G = Z[0], L = Z[1], B = l(G, 2), F = B[0], q = B[1], D = l(L, 2), U = D[0], W = D[1], R = l(m, 2), A = R[0], K = R[1];
+    return (o.useEffect(function () {
+      var e = s.select(S.current);
+      var o = a.zoom().filter(function (e) {
+        return r ? r(e) : !!e && (!e.ctrlKey && !e.button);
+      }).scaleExtent([A, K]).translateExtent([[F, q], [U, W]]).on("start", function (e) {
+        n && !z.current && n({
+          coordinates: E.invert(v(M, b, e.transform)),
+          zoom: e.transform.k
+        }, e);
+      }).on("zoom", function (e) {
+        if (!z.current) {
+          var o = e.transform, t = e.sourceEvent;
+          (O({
+            x: o.x,
+            y: o.y,
+            k: o.k,
+            dragging: t
+          }), c && c({
+            x: o.x,
+            y: o.y,
+            k: o.k,
+            dragging: t
+          }, e));
+        }
+      }).on("end", function (e) {
+        if (z.current) z.current = !1; else {
+          var o = E.invert(v(M, b, e.transform)), t = l(o, 2), r = t[0], n = t[1];
+          (T.current = {
+            x: r,
+            y: n,
+            k: e.transform.k
+          }, i && i({
+            coordinates: [r, n],
+            zoom: e.transform.k
+          }, e));
+        }
+      });
+      (P.current = o, e.call(o));
+    }, [M, b, F, q, U, W, A, K, E, n, c, i, r]), o.useEffect(function () {
+      if (k !== T.current.x || x !== T.current.y || g !== T.current.k) {
+        var e = E([k, x]), o = e[0] * g, t = e[1] * g, r = s.select(S.current);
+        (z.current = !0, r.call(P.current.transform, a.zoomIdentity.translate(M / 2 - o, b / 2 - t).scale(g)), O({
+          x: M / 2 - o,
+          y: b / 2 - t,
+          k: g
+        }), T.current = {
+          x: k,
+          y: x,
+          k: g
+        });
+      }
+    }, [k, x, g, M, b, E]), {
+      mapRef: S,
+      position: C,
+      transformString: "translate(" + C.x + " " + C.y + ") scale(" + C.k + ")"
+    });
+  }
+  var C = function (e) {
+    var t = e.center, r = void 0 === t ? [0, 0] : t, n = e.zoom, a = void 0 === n ? 1 : n, s = e.minZoom, l = void 0 === s ? 1 : s, p = e.maxZoom, f = void 0 === p ? 8 : p, m = e.translateExtent, h = e.filterZoomEvent, v = e.onMoveStart, g = e.onMove, y = e.onMoveEnd, M = e.className, b = u(e, ["center", "zoom", "minZoom", "maxZoom", "translateExtent", "filterZoomEvent", "onMoveStart", "onMove", "onMoveEnd", "className"]), E = o.useContext(d), j = E.width, k = E.height, x = w({
+      center: r,
+      filterZoomEvent: h,
+      onMoveStart: v,
+      onMove: g,
+      onMoveEnd: y,
+      scaleExtent: [l, f],
+      translateExtent: m,
+      zoom: a
+    }), N = x.mapRef, C = x.transformString;
+    return i.createElement("g", {
+      ref: N
+    }, i.createElement("rect", {
+      width: j,
+      height: k,
+      fill: "transparent"
+    }), i.createElement("g", c({
+      transform: C,
+      className: "rsm-zoomable-group " + M
+    }, b)));
+  };
+  C.propTypes = {
+    center: t.array,
+    zoom: t.number,
+    minZoom: t.number,
+    maxZoom: t.number,
+    translateExtent: t.arrayOf(t.array),
+    onMoveStart: t.func,
+    onMove: t.func,
+    onMoveEnd: t.func,
+    className: t.string
+  };
+  var O = function (e) {
+    var t = e.id, r = void 0 === t ? "rsm-sphere" : t, n = e.fill, a = void 0 === n ? "transparent" : n, s = e.stroke, l = void 0 === s ? "currentcolor" : s, p = e.strokeWidth, f = void 0 === p ? .5 : p, m = e.className, h = void 0 === m ? "" : m, v = u(e, ["id", "fill", "stroke", "strokeWidth", "className"]), g = o.useContext(d).path, y = o.useMemo(function () {
+      return g({
+        type: "Sphere"
+      });
+    }, [g]);
+    return i.createElement(o.Fragment, null, i.createElement("defs", null, i.createElement("clipPath", {
+      id: r
+    }, i.createElement("path", {
+      d: y
+    }))), i.createElement("path", c({
+      d: y,
+      fill: a,
+      stroke: l,
+      strokeWidth: f,
+      style: {
+        pointerEvents: "none"
+      },
+      className: "rsm-sphere " + h
+    }, v)));
+  };
+  O.propTypes = {
+    id: t.string,
+    fill: t.string,
+    stroke: t.string,
+    strokeWidth: t.number,
+    className: t.string
+  };
+  var T = o.memo(O), S = function (e) {
+    var t = e.coordinates, r = e.children, n = e.onMouseEnter, a = e.onMouseLeave, s = e.onMouseDown, p = e.onMouseUp, f = e.onFocus, m = e.onBlur, h = e.style, v = void 0 === h ? {} : h, g = e.className, y = void 0 === g ? "" : g, M = u(e, ["coordinates", "children", "onMouseEnter", "onMouseLeave", "onMouseDown", "onMouseUp", "onFocus", "onBlur", "style", "className"]), b = o.useContext(d).projection, E = o.useState(!1), j = l(E, 2), k = j[0], x = j[1], N = o.useState(!1), w = l(N, 2), C = w[0], O = w[1], T = b(t), S = l(T, 2), P = S[0], z = S[1];
+    return i.createElement("g", c({
+      transform: "translate(" + P + ", " + z + ")",
+      className: "rsm-marker " + y,
+      onMouseEnter: function (e) {
+        (O(!0), n && n(e));
+      },
+      onMouseLeave: function (e) {
+        (O(!1), k && x(!1), a && a(e));
+      },
+      onFocus: function (e) {
+        (O(!0), f && f(e));
+      },
+      onBlur: function (e) {
+        (O(!1), k && x(!1), m && m(e));
+      },
+      onMouseDown: function (e) {
+        (x(!0), s && s(e));
+      },
+      onMouseUp: function (e) {
+        (x(!1), p && p(e));
+      },
+      style: v[k || C ? k ? "pressed" : "hover" : "default"]
+    }, M), r);
+  };
+  S.propTypes = {
+    coordinates: t.array,
+    children: t.oneOfType([t.node, t.arrayOf(t.node)]),
+    onMouseEnter: t.func,
+    onMouseLeave: t.func,
+    onMouseDown: t.func,
+    onMouseUp: t.func,
+    onFocus: t.func,
+    onBlur: t.func,
+    style: t.object,
+    className: t.string
+  };
+  var P = function (e) {
+    var t = e.from, r = void 0 === t ? [0, 0] : t, n = e.to, a = void 0 === n ? [0, 0] : n, s = e.coordinates, l = e.stroke, p = void 0 === l ? "currentcolor" : l, f = e.strokeWidth, m = void 0 === f ? 3 : f, h = e.fill, v = void 0 === h ? "transparent" : h, g = e.className, y = void 0 === g ? "" : g, M = u(e, ["from", "to", "coordinates", "stroke", "strokeWidth", "fill", "className"]), b = o.useContext(d).path, E = {
+      type: "LineString",
+      coordinates: s || [r, a]
+    };
+    return i.createElement("path", c({
+      d: b(E),
+      className: "rsm-line " + y,
+      stroke: p,
+      strokeWidth: m,
+      fill: v
+    }, M));
+  };
+  P.propTypes = {
+    from: t.array,
+    to: t.array,
+    coordinates: t.array,
+    stroke: t.string,
+    strokeWidth: t.number,
+    fill: t.string,
+    className: t.string
+  };
+  var z = function (e) {
+    var t = e.subject, r = e.children, n = e.connectorProps, a = e.dx, s = void 0 === a ? 30 : a, p = e.dy, f = void 0 === p ? 30 : p, m = e.curve, h = void 0 === m ? 0 : m, v = e.className, g = void 0 === v ? "" : v, y = u(e, ["subject", "children", "connectorProps", "dx", "dy", "curve", "className"]), M = (0, o.useContext(d).projection)(t), b = l(M, 2), E = b[0], j = b[1], k = (function () {
+      var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 30, o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 30, t = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : .5, r = Array.isArray(t) ? t : [t, t], n = e / 2 * r[0], a = o / 2 * r[1];
+      return "M0,0 Q" + (-e / 2 - n) + "," + (-o / 2 + a) + " " + -e + "," + -o;
+    })(s, f, h);
+    return i.createElement("g", c({
+      transform: "translate(" + (E + s) + ", " + (j + f) + ")",
+      className: "rsm-annotation " + g
+    }, y), i.createElement("path", c({
+      d: k,
+      fill: "transparent",
+      stroke: "#000"
+    }, n)), r);
+  };
+  (z.propTypes = {
+    subject: t.array,
+    children: t.oneOfType([t.node, t.arrayOf(t.node)]),
+    dx: t.number,
+    dy: t.number,
+    curve: t.number,
+    connectorProps: t.object,
+    className: t.string
+  }, e.Annotation = z, e.ComposableMap = h, e.Geographies = E, e.Geography = k, e.Graticule = N, e.Line = P, e.MapContext = d, e.MapProvider = m, e.Marker = S, e.Sphere = T, e.ZoomableGroup = C, e.useGeographies = b, e.useZoomPan = w, Object.defineProperty(e, "__esModule", {
+    value: !0
+  }));
+});
+
+},{"react":"3b2NM","prop-types":"4dfy5","d3-geo":"3nbkI","topojson-client":"7lQtw","d3-zoom":"6HwjU","d3-selection":"1RFAz"}],"3nbkI":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-geo/ v2.0.1 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-array'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3));
+})(this, function (exports, d3Array) {
+  "use strict";
+  var epsilon = 1e-6;
+  var epsilon2 = 1e-12;
+  var pi = Math.PI;
+  var halfPi = pi / 2;
+  var quarterPi = pi / 4;
+  var tau = pi * 2;
+  var degrees = 180 / pi;
+  var radians = pi / 180;
+  var abs = Math.abs;
+  var atan = Math.atan;
+  var atan2 = Math.atan2;
+  var cos = Math.cos;
+  var ceil = Math.ceil;
+  var exp = Math.exp;
+  var hypot = Math.hypot;
+  var log = Math.log;
+  var pow = Math.pow;
+  var sin = Math.sin;
+  var sign = Math.sign || (function (x) {
+    return x > 0 ? 1 : x < 0 ? -1 : 0;
+  });
+  var sqrt = Math.sqrt;
+  var tan = Math.tan;
+  function acos(x) {
+    return x > 1 ? 0 : x < -1 ? pi : Math.acos(x);
+  }
+  function asin(x) {
+    return x > 1 ? halfPi : x < -1 ? -halfPi : Math.asin(x);
+  }
+  function haversin(x) {
+    return (x = sin(x / 2)) * x;
+  }
+  function noop() {}
+  function streamGeometry(geometry, stream) {
+    if (geometry && streamGeometryType.hasOwnProperty(geometry.type)) {
+      streamGeometryType[geometry.type](geometry, stream);
+    }
+  }
+  var streamObjectType = {
+    Feature: function (object, stream) {
+      streamGeometry(object.geometry, stream);
+    },
+    FeatureCollection: function (object, stream) {
+      var features = object.features, i = -1, n = features.length;
+      while (++i < n) streamGeometry(features[i].geometry, stream);
+    }
+  };
+  var streamGeometryType = {
+    Sphere: function (object, stream) {
+      stream.sphere();
+    },
+    Point: function (object, stream) {
+      object = object.coordinates;
+      stream.point(object[0], object[1], object[2]);
+    },
+    MultiPoint: function (object, stream) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) (object = coordinates[i], stream.point(object[0], object[1], object[2]));
+    },
+    LineString: function (object, stream) {
+      streamLine(object.coordinates, stream, 0);
+    },
+    MultiLineString: function (object, stream) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) streamLine(coordinates[i], stream, 0);
+    },
+    Polygon: function (object, stream) {
+      streamPolygon(object.coordinates, stream);
+    },
+    MultiPolygon: function (object, stream) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) streamPolygon(coordinates[i], stream);
+    },
+    GeometryCollection: function (object, stream) {
+      var geometries = object.geometries, i = -1, n = geometries.length;
+      while (++i < n) streamGeometry(geometries[i], stream);
+    }
+  };
+  function streamLine(coordinates, stream, closed) {
+    var i = -1, n = coordinates.length - closed, coordinate;
+    stream.lineStart();
+    while (++i < n) (coordinate = coordinates[i], stream.point(coordinate[0], coordinate[1], coordinate[2]));
+    stream.lineEnd();
+  }
+  function streamPolygon(coordinates, stream) {
+    var i = -1, n = coordinates.length;
+    stream.polygonStart();
+    while (++i < n) streamLine(coordinates[i], stream, 1);
+    stream.polygonEnd();
+  }
+  function geoStream(object, stream) {
+    if (object && streamObjectType.hasOwnProperty(object.type)) {
+      streamObjectType[object.type](object, stream);
+    } else {
+      streamGeometry(object, stream);
+    }
+  }
+  var areaRingSum = new d3Array.Adder();
+  // hello?
+  var areaSum = new d3Array.Adder(), lambda00, phi00, lambda0, cosPhi0, sinPhi0;
+  var areaStream = {
+    point: noop,
+    lineStart: noop,
+    lineEnd: noop,
+    polygonStart: function () {
+      areaRingSum = new d3Array.Adder();
+      areaStream.lineStart = areaRingStart;
+      areaStream.lineEnd = areaRingEnd;
+    },
+    polygonEnd: function () {
+      var areaRing = +areaRingSum;
+      areaSum.add(areaRing < 0 ? tau + areaRing : areaRing);
+      this.lineStart = this.lineEnd = this.point = noop;
+    },
+    sphere: function () {
+      areaSum.add(tau);
+    }
+  };
+  function areaRingStart() {
+    areaStream.point = areaPointFirst;
+  }
+  function areaRingEnd() {
+    areaPoint(lambda00, phi00);
+  }
+  function areaPointFirst(lambda, phi) {
+    areaStream.point = areaPoint;
+    (lambda00 = lambda, phi00 = phi);
+    (lambda *= radians, phi *= radians);
+    (lambda0 = lambda, cosPhi0 = cos(phi = phi / 2 + quarterPi), sinPhi0 = sin(phi));
+  }
+  function areaPoint(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    phi = phi / 2 + quarterPi;
+    // half the angular distance from south pole
+    // Spherical excess E for a spherical triangle with vertices: south pole,
+    // previous point, current point.  Uses a formula derived from Cagnoli’s
+    // theorem.  See Todhunter, Spherical Trig. (1871), Sec. 103, Eq. (2).
+    var dLambda = lambda - lambda0, sdLambda = dLambda >= 0 ? 1 : -1, adLambda = sdLambda * dLambda, cosPhi = cos(phi), sinPhi = sin(phi), k = sinPhi0 * sinPhi, u = cosPhi0 * cosPhi + k * cos(adLambda), v = k * sdLambda * sin(adLambda);
+    areaRingSum.add(atan2(v, u));
+    // Advance the previous points.
+    (lambda0 = lambda, cosPhi0 = cosPhi, sinPhi0 = sinPhi);
+  }
+  function area(object) {
+    areaSum = new d3Array.Adder();
+    geoStream(object, areaStream);
+    return areaSum * 2;
+  }
+  function spherical(cartesian) {
+    return [atan2(cartesian[1], cartesian[0]), asin(cartesian[2])];
+  }
+  function cartesian(spherical) {
+    var lambda = spherical[0], phi = spherical[1], cosPhi = cos(phi);
+    return [cosPhi * cos(lambda), cosPhi * sin(lambda), sin(phi)];
+  }
+  function cartesianDot(a, b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  }
+  function cartesianCross(a, b) {
+    return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  }
+  // TODO return a
+  function cartesianAddInPlace(a, b) {
+    (a[0] += b[0], a[1] += b[1], a[2] += b[2]);
+  }
+  function cartesianScale(vector, k) {
+    return [vector[0] * k, vector[1] * k, vector[2] * k];
+  }
+  // TODO return d
+  function cartesianNormalizeInPlace(d) {
+    var l = sqrt(d[0] * d[0] + d[1] * d[1] + d[2] * d[2]);
+    (d[0] /= l, d[1] /= l, d[2] /= l);
+  }
+  var lambda0$1, phi0, lambda1, phi1, // bounds
+  lambda2, // previous lambda-coordinate
+  lambda00$1, phi00$1, // first point
+  p0, // previous 3D point
+  deltaSum, ranges, range;
+  var boundsStream = {
+    point: boundsPoint,
+    lineStart: boundsLineStart,
+    lineEnd: boundsLineEnd,
+    polygonStart: function () {
+      boundsStream.point = boundsRingPoint;
+      boundsStream.lineStart = boundsRingStart;
+      boundsStream.lineEnd = boundsRingEnd;
+      deltaSum = new d3Array.Adder();
+      areaStream.polygonStart();
+    },
+    polygonEnd: function () {
+      areaStream.polygonEnd();
+      boundsStream.point = boundsPoint;
+      boundsStream.lineStart = boundsLineStart;
+      boundsStream.lineEnd = boundsLineEnd;
+      if (areaRingSum < 0) (lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90)); else if (deltaSum > epsilon) phi1 = 90; else if (deltaSum < -epsilon) phi0 = -90;
+      (range[0] = lambda0$1, range[1] = lambda1);
+    },
+    sphere: function () {
+      (lambda0$1 = -(lambda1 = 180), phi0 = -(phi1 = 90));
+    }
+  };
+  function boundsPoint(lambda, phi) {
+    ranges.push(range = [lambda0$1 = lambda, lambda1 = lambda]);
+    if (phi < phi0) phi0 = phi;
+    if (phi > phi1) phi1 = phi;
+  }
+  function linePoint(lambda, phi) {
+    var p = cartesian([lambda * radians, phi * radians]);
+    if (p0) {
+      var normal = cartesianCross(p0, p), equatorial = [normal[1], -normal[0], 0], inflection = cartesianCross(equatorial, normal);
+      cartesianNormalizeInPlace(inflection);
+      inflection = spherical(inflection);
+      var delta = lambda - lambda2, sign = delta > 0 ? 1 : -1, lambdai = inflection[0] * degrees * sign, phii, antimeridian = abs(delta) > 180;
+      if (antimeridian ^ (sign * lambda2 < lambdai && lambdai < sign * lambda)) {
+        phii = inflection[1] * degrees;
+        if (phii > phi1) phi1 = phii;
+      } else if ((lambdai = (lambdai + 360) % 360 - 180, antimeridian ^ (sign * lambda2 < lambdai && lambdai < sign * lambda))) {
+        phii = -inflection[1] * degrees;
+        if (phii < phi0) phi0 = phii;
+      } else {
+        if (phi < phi0) phi0 = phi;
+        if (phi > phi1) phi1 = phi;
+      }
+      if (antimeridian) {
+        if (lambda < lambda2) {
+          if (angle(lambda0$1, lambda) > angle(lambda0$1, lambda1)) lambda1 = lambda;
+        } else {
+          if (angle(lambda, lambda1) > angle(lambda0$1, lambda1)) lambda0$1 = lambda;
+        }
+      } else {
+        if (lambda1 >= lambda0$1) {
+          if (lambda < lambda0$1) lambda0$1 = lambda;
+          if (lambda > lambda1) lambda1 = lambda;
+        } else {
+          if (lambda > lambda2) {
+            if (angle(lambda0$1, lambda) > angle(lambda0$1, lambda1)) lambda1 = lambda;
+          } else {
+            if (angle(lambda, lambda1) > angle(lambda0$1, lambda1)) lambda0$1 = lambda;
+          }
+        }
+      }
+    } else {
+      ranges.push(range = [lambda0$1 = lambda, lambda1 = lambda]);
+    }
+    if (phi < phi0) phi0 = phi;
+    if (phi > phi1) phi1 = phi;
+    (p0 = p, lambda2 = lambda);
+  }
+  function boundsLineStart() {
+    boundsStream.point = linePoint;
+  }
+  function boundsLineEnd() {
+    (range[0] = lambda0$1, range[1] = lambda1);
+    boundsStream.point = boundsPoint;
+    p0 = null;
+  }
+  function boundsRingPoint(lambda, phi) {
+    if (p0) {
+      var delta = lambda - lambda2;
+      deltaSum.add(abs(delta) > 180 ? delta + (delta > 0 ? 360 : -360) : delta);
+    } else {
+      (lambda00$1 = lambda, phi00$1 = phi);
+    }
+    areaStream.point(lambda, phi);
+    linePoint(lambda, phi);
+  }
+  function boundsRingStart() {
+    areaStream.lineStart();
+  }
+  function boundsRingEnd() {
+    boundsRingPoint(lambda00$1, phi00$1);
+    areaStream.lineEnd();
+    if (abs(deltaSum) > epsilon) lambda0$1 = -(lambda1 = 180);
+    (range[0] = lambda0$1, range[1] = lambda1);
+    p0 = null;
+  }
+  // Finds the left-right distance between two longitudes.
+  // This is almost the same as (lambda1 - lambda0 + 360°) % 360°, except that we want
+  // the distance between ±180° to be 360°.
+  function angle(lambda0, lambda1) {
+    return (lambda1 -= lambda0) < 0 ? lambda1 + 360 : lambda1;
+  }
+  function rangeCompare(a, b) {
+    return a[0] - b[0];
+  }
+  function rangeContains(range, x) {
+    return range[0] <= range[1] ? range[0] <= x && x <= range[1] : x < range[0] || range[1] < x;
+  }
+  function bounds(feature) {
+    var i, n, a, b, merged, deltaMax, delta;
+    phi1 = lambda1 = -(lambda0$1 = phi0 = Infinity);
+    ranges = [];
+    geoStream(feature, boundsStream);
+    // First, sort ranges by their minimum longitudes.
+    if (n = ranges.length) {
+      ranges.sort(rangeCompare);
+      // Then, merge any ranges that overlap.
+      for ((i = 1, a = ranges[0], merged = [a]); i < n; ++i) {
+        b = ranges[i];
+        if (rangeContains(a, b[0]) || rangeContains(a, b[1])) {
+          if (angle(a[0], b[1]) > angle(a[0], a[1])) a[1] = b[1];
+          if (angle(b[0], a[1]) > angle(a[0], a[1])) a[0] = b[0];
+        } else {
+          merged.push(a = b);
+        }
+      }
+      // Finally, find the largest gap between the merged ranges.
+      // The final bounding box will be the inverse of this gap.
+      for ((deltaMax = -Infinity, n = merged.length - 1, i = 0, a = merged[n]); i <= n; (a = b, ++i)) {
+        b = merged[i];
+        if ((delta = angle(a[1], b[0])) > deltaMax) (deltaMax = delta, lambda0$1 = b[0], lambda1 = a[1]);
+      }
+    }
+    ranges = range = null;
+    return lambda0$1 === Infinity || phi0 === Infinity ? [[NaN, NaN], [NaN, NaN]] : [[lambda0$1, phi0], [lambda1, phi1]];
+  }
+  var W0, W1, X0, Y0, Z0, X1, Y1, Z1, X2, Y2, Z2, lambda00$2, phi00$2, // first point
+  x0, y0, z0;
+  // previous point
+  var centroidStream = {
+    sphere: noop,
+    point: centroidPoint,
+    lineStart: centroidLineStart,
+    lineEnd: centroidLineEnd,
+    polygonStart: function () {
+      centroidStream.lineStart = centroidRingStart;
+      centroidStream.lineEnd = centroidRingEnd;
+    },
+    polygonEnd: function () {
+      centroidStream.lineStart = centroidLineStart;
+      centroidStream.lineEnd = centroidLineEnd;
+    }
+  };
+  // Arithmetic mean of Cartesian vectors.
+  function centroidPoint(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    var cosPhi = cos(phi);
+    centroidPointCartesian(cosPhi * cos(lambda), cosPhi * sin(lambda), sin(phi));
+  }
+  function centroidPointCartesian(x, y, z) {
+    ++W0;
+    X0 += (x - X0) / W0;
+    Y0 += (y - Y0) / W0;
+    Z0 += (z - Z0) / W0;
+  }
+  function centroidLineStart() {
+    centroidStream.point = centroidLinePointFirst;
+  }
+  function centroidLinePointFirst(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    var cosPhi = cos(phi);
+    x0 = cosPhi * cos(lambda);
+    y0 = cosPhi * sin(lambda);
+    z0 = sin(phi);
+    centroidStream.point = centroidLinePoint;
+    centroidPointCartesian(x0, y0, z0);
+  }
+  function centroidLinePoint(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    var cosPhi = cos(phi), x = cosPhi * cos(lambda), y = cosPhi * sin(lambda), z = sin(phi), w = atan2(sqrt((w = y0 * z - z0 * y) * w + (w = z0 * x - x0 * z) * w + (w = x0 * y - y0 * x) * w), x0 * x + y0 * y + z0 * z);
+    W1 += w;
+    X1 += w * (x0 + (x0 = x));
+    Y1 += w * (y0 + (y0 = y));
+    Z1 += w * (z0 + (z0 = z));
+    centroidPointCartesian(x0, y0, z0);
+  }
+  function centroidLineEnd() {
+    centroidStream.point = centroidPoint;
+  }
+  // See J. E. Brock, The Inertia Tensor for a Spherical Triangle,
+  // J. Applied Mechanics 42, 239 (1975).
+  function centroidRingStart() {
+    centroidStream.point = centroidRingPointFirst;
+  }
+  function centroidRingEnd() {
+    centroidRingPoint(lambda00$2, phi00$2);
+    centroidStream.point = centroidPoint;
+  }
+  function centroidRingPointFirst(lambda, phi) {
+    (lambda00$2 = lambda, phi00$2 = phi);
+    (lambda *= radians, phi *= radians);
+    centroidStream.point = centroidRingPoint;
+    var cosPhi = cos(phi);
+    x0 = cosPhi * cos(lambda);
+    y0 = cosPhi * sin(lambda);
+    z0 = sin(phi);
+    centroidPointCartesian(x0, y0, z0);
+  }
+  function centroidRingPoint(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    var cosPhi = cos(phi), x = cosPhi * cos(lambda), y = cosPhi * sin(lambda), z = sin(phi), cx = y0 * z - z0 * y, cy = z0 * x - x0 * z, cz = x0 * y - y0 * x, m = hypot(cx, cy, cz), w = asin(m), // line weight = angle
+    v = m && -w / m;
+    // area weight multiplier
+    X2.add(v * cx);
+    Y2.add(v * cy);
+    Z2.add(v * cz);
+    W1 += w;
+    X1 += w * (x0 + (x0 = x));
+    Y1 += w * (y0 + (y0 = y));
+    Z1 += w * (z0 + (z0 = z));
+    centroidPointCartesian(x0, y0, z0);
+  }
+  function centroid(object) {
+    W0 = W1 = X0 = Y0 = Z0 = X1 = Y1 = Z1 = 0;
+    X2 = new d3Array.Adder();
+    Y2 = new d3Array.Adder();
+    Z2 = new d3Array.Adder();
+    geoStream(object, centroidStream);
+    var x = +X2, y = +Y2, z = +Z2, m = hypot(x, y, z);
+    // If the area-weighted ccentroid is undefined, fall back to length-weighted ccentroid.
+    if (m < epsilon2) {
+      (x = X1, y = Y1, z = Z1);
+      // If the feature has zero length, fall back to arithmetic mean of point vectors.
+      if (W1 < epsilon) (x = X0, y = Y0, z = Z0);
+      m = hypot(x, y, z);
+      // If the feature still has an undefined ccentroid, then return.
+      if (m < epsilon2) return [NaN, NaN];
+    }
+    return [atan2(y, x) * degrees, asin(z / m) * degrees];
+  }
+  function constant(x) {
+    return function () {
+      return x;
+    };
+  }
+  function compose(a, b) {
+    function compose(x, y) {
+      return (x = a(x, y), b(x[0], x[1]));
+    }
+    if (a.invert && b.invert) compose.invert = function (x, y) {
+      return (x = b.invert(x, y), x && a.invert(x[0], x[1]));
+    };
+    return compose;
+  }
+  function rotationIdentity(lambda, phi) {
+    return [abs(lambda) > pi ? lambda + Math.round(-lambda / tau) * tau : lambda, phi];
+  }
+  rotationIdentity.invert = rotationIdentity;
+  function rotateRadians(deltaLambda, deltaPhi, deltaGamma) {
+    return (deltaLambda %= tau) ? deltaPhi || deltaGamma ? compose(rotationLambda(deltaLambda), rotationPhiGamma(deltaPhi, deltaGamma)) : rotationLambda(deltaLambda) : deltaPhi || deltaGamma ? rotationPhiGamma(deltaPhi, deltaGamma) : rotationIdentity;
+  }
+  function forwardRotationLambda(deltaLambda) {
+    return function (lambda, phi) {
+      return (lambda += deltaLambda, [lambda > pi ? lambda - tau : lambda < -pi ? lambda + tau : lambda, phi]);
+    };
+  }
+  function rotationLambda(deltaLambda) {
+    var rotation = forwardRotationLambda(deltaLambda);
+    rotation.invert = forwardRotationLambda(-deltaLambda);
+    return rotation;
+  }
+  function rotationPhiGamma(deltaPhi, deltaGamma) {
+    var cosDeltaPhi = cos(deltaPhi), sinDeltaPhi = sin(deltaPhi), cosDeltaGamma = cos(deltaGamma), sinDeltaGamma = sin(deltaGamma);
+    function rotation(lambda, phi) {
+      var cosPhi = cos(phi), x = cos(lambda) * cosPhi, y = sin(lambda) * cosPhi, z = sin(phi), k = z * cosDeltaPhi + x * sinDeltaPhi;
+      return [atan2(y * cosDeltaGamma - k * sinDeltaGamma, x * cosDeltaPhi - z * sinDeltaPhi), asin(k * cosDeltaGamma + y * sinDeltaGamma)];
+    }
+    rotation.invert = function (lambda, phi) {
+      var cosPhi = cos(phi), x = cos(lambda) * cosPhi, y = sin(lambda) * cosPhi, z = sin(phi), k = z * cosDeltaGamma - y * sinDeltaGamma;
+      return [atan2(y * cosDeltaGamma + z * sinDeltaGamma, x * cosDeltaPhi + k * sinDeltaPhi), asin(k * cosDeltaPhi - x * sinDeltaPhi)];
+    };
+    return rotation;
+  }
+  function rotation(rotate) {
+    rotate = rotateRadians(rotate[0] * radians, rotate[1] * radians, rotate.length > 2 ? rotate[2] * radians : 0);
+    function forward(coordinates) {
+      coordinates = rotate(coordinates[0] * radians, coordinates[1] * radians);
+      return (coordinates[0] *= degrees, coordinates[1] *= degrees, coordinates);
+    }
+    forward.invert = function (coordinates) {
+      coordinates = rotate.invert(coordinates[0] * radians, coordinates[1] * radians);
+      return (coordinates[0] *= degrees, coordinates[1] *= degrees, coordinates);
+    };
+    return forward;
+  }
+  // Generates a circle centered at [0°, 0°], with a given radius and precision.
+  function circleStream(stream, radius, delta, direction, t0, t1) {
+    if (!delta) return;
+    var cosRadius = cos(radius), sinRadius = sin(radius), step = direction * delta;
+    if (t0 == null) {
+      t0 = radius + direction * tau;
+      t1 = radius - step / 2;
+    } else {
+      t0 = circleRadius(cosRadius, t0);
+      t1 = circleRadius(cosRadius, t1);
+      if (direction > 0 ? t0 < t1 : t0 > t1) t0 += direction * tau;
+    }
+    for (var point, t = t0; direction > 0 ? t > t1 : t < t1; t -= step) {
+      point = spherical([cosRadius, -sinRadius * cos(t), -sinRadius * sin(t)]);
+      stream.point(point[0], point[1]);
+    }
+  }
+  // Returns the signed angle of a cartesian point relative to [cosRadius, 0, 0].
+  function circleRadius(cosRadius, point) {
+    (point = cartesian(point), point[0] -= cosRadius);
+    cartesianNormalizeInPlace(point);
+    var radius = acos(-point[1]);
+    return ((-point[2] < 0 ? -radius : radius) + tau - epsilon) % tau;
+  }
+  function circle() {
+    var center = constant([0, 0]), radius = constant(90), precision = constant(6), ring, rotate, stream = {
+      point: point
+    };
+    function point(x, y) {
+      ring.push(x = rotate(x, y));
+      (x[0] *= degrees, x[1] *= degrees);
+    }
+    function circle() {
+      var c = center.apply(this, arguments), r = radius.apply(this, arguments) * radians, p = precision.apply(this, arguments) * radians;
+      ring = [];
+      rotate = rotateRadians(-c[0] * radians, -c[1] * radians, 0).invert;
+      circleStream(stream, r, p, 1);
+      c = {
+        type: "Polygon",
+        coordinates: [ring]
+      };
+      ring = rotate = null;
+      return c;
+    }
+    circle.center = function (_) {
+      return arguments.length ? (center = typeof _ === "function" ? _ : constant([+_[0], +_[1]]), circle) : center;
+    };
+    circle.radius = function (_) {
+      return arguments.length ? (radius = typeof _ === "function" ? _ : constant(+_), circle) : radius;
+    };
+    circle.precision = function (_) {
+      return arguments.length ? (precision = typeof _ === "function" ? _ : constant(+_), circle) : precision;
+    };
+    return circle;
+  }
+  function clipBuffer() {
+    var lines = [], line;
+    return {
+      point: function (x, y, m) {
+        line.push([x, y, m]);
+      },
+      lineStart: function () {
+        lines.push(line = []);
+      },
+      lineEnd: noop,
+      rejoin: function () {
+        if (lines.length > 1) lines.push(lines.pop().concat(lines.shift()));
+      },
+      result: function () {
+        var result = lines;
+        lines = [];
+        line = null;
+        return result;
+      }
+    };
+  }
+  function pointEqual(a, b) {
+    return abs(a[0] - b[0]) < epsilon && abs(a[1] - b[1]) < epsilon;
+  }
+  function Intersection(point, points, other, entry) {
+    this.x = point;
+    this.z = points;
+    this.o = other;
+    // another intersection
+    this.e = entry;
+    // is an entry?
+    this.v = false;
+    // visited
+    this.n = this.p = null;
+  }
+  // A generalized polygon clipping algorithm: given a polygon that has been cut
+  // into its visible line segments, and rejoins the segments by interpolating
+  // along the clip edge.
+  function clipRejoin(segments, compareIntersection, startInside, interpolate, stream) {
+    var subject = [], clip = [], i, n;
+    segments.forEach(function (segment) {
+      if ((n = segment.length - 1) <= 0) return;
+      var n, p0 = segment[0], p1 = segment[n], x;
+      if (pointEqual(p0, p1)) {
+        if (!p0[2] && !p1[2]) {
+          stream.lineStart();
+          for (i = 0; i < n; ++i) stream.point((p0 = segment[i])[0], p0[1]);
+          stream.lineEnd();
+          return;
+        }
+        // handle degenerate cases by moving the point
+        p1[0] += 2 * epsilon;
+      }
+      subject.push(x = new Intersection(p0, segment, null, true));
+      clip.push(x.o = new Intersection(p0, null, x, false));
+      subject.push(x = new Intersection(p1, segment, null, false));
+      clip.push(x.o = new Intersection(p1, null, x, true));
+    });
+    if (!subject.length) return;
+    clip.sort(compareIntersection);
+    link(subject);
+    link(clip);
+    for ((i = 0, n = clip.length); i < n; ++i) {
+      clip[i].e = startInside = !startInside;
+    }
+    var start = subject[0], points, point;
+    while (1) {
+      // Find first unvisited intersection.
+      var current = start, isSubject = true;
+      while (current.v) if ((current = current.n) === start) return;
+      points = current.z;
+      stream.lineStart();
+      do {
+        current.v = current.o.v = true;
+        if (current.e) {
+          if (isSubject) {
+            for ((i = 0, n = points.length); i < n; ++i) stream.point((point = points[i])[0], point[1]);
+          } else {
+            interpolate(current.x, current.n.x, 1, stream);
+          }
+          current = current.n;
+        } else {
+          if (isSubject) {
+            points = current.p.z;
+            for (i = points.length - 1; i >= 0; --i) stream.point((point = points[i])[0], point[1]);
+          } else {
+            interpolate(current.x, current.p.x, -1, stream);
+          }
+          current = current.p;
+        }
+        current = current.o;
+        points = current.z;
+        isSubject = !isSubject;
+      } while (!current.v);
+      stream.lineEnd();
+    }
+  }
+  function link(array) {
+    if (!(n = array.length)) return;
+    var n, i = 0, a = array[0], b;
+    while (++i < n) {
+      a.n = b = array[i];
+      b.p = a;
+      a = b;
+    }
+    a.n = b = array[0];
+    b.p = a;
+  }
+  function longitude(point) {
+    if (abs(point[0]) <= pi) return point[0]; else return sign(point[0]) * ((abs(point[0]) + pi) % tau - pi);
+  }
+  function polygonContains(polygon, point) {
+    var lambda = longitude(point), phi = point[1], sinPhi = sin(phi), normal = [sin(lambda), -cos(lambda), 0], angle = 0, winding = 0;
+    var sum = new d3Array.Adder();
+    if (sinPhi === 1) phi = halfPi + epsilon; else if (sinPhi === -1) phi = -halfPi - epsilon;
+    for (var i = 0, n = polygon.length; i < n; ++i) {
+      if (!(m = (ring = polygon[i]).length)) continue;
+      var ring, m, point0 = ring[m - 1], lambda0 = longitude(point0), phi0 = point0[1] / 2 + quarterPi, sinPhi0 = sin(phi0), cosPhi0 = cos(phi0);
+      for (var j = 0; j < m; (++j, lambda0 = lambda1, sinPhi0 = sinPhi1, cosPhi0 = cosPhi1, point0 = point1)) {
+        var point1 = ring[j], lambda1 = longitude(point1), phi1 = point1[1] / 2 + quarterPi, sinPhi1 = sin(phi1), cosPhi1 = cos(phi1), delta = lambda1 - lambda0, sign = delta >= 0 ? 1 : -1, absDelta = sign * delta, antimeridian = absDelta > pi, k = sinPhi0 * sinPhi1;
+        sum.add(atan2(k * sign * sin(absDelta), cosPhi0 * cosPhi1 + k * cos(absDelta)));
+        angle += antimeridian ? delta + sign * tau : delta;
+        // Are the longitudes either side of the point’s meridian (lambda),
+        // and are the latitudes smaller than the parallel (phi)?
+        if (antimeridian ^ lambda0 >= lambda ^ lambda1 >= lambda) {
+          var arc = cartesianCross(cartesian(point0), cartesian(point1));
+          cartesianNormalizeInPlace(arc);
+          var intersection = cartesianCross(normal, arc);
+          cartesianNormalizeInPlace(intersection);
+          var phiArc = (antimeridian ^ delta >= 0 ? -1 : 1) * asin(intersection[2]);
+          if (phi > phiArc || phi === phiArc && (arc[0] || arc[1])) {
+            winding += antimeridian ^ delta >= 0 ? 1 : -1;
+          }
+        }
+      }
+    }
+    // First, determine whether the South pole is inside or outside:
+    // 
+    // It is inside if:
+    // * the polygon winds around it in a clockwise direction.
+    // * the polygon does not (cumulatively) wind around it, but has a negative
+    // (counter-clockwise) area.
+    // 
+    // Second, count the (signed) number of times a segment crosses a lambda
+    // from the point to the South pole.  If it is zero, then the point is the
+    // same side as the South pole.
+    return (angle < -epsilon || angle < epsilon && sum < -epsilon2) ^ winding & 1;
+  }
+  function clip(pointVisible, clipLine, interpolate, start) {
+    return function (sink) {
+      var line = clipLine(sink), ringBuffer = clipBuffer(), ringSink = clipLine(ringBuffer), polygonStarted = false, polygon, segments, ring;
+      var clip = {
+        point: point,
+        lineStart: lineStart,
+        lineEnd: lineEnd,
+        polygonStart: function () {
+          clip.point = pointRing;
+          clip.lineStart = ringStart;
+          clip.lineEnd = ringEnd;
+          segments = [];
+          polygon = [];
+        },
+        polygonEnd: function () {
+          clip.point = point;
+          clip.lineStart = lineStart;
+          clip.lineEnd = lineEnd;
+          segments = d3Array.merge(segments);
+          var startInside = polygonContains(polygon, start);
+          if (segments.length) {
+            if (!polygonStarted) (sink.polygonStart(), polygonStarted = true);
+            clipRejoin(segments, compareIntersection, startInside, interpolate, sink);
+          } else if (startInside) {
+            if (!polygonStarted) (sink.polygonStart(), polygonStarted = true);
+            sink.lineStart();
+            interpolate(null, null, 1, sink);
+            sink.lineEnd();
+          }
+          if (polygonStarted) (sink.polygonEnd(), polygonStarted = false);
+          segments = polygon = null;
+        },
+        sphere: function () {
+          sink.polygonStart();
+          sink.lineStart();
+          interpolate(null, null, 1, sink);
+          sink.lineEnd();
+          sink.polygonEnd();
+        }
+      };
+      function point(lambda, phi) {
+        if (pointVisible(lambda, phi)) sink.point(lambda, phi);
+      }
+      function pointLine(lambda, phi) {
+        line.point(lambda, phi);
+      }
+      function lineStart() {
+        clip.point = pointLine;
+        line.lineStart();
+      }
+      function lineEnd() {
+        clip.point = point;
+        line.lineEnd();
+      }
+      function pointRing(lambda, phi) {
+        ring.push([lambda, phi]);
+        ringSink.point(lambda, phi);
+      }
+      function ringStart() {
+        ringSink.lineStart();
+        ring = [];
+      }
+      function ringEnd() {
+        pointRing(ring[0][0], ring[0][1]);
+        ringSink.lineEnd();
+        var clean = ringSink.clean(), ringSegments = ringBuffer.result(), i, n = ringSegments.length, m, segment, point;
+        ring.pop();
+        polygon.push(ring);
+        ring = null;
+        if (!n) return;
+        // No intersections.
+        if (clean & 1) {
+          segment = ringSegments[0];
+          if ((m = segment.length - 1) > 0) {
+            if (!polygonStarted) (sink.polygonStart(), polygonStarted = true);
+            sink.lineStart();
+            for (i = 0; i < m; ++i) sink.point((point = segment[i])[0], point[1]);
+            sink.lineEnd();
+          }
+          return;
+        }
+        // Rejoin connected segments.
+        // TODO reuse ringBuffer.rejoin()?
+        if (n > 1 && clean & 2) ringSegments.push(ringSegments.pop().concat(ringSegments.shift()));
+        segments.push(ringSegments.filter(validSegment));
+      }
+      return clip;
+    };
+  }
+  function validSegment(segment) {
+    return segment.length > 1;
+  }
+  // Intersections are sorted along the clip edge. For both antimeridian cutting
+  // and circle clipping, the same comparison is used.
+  function compareIntersection(a, b) {
+    return ((a = a.x)[0] < 0 ? a[1] - halfPi - epsilon : halfPi - a[1]) - ((b = b.x)[0] < 0 ? b[1] - halfPi - epsilon : halfPi - b[1]);
+  }
+  var clipAntimeridian = clip(function () {
+    return true;
+  }, clipAntimeridianLine, clipAntimeridianInterpolate, [-pi, -halfPi]);
+  // Takes a line and cuts into visible segments. Return values: 0 - there were
+  // intersections or the line was empty; 1 - no intersections; 2 - there were
+  // intersections, and the first and last segments should be rejoined.
+  function clipAntimeridianLine(stream) {
+    var lambda0 = NaN, phi0 = NaN, sign0 = NaN, clean;
+    // no intersections
+    return {
+      lineStart: function () {
+        stream.lineStart();
+        clean = 1;
+      },
+      point: function (lambda1, phi1) {
+        var sign1 = lambda1 > 0 ? pi : -pi, delta = abs(lambda1 - lambda0);
+        if (abs(delta - pi) < epsilon) {
+          // line crosses a pole
+          stream.point(lambda0, phi0 = (phi0 + phi1) / 2 > 0 ? halfPi : -halfPi);
+          stream.point(sign0, phi0);
+          stream.lineEnd();
+          stream.lineStart();
+          stream.point(sign1, phi0);
+          stream.point(lambda1, phi0);
+          clean = 0;
+        } else if (sign0 !== sign1 && delta >= pi) {
+          // line crosses antimeridian
+          if (abs(lambda0 - sign0) < epsilon) lambda0 -= sign0 * epsilon;
+          // handle degeneracies
+          if (abs(lambda1 - sign1) < epsilon) lambda1 -= sign1 * epsilon;
+          phi0 = clipAntimeridianIntersect(lambda0, phi0, lambda1, phi1);
+          stream.point(sign0, phi0);
+          stream.lineEnd();
+          stream.lineStart();
+          stream.point(sign1, phi0);
+          clean = 0;
+        }
+        stream.point(lambda0 = lambda1, phi0 = phi1);
+        sign0 = sign1;
+      },
+      lineEnd: function () {
+        stream.lineEnd();
+        lambda0 = phi0 = NaN;
+      },
+      clean: function () {
+        return 2 - clean;
+      }
+    };
+  }
+  function clipAntimeridianIntersect(lambda0, phi0, lambda1, phi1) {
+    var cosPhi0, cosPhi1, sinLambda0Lambda1 = sin(lambda0 - lambda1);
+    return abs(sinLambda0Lambda1) > epsilon ? atan((sin(phi0) * (cosPhi1 = cos(phi1)) * sin(lambda1) - sin(phi1) * (cosPhi0 = cos(phi0)) * sin(lambda0)) / (cosPhi0 * cosPhi1 * sinLambda0Lambda1)) : (phi0 + phi1) / 2;
+  }
+  function clipAntimeridianInterpolate(from, to, direction, stream) {
+    var phi;
+    if (from == null) {
+      phi = direction * halfPi;
+      stream.point(-pi, phi);
+      stream.point(0, phi);
+      stream.point(pi, phi);
+      stream.point(pi, 0);
+      stream.point(pi, -phi);
+      stream.point(0, -phi);
+      stream.point(-pi, -phi);
+      stream.point(-pi, 0);
+      stream.point(-pi, phi);
+    } else if (abs(from[0] - to[0]) > epsilon) {
+      var lambda = from[0] < to[0] ? pi : -pi;
+      phi = direction * lambda / 2;
+      stream.point(-lambda, phi);
+      stream.point(0, phi);
+      stream.point(lambda, phi);
+    } else {
+      stream.point(to[0], to[1]);
+    }
+  }
+  function clipCircle(radius) {
+    var cr = cos(radius), delta = 6 * radians, smallRadius = cr > 0, notHemisphere = abs(cr) > epsilon;
+    // TODO optimise for this common case
+    function interpolate(from, to, direction, stream) {
+      circleStream(stream, radius, delta, direction, from, to);
+    }
+    function visible(lambda, phi) {
+      return cos(lambda) * cos(phi) > cr;
+    }
+    // Takes a line and cuts into visible segments. Return values used for polygon
+    // clipping: 0 - there were intersections or the line was empty; 1 - no
+    // intersections 2 - there were intersections, and the first and last segments
+    // should be rejoined.
+    function clipLine(stream) {
+      var point0, // previous point
+      c0, // code for previous point
+      v0, // visibility of previous point
+      v00, // visibility of first point
+      clean;
+      // no intersections
+      return {
+        lineStart: function () {
+          v00 = v0 = false;
+          clean = 1;
+        },
+        point: function (lambda, phi) {
+          var point1 = [lambda, phi], point2, v = visible(lambda, phi), c = smallRadius ? v ? 0 : code(lambda, phi) : v ? code(lambda + (lambda < 0 ? pi : -pi), phi) : 0;
+          if (!point0 && (v00 = v0 = v)) stream.lineStart();
+          if (v !== v0) {
+            point2 = intersect(point0, point1);
+            if (!point2 || pointEqual(point0, point2) || pointEqual(point1, point2)) point1[2] = 1;
+          }
+          if (v !== v0) {
+            clean = 0;
+            if (v) {
+              // outside going in
+              stream.lineStart();
+              point2 = intersect(point1, point0);
+              stream.point(point2[0], point2[1]);
+            } else {
+              // inside going out
+              point2 = intersect(point0, point1);
+              stream.point(point2[0], point2[1], 2);
+              stream.lineEnd();
+            }
+            point0 = point2;
+          } else if (notHemisphere && point0 && smallRadius ^ v) {
+            var t;
+            // If the codes for two points are different, or are both zero,
+            // and there this segment intersects with the small circle.
+            if (!(c & c0) && (t = intersect(point1, point0, true))) {
+              clean = 0;
+              if (smallRadius) {
+                stream.lineStart();
+                stream.point(t[0][0], t[0][1]);
+                stream.point(t[1][0], t[1][1]);
+                stream.lineEnd();
+              } else {
+                stream.point(t[1][0], t[1][1]);
+                stream.lineEnd();
+                stream.lineStart();
+                stream.point(t[0][0], t[0][1], 3);
+              }
+            }
+          }
+          if (v && (!point0 || !pointEqual(point0, point1))) {
+            stream.point(point1[0], point1[1]);
+          }
+          (point0 = point1, v0 = v, c0 = c);
+        },
+        lineEnd: function () {
+          if (v0) stream.lineEnd();
+          point0 = null;
+        },
+        // Rejoin first and last segments if there were intersections and the first
+        // and last points were visible.
+        clean: function () {
+          return clean | (v00 && v0) << 1;
+        }
+      };
+    }
+    // Intersects the great circle between a and b with the clip circle.
+    function intersect(a, b, two) {
+      var pa = cartesian(a), pb = cartesian(b);
+      // We have two planes, n1.p = d1 and n2.p = d2.
+      // Find intersection line p(t) = c1 n1 + c2 n2 + t (n1 ⨯ n2).
+      var n1 = [1, 0, 0], // normal
+      n2 = cartesianCross(pa, pb), n2n2 = cartesianDot(n2, n2), n1n2 = n2[0], // cartesianDot(n1, n2),
+      determinant = n2n2 - n1n2 * n1n2;
+      // Two polar points.
+      if (!determinant) return !two && a;
+      var c1 = cr * n2n2 / determinant, c2 = -cr * n1n2 / determinant, n1xn2 = cartesianCross(n1, n2), A = cartesianScale(n1, c1), B = cartesianScale(n2, c2);
+      cartesianAddInPlace(A, B);
+      // Solve |p(t)|^2 = 1.
+      var u = n1xn2, w = cartesianDot(A, u), uu = cartesianDot(u, u), t2 = w * w - uu * (cartesianDot(A, A) - 1);
+      if (t2 < 0) return;
+      var t = sqrt(t2), q = cartesianScale(u, (-w - t) / uu);
+      cartesianAddInPlace(q, A);
+      q = spherical(q);
+      if (!two) return q;
+      // Two intersection points.
+      var lambda0 = a[0], lambda1 = b[0], phi0 = a[1], phi1 = b[1], z;
+      if (lambda1 < lambda0) (z = lambda0, lambda0 = lambda1, lambda1 = z);
+      var delta = lambda1 - lambda0, polar = abs(delta - pi) < epsilon, meridian = polar || delta < epsilon;
+      if (!polar && phi1 < phi0) (z = phi0, phi0 = phi1, phi1 = z);
+      // Check that the first point is between a and b.
+      if (meridian ? polar ? phi0 + phi1 > 0 ^ q[1] < (abs(q[0] - lambda0) < epsilon ? phi0 : phi1) : phi0 <= q[1] && q[1] <= phi1 : delta > pi ^ (lambda0 <= q[0] && q[0] <= lambda1)) {
+        var q1 = cartesianScale(u, (-w + t) / uu);
+        cartesianAddInPlace(q1, A);
+        return [q, spherical(q1)];
+      }
+    }
+    // Generates a 4-bit vector representing the location of a point relative to
+    // the small circle's bounding box.
+    function code(lambda, phi) {
+      var r = smallRadius ? radius : pi - radius, code = 0;
+      if (lambda < -r) code |= 1; else // left
+      if (lambda > r) code |= 2;
+      // right
+      if (phi < -r) code |= 4; else // below
+      if (phi > r) code |= 8;
+      // above
+      return code;
+    }
+    return clip(visible, clipLine, interpolate, smallRadius ? [0, -radius] : [-pi, radius - pi]);
+  }
+  function clipLine(a, b, x0, y0, x1, y1) {
+    var ax = a[0], ay = a[1], bx = b[0], by = b[1], t0 = 0, t1 = 1, dx = bx - ax, dy = by - ay, r;
+    r = x0 - ax;
+    if (!dx && r > 0) return;
+    r /= dx;
+    if (dx < 0) {
+      if (r < t0) return;
+      if (r < t1) t1 = r;
+    } else if (dx > 0) {
+      if (r > t1) return;
+      if (r > t0) t0 = r;
+    }
+    r = x1 - ax;
+    if (!dx && r < 0) return;
+    r /= dx;
+    if (dx < 0) {
+      if (r > t1) return;
+      if (r > t0) t0 = r;
+    } else if (dx > 0) {
+      if (r < t0) return;
+      if (r < t1) t1 = r;
+    }
+    r = y0 - ay;
+    if (!dy && r > 0) return;
+    r /= dy;
+    if (dy < 0) {
+      if (r < t0) return;
+      if (r < t1) t1 = r;
+    } else if (dy > 0) {
+      if (r > t1) return;
+      if (r > t0) t0 = r;
+    }
+    r = y1 - ay;
+    if (!dy && r < 0) return;
+    r /= dy;
+    if (dy < 0) {
+      if (r > t1) return;
+      if (r > t0) t0 = r;
+    } else if (dy > 0) {
+      if (r < t0) return;
+      if (r < t1) t1 = r;
+    }
+    if (t0 > 0) (a[0] = ax + t0 * dx, a[1] = ay + t0 * dy);
+    if (t1 < 1) (b[0] = ax + t1 * dx, b[1] = ay + t1 * dy);
+    return true;
+  }
+  var clipMax = 1e9, clipMin = -clipMax;
+  // TODO Use d3-polygon’s polygonContains here for the ring check?
+  // TODO Eliminate duplicate buffering in clipBuffer and polygon.push?
+  function clipRectangle(x0, y0, x1, y1) {
+    function visible(x, y) {
+      return x0 <= x && x <= x1 && y0 <= y && y <= y1;
+    }
+    function interpolate(from, to, direction, stream) {
+      var a = 0, a1 = 0;
+      if (from == null || (a = corner(from, direction)) !== (a1 = corner(to, direction)) || comparePoint(from, to) < 0 ^ direction > 0) {
+        do stream.point(a === 0 || a === 3 ? x0 : x1, a > 1 ? y1 : y0); while ((a = (a + direction + 4) % 4) !== a1);
+      } else {
+        stream.point(to[0], to[1]);
+      }
+    }
+    function corner(p, direction) {
+      return abs(p[0] - x0) < epsilon ? direction > 0 ? 0 : 3 : abs(p[0] - x1) < epsilon ? direction > 0 ? 2 : 1 : abs(p[1] - y0) < epsilon ? direction > 0 ? 1 : 0 : direction > 0 ? 3 : 2;
+    }
+    function compareIntersection(a, b) {
+      return comparePoint(a.x, b.x);
+    }
+    function comparePoint(a, b) {
+      var ca = corner(a, 1), cb = corner(b, 1);
+      return ca !== cb ? ca - cb : ca === 0 ? b[1] - a[1] : ca === 1 ? a[0] - b[0] : ca === 2 ? a[1] - b[1] : b[0] - a[0];
+    }
+    return function (stream) {
+      var activeStream = stream, bufferStream = clipBuffer(), segments, polygon, ring, x__, y__, v__, // first point
+      x_, y_, v_, // previous point
+      first, clean;
+      var clipStream = {
+        point: point,
+        lineStart: lineStart,
+        lineEnd: lineEnd,
+        polygonStart: polygonStart,
+        polygonEnd: polygonEnd
+      };
+      function point(x, y) {
+        if (visible(x, y)) activeStream.point(x, y);
+      }
+      function polygonInside() {
+        var winding = 0;
+        for (var i = 0, n = polygon.length; i < n; ++i) {
+          for (var ring = polygon[i], j = 1, m = ring.length, point = ring[0], a0, a1, b0 = point[0], b1 = point[1]; j < m; ++j) {
+            (a0 = b0, a1 = b1, point = ring[j], b0 = point[0], b1 = point[1]);
+            if (a1 <= y1) {
+              if (b1 > y1 && (b0 - a0) * (y1 - a1) > (b1 - a1) * (x0 - a0)) ++winding;
+            } else {
+              if (b1 <= y1 && (b0 - a0) * (y1 - a1) < (b1 - a1) * (x0 - a0)) --winding;
+            }
+          }
+        }
+        return winding;
+      }
+      // Buffer geometry within a polygon and then clip it en masse.
+      function polygonStart() {
+        (activeStream = bufferStream, segments = [], polygon = [], clean = true);
+      }
+      function polygonEnd() {
+        var startInside = polygonInside(), cleanInside = clean && startInside, visible = (segments = d3Array.merge(segments)).length;
+        if (cleanInside || visible) {
+          stream.polygonStart();
+          if (cleanInside) {
+            stream.lineStart();
+            interpolate(null, null, 1, stream);
+            stream.lineEnd();
+          }
+          if (visible) {
+            clipRejoin(segments, compareIntersection, startInside, interpolate, stream);
+          }
+          stream.polygonEnd();
+        }
+        (activeStream = stream, segments = polygon = ring = null);
+      }
+      function lineStart() {
+        clipStream.point = linePoint;
+        if (polygon) polygon.push(ring = []);
+        first = true;
+        v_ = false;
+        x_ = y_ = NaN;
+      }
+      // TODO rather than special-case polygons, simply handle them separately.
+      // Ideally, coincident intersection points should be jittered to avoid
+      // clipping issues.
+      function lineEnd() {
+        if (segments) {
+          linePoint(x__, y__);
+          if (v__ && v_) bufferStream.rejoin();
+          segments.push(bufferStream.result());
+        }
+        clipStream.point = point;
+        if (v_) activeStream.lineEnd();
+      }
+      function linePoint(x, y) {
+        var v = visible(x, y);
+        if (polygon) ring.push([x, y]);
+        if (first) {
+          (x__ = x, y__ = y, v__ = v);
+          first = false;
+          if (v) {
+            activeStream.lineStart();
+            activeStream.point(x, y);
+          }
+        } else {
+          if (v && v_) activeStream.point(x, y); else {
+            var a = [x_ = Math.max(clipMin, Math.min(clipMax, x_)), y_ = Math.max(clipMin, Math.min(clipMax, y_))], b = [x = Math.max(clipMin, Math.min(clipMax, x)), y = Math.max(clipMin, Math.min(clipMax, y))];
+            if (clipLine(a, b, x0, y0, x1, y1)) {
+              if (!v_) {
+                activeStream.lineStart();
+                activeStream.point(a[0], a[1]);
+              }
+              activeStream.point(b[0], b[1]);
+              if (!v) activeStream.lineEnd();
+              clean = false;
+            } else if (v) {
+              activeStream.lineStart();
+              activeStream.point(x, y);
+              clean = false;
+            }
+          }
+        }
+        (x_ = x, y_ = y, v_ = v);
+      }
+      return clipStream;
+    };
+  }
+  function extent() {
+    var x0 = 0, y0 = 0, x1 = 960, y1 = 500, cache, cacheStream, clip;
+    return clip = {
+      stream: function (stream) {
+        return cache && cacheStream === stream ? cache : cache = clipRectangle(x0, y0, x1, y1)(cacheStream = stream);
+      },
+      extent: function (_) {
+        return arguments.length ? (x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1], cache = cacheStream = null, clip) : [[x0, y0], [x1, y1]];
+      }
+    };
+  }
+  var lengthSum, lambda0$2, sinPhi0$1, cosPhi0$1;
+  var lengthStream = {
+    sphere: noop,
+    point: noop,
+    lineStart: lengthLineStart,
+    lineEnd: noop,
+    polygonStart: noop,
+    polygonEnd: noop
+  };
+  function lengthLineStart() {
+    lengthStream.point = lengthPointFirst;
+    lengthStream.lineEnd = lengthLineEnd;
+  }
+  function lengthLineEnd() {
+    lengthStream.point = lengthStream.lineEnd = noop;
+  }
+  function lengthPointFirst(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    (lambda0$2 = lambda, sinPhi0$1 = sin(phi), cosPhi0$1 = cos(phi));
+    lengthStream.point = lengthPoint;
+  }
+  function lengthPoint(lambda, phi) {
+    (lambda *= radians, phi *= radians);
+    var sinPhi = sin(phi), cosPhi = cos(phi), delta = abs(lambda - lambda0$2), cosDelta = cos(delta), sinDelta = sin(delta), x = cosPhi * sinDelta, y = cosPhi0$1 * sinPhi - sinPhi0$1 * cosPhi * cosDelta, z = sinPhi0$1 * sinPhi + cosPhi0$1 * cosPhi * cosDelta;
+    lengthSum.add(atan2(sqrt(x * x + y * y), z));
+    (lambda0$2 = lambda, sinPhi0$1 = sinPhi, cosPhi0$1 = cosPhi);
+  }
+  function length(object) {
+    lengthSum = new d3Array.Adder();
+    geoStream(object, lengthStream);
+    return +lengthSum;
+  }
+  var coordinates = [null, null], object = {
+    type: "LineString",
+    coordinates: coordinates
+  };
+  function distance(a, b) {
+    coordinates[0] = a;
+    coordinates[1] = b;
+    return length(object);
+  }
+  var containsObjectType = {
+    Feature: function (object, point) {
+      return containsGeometry(object.geometry, point);
+    },
+    FeatureCollection: function (object, point) {
+      var features = object.features, i = -1, n = features.length;
+      while (++i < n) if (containsGeometry(features[i].geometry, point)) return true;
+      return false;
+    }
+  };
+  var containsGeometryType = {
+    Sphere: function () {
+      return true;
+    },
+    Point: function (object, point) {
+      return containsPoint(object.coordinates, point);
+    },
+    MultiPoint: function (object, point) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) if (containsPoint(coordinates[i], point)) return true;
+      return false;
+    },
+    LineString: function (object, point) {
+      return containsLine(object.coordinates, point);
+    },
+    MultiLineString: function (object, point) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) if (containsLine(coordinates[i], point)) return true;
+      return false;
+    },
+    Polygon: function (object, point) {
+      return containsPolygon(object.coordinates, point);
+    },
+    MultiPolygon: function (object, point) {
+      var coordinates = object.coordinates, i = -1, n = coordinates.length;
+      while (++i < n) if (containsPolygon(coordinates[i], point)) return true;
+      return false;
+    },
+    GeometryCollection: function (object, point) {
+      var geometries = object.geometries, i = -1, n = geometries.length;
+      while (++i < n) if (containsGeometry(geometries[i], point)) return true;
+      return false;
+    }
+  };
+  function containsGeometry(geometry, point) {
+    return geometry && containsGeometryType.hasOwnProperty(geometry.type) ? containsGeometryType[geometry.type](geometry, point) : false;
+  }
+  function containsPoint(coordinates, point) {
+    return distance(coordinates, point) === 0;
+  }
+  function containsLine(coordinates, point) {
+    var ao, bo, ab;
+    for (var i = 0, n = coordinates.length; i < n; i++) {
+      bo = distance(coordinates[i], point);
+      if (bo === 0) return true;
+      if (i > 0) {
+        ab = distance(coordinates[i], coordinates[i - 1]);
+        if (ab > 0 && ao <= ab && bo <= ab && (ao + bo - ab) * (1 - Math.pow((ao - bo) / ab, 2)) < epsilon2 * ab) return true;
+      }
+      ao = bo;
+    }
+    return false;
+  }
+  function containsPolygon(coordinates, point) {
+    return !!polygonContains(coordinates.map(ringRadians), pointRadians(point));
+  }
+  function ringRadians(ring) {
+    return (ring = ring.map(pointRadians), ring.pop(), ring);
+  }
+  function pointRadians(point) {
+    return [point[0] * radians, point[1] * radians];
+  }
+  function contains(object, point) {
+    return (object && containsObjectType.hasOwnProperty(object.type) ? containsObjectType[object.type] : containsGeometry)(object, point);
+  }
+  function graticuleX(y0, y1, dy) {
+    var y = d3Array.range(y0, y1 - epsilon, dy).concat(y1);
+    return function (x) {
+      return y.map(function (y) {
+        return [x, y];
+      });
+    };
+  }
+  function graticuleY(x0, x1, dx) {
+    var x = d3Array.range(x0, x1 - epsilon, dx).concat(x1);
+    return function (y) {
+      return x.map(function (x) {
+        return [x, y];
+      });
+    };
+  }
+  function graticule() {
+    var x1, x0, X1, X0, y1, y0, Y1, Y0, dx = 10, dy = dx, DX = 90, DY = 360, x, y, X, Y, precision = 2.5;
+    function graticule() {
+      return {
+        type: "MultiLineString",
+        coordinates: lines()
+      };
+    }
+    function lines() {
+      return d3Array.range(ceil(X0 / DX) * DX, X1, DX).map(X).concat(d3Array.range(ceil(Y0 / DY) * DY, Y1, DY).map(Y)).concat(d3Array.range(ceil(x0 / dx) * dx, x1, dx).filter(function (x) {
+        return abs(x % DX) > epsilon;
+      }).map(x)).concat(d3Array.range(ceil(y0 / dy) * dy, y1, dy).filter(function (y) {
+        return abs(y % DY) > epsilon;
+      }).map(y));
+    }
+    graticule.lines = function () {
+      return lines().map(function (coordinates) {
+        return {
+          type: "LineString",
+          coordinates: coordinates
+        };
+      });
+    };
+    graticule.outline = function () {
+      return {
+        type: "Polygon",
+        coordinates: [X(X0).concat(Y(Y1).slice(1), X(X1).reverse().slice(1), Y(Y0).reverse().slice(1))]
+      };
+    };
+    graticule.extent = function (_) {
+      if (!arguments.length) return graticule.extentMinor();
+      return graticule.extentMajor(_).extentMinor(_);
+    };
+    graticule.extentMajor = function (_) {
+      if (!arguments.length) return [[X0, Y0], [X1, Y1]];
+      (X0 = +_[0][0], X1 = +_[1][0]);
+      (Y0 = +_[0][1], Y1 = +_[1][1]);
+      if (X0 > X1) (_ = X0, X0 = X1, X1 = _);
+      if (Y0 > Y1) (_ = Y0, Y0 = Y1, Y1 = _);
+      return graticule.precision(precision);
+    };
+    graticule.extentMinor = function (_) {
+      if (!arguments.length) return [[x0, y0], [x1, y1]];
+      (x0 = +_[0][0], x1 = +_[1][0]);
+      (y0 = +_[0][1], y1 = +_[1][1]);
+      if (x0 > x1) (_ = x0, x0 = x1, x1 = _);
+      if (y0 > y1) (_ = y0, y0 = y1, y1 = _);
+      return graticule.precision(precision);
+    };
+    graticule.step = function (_) {
+      if (!arguments.length) return graticule.stepMinor();
+      return graticule.stepMajor(_).stepMinor(_);
+    };
+    graticule.stepMajor = function (_) {
+      if (!arguments.length) return [DX, DY];
+      (DX = +_[0], DY = +_[1]);
+      return graticule;
+    };
+    graticule.stepMinor = function (_) {
+      if (!arguments.length) return [dx, dy];
+      (dx = +_[0], dy = +_[1]);
+      return graticule;
+    };
+    graticule.precision = function (_) {
+      if (!arguments.length) return precision;
+      precision = +_;
+      x = graticuleX(y0, y1, 90);
+      y = graticuleY(x0, x1, precision);
+      X = graticuleX(Y0, Y1, 90);
+      Y = graticuleY(X0, X1, precision);
+      return graticule;
+    };
+    return graticule.extentMajor([[-180, -90 + epsilon], [180, 90 - epsilon]]).extentMinor([[-180, -80 - epsilon], [180, 80 + epsilon]]);
+  }
+  function graticule10() {
+    return graticule()();
+  }
+  function interpolate(a, b) {
+    var x0 = a[0] * radians, y0 = a[1] * radians, x1 = b[0] * radians, y1 = b[1] * radians, cy0 = cos(y0), sy0 = sin(y0), cy1 = cos(y1), sy1 = sin(y1), kx0 = cy0 * cos(x0), ky0 = cy0 * sin(x0), kx1 = cy1 * cos(x1), ky1 = cy1 * sin(x1), d = 2 * asin(sqrt(haversin(y1 - y0) + cy0 * cy1 * haversin(x1 - x0))), k = sin(d);
+    var interpolate = d ? function (t) {
+      var B = sin(t *= d) / k, A = sin(d - t) / k, x = A * kx0 + B * kx1, y = A * ky0 + B * ky1, z = A * sy0 + B * sy1;
+      return [atan2(y, x) * degrees, atan2(z, sqrt(x * x + y * y)) * degrees];
+    } : function () {
+      return [x0 * degrees, y0 * degrees];
+    };
+    interpolate.distance = d;
+    return interpolate;
+  }
+  var identity = x => x;
+  var areaSum$1 = new d3Array.Adder(), areaRingSum$1 = new d3Array.Adder(), x00, y00, x0$1, y0$1;
+  var areaStream$1 = {
+    point: noop,
+    lineStart: noop,
+    lineEnd: noop,
+    polygonStart: function () {
+      areaStream$1.lineStart = areaRingStart$1;
+      areaStream$1.lineEnd = areaRingEnd$1;
+    },
+    polygonEnd: function () {
+      areaStream$1.lineStart = areaStream$1.lineEnd = areaStream$1.point = noop;
+      areaSum$1.add(abs(areaRingSum$1));
+      areaRingSum$1 = new d3Array.Adder();
+    },
+    result: function () {
+      var area = areaSum$1 / 2;
+      areaSum$1 = new d3Array.Adder();
+      return area;
+    }
+  };
+  function areaRingStart$1() {
+    areaStream$1.point = areaPointFirst$1;
+  }
+  function areaPointFirst$1(x, y) {
+    areaStream$1.point = areaPoint$1;
+    (x00 = x0$1 = x, y00 = y0$1 = y);
+  }
+  function areaPoint$1(x, y) {
+    areaRingSum$1.add(y0$1 * x - x0$1 * y);
+    (x0$1 = x, y0$1 = y);
+  }
+  function areaRingEnd$1() {
+    areaPoint$1(x00, y00);
+  }
+  var x0$2 = Infinity, y0$2 = x0$2, x1 = -x0$2, y1 = x1;
+  var boundsStream$1 = {
+    point: boundsPoint$1,
+    lineStart: noop,
+    lineEnd: noop,
+    polygonStart: noop,
+    polygonEnd: noop,
+    result: function () {
+      var bounds = [[x0$2, y0$2], [x1, y1]];
+      x1 = y1 = -(y0$2 = x0$2 = Infinity);
+      return bounds;
+    }
+  };
+  function boundsPoint$1(x, y) {
+    if (x < x0$2) x0$2 = x;
+    if (x > x1) x1 = x;
+    if (y < y0$2) y0$2 = y;
+    if (y > y1) y1 = y;
+  }
+  // TODO Enforce positive area for exterior, negative area for interior?
+  var X0$1 = 0, Y0$1 = 0, Z0$1 = 0, X1$1 = 0, Y1$1 = 0, Z1$1 = 0, X2$1 = 0, Y2$1 = 0, Z2$1 = 0, x00$1, y00$1, x0$3, y0$3;
+  var centroidStream$1 = {
+    point: centroidPoint$1,
+    lineStart: centroidLineStart$1,
+    lineEnd: centroidLineEnd$1,
+    polygonStart: function () {
+      centroidStream$1.lineStart = centroidRingStart$1;
+      centroidStream$1.lineEnd = centroidRingEnd$1;
+    },
+    polygonEnd: function () {
+      centroidStream$1.point = centroidPoint$1;
+      centroidStream$1.lineStart = centroidLineStart$1;
+      centroidStream$1.lineEnd = centroidLineEnd$1;
+    },
+    result: function () {
+      var centroid = Z2$1 ? [X2$1 / Z2$1, Y2$1 / Z2$1] : Z1$1 ? [X1$1 / Z1$1, Y1$1 / Z1$1] : Z0$1 ? [X0$1 / Z0$1, Y0$1 / Z0$1] : [NaN, NaN];
+      X0$1 = Y0$1 = Z0$1 = X1$1 = Y1$1 = Z1$1 = X2$1 = Y2$1 = Z2$1 = 0;
+      return centroid;
+    }
+  };
+  function centroidPoint$1(x, y) {
+    X0$1 += x;
+    Y0$1 += y;
+    ++Z0$1;
+  }
+  function centroidLineStart$1() {
+    centroidStream$1.point = centroidPointFirstLine;
+  }
+  function centroidPointFirstLine(x, y) {
+    centroidStream$1.point = centroidPointLine;
+    centroidPoint$1(x0$3 = x, y0$3 = y);
+  }
+  function centroidPointLine(x, y) {
+    var dx = x - x0$3, dy = y - y0$3, z = sqrt(dx * dx + dy * dy);
+    X1$1 += z * (x0$3 + x) / 2;
+    Y1$1 += z * (y0$3 + y) / 2;
+    Z1$1 += z;
+    centroidPoint$1(x0$3 = x, y0$3 = y);
+  }
+  function centroidLineEnd$1() {
+    centroidStream$1.point = centroidPoint$1;
+  }
+  function centroidRingStart$1() {
+    centroidStream$1.point = centroidPointFirstRing;
+  }
+  function centroidRingEnd$1() {
+    centroidPointRing(x00$1, y00$1);
+  }
+  function centroidPointFirstRing(x, y) {
+    centroidStream$1.point = centroidPointRing;
+    centroidPoint$1(x00$1 = x0$3 = x, y00$1 = y0$3 = y);
+  }
+  function centroidPointRing(x, y) {
+    var dx = x - x0$3, dy = y - y0$3, z = sqrt(dx * dx + dy * dy);
+    X1$1 += z * (x0$3 + x) / 2;
+    Y1$1 += z * (y0$3 + y) / 2;
+    Z1$1 += z;
+    z = y0$3 * x - x0$3 * y;
+    X2$1 += z * (x0$3 + x);
+    Y2$1 += z * (y0$3 + y);
+    Z2$1 += z * 3;
+    centroidPoint$1(x0$3 = x, y0$3 = y);
+  }
+  function PathContext(context) {
+    this._context = context;
+  }
+  PathContext.prototype = {
+    _radius: 4.5,
+    pointRadius: function (_) {
+      return (this._radius = _, this);
+    },
+    polygonStart: function () {
+      this._line = 0;
+    },
+    polygonEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line === 0) this._context.closePath();
+      this._point = NaN;
+    },
+    point: function (x, y) {
+      switch (this._point) {
+        case 0:
+          {
+            this._context.moveTo(x, y);
+            this._point = 1;
+            break;
+          }
+        case 1:
+          {
+            this._context.lineTo(x, y);
+            break;
+          }
+        default:
+          {
+            this._context.moveTo(x + this._radius, y);
+            this._context.arc(x, y, this._radius, 0, tau);
+            break;
+          }
+      }
+    },
+    result: noop
+  };
+  var lengthSum$1 = new d3Array.Adder(), lengthRing, x00$2, y00$2, x0$4, y0$4;
+  var lengthStream$1 = {
+    point: noop,
+    lineStart: function () {
+      lengthStream$1.point = lengthPointFirst$1;
+    },
+    lineEnd: function () {
+      if (lengthRing) lengthPoint$1(x00$2, y00$2);
+      lengthStream$1.point = noop;
+    },
+    polygonStart: function () {
+      lengthRing = true;
+    },
+    polygonEnd: function () {
+      lengthRing = null;
+    },
+    result: function () {
+      var length = +lengthSum$1;
+      lengthSum$1 = new d3Array.Adder();
+      return length;
+    }
+  };
+  function lengthPointFirst$1(x, y) {
+    lengthStream$1.point = lengthPoint$1;
+    (x00$2 = x0$4 = x, y00$2 = y0$4 = y);
+  }
+  function lengthPoint$1(x, y) {
+    (x0$4 -= x, y0$4 -= y);
+    lengthSum$1.add(sqrt(x0$4 * x0$4 + y0$4 * y0$4));
+    (x0$4 = x, y0$4 = y);
+  }
+  function PathString() {
+    this._string = [];
+  }
+  PathString.prototype = {
+    _radius: 4.5,
+    _circle: circle$1(4.5),
+    pointRadius: function (_) {
+      if ((_ = +_) !== this._radius) (this._radius = _, this._circle = null);
+      return this;
+    },
+    polygonStart: function () {
+      this._line = 0;
+    },
+    polygonEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line === 0) this._string.push("Z");
+      this._point = NaN;
+    },
+    point: function (x, y) {
+      switch (this._point) {
+        case 0:
+          {
+            this._string.push("M", x, ",", y);
+            this._point = 1;
+            break;
+          }
+        case 1:
+          {
+            this._string.push("L", x, ",", y);
+            break;
+          }
+        default:
+          {
+            if (this._circle == null) this._circle = circle$1(this._radius);
+            this._string.push("M", x, ",", y, this._circle);
+            break;
+          }
+      }
+    },
+    result: function () {
+      if (this._string.length) {
+        var result = this._string.join("");
+        this._string = [];
+        return result;
+      } else {
+        return null;
+      }
+    }
+  };
+  function circle$1(radius) {
+    return "m0," + radius + "a" + radius + "," + radius + " 0 1,1 0," + -2 * radius + "a" + radius + "," + radius + " 0 1,1 0," + 2 * radius + "z";
+  }
+  function index(projection, context) {
+    var pointRadius = 4.5, projectionStream, contextStream;
+    function path(object) {
+      if (object) {
+        if (typeof pointRadius === "function") contextStream.pointRadius(+pointRadius.apply(this, arguments));
+        geoStream(object, projectionStream(contextStream));
+      }
+      return contextStream.result();
+    }
+    path.area = function (object) {
+      geoStream(object, projectionStream(areaStream$1));
+      return areaStream$1.result();
+    };
+    path.measure = function (object) {
+      geoStream(object, projectionStream(lengthStream$1));
+      return lengthStream$1.result();
+    };
+    path.bounds = function (object) {
+      geoStream(object, projectionStream(boundsStream$1));
+      return boundsStream$1.result();
+    };
+    path.centroid = function (object) {
+      geoStream(object, projectionStream(centroidStream$1));
+      return centroidStream$1.result();
+    };
+    path.projection = function (_) {
+      return arguments.length ? (projectionStream = _ == null ? (projection = null, identity) : (projection = _).stream, path) : projection;
+    };
+    path.context = function (_) {
+      if (!arguments.length) return context;
+      contextStream = _ == null ? (context = null, new PathString()) : new PathContext(context = _);
+      if (typeof pointRadius !== "function") contextStream.pointRadius(pointRadius);
+      return path;
+    };
+    path.pointRadius = function (_) {
+      if (!arguments.length) return pointRadius;
+      pointRadius = typeof _ === "function" ? _ : (contextStream.pointRadius(+_), +_);
+      return path;
+    };
+    return path.projection(projection).context(context);
+  }
+  function transform(methods) {
+    return {
+      stream: transformer(methods)
+    };
+  }
+  function transformer(methods) {
+    return function (stream) {
+      var s = new TransformStream();
+      for (var key in methods) s[key] = methods[key];
+      s.stream = stream;
+      return s;
+    };
+  }
+  function TransformStream() {}
+  TransformStream.prototype = {
+    constructor: TransformStream,
+    point: function (x, y) {
+      this.stream.point(x, y);
+    },
+    sphere: function () {
+      this.stream.sphere();
+    },
+    lineStart: function () {
+      this.stream.lineStart();
+    },
+    lineEnd: function () {
+      this.stream.lineEnd();
+    },
+    polygonStart: function () {
+      this.stream.polygonStart();
+    },
+    polygonEnd: function () {
+      this.stream.polygonEnd();
+    }
+  };
+  function fit(projection, fitBounds, object) {
+    var clip = projection.clipExtent && projection.clipExtent();
+    projection.scale(150).translate([0, 0]);
+    if (clip != null) projection.clipExtent(null);
+    geoStream(object, projection.stream(boundsStream$1));
+    fitBounds(boundsStream$1.result());
+    if (clip != null) projection.clipExtent(clip);
+    return projection;
+  }
+  function fitExtent(projection, extent, object) {
+    return fit(projection, function (b) {
+      var w = extent[1][0] - extent[0][0], h = extent[1][1] - extent[0][1], k = Math.min(w / (b[1][0] - b[0][0]), h / (b[1][1] - b[0][1])), x = +extent[0][0] + (w - k * (b[1][0] + b[0][0])) / 2, y = +extent[0][1] + (h - k * (b[1][1] + b[0][1])) / 2;
+      projection.scale(150 * k).translate([x, y]);
+    }, object);
+  }
+  function fitSize(projection, size, object) {
+    return fitExtent(projection, [[0, 0], size], object);
+  }
+  function fitWidth(projection, width, object) {
+    return fit(projection, function (b) {
+      var w = +width, k = w / (b[1][0] - b[0][0]), x = (w - k * (b[1][0] + b[0][0])) / 2, y = -k * b[0][1];
+      projection.scale(150 * k).translate([x, y]);
+    }, object);
+  }
+  function fitHeight(projection, height, object) {
+    return fit(projection, function (b) {
+      var h = +height, k = h / (b[1][1] - b[0][1]), x = -k * b[0][0], y = (h - k * (b[1][1] + b[0][1])) / 2;
+      projection.scale(150 * k).translate([x, y]);
+    }, object);
+  }
+  var maxDepth = 16, // maximum depth of subdivision
+  cosMinDistance = cos(30 * radians);
+  // cos(minimum angular distance)
+  function resample(project, delta2) {
+    return +delta2 ? resample$1(project, delta2) : resampleNone(project);
+  }
+  function resampleNone(project) {
+    return transformer({
+      point: function (x, y) {
+        x = project(x, y);
+        this.stream.point(x[0], x[1]);
+      }
+    });
+  }
+  function resample$1(project, delta2) {
+    function resampleLineTo(x0, y0, lambda0, a0, b0, c0, x1, y1, lambda1, a1, b1, c1, depth, stream) {
+      var dx = x1 - x0, dy = y1 - y0, d2 = dx * dx + dy * dy;
+      if (d2 > 4 * delta2 && depth--) {
+        var a = a0 + a1, b = b0 + b1, c = c0 + c1, m = sqrt(a * a + b * b + c * c), phi2 = asin(c /= m), lambda2 = abs(abs(c) - 1) < epsilon || abs(lambda0 - lambda1) < epsilon ? (lambda0 + lambda1) / 2 : atan2(b, a), p = project(lambda2, phi2), x2 = p[0], y2 = p[1], dx2 = x2 - x0, dy2 = y2 - y0, dz = dy * dx2 - dx * dy2;
+        if (dz * dz / d2 > delta2 || // perpendicular projected distance
+        abs((dx * dx2 + dy * dy2) / d2 - 0.5) > 0.3 || // midpoint close to an end
+        a0 * a1 + b0 * b1 + c0 * c1 < cosMinDistance) {
+          // angular distance
+          resampleLineTo(x0, y0, lambda0, a0, b0, c0, x2, y2, lambda2, a /= m, b /= m, c, depth, stream);
+          stream.point(x2, y2);
+          resampleLineTo(x2, y2, lambda2, a, b, c, x1, y1, lambda1, a1, b1, c1, depth, stream);
+        }
+      }
+    }
+    return function (stream) {
+      var lambda00, x00, y00, a00, b00, c00, // first point
+      lambda0, x0, y0, a0, b0, c0;
+      // previous point
+      var resampleStream = {
+        point: point,
+        lineStart: lineStart,
+        lineEnd: lineEnd,
+        polygonStart: function () {
+          stream.polygonStart();
+          resampleStream.lineStart = ringStart;
+        },
+        polygonEnd: function () {
+          stream.polygonEnd();
+          resampleStream.lineStart = lineStart;
+        }
+      };
+      function point(x, y) {
+        x = project(x, y);
+        stream.point(x[0], x[1]);
+      }
+      function lineStart() {
+        x0 = NaN;
+        resampleStream.point = linePoint;
+        stream.lineStart();
+      }
+      function linePoint(lambda, phi) {
+        var c = cartesian([lambda, phi]), p = project(lambda, phi);
+        resampleLineTo(x0, y0, lambda0, a0, b0, c0, x0 = p[0], y0 = p[1], lambda0 = lambda, a0 = c[0], b0 = c[1], c0 = c[2], maxDepth, stream);
+        stream.point(x0, y0);
+      }
+      function lineEnd() {
+        resampleStream.point = point;
+        stream.lineEnd();
+      }
+      function ringStart() {
+        lineStart();
+        resampleStream.point = ringPoint;
+        resampleStream.lineEnd = ringEnd;
+      }
+      function ringPoint(lambda, phi) {
+        (linePoint(lambda00 = lambda, phi), x00 = x0, y00 = y0, a00 = a0, b00 = b0, c00 = c0);
+        resampleStream.point = linePoint;
+      }
+      function ringEnd() {
+        resampleLineTo(x0, y0, lambda0, a0, b0, c0, x00, y00, lambda00, a00, b00, c00, maxDepth, stream);
+        resampleStream.lineEnd = lineEnd;
+        lineEnd();
+      }
+      return resampleStream;
+    };
+  }
+  var transformRadians = transformer({
+    point: function (x, y) {
+      this.stream.point(x * radians, y * radians);
+    }
+  });
+  function transformRotate(rotate) {
+    return transformer({
+      point: function (x, y) {
+        var r = rotate(x, y);
+        return this.stream.point(r[0], r[1]);
+      }
+    });
+  }
+  function scaleTranslate(k, dx, dy, sx, sy) {
+    function transform(x, y) {
+      x *= sx;
+      y *= sy;
+      return [dx + k * x, dy - k * y];
+    }
+    transform.invert = function (x, y) {
+      return [(x - dx) / k * sx, (dy - y) / k * sy];
+    };
+    return transform;
+  }
+  function scaleTranslateRotate(k, dx, dy, sx, sy, alpha) {
+    if (!alpha) return scaleTranslate(k, dx, dy, sx, sy);
+    var cosAlpha = cos(alpha), sinAlpha = sin(alpha), a = cosAlpha * k, b = sinAlpha * k, ai = cosAlpha / k, bi = sinAlpha / k, ci = (sinAlpha * dy - cosAlpha * dx) / k, fi = (sinAlpha * dx + cosAlpha * dy) / k;
+    function transform(x, y) {
+      x *= sx;
+      y *= sy;
+      return [a * x - b * y + dx, dy - b * x - a * y];
+    }
+    transform.invert = function (x, y) {
+      return [sx * (ai * x - bi * y + ci), sy * (fi - bi * x - ai * y)];
+    };
+    return transform;
+  }
+  function projection(project) {
+    return projectionMutator(function () {
+      return project;
+    })();
+  }
+  function projectionMutator(projectAt) {
+    var project, k = 150, // scale
+    x = 480, y = 250, // translate
+    lambda = 0, phi = 0, // center
+    deltaLambda = 0, deltaPhi = 0, deltaGamma = 0, rotate, // pre-rotate
+    alpha = 0, // post-rotate angle
+    sx = 1, // reflectX
+    sy = 1, // reflectX
+    theta = null, preclip = clipAntimeridian, // pre-clip angle
+    x0 = null, y0, x1, y1, postclip = identity, // post-clip extent
+    delta2 = 0.5, // precision
+    projectResample, projectTransform, projectRotateTransform, cache, cacheStream;
+    function projection(point) {
+      return projectRotateTransform(point[0] * radians, point[1] * radians);
+    }
+    function invert(point) {
+      point = projectRotateTransform.invert(point[0], point[1]);
+      return point && [point[0] * degrees, point[1] * degrees];
+    }
+    projection.stream = function (stream) {
+      return cache && cacheStream === stream ? cache : cache = transformRadians(transformRotate(rotate)(preclip(projectResample(postclip(cacheStream = stream)))));
+    };
+    projection.preclip = function (_) {
+      return arguments.length ? (preclip = _, theta = undefined, reset()) : preclip;
+    };
+    projection.postclip = function (_) {
+      return arguments.length ? (postclip = _, x0 = y0 = x1 = y1 = null, reset()) : postclip;
+    };
+    projection.clipAngle = function (_) {
+      return arguments.length ? (preclip = +_ ? clipCircle(theta = _ * radians) : (theta = null, clipAntimeridian), reset()) : theta * degrees;
+    };
+    projection.clipExtent = function (_) {
+      return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    };
+    projection.scale = function (_) {
+      return arguments.length ? (k = +_, recenter()) : k;
+    };
+    projection.translate = function (_) {
+      return arguments.length ? (x = +_[0], y = +_[1], recenter()) : [x, y];
+    };
+    projection.center = function (_) {
+      return arguments.length ? (lambda = _[0] % 360 * radians, phi = _[1] % 360 * radians, recenter()) : [lambda * degrees, phi * degrees];
+    };
+    projection.rotate = function (_) {
+      return arguments.length ? (deltaLambda = _[0] % 360 * radians, deltaPhi = _[1] % 360 * radians, deltaGamma = _.length > 2 ? _[2] % 360 * radians : 0, recenter()) : [deltaLambda * degrees, deltaPhi * degrees, deltaGamma * degrees];
+    };
+    projection.angle = function (_) {
+      return arguments.length ? (alpha = _ % 360 * radians, recenter()) : alpha * degrees;
+    };
+    projection.reflectX = function (_) {
+      return arguments.length ? (sx = _ ? -1 : 1, recenter()) : sx < 0;
+    };
+    projection.reflectY = function (_) {
+      return arguments.length ? (sy = _ ? -1 : 1, recenter()) : sy < 0;
+    };
+    projection.precision = function (_) {
+      return arguments.length ? (projectResample = resample(projectTransform, delta2 = _ * _), reset()) : sqrt(delta2);
+    };
+    projection.fitExtent = function (extent, object) {
+      return fitExtent(projection, extent, object);
+    };
+    projection.fitSize = function (size, object) {
+      return fitSize(projection, size, object);
+    };
+    projection.fitWidth = function (width, object) {
+      return fitWidth(projection, width, object);
+    };
+    projection.fitHeight = function (height, object) {
+      return fitHeight(projection, height, object);
+    };
+    function recenter() {
+      var center = scaleTranslateRotate(k, 0, 0, sx, sy, alpha).apply(null, project(lambda, phi)), transform = scaleTranslateRotate(k, x - center[0], y - center[1], sx, sy, alpha);
+      rotate = rotateRadians(deltaLambda, deltaPhi, deltaGamma);
+      projectTransform = compose(project, transform);
+      projectRotateTransform = compose(rotate, projectTransform);
+      projectResample = resample(projectTransform, delta2);
+      return reset();
+    }
+    function reset() {
+      cache = cacheStream = null;
+      return projection;
+    }
+    return function () {
+      project = projectAt.apply(this, arguments);
+      projection.invert = project.invert && invert;
+      return recenter();
+    };
+  }
+  function conicProjection(projectAt) {
+    var phi0 = 0, phi1 = pi / 3, m = projectionMutator(projectAt), p = m(phi0, phi1);
+    p.parallels = function (_) {
+      return arguments.length ? m(phi0 = _[0] * radians, phi1 = _[1] * radians) : [phi0 * degrees, phi1 * degrees];
+    };
+    return p;
+  }
+  function cylindricalEqualAreaRaw(phi0) {
+    var cosPhi0 = cos(phi0);
+    function forward(lambda, phi) {
+      return [lambda * cosPhi0, sin(phi) / cosPhi0];
+    }
+    forward.invert = function (x, y) {
+      return [x / cosPhi0, asin(y * cosPhi0)];
+    };
+    return forward;
+  }
+  function conicEqualAreaRaw(y0, y1) {
+    var sy0 = sin(y0), n = (sy0 + sin(y1)) / 2;
+    // Are the parallels symmetrical around the Equator?
+    if (abs(n) < epsilon) return cylindricalEqualAreaRaw(y0);
+    var c = 1 + sy0 * (2 * n - sy0), r0 = sqrt(c) / n;
+    function project(x, y) {
+      var r = sqrt(c - 2 * n * sin(y)) / n;
+      return [r * sin(x *= n), r0 - r * cos(x)];
+    }
+    project.invert = function (x, y) {
+      var r0y = r0 - y, l = atan2(x, abs(r0y)) * sign(r0y);
+      if (r0y * n < 0) l -= pi * sign(x) * sign(r0y);
+      return [l / n, asin((c - (x * x + r0y * r0y) * n * n) / (2 * n))];
+    };
+    return project;
+  }
+  function conicEqualArea() {
+    return conicProjection(conicEqualAreaRaw).scale(155.424).center([0, 33.6442]);
+  }
+  function albers() {
+    return conicEqualArea().parallels([29.5, 45.5]).scale(1070).translate([480, 250]).rotate([96, 0]).center([-0.6, 38.7]);
+  }
+  // The projections must have mutually exclusive clip regions on the sphere,
+  // as this will avoid emitting interleaving lines and polygons.
+  function multiplex(streams) {
+    var n = streams.length;
+    return {
+      point: function (x, y) {
+        var i = -1;
+        while (++i < n) streams[i].point(x, y);
+      },
+      sphere: function () {
+        var i = -1;
+        while (++i < n) streams[i].sphere();
+      },
+      lineStart: function () {
+        var i = -1;
+        while (++i < n) streams[i].lineStart();
+      },
+      lineEnd: function () {
+        var i = -1;
+        while (++i < n) streams[i].lineEnd();
+      },
+      polygonStart: function () {
+        var i = -1;
+        while (++i < n) streams[i].polygonStart();
+      },
+      polygonEnd: function () {
+        var i = -1;
+        while (++i < n) streams[i].polygonEnd();
+      }
+    };
+  }
+  // A composite projection for the United States, configured by default for
+  // 960×500. The projection also works quite well at 960×600 if you change the
+  // scale to 1285 and adjust the translate accordingly. The set of standard
+  // parallels for each region comes from USGS, which is published here:
+  // http://egsc.usgs.gov/isb/pubs/MapProjections/projections.html#albers
+  function albersUsa() {
+    var cache, cacheStream, lower48 = albers(), lower48Point, alaska = conicEqualArea().rotate([154, 0]).center([-2, 58.5]).parallels([55, 65]), alaskaPoint, // EPSG:3338
+    hawaii = conicEqualArea().rotate([157, 0]).center([-3, 19.9]).parallels([8, 18]), hawaiiPoint, // ESRI:102007
+    point, pointStream = {
+      point: function (x, y) {
+        point = [x, y];
+      }
+    };
+    function albersUsa(coordinates) {
+      var x = coordinates[0], y = coordinates[1];
+      return (point = null, (lower48Point.point(x, y), point) || (alaskaPoint.point(x, y), point) || (hawaiiPoint.point(x, y), point));
+    }
+    albersUsa.invert = function (coordinates) {
+      var k = lower48.scale(), t = lower48.translate(), x = (coordinates[0] - t[0]) / k, y = (coordinates[1] - t[1]) / k;
+      return (y >= 0.120 && y < 0.234 && x >= -0.425 && x < -0.214 ? alaska : y >= 0.166 && y < 0.234 && x >= -0.214 && x < -0.115 ? hawaii : lower48).invert(coordinates);
+    };
+    albersUsa.stream = function (stream) {
+      return cache && cacheStream === stream ? cache : cache = multiplex([lower48.stream(cacheStream = stream), alaska.stream(stream), hawaii.stream(stream)]);
+    };
+    albersUsa.precision = function (_) {
+      if (!arguments.length) return lower48.precision();
+      (lower48.precision(_), alaska.precision(_), hawaii.precision(_));
+      return reset();
+    };
+    albersUsa.scale = function (_) {
+      if (!arguments.length) return lower48.scale();
+      (lower48.scale(_), alaska.scale(_ * 0.35), hawaii.scale(_));
+      return albersUsa.translate(lower48.translate());
+    };
+    albersUsa.translate = function (_) {
+      if (!arguments.length) return lower48.translate();
+      var k = lower48.scale(), x = +_[0], y = +_[1];
+      lower48Point = lower48.translate(_).clipExtent([[x - 0.455 * k, y - 0.238 * k], [x + 0.455 * k, y + 0.238 * k]]).stream(pointStream);
+      alaskaPoint = alaska.translate([x - 0.307 * k, y + 0.201 * k]).clipExtent([[x - 0.425 * k + epsilon, y + 0.120 * k + epsilon], [x - 0.214 * k - epsilon, y + 0.234 * k - epsilon]]).stream(pointStream);
+      hawaiiPoint = hawaii.translate([x - 0.205 * k, y + 0.212 * k]).clipExtent([[x - 0.214 * k + epsilon, y + 0.166 * k + epsilon], [x - 0.115 * k - epsilon, y + 0.234 * k - epsilon]]).stream(pointStream);
+      return reset();
+    };
+    albersUsa.fitExtent = function (extent, object) {
+      return fitExtent(albersUsa, extent, object);
+    };
+    albersUsa.fitSize = function (size, object) {
+      return fitSize(albersUsa, size, object);
+    };
+    albersUsa.fitWidth = function (width, object) {
+      return fitWidth(albersUsa, width, object);
+    };
+    albersUsa.fitHeight = function (height, object) {
+      return fitHeight(albersUsa, height, object);
+    };
+    function reset() {
+      cache = cacheStream = null;
+      return albersUsa;
+    }
+    return albersUsa.scale(1070);
+  }
+  function azimuthalRaw(scale) {
+    return function (x, y) {
+      var cx = cos(x), cy = cos(y), k = scale(cx * cy);
+      if (k === Infinity) return [2, 0];
+      return [k * cy * sin(x), k * sin(y)];
+    };
+  }
+  function azimuthalInvert(angle) {
+    return function (x, y) {
+      var z = sqrt(x * x + y * y), c = angle(z), sc = sin(c), cc = cos(c);
+      return [atan2(x * sc, z * cc), asin(z && y * sc / z)];
+    };
+  }
+  var azimuthalEqualAreaRaw = azimuthalRaw(function (cxcy) {
+    return sqrt(2 / (1 + cxcy));
+  });
+  azimuthalEqualAreaRaw.invert = azimuthalInvert(function (z) {
+    return 2 * asin(z / 2);
+  });
+  function azimuthalEqualArea() {
+    return projection(azimuthalEqualAreaRaw).scale(124.75).clipAngle(180 - 1e-3);
+  }
+  var azimuthalEquidistantRaw = azimuthalRaw(function (c) {
+    return (c = acos(c)) && c / sin(c);
+  });
+  azimuthalEquidistantRaw.invert = azimuthalInvert(function (z) {
+    return z;
+  });
+  function azimuthalEquidistant() {
+    return projection(azimuthalEquidistantRaw).scale(79.4188).clipAngle(180 - 1e-3);
+  }
+  function mercatorRaw(lambda, phi) {
+    return [lambda, log(tan((halfPi + phi) / 2))];
+  }
+  mercatorRaw.invert = function (x, y) {
+    return [x, 2 * atan(exp(y)) - halfPi];
+  };
+  function mercator() {
+    return mercatorProjection(mercatorRaw).scale(961 / tau);
+  }
+  function mercatorProjection(project) {
+    var m = projection(project), center = m.center, scale = m.scale, translate = m.translate, clipExtent = m.clipExtent, x0 = null, y0, x1, y1;
+    // clip extent
+    m.scale = function (_) {
+      return arguments.length ? (scale(_), reclip()) : scale();
+    };
+    m.translate = function (_) {
+      return arguments.length ? (translate(_), reclip()) : translate();
+    };
+    m.center = function (_) {
+      return arguments.length ? (center(_), reclip()) : center();
+    };
+    m.clipExtent = function (_) {
+      return arguments.length ? (_ == null ? x0 = y0 = x1 = y1 = null : (x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reclip()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    };
+    function reclip() {
+      var k = pi * scale(), t = m(rotation(m.rotate()).invert([0, 0]));
+      return clipExtent(x0 == null ? [[t[0] - k, t[1] - k], [t[0] + k, t[1] + k]] : project === mercatorRaw ? [[Math.max(t[0] - k, x0), y0], [Math.min(t[0] + k, x1), y1]] : [[x0, Math.max(t[1] - k, y0)], [x1, Math.min(t[1] + k, y1)]]);
+    }
+    return reclip();
+  }
+  function tany(y) {
+    return tan((halfPi + y) / 2);
+  }
+  function conicConformalRaw(y0, y1) {
+    var cy0 = cos(y0), n = y0 === y1 ? sin(y0) : log(cy0 / cos(y1)) / log(tany(y1) / tany(y0)), f = cy0 * pow(tany(y0), n) / n;
+    if (!n) return mercatorRaw;
+    function project(x, y) {
+      if (f > 0) {
+        if (y < -halfPi + epsilon) y = -halfPi + epsilon;
+      } else {
+        if (y > halfPi - epsilon) y = halfPi - epsilon;
+      }
+      var r = f / pow(tany(y), n);
+      return [r * sin(n * x), f - r * cos(n * x)];
+    }
+    project.invert = function (x, y) {
+      var fy = f - y, r = sign(n) * sqrt(x * x + fy * fy), l = atan2(x, abs(fy)) * sign(fy);
+      if (fy * n < 0) l -= pi * sign(x) * sign(fy);
+      return [l / n, 2 * atan(pow(f / r, 1 / n)) - halfPi];
+    };
+    return project;
+  }
+  function conicConformal() {
+    return conicProjection(conicConformalRaw).scale(109.5).parallels([30, 30]);
+  }
+  function equirectangularRaw(lambda, phi) {
+    return [lambda, phi];
+  }
+  equirectangularRaw.invert = equirectangularRaw;
+  function equirectangular() {
+    return projection(equirectangularRaw).scale(152.63);
+  }
+  function conicEquidistantRaw(y0, y1) {
+    var cy0 = cos(y0), n = y0 === y1 ? sin(y0) : (cy0 - cos(y1)) / (y1 - y0), g = cy0 / n + y0;
+    if (abs(n) < epsilon) return equirectangularRaw;
+    function project(x, y) {
+      var gy = g - y, nx = n * x;
+      return [gy * sin(nx), g - gy * cos(nx)];
+    }
+    project.invert = function (x, y) {
+      var gy = g - y, l = atan2(x, abs(gy)) * sign(gy);
+      if (gy * n < 0) l -= pi * sign(x) * sign(gy);
+      return [l / n, g - sign(n) * sqrt(x * x + gy * gy)];
+    };
+    return project;
+  }
+  function conicEquidistant() {
+    return conicProjection(conicEquidistantRaw).scale(131.154).center([0, 13.9389]);
+  }
+  var A1 = 1.340264, A2 = -0.081106, A3 = 0.000893, A4 = 0.003796, M = sqrt(3) / 2, iterations = 12;
+  function equalEarthRaw(lambda, phi) {
+    var l = asin(M * sin(phi)), l2 = l * l, l6 = l2 * l2 * l2;
+    return [lambda * cos(l) / (M * (A1 + 3 * A2 * l2 + l6 * (7 * A3 + 9 * A4 * l2))), l * (A1 + A2 * l2 + l6 * (A3 + A4 * l2))];
+  }
+  equalEarthRaw.invert = function (x, y) {
+    var l = y, l2 = l * l, l6 = l2 * l2 * l2;
+    for (var i = 0, delta, fy, fpy; i < iterations; ++i) {
+      fy = l * (A1 + A2 * l2 + l6 * (A3 + A4 * l2)) - y;
+      fpy = A1 + 3 * A2 * l2 + l6 * (7 * A3 + 9 * A4 * l2);
+      (l -= delta = fy / fpy, l2 = l * l, l6 = l2 * l2 * l2);
+      if (abs(delta) < epsilon2) break;
+    }
+    return [M * x * (A1 + 3 * A2 * l2 + l6 * (7 * A3 + 9 * A4 * l2)) / cos(l), asin(sin(l) / M)];
+  };
+  function equalEarth() {
+    return projection(equalEarthRaw).scale(177.158);
+  }
+  function gnomonicRaw(x, y) {
+    var cy = cos(y), k = cos(x) * cy;
+    return [cy * sin(x) / k, sin(y) / k];
+  }
+  gnomonicRaw.invert = azimuthalInvert(atan);
+  function gnomonic() {
+    return projection(gnomonicRaw).scale(144.049).clipAngle(60);
+  }
+  function identity$1() {
+    var k = 1, tx = 0, ty = 0, sx = 1, sy = 1, // scale, translate and reflect
+    alpha = 0, ca, sa, // angle
+    x0 = null, y0, x1, y1, // clip extent
+    kx = 1, ky = 1, transform = transformer({
+      point: function (x, y) {
+        var p = projection([x, y]);
+        this.stream.point(p[0], p[1]);
+      }
+    }), postclip = identity, cache, cacheStream;
+    function reset() {
+      kx = k * sx;
+      ky = k * sy;
+      cache = cacheStream = null;
+      return projection;
+    }
+    function projection(p) {
+      var x = p[0] * kx, y = p[1] * ky;
+      if (alpha) {
+        var t = y * ca - x * sa;
+        x = x * ca + y * sa;
+        y = t;
+      }
+      return [x + tx, y + ty];
+    }
+    projection.invert = function (p) {
+      var x = p[0] - tx, y = p[1] - ty;
+      if (alpha) {
+        var t = y * ca + x * sa;
+        x = x * ca - y * sa;
+        y = t;
+      }
+      return [x / kx, y / ky];
+    };
+    projection.stream = function (stream) {
+      return cache && cacheStream === stream ? cache : cache = transform(postclip(cacheStream = stream));
+    };
+    projection.postclip = function (_) {
+      return arguments.length ? (postclip = _, x0 = y0 = x1 = y1 = null, reset()) : postclip;
+    };
+    projection.clipExtent = function (_) {
+      return arguments.length ? (postclip = _ == null ? (x0 = y0 = x1 = y1 = null, identity) : clipRectangle(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
+    };
+    projection.scale = function (_) {
+      return arguments.length ? (k = +_, reset()) : k;
+    };
+    projection.translate = function (_) {
+      return arguments.length ? (tx = +_[0], ty = +_[1], reset()) : [tx, ty];
+    };
+    projection.angle = function (_) {
+      return arguments.length ? (alpha = _ % 360 * radians, sa = sin(alpha), ca = cos(alpha), reset()) : alpha * degrees;
+    };
+    projection.reflectX = function (_) {
+      return arguments.length ? (sx = _ ? -1 : 1, reset()) : sx < 0;
+    };
+    projection.reflectY = function (_) {
+      return arguments.length ? (sy = _ ? -1 : 1, reset()) : sy < 0;
+    };
+    projection.fitExtent = function (extent, object) {
+      return fitExtent(projection, extent, object);
+    };
+    projection.fitSize = function (size, object) {
+      return fitSize(projection, size, object);
+    };
+    projection.fitWidth = function (width, object) {
+      return fitWidth(projection, width, object);
+    };
+    projection.fitHeight = function (height, object) {
+      return fitHeight(projection, height, object);
+    };
+    return projection;
+  }
+  function naturalEarth1Raw(lambda, phi) {
+    var phi2 = phi * phi, phi4 = phi2 * phi2;
+    return [lambda * (0.8707 - 0.131979 * phi2 + phi4 * (-0.013791 + phi4 * (0.003971 * phi2 - 0.001529 * phi4))), phi * (1.007226 + phi2 * (0.015085 + phi4 * (-0.044475 + 0.028874 * phi2 - 0.005916 * phi4)))];
+  }
+  naturalEarth1Raw.invert = function (x, y) {
+    var phi = y, i = 25, delta;
+    do {
+      var phi2 = phi * phi, phi4 = phi2 * phi2;
+      phi -= delta = (phi * (1.007226 + phi2 * (0.015085 + phi4 * (-0.044475 + 0.028874 * phi2 - 0.005916 * phi4))) - y) / (1.007226 + phi2 * (0.015085 * 3 + phi4 * (-0.044475 * 7 + 0.028874 * 9 * phi2 - 0.005916 * 11 * phi4)));
+    } while (abs(delta) > epsilon && --i > 0);
+    return [x / (0.8707 + (phi2 = phi * phi) * (-0.131979 + phi2 * (-0.013791 + phi2 * phi2 * phi2 * (0.003971 - 0.001529 * phi2)))), phi];
+  };
+  function naturalEarth1() {
+    return projection(naturalEarth1Raw).scale(175.295);
+  }
+  function orthographicRaw(x, y) {
+    return [cos(y) * sin(x), sin(y)];
+  }
+  orthographicRaw.invert = azimuthalInvert(asin);
+  function orthographic() {
+    return projection(orthographicRaw).scale(249.5).clipAngle(90 + epsilon);
+  }
+  function stereographicRaw(x, y) {
+    var cy = cos(y), k = 1 + cos(x) * cy;
+    return [cy * sin(x) / k, sin(y) / k];
+  }
+  stereographicRaw.invert = azimuthalInvert(function (z) {
+    return 2 * atan(z);
+  });
+  function stereographic() {
+    return projection(stereographicRaw).scale(250).clipAngle(142);
+  }
+  function transverseMercatorRaw(lambda, phi) {
+    return [log(tan((halfPi + phi) / 2)), -lambda];
+  }
+  transverseMercatorRaw.invert = function (x, y) {
+    return [-y, 2 * atan(exp(x)) - halfPi];
+  };
+  function transverseMercator() {
+    var m = mercatorProjection(transverseMercatorRaw), center = m.center, rotate = m.rotate;
+    m.center = function (_) {
+      return arguments.length ? center([-_[1], _[0]]) : (_ = center(), [_[1], -_[0]]);
+    };
+    m.rotate = function (_) {
+      return arguments.length ? rotate([_[0], _[1], _.length > 2 ? _[2] + 90 : 90]) : (_ = rotate(), [_[0], _[1], _[2] - 90]);
+    };
+    return rotate([0, 0, 90]).scale(159.155);
+  }
+  exports.geoAlbers = albers;
+  exports.geoAlbersUsa = albersUsa;
+  exports.geoArea = area;
+  exports.geoAzimuthalEqualArea = azimuthalEqualArea;
+  exports.geoAzimuthalEqualAreaRaw = azimuthalEqualAreaRaw;
+  exports.geoAzimuthalEquidistant = azimuthalEquidistant;
+  exports.geoAzimuthalEquidistantRaw = azimuthalEquidistantRaw;
+  exports.geoBounds = bounds;
+  exports.geoCentroid = centroid;
+  exports.geoCircle = circle;
+  exports.geoClipAntimeridian = clipAntimeridian;
+  exports.geoClipCircle = clipCircle;
+  exports.geoClipExtent = extent;
+  exports.geoClipRectangle = clipRectangle;
+  exports.geoConicConformal = conicConformal;
+  exports.geoConicConformalRaw = conicConformalRaw;
+  exports.geoConicEqualArea = conicEqualArea;
+  exports.geoConicEqualAreaRaw = conicEqualAreaRaw;
+  exports.geoConicEquidistant = conicEquidistant;
+  exports.geoConicEquidistantRaw = conicEquidistantRaw;
+  exports.geoContains = contains;
+  exports.geoDistance = distance;
+  exports.geoEqualEarth = equalEarth;
+  exports.geoEqualEarthRaw = equalEarthRaw;
+  exports.geoEquirectangular = equirectangular;
+  exports.geoEquirectangularRaw = equirectangularRaw;
+  exports.geoGnomonic = gnomonic;
+  exports.geoGnomonicRaw = gnomonicRaw;
+  exports.geoGraticule = graticule;
+  exports.geoGraticule10 = graticule10;
+  exports.geoIdentity = identity$1;
+  exports.geoInterpolate = interpolate;
+  exports.geoLength = length;
+  exports.geoMercator = mercator;
+  exports.geoMercatorRaw = mercatorRaw;
+  exports.geoNaturalEarth1 = naturalEarth1;
+  exports.geoNaturalEarth1Raw = naturalEarth1Raw;
+  exports.geoOrthographic = orthographic;
+  exports.geoOrthographicRaw = orthographicRaw;
+  exports.geoPath = index;
+  exports.geoProjection = projection;
+  exports.geoProjectionMutator = projectionMutator;
+  exports.geoRotation = rotation;
+  exports.geoStereographic = stereographic;
+  exports.geoStereographicRaw = stereographicRaw;
+  exports.geoStream = geoStream;
+  exports.geoTransform = transform;
+  exports.geoTransverseMercator = transverseMercator;
+  exports.geoTransverseMercatorRaw = transverseMercatorRaw;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-array":"7CLUA"}],"7lQtw":[function(require,module,exports) {
+var define;
+// https://github.com/topojson/topojson-client v3.1.0 Copyright 2019 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.topojson = global.topojson || ({})));
+})(this, function (exports) {
+  "use strict";
+  function identity(x) {
+    return x;
+  }
+  function transform(transform) {
+    if (transform == null) return identity;
+    var x0, y0, kx = transform.scale[0], ky = transform.scale[1], dx = transform.translate[0], dy = transform.translate[1];
+    return function (input, i) {
+      if (!i) x0 = y0 = 0;
+      var j = 2, n = input.length, output = new Array(n);
+      output[0] = (x0 += input[0]) * kx + dx;
+      output[1] = (y0 += input[1]) * ky + dy;
+      while (j < n) (output[j] = input[j], ++j);
+      return output;
+    };
+  }
+  function bbox(topology) {
+    var t = transform(topology.transform), key, x0 = Infinity, y0 = x0, x1 = -x0, y1 = -x0;
+    function bboxPoint(p) {
+      p = t(p);
+      if (p[0] < x0) x0 = p[0];
+      if (p[0] > x1) x1 = p[0];
+      if (p[1] < y0) y0 = p[1];
+      if (p[1] > y1) y1 = p[1];
+    }
+    function bboxGeometry(o) {
+      switch (o.type) {
+        case "GeometryCollection":
+          o.geometries.forEach(bboxGeometry);
+          break;
+        case "Point":
+          bboxPoint(o.coordinates);
+          break;
+        case "MultiPoint":
+          o.coordinates.forEach(bboxPoint);
+          break;
+      }
+    }
+    topology.arcs.forEach(function (arc) {
+      var i = -1, n = arc.length, p;
+      while (++i < n) {
+        p = t(arc[i], i);
+        if (p[0] < x0) x0 = p[0];
+        if (p[0] > x1) x1 = p[0];
+        if (p[1] < y0) y0 = p[1];
+        if (p[1] > y1) y1 = p[1];
+      }
+    });
+    for (key in topology.objects) {
+      bboxGeometry(topology.objects[key]);
+    }
+    return [x0, y0, x1, y1];
+  }
+  function reverse(array, n) {
+    var t, j = array.length, i = j - n;
+    while (i < --j) (t = array[i], array[i++] = array[j], array[j] = t);
+  }
+  function feature(topology, o) {
+    if (typeof o === "string") o = topology.objects[o];
+    return o.type === "GeometryCollection" ? {
+      type: "FeatureCollection",
+      features: o.geometries.map(function (o) {
+        return feature$1(topology, o);
+      })
+    } : feature$1(topology, o);
+  }
+  function feature$1(topology, o) {
+    var id = o.id, bbox = o.bbox, properties = o.properties == null ? {} : o.properties, geometry = object(topology, o);
+    return id == null && bbox == null ? {
+      type: "Feature",
+      properties: properties,
+      geometry: geometry
+    } : bbox == null ? {
+      type: "Feature",
+      id: id,
+      properties: properties,
+      geometry: geometry
+    } : {
+      type: "Feature",
+      id: id,
+      bbox: bbox,
+      properties: properties,
+      geometry: geometry
+    };
+  }
+  function object(topology, o) {
+    var transformPoint = transform(topology.transform), arcs = topology.arcs;
+    function arc(i, points) {
+      if (points.length) points.pop();
+      for (var a = arcs[i < 0 ? ~i : i], k = 0, n = a.length; k < n; ++k) {
+        points.push(transformPoint(a[k], k));
+      }
+      if (i < 0) reverse(points, n);
+    }
+    function point(p) {
+      return transformPoint(p);
+    }
+    function line(arcs) {
+      var points = [];
+      for (var i = 0, n = arcs.length; i < n; ++i) arc(arcs[i], points);
+      if (points.length < 2) points.push(points[0]);
+      // This should never happen per the specification.
+      return points;
+    }
+    function ring(arcs) {
+      var points = line(arcs);
+      while (points.length < 4) points.push(points[0]);
+      // This may happen if an arc has only two points.
+      return points;
+    }
+    function polygon(arcs) {
+      return arcs.map(ring);
+    }
+    function geometry(o) {
+      var type = o.type, coordinates;
+      switch (type) {
+        case "GeometryCollection":
+          return {
+            type: type,
+            geometries: o.geometries.map(geometry)
+          };
+        case "Point":
+          coordinates = point(o.coordinates);
+          break;
+        case "MultiPoint":
+          coordinates = o.coordinates.map(point);
+          break;
+        case "LineString":
+          coordinates = line(o.arcs);
+          break;
+        case "MultiLineString":
+          coordinates = o.arcs.map(line);
+          break;
+        case "Polygon":
+          coordinates = polygon(o.arcs);
+          break;
+        case "MultiPolygon":
+          coordinates = o.arcs.map(polygon);
+          break;
+        default:
+          return null;
+      }
+      return {
+        type: type,
+        coordinates: coordinates
+      };
+    }
+    return geometry(o);
+  }
+  function stitch(topology, arcs) {
+    var stitchedArcs = {}, fragmentByStart = {}, fragmentByEnd = {}, fragments = [], emptyIndex = -1;
+    // Stitch empty arcs first, since they may be subsumed by other arcs.
+    arcs.forEach(function (i, j) {
+      var arc = topology.arcs[i < 0 ? ~i : i], t;
+      if (arc.length < 3 && !arc[1][0] && !arc[1][1]) {
+        (t = arcs[++emptyIndex], arcs[emptyIndex] = i, arcs[j] = t);
+      }
+    });
+    arcs.forEach(function (i) {
+      var e = ends(i), start = e[0], end = e[1], f, g;
+      if (f = fragmentByEnd[start]) {
+        delete fragmentByEnd[f.end];
+        f.push(i);
+        f.end = end;
+        if (g = fragmentByStart[end]) {
+          delete fragmentByStart[g.start];
+          var fg = g === f ? f : f.concat(g);
+          fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.end] = fg;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else if (f = fragmentByStart[end]) {
+        delete fragmentByStart[f.start];
+        f.unshift(i);
+        f.start = start;
+        if (g = fragmentByEnd[start]) {
+          delete fragmentByEnd[g.end];
+          var gf = g === f ? f : g.concat(f);
+          fragmentByStart[gf.start = g.start] = fragmentByEnd[gf.end = f.end] = gf;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else {
+        f = [i];
+        fragmentByStart[f.start = start] = fragmentByEnd[f.end = end] = f;
+      }
+    });
+    function ends(i) {
+      var arc = topology.arcs[i < 0 ? ~i : i], p0 = arc[0], p1;
+      if (topology.transform) (p1 = [0, 0], arc.forEach(function (dp) {
+        (p1[0] += dp[0], p1[1] += dp[1]);
+      })); else p1 = arc[arc.length - 1];
+      return i < 0 ? [p1, p0] : [p0, p1];
+    }
+    function flush(fragmentByEnd, fragmentByStart) {
+      for (var k in fragmentByEnd) {
+        var f = fragmentByEnd[k];
+        delete fragmentByStart[f.start];
+        delete f.start;
+        delete f.end;
+        f.forEach(function (i) {
+          stitchedArcs[i < 0 ? ~i : i] = 1;
+        });
+        fragments.push(f);
+      }
+    }
+    flush(fragmentByEnd, fragmentByStart);
+    flush(fragmentByStart, fragmentByEnd);
+    arcs.forEach(function (i) {
+      if (!stitchedArcs[i < 0 ? ~i : i]) fragments.push([i]);
+    });
+    return fragments;
+  }
+  function mesh(topology) {
+    return object(topology, meshArcs.apply(this, arguments));
+  }
+  function meshArcs(topology, object, filter) {
+    var arcs, i, n;
+    if (arguments.length > 1) arcs = extractArcs(topology, object, filter); else for ((i = 0, arcs = new Array(n = topology.arcs.length)); i < n; ++i) arcs[i] = i;
+    return {
+      type: "MultiLineString",
+      arcs: stitch(topology, arcs)
+    };
+  }
+  function extractArcs(topology, object, filter) {
+    var arcs = [], geomsByArc = [], geom;
+    function extract0(i) {
+      var j = i < 0 ? ~i : i;
+      (geomsByArc[j] || (geomsByArc[j] = [])).push({
+        i: i,
+        g: geom
+      });
+    }
+    function extract1(arcs) {
+      arcs.forEach(extract0);
+    }
+    function extract2(arcs) {
+      arcs.forEach(extract1);
+    }
+    function extract3(arcs) {
+      arcs.forEach(extract2);
+    }
+    function geometry(o) {
+      switch ((geom = o, o.type)) {
+        case "GeometryCollection":
+          o.geometries.forEach(geometry);
+          break;
+        case "LineString":
+          extract1(o.arcs);
+          break;
+        case "MultiLineString":
+        case "Polygon":
+          extract2(o.arcs);
+          break;
+        case "MultiPolygon":
+          extract3(o.arcs);
+          break;
+      }
+    }
+    geometry(object);
+    geomsByArc.forEach(filter == null ? function (geoms) {
+      arcs.push(geoms[0].i);
+    } : function (geoms) {
+      if (filter(geoms[0].g, geoms[geoms.length - 1].g)) arcs.push(geoms[0].i);
+    });
+    return arcs;
+  }
+  function planarRingArea(ring) {
+    var i = -1, n = ring.length, a, b = ring[n - 1], area = 0;
+    while (++i < n) (a = b, b = ring[i], area += a[0] * b[1] - a[1] * b[0]);
+    return Math.abs(area);
+  }
+  function merge(topology) {
+    return object(topology, mergeArcs.apply(this, arguments));
+  }
+  function mergeArcs(topology, objects) {
+    var polygonsByArc = {}, polygons = [], groups = [];
+    objects.forEach(geometry);
+    function geometry(o) {
+      switch (o.type) {
+        case "GeometryCollection":
+          o.geometries.forEach(geometry);
+          break;
+        case "Polygon":
+          extract(o.arcs);
+          break;
+        case "MultiPolygon":
+          o.arcs.forEach(extract);
+          break;
+      }
+    }
+    function extract(polygon) {
+      polygon.forEach(function (ring) {
+        ring.forEach(function (arc) {
+          (polygonsByArc[arc = arc < 0 ? ~arc : arc] || (polygonsByArc[arc] = [])).push(polygon);
+        });
+      });
+      polygons.push(polygon);
+    }
+    function area(ring) {
+      return planarRingArea(object(topology, {
+        type: "Polygon",
+        arcs: [ring]
+      }).coordinates[0]);
+    }
+    polygons.forEach(function (polygon) {
+      if (!polygon._) {
+        var group = [], neighbors = [polygon];
+        polygon._ = 1;
+        groups.push(group);
+        while (polygon = neighbors.pop()) {
+          group.push(polygon);
+          polygon.forEach(function (ring) {
+            ring.forEach(function (arc) {
+              polygonsByArc[arc < 0 ? ~arc : arc].forEach(function (polygon) {
+                if (!polygon._) {
+                  polygon._ = 1;
+                  neighbors.push(polygon);
+                }
+              });
+            });
+          });
+        }
+      }
+    });
+    polygons.forEach(function (polygon) {
+      delete polygon._;
+    });
+    return {
+      type: "MultiPolygon",
+      arcs: groups.map(function (polygons) {
+        var arcs = [], n;
+        // Extract the exterior (unique) arcs.
+        polygons.forEach(function (polygon) {
+          polygon.forEach(function (ring) {
+            ring.forEach(function (arc) {
+              if (polygonsByArc[arc < 0 ? ~arc : arc].length < 2) {
+                arcs.push(arc);
+              }
+            });
+          });
+        });
+        // Stitch the arcs into one or more rings.
+        arcs = stitch(topology, arcs);
+        // If more than one ring is returned,
+        // at most one of these rings can be the exterior;
+        // choose the one with the greatest absolute area.
+        if ((n = arcs.length) > 1) {
+          for (var i = 1, k = area(arcs[0]), ki, t; i < n; ++i) {
+            if ((ki = area(arcs[i])) > k) {
+              (t = arcs[0], arcs[0] = arcs[i], arcs[i] = t, k = ki);
+            }
+          }
+        }
+        return arcs;
+      }).filter(function (arcs) {
+        return arcs.length > 0;
+      })
+    };
+  }
+  function bisect(a, x) {
+    var lo = 0, hi = a.length;
+    while (lo < hi) {
+      var mid = lo + hi >>> 1;
+      if (a[mid] < x) lo = mid + 1; else hi = mid;
+    }
+    return lo;
+  }
+  function neighbors(objects) {
+    var indexesByArc = {}, // arc index -> array of object indexes
+    neighbors = objects.map(function () {
+      return [];
+    });
+    function line(arcs, i) {
+      arcs.forEach(function (a) {
+        if (a < 0) a = ~a;
+        var o = indexesByArc[a];
+        if (o) o.push(i); else indexesByArc[a] = [i];
+      });
+    }
+    function polygon(arcs, i) {
+      arcs.forEach(function (arc) {
+        line(arc, i);
+      });
+    }
+    function geometry(o, i) {
+      if (o.type === "GeometryCollection") o.geometries.forEach(function (o) {
+        geometry(o, i);
+      }); else if ((o.type in geometryType)) geometryType[o.type](o.arcs, i);
+    }
+    var geometryType = {
+      LineString: line,
+      MultiLineString: polygon,
+      Polygon: polygon,
+      MultiPolygon: function (arcs, i) {
+        arcs.forEach(function (arc) {
+          polygon(arc, i);
+        });
+      }
+    };
+    objects.forEach(geometry);
+    for (var i in indexesByArc) {
+      for (var indexes = indexesByArc[i], m = indexes.length, j = 0; j < m; ++j) {
+        for (var k = j + 1; k < m; ++k) {
+          var ij = indexes[j], ik = indexes[k], n;
+          if ((n = neighbors[ij])[i = bisect(n, ik)] !== ik) n.splice(i, 0, ik);
+          if ((n = neighbors[ik])[i = bisect(n, ij)] !== ij) n.splice(i, 0, ij);
+        }
+      }
+    }
+    return neighbors;
+  }
+  function untransform(transform) {
+    if (transform == null) return identity;
+    var x0, y0, kx = transform.scale[0], ky = transform.scale[1], dx = transform.translate[0], dy = transform.translate[1];
+    return function (input, i) {
+      if (!i) x0 = y0 = 0;
+      var j = 2, n = input.length, output = new Array(n), x1 = Math.round((input[0] - dx) / kx), y1 = Math.round((input[1] - dy) / ky);
+      (output[0] = x1 - x0, x0 = x1);
+      (output[1] = y1 - y0, y0 = y1);
+      while (j < n) (output[j] = input[j], ++j);
+      return output;
+    };
+  }
+  function quantize(topology, transform) {
+    if (topology.transform) throw new Error("already quantized");
+    if (!transform || !transform.scale) {
+      if (!((n = Math.floor(transform)) >= 2)) throw new Error("n must be ≥2");
+      box = topology.bbox || bbox(topology);
+      var x0 = box[0], y0 = box[1], x1 = box[2], y1 = box[3], n;
+      transform = {
+        scale: [x1 - x0 ? (x1 - x0) / (n - 1) : 1, y1 - y0 ? (y1 - y0) / (n - 1) : 1],
+        translate: [x0, y0]
+      };
+    } else {
+      box = topology.bbox;
+    }
+    var t = untransform(transform), box, key, inputs = topology.objects, outputs = {};
+    function quantizePoint(point) {
+      return t(point);
+    }
+    function quantizeGeometry(input) {
+      var output;
+      switch (input.type) {
+        case "GeometryCollection":
+          output = {
+            type: "GeometryCollection",
+            geometries: input.geometries.map(quantizeGeometry)
+          };
+          break;
+        case "Point":
+          output = {
+            type: "Point",
+            coordinates: quantizePoint(input.coordinates)
+          };
+          break;
+        case "MultiPoint":
+          output = {
+            type: "MultiPoint",
+            coordinates: input.coordinates.map(quantizePoint)
+          };
+          break;
+        default:
+          return input;
+      }
+      if (input.id != null) output.id = input.id;
+      if (input.bbox != null) output.bbox = input.bbox;
+      if (input.properties != null) output.properties = input.properties;
+      return output;
+    }
+    function quantizeArc(input) {
+      var i = 0, j = 1, n = input.length, p, output = new Array(n);
+      // pessimistic
+      output[0] = t(input[0], 0);
+      while (++i < n) if ((p = t(input[i], i))[0] || p[1]) output[j++] = p;
+      // non-coincident points
+      if (j === 1) output[j++] = [0, 0];
+      // an arc must have at least two points
+      output.length = j;
+      return output;
+    }
+    for (key in inputs) outputs[key] = quantizeGeometry(inputs[key]);
+    return {
+      type: "Topology",
+      bbox: box,
+      transform: transform,
+      objects: outputs,
+      arcs: topology.arcs.map(quantizeArc)
+    };
+  }
+  exports.bbox = bbox;
+  exports.feature = feature;
+  exports.merge = merge;
+  exports.mergeArcs = mergeArcs;
+  exports.mesh = mesh;
+  exports.meshArcs = meshArcs;
+  exports.neighbors = neighbors;
+  exports.quantize = quantize;
+  exports.transform = transform;
+  exports.untransform = untransform;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"6HwjU":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-zoom/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dispatch'), require('d3-drag'), require('d3-interpolate'), require('d3-selection'), require('d3-transition')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-dispatch', 'd3-drag', 'd3-interpolate', 'd3-selection', 'd3-transition'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3, global.d3, global.d3, global.d3, global.d3));
+})(this, function (exports, d3Dispatch, d3Drag, d3Interpolate, d3Selection, d3Transition) {
+  "use strict";
+  var constant = x => () => x;
+  function ZoomEvent(type, {sourceEvent, target, transform, dispatch}) {
+    Object.defineProperties(this, {
+      type: {
+        value: type,
+        enumerable: true,
+        configurable: true
+      },
+      sourceEvent: {
+        value: sourceEvent,
+        enumerable: true,
+        configurable: true
+      },
+      target: {
+        value: target,
+        enumerable: true,
+        configurable: true
+      },
+      transform: {
+        value: transform,
+        enumerable: true,
+        configurable: true
+      },
+      _: {
+        value: dispatch
+      }
+    });
+  }
+  function Transform(k, x, y) {
+    this.k = k;
+    this.x = x;
+    this.y = y;
+  }
+  Transform.prototype = {
+    constructor: Transform,
+    scale: function (k) {
+      return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
+    },
+    translate: function (x, y) {
+      return x === 0 & y === 0 ? this : new Transform(this.k, this.x + this.k * x, this.y + this.k * y);
+    },
+    apply: function (point) {
+      return [point[0] * this.k + this.x, point[1] * this.k + this.y];
+    },
+    applyX: function (x) {
+      return x * this.k + this.x;
+    },
+    applyY: function (y) {
+      return y * this.k + this.y;
+    },
+    invert: function (location) {
+      return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
+    },
+    invertX: function (x) {
+      return (x - this.x) / this.k;
+    },
+    invertY: function (y) {
+      return (y - this.y) / this.k;
+    },
+    rescaleX: function (x) {
+      return x.copy().domain(x.range().map(this.invertX, this).map(x.invert, x));
+    },
+    rescaleY: function (y) {
+      return y.copy().domain(y.range().map(this.invertY, this).map(y.invert, y));
+    },
+    toString: function () {
+      return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
+    }
+  };
+  var identity = new Transform(1, 0, 0);
+  transform.prototype = Transform.prototype;
+  function transform(node) {
+    while (!node.__zoom) if (!(node = node.parentNode)) return identity;
+    return node.__zoom;
+  }
+  function nopropagation(event) {
+    event.stopImmediatePropagation();
+  }
+  function noevent(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+  // Ignore right-click, since that should open the context menu.
+  // except for pinch-to-zoom, which is sent as a wheel+ctrlKey event
+  function defaultFilter(event) {
+    return (!event.ctrlKey || event.type === 'wheel') && !event.button;
+  }
+  function defaultExtent() {
+    var e = this;
+    if (e instanceof SVGElement) {
+      e = e.ownerSVGElement || e;
+      if (e.hasAttribute("viewBox")) {
+        e = e.viewBox.baseVal;
+        return [[e.x, e.y], [e.x + e.width, e.y + e.height]];
+      }
+      return [[0, 0], [e.width.baseVal.value, e.height.baseVal.value]];
+    }
+    return [[0, 0], [e.clientWidth, e.clientHeight]];
+  }
+  function defaultTransform() {
+    return this.__zoom || identity;
+  }
+  function defaultWheelDelta(event) {
+    return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002) * (event.ctrlKey ? 10 : 1);
+  }
+  function defaultTouchable() {
+    return navigator.maxTouchPoints || ("ontouchstart" in this);
+  }
+  function defaultConstrain(transform, extent, translateExtent) {
+    var dx0 = transform.invertX(extent[0][0]) - translateExtent[0][0], dx1 = transform.invertX(extent[1][0]) - translateExtent[1][0], dy0 = transform.invertY(extent[0][1]) - translateExtent[0][1], dy1 = transform.invertY(extent[1][1]) - translateExtent[1][1];
+    return transform.translate(dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1), dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1));
+  }
+  function zoom() {
+    var filter = defaultFilter, extent = defaultExtent, constrain = defaultConstrain, wheelDelta = defaultWheelDelta, touchable = defaultTouchable, scaleExtent = [0, Infinity], translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]], duration = 250, interpolate = d3Interpolate.interpolateZoom, listeners = d3Dispatch.dispatch("start", "zoom", "end"), touchstarting, touchfirst, touchending, touchDelay = 500, wheelDelay = 150, clickDistance2 = 0, tapDistance = 10;
+    function zoom(selection) {
+      selection.property("__zoom", defaultTransform).on("wheel.zoom", wheeled).on("mousedown.zoom", mousedowned).on("dblclick.zoom", dblclicked).filter(touchable).on("touchstart.zoom", touchstarted).on("touchmove.zoom", touchmoved).on("touchend.zoom touchcancel.zoom", touchended).style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+    }
+    zoom.transform = function (collection, transform, point, event) {
+      var selection = collection.selection ? collection.selection() : collection;
+      selection.property("__zoom", defaultTransform);
+      if (collection !== selection) {
+        schedule(collection, transform, point, event);
+      } else {
+        selection.interrupt().each(function () {
+          gesture(this, arguments).event(event).start().zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform).end();
+        });
+      }
+    };
+    zoom.scaleBy = function (selection, k, p, event) {
+      zoom.scaleTo(selection, function () {
+        var k0 = this.__zoom.k, k1 = typeof k === "function" ? k.apply(this, arguments) : k;
+        return k0 * k1;
+      }, p, event);
+    };
+    zoom.scaleTo = function (selection, k, p, event) {
+      zoom.transform(selection, function () {
+        var e = extent.apply(this, arguments), t0 = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p, p1 = t0.invert(p0), k1 = typeof k === "function" ? k.apply(this, arguments) : k;
+        return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
+      }, p, event);
+    };
+    zoom.translateBy = function (selection, x, y, event) {
+      zoom.transform(selection, function () {
+        return constrain(this.__zoom.translate(typeof x === "function" ? x.apply(this, arguments) : x, typeof y === "function" ? y.apply(this, arguments) : y), extent.apply(this, arguments), translateExtent);
+      }, null, event);
+    };
+    zoom.translateTo = function (selection, x, y, p, event) {
+      zoom.transform(selection, function () {
+        var e = extent.apply(this, arguments), t = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
+        return constrain(identity.translate(p0[0], p0[1]).scale(t.k).translate(typeof x === "function" ? -x.apply(this, arguments) : -x, typeof y === "function" ? -y.apply(this, arguments) : -y), e, translateExtent);
+      }, p, event);
+    };
+    function scale(transform, k) {
+      k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], k));
+      return k === transform.k ? transform : new Transform(k, transform.x, transform.y);
+    }
+    function translate(transform, p0, p1) {
+      var x = p0[0] - p1[0] * transform.k, y = p0[1] - p1[1] * transform.k;
+      return x === transform.x && y === transform.y ? transform : new Transform(transform.k, x, y);
+    }
+    function centroid(extent) {
+      return [(+extent[0][0] + +extent[1][0]) / 2, (+extent[0][1] + +extent[1][1]) / 2];
+    }
+    function schedule(transition, transform, point, event) {
+      transition.on("start.zoom", function () {
+        gesture(this, arguments).event(event).start();
+      }).on("interrupt.zoom end.zoom", function () {
+        gesture(this, arguments).event(event).end();
+      }).tween("zoom", function () {
+        var that = this, args = arguments, g = gesture(that, args).event(event), e = extent.apply(that, args), p = point == null ? centroid(e) : typeof point === "function" ? point.apply(that, args) : point, w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]), a = that.__zoom, b = typeof transform === "function" ? transform.apply(that, args) : transform, i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
+        return function (t) {
+          if (t === 1) t = b; else // Avoid rounding error on end.
+          {
+            var l = i(t), k = w / l[2];
+            t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k);
+          }
+          g.zoom(null, t);
+        };
+      });
+    }
+    function gesture(that, args, clean) {
+      return !clean && that.__zooming || new Gesture(that, args);
+    }
+    function Gesture(that, args) {
+      this.that = that;
+      this.args = args;
+      this.active = 0;
+      this.sourceEvent = null;
+      this.extent = extent.apply(that, args);
+      this.taps = 0;
+    }
+    Gesture.prototype = {
+      event: function (event) {
+        if (event) this.sourceEvent = event;
+        return this;
+      },
+      start: function () {
+        if (++this.active === 1) {
+          this.that.__zooming = this;
+          this.emit("start");
+        }
+        return this;
+      },
+      zoom: function (key, transform) {
+        if (this.mouse && key !== "mouse") this.mouse[1] = transform.invert(this.mouse[0]);
+        if (this.touch0 && key !== "touch") this.touch0[1] = transform.invert(this.touch0[0]);
+        if (this.touch1 && key !== "touch") this.touch1[1] = transform.invert(this.touch1[0]);
+        this.that.__zoom = transform;
+        this.emit("zoom");
+        return this;
+      },
+      end: function () {
+        if (--this.active === 0) {
+          delete this.that.__zooming;
+          this.emit("end");
+        }
+        return this;
+      },
+      emit: function (type) {
+        var d = d3Selection.select(this.that).datum();
+        listeners.call(type, this.that, new ZoomEvent(type, {
+          sourceEvent: this.sourceEvent,
+          target: zoom,
+          type,
+          transform: this.that.__zoom,
+          dispatch: listeners
+        }), d);
+      }
+    };
+    function wheeled(event, ...args) {
+      if (!filter.apply(this, arguments)) return;
+      var g = gesture(this, args).event(event), t = this.__zoom, k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))), p = d3Selection.pointer(event);
+      // If the mouse is in the same location as before, reuse it.
+      // If there were recent wheel events, reset the wheel idle timeout.
+      if (g.wheel) {
+        if (g.mouse[0][0] !== p[0] || g.mouse[0][1] !== p[1]) {
+          g.mouse[1] = t.invert(g.mouse[0] = p);
+        }
+        clearTimeout(g.wheel);
+              // If this wheel event won’t trigger a transform change, ignore it.
+} else // If this wheel event won’t trigger a transform change, ignore it.
+      if (t.k === k) return; else // Otherwise, capture the mouse point and location at the start.
+      {
+        g.mouse = [p, t.invert(p)];
+        d3Transition.interrupt(this);
+        g.start();
+      }
+      noevent(event);
+      g.wheel = setTimeout(wheelidled, wheelDelay);
+      g.zoom("mouse", constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
+      function wheelidled() {
+        g.wheel = null;
+        g.end();
+      }
+    }
+    function mousedowned(event, ...args) {
+      if (touchending || !filter.apply(this, arguments)) return;
+      var g = gesture(this, args, true).event(event), v = d3Selection.select(event.view).on("mousemove.zoom", mousemoved, true).on("mouseup.zoom", mouseupped, true), p = d3Selection.pointer(event, currentTarget), currentTarget = event.currentTarget, x0 = event.clientX, y0 = event.clientY;
+      d3Drag.dragDisable(event.view);
+      nopropagation(event);
+      g.mouse = [p, this.__zoom.invert(p)];
+      d3Transition.interrupt(this);
+      g.start();
+      function mousemoved(event) {
+        noevent(event);
+        if (!g.moved) {
+          var dx = event.clientX - x0, dy = event.clientY - y0;
+          g.moved = dx * dx + dy * dy > clickDistance2;
+        }
+        g.event(event).zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = d3Selection.pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
+      }
+      function mouseupped(event) {
+        v.on("mousemove.zoom mouseup.zoom", null);
+        d3Drag.dragEnable(event.view, g.moved);
+        noevent(event);
+        g.event(event).end();
+      }
+    }
+    function dblclicked(event, ...args) {
+      if (!filter.apply(this, arguments)) return;
+      var t0 = this.__zoom, p0 = d3Selection.pointer(event.changedTouches ? event.changedTouches[0] : event, this), p1 = t0.invert(p0), k1 = t0.k * (event.shiftKey ? 0.5 : 2), t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, args), translateExtent);
+      noevent(event);
+      if (duration > 0) d3Selection.select(this).transition().duration(duration).call(schedule, t1, p0, event); else d3Selection.select(this).call(zoom.transform, t1, p0, event);
+    }
+    function touchstarted(event, ...args) {
+      if (!filter.apply(this, arguments)) return;
+      var touches = event.touches, n = touches.length, g = gesture(this, args, event.changedTouches.length === n).event(event), started, i, t, p;
+      nopropagation(event);
+      for (i = 0; i < n; ++i) {
+        (t = touches[i], p = d3Selection.pointer(t, this));
+        p = [p, this.__zoom.invert(p), t.identifier];
+        if (!g.touch0) (g.touch0 = p, started = true, g.taps = 1 + !!touchstarting); else if (!g.touch1 && g.touch0[2] !== p[2]) (g.touch1 = p, g.taps = 0);
+      }
+      if (touchstarting) touchstarting = clearTimeout(touchstarting);
+      if (started) {
+        if (g.taps < 2) (touchfirst = p[0], touchstarting = setTimeout(function () {
+          touchstarting = null;
+        }, touchDelay));
+        d3Transition.interrupt(this);
+        g.start();
+      }
+    }
+    function touchmoved(event, ...args) {
+      if (!this.__zooming) return;
+      var g = gesture(this, args).event(event), touches = event.changedTouches, n = touches.length, i, t, p, l;
+      noevent(event);
+      for (i = 0; i < n; ++i) {
+        (t = touches[i], p = d3Selection.pointer(t, this));
+        if (g.touch0 && g.touch0[2] === t.identifier) g.touch0[0] = p; else if (g.touch1 && g.touch1[2] === t.identifier) g.touch1[0] = p;
+      }
+      t = g.that.__zoom;
+      if (g.touch1) {
+        var p0 = g.touch0[0], l0 = g.touch0[1], p1 = g.touch1[0], l1 = g.touch1[1], dp = (dp = p1[0] - p0[0]) * dp + (dp = p1[1] - p0[1]) * dp, dl = (dl = l1[0] - l0[0]) * dl + (dl = l1[1] - l0[1]) * dl;
+        t = scale(t, Math.sqrt(dp / dl));
+        p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
+        l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
+      } else if (g.touch0) (p = g.touch0[0], l = g.touch0[1]); else return;
+      g.zoom("touch", constrain(translate(t, p, l), g.extent, translateExtent));
+    }
+    function touchended(event, ...args) {
+      if (!this.__zooming) return;
+      var g = gesture(this, args).event(event), touches = event.changedTouches, n = touches.length, i, t;
+      nopropagation(event);
+      if (touchending) clearTimeout(touchending);
+      touchending = setTimeout(function () {
+        touchending = null;
+      }, touchDelay);
+      for (i = 0; i < n; ++i) {
+        t = touches[i];
+        if (g.touch0 && g.touch0[2] === t.identifier) delete g.touch0; else if (g.touch1 && g.touch1[2] === t.identifier) delete g.touch1;
+      }
+      if (g.touch1 && !g.touch0) (g.touch0 = g.touch1, delete g.touch1);
+      if (g.touch0) g.touch0[1] = this.__zoom.invert(g.touch0[0]); else {
+        g.end();
+        // If this was a dbltap, reroute to the (optional) dblclick.zoom handler.
+        if (g.taps === 2) {
+          t = d3Selection.pointer(t, this);
+          if (Math.hypot(touchfirst[0] - t[0], touchfirst[1] - t[1]) < tapDistance) {
+            var p = d3Selection.select(this).on("dblclick.zoom");
+            if (p) p.apply(this, arguments);
+          }
+        }
+      }
+    }
+    zoom.wheelDelta = function (_) {
+      return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : constant(+_), zoom) : wheelDelta;
+    };
+    zoom.filter = function (_) {
+      return arguments.length ? (filter = typeof _ === "function" ? _ : constant(!!_), zoom) : filter;
+    };
+    zoom.touchable = function (_) {
+      return arguments.length ? (touchable = typeof _ === "function" ? _ : constant(!!_), zoom) : touchable;
+    };
+    zoom.extent = function (_) {
+      return arguments.length ? (extent = typeof _ === "function" ? _ : constant([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
+    };
+    zoom.scaleExtent = function (_) {
+      return arguments.length ? (scaleExtent[0] = +_[0], scaleExtent[1] = +_[1], zoom) : [scaleExtent[0], scaleExtent[1]];
+    };
+    zoom.translateExtent = function (_) {
+      return arguments.length ? (translateExtent[0][0] = +_[0][0], translateExtent[1][0] = +_[1][0], translateExtent[0][1] = +_[0][1], translateExtent[1][1] = +_[1][1], zoom) : [[translateExtent[0][0], translateExtent[0][1]], [translateExtent[1][0], translateExtent[1][1]]];
+    };
+    zoom.constrain = function (_) {
+      return arguments.length ? (constrain = _, zoom) : constrain;
+    };
+    zoom.duration = function (_) {
+      return arguments.length ? (duration = +_, zoom) : duration;
+    };
+    zoom.interpolate = function (_) {
+      return arguments.length ? (interpolate = _, zoom) : interpolate;
+    };
+    zoom.on = function () {
+      var value = listeners.on.apply(listeners, arguments);
+      return value === listeners ? zoom : value;
+    };
+    zoom.clickDistance = function (_) {
+      return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
+    };
+    zoom.tapDistance = function (_) {
+      return arguments.length ? (tapDistance = +_, zoom) : tapDistance;
+    };
+    return zoom;
+  }
+  exports.zoom = zoom;
+  exports.zoomIdentity = identity;
+  exports.zoomTransform = transform;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-dispatch":"6ygE0","d3-drag":"5x5QZ","d3-interpolate":"6eByj","d3-selection":"1RFAz","d3-transition":"ee4oY"}],"6ygE0":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-dispatch/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  var noop = {
+    value: () => {}
+  };
+  function dispatch() {
+    for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
+      if (!(t = arguments[i] + "") || (t in _) || (/[\s.]/).test(t)) throw new Error("illegal type: " + t);
+      _[t] = [];
+    }
+    return new Dispatch(_);
+  }
+  function Dispatch(_) {
+    this._ = _;
+  }
+  function parseTypenames(typenames, types) {
+    return typenames.trim().split(/^|\s+/).map(function (t) {
+      var name = "", i = t.indexOf(".");
+      if (i >= 0) (name = t.slice(i + 1), t = t.slice(0, i));
+      if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
+      return {
+        type: t,
+        name: name
+      };
+    });
+  }
+  Dispatch.prototype = dispatch.prototype = {
+    constructor: Dispatch,
+    on: function (typename, callback) {
+      var _ = this._, T = parseTypenames(typename + "", _), t, i = -1, n = T.length;
+      // If no callback was specified, return the callback of the given type and name.
+      if (arguments.length < 2) {
+        while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
+        return;
+      }
+      // If a type was specified, set the callback for the given type and name.
+      // Otherwise, if a null callback was specified, remove callbacks of the given name.
+      if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
+      while (++i < n) {
+        if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback); else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
+      }
+      return this;
+    },
+    copy: function () {
+      var copy = {}, _ = this._;
+      for (var t in _) copy[t] = _[t].slice();
+      return new Dispatch(copy);
+    },
+    call: function (type, that) {
+      if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
+      if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+      for ((t = this._[type], i = 0, n = t.length); i < n; ++i) t[i].value.apply(that, args);
+    },
+    apply: function (type, that, args) {
+      if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+      for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+    }
+  };
+  function get(type, name) {
+    for (var i = 0, n = type.length, c; i < n; ++i) {
+      if ((c = type[i]).name === name) {
+        return c.value;
+      }
+    }
+  }
+  function set(type, name, callback) {
+    for (var i = 0, n = type.length; i < n; ++i) {
+      if (type[i].name === name) {
+        (type[i] = noop, type = type.slice(0, i).concat(type.slice(i + 1)));
+        break;
+      }
+    }
+    if (callback != null) type.push({
+      name: name,
+      value: callback
+    });
+    return type;
+  }
+  exports.dispatch = dispatch;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"5x5QZ":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-drag/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-dispatch'), require('d3-selection')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-dispatch', 'd3-selection'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3, global.d3));
+})(this, function (exports, d3Dispatch, d3Selection) {
+  "use strict";
+  function nopropagation(event) {
+    event.stopImmediatePropagation();
+  }
+  function noevent(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+  function nodrag(view) {
+    var root = view.document.documentElement, selection = d3Selection.select(view).on("dragstart.drag", noevent, true);
+    if (("onselectstart" in root)) {
+      selection.on("selectstart.drag", noevent, true);
+    } else {
+      root.__noselect = root.style.MozUserSelect;
+      root.style.MozUserSelect = "none";
+    }
+  }
+  function yesdrag(view, noclick) {
+    var root = view.document.documentElement, selection = d3Selection.select(view).on("dragstart.drag", null);
+    if (noclick) {
+      selection.on("click.drag", noevent, true);
+      setTimeout(function () {
+        selection.on("click.drag", null);
+      }, 0);
+    }
+    if (("onselectstart" in root)) {
+      selection.on("selectstart.drag", null);
+    } else {
+      root.style.MozUserSelect = root.__noselect;
+      delete root.__noselect;
+    }
+  }
+  var constant = x => () => x;
+  function DragEvent(type, {sourceEvent, subject, target, identifier, active, x, y, dx, dy, dispatch}) {
+    Object.defineProperties(this, {
+      type: {
+        value: type,
+        enumerable: true,
+        configurable: true
+      },
+      sourceEvent: {
+        value: sourceEvent,
+        enumerable: true,
+        configurable: true
+      },
+      subject: {
+        value: subject,
+        enumerable: true,
+        configurable: true
+      },
+      target: {
+        value: target,
+        enumerable: true,
+        configurable: true
+      },
+      identifier: {
+        value: identifier,
+        enumerable: true,
+        configurable: true
+      },
+      active: {
+        value: active,
+        enumerable: true,
+        configurable: true
+      },
+      x: {
+        value: x,
+        enumerable: true,
+        configurable: true
+      },
+      y: {
+        value: y,
+        enumerable: true,
+        configurable: true
+      },
+      dx: {
+        value: dx,
+        enumerable: true,
+        configurable: true
+      },
+      dy: {
+        value: dy,
+        enumerable: true,
+        configurable: true
+      },
+      _: {
+        value: dispatch
+      }
+    });
+  }
+  DragEvent.prototype.on = function () {
+    var value = this._.on.apply(this._, arguments);
+    return value === this._ ? this : value;
+  };
+  // Ignore right-click, since that should open the context menu.
+  function defaultFilter(event) {
+    return !event.ctrlKey && !event.button;
+  }
+  function defaultContainer() {
+    return this.parentNode;
+  }
+  function defaultSubject(event, d) {
+    return d == null ? {
+      x: event.x,
+      y: event.y
+    } : d;
+  }
+  function defaultTouchable() {
+    return navigator.maxTouchPoints || ("ontouchstart" in this);
+  }
+  function drag() {
+    var filter = defaultFilter, container = defaultContainer, subject = defaultSubject, touchable = defaultTouchable, gestures = {}, listeners = d3Dispatch.dispatch("start", "drag", "end"), active = 0, mousedownx, mousedowny, mousemoving, touchending, clickDistance2 = 0;
+    function drag(selection) {
+      selection.on("mousedown.drag", mousedowned).filter(touchable).on("touchstart.drag", touchstarted).on("touchmove.drag", touchmoved).on("touchend.drag touchcancel.drag", touchended).style("touch-action", "none").style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+    }
+    function mousedowned(event, d) {
+      if (touchending || !filter.call(this, event, d)) return;
+      var gesture = beforestart(this, container.call(this, event, d), event, d, "mouse");
+      if (!gesture) return;
+      d3Selection.select(event.view).on("mousemove.drag", mousemoved, true).on("mouseup.drag", mouseupped, true);
+      nodrag(event.view);
+      nopropagation(event);
+      mousemoving = false;
+      mousedownx = event.clientX;
+      mousedowny = event.clientY;
+      gesture("start", event);
+    }
+    function mousemoved(event) {
+      noevent(event);
+      if (!mousemoving) {
+        var dx = event.clientX - mousedownx, dy = event.clientY - mousedowny;
+        mousemoving = dx * dx + dy * dy > clickDistance2;
+      }
+      gestures.mouse("drag", event);
+    }
+    function mouseupped(event) {
+      d3Selection.select(event.view).on("mousemove.drag mouseup.drag", null);
+      yesdrag(event.view, mousemoving);
+      noevent(event);
+      gestures.mouse("end", event);
+    }
+    function touchstarted(event, d) {
+      if (!filter.call(this, event, d)) return;
+      var touches = event.changedTouches, c = container.call(this, event, d), n = touches.length, i, gesture;
+      for (i = 0; i < n; ++i) {
+        if (gesture = beforestart(this, c, event, d, touches[i].identifier, touches[i])) {
+          nopropagation(event);
+          gesture("start", event, touches[i]);
+        }
+      }
+    }
+    function touchmoved(event) {
+      var touches = event.changedTouches, n = touches.length, i, gesture;
+      for (i = 0; i < n; ++i) {
+        if (gesture = gestures[touches[i].identifier]) {
+          noevent(event);
+          gesture("drag", event, touches[i]);
+        }
+      }
+    }
+    function touchended(event) {
+      var touches = event.changedTouches, n = touches.length, i, gesture;
+      if (touchending) clearTimeout(touchending);
+      touchending = setTimeout(function () {
+        touchending = null;
+      }, 500);
+      // Ghost clicks are delayed!
+      for (i = 0; i < n; ++i) {
+        if (gesture = gestures[touches[i].identifier]) {
+          nopropagation(event);
+          gesture("end", event, touches[i]);
+        }
+      }
+    }
+    function beforestart(that, container, event, d, identifier, touch) {
+      var dispatch = listeners.copy(), p = d3Selection.pointer(touch || event, container), dx, dy, s;
+      if ((s = subject.call(that, new DragEvent("beforestart", {
+        sourceEvent: event,
+        target: drag,
+        identifier,
+        active,
+        x: p[0],
+        y: p[1],
+        dx: 0,
+        dy: 0,
+        dispatch
+      }), d)) == null) return;
+      dx = s.x - p[0] || 0;
+      dy = s.y - p[1] || 0;
+      return function gesture(type, event, touch) {
+        var p0 = p, n;
+        switch (type) {
+          case "start":
+            (gestures[identifier] = gesture, n = active++);
+            break;
+          case "end":
+            (delete gestures[identifier], --active);
+          case "drag":
+            (p = d3Selection.pointer(touch || event, container), n = active);
+            break;
+        }
+        dispatch.call(type, that, new DragEvent(type, {
+          sourceEvent: event,
+          subject: s,
+          target: drag,
+          identifier,
+          active: n,
+          x: p[0] + dx,
+          y: p[1] + dy,
+          dx: p[0] - p0[0],
+          dy: p[1] - p0[1],
+          dispatch
+        }), d);
+      };
+    }
+    drag.filter = function (_) {
+      return arguments.length ? (filter = typeof _ === "function" ? _ : constant(!!_), drag) : filter;
+    };
+    drag.container = function (_) {
+      return arguments.length ? (container = typeof _ === "function" ? _ : constant(_), drag) : container;
+    };
+    drag.subject = function (_) {
+      return arguments.length ? (subject = typeof _ === "function" ? _ : constant(_), drag) : subject;
+    };
+    drag.touchable = function (_) {
+      return arguments.length ? (touchable = typeof _ === "function" ? _ : constant(!!_), drag) : touchable;
+    };
+    drag.on = function () {
+      var value = listeners.on.apply(listeners, arguments);
+      return value === listeners ? drag : value;
+    };
+    drag.clickDistance = function (_) {
+      return arguments.length ? (clickDistance2 = (_ = +_) * _, drag) : Math.sqrt(clickDistance2);
+    };
+    return drag;
+  }
+  exports.drag = drag;
+  exports.dragDisable = nodrag;
+  exports.dragEnable = yesdrag;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-dispatch":"6ygE0","d3-selection":"1RFAz"}],"1RFAz":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-selection/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  var xhtml = "http://www.w3.org/1999/xhtml";
+  var namespaces = {
+    svg: "http://www.w3.org/2000/svg",
+    xhtml: xhtml,
+    xlink: "http://www.w3.org/1999/xlink",
+    xml: "http://www.w3.org/XML/1998/namespace",
+    xmlns: "http://www.w3.org/2000/xmlns/"
+  };
+  function namespace(name) {
+    var prefix = name += "", i = prefix.indexOf(":");
+    if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
+    return namespaces.hasOwnProperty(prefix) ? {
+      space: namespaces[prefix],
+      local: name
+    } : name;
+  }
+  function creatorInherit(name) {
+    return function () {
+      var document = this.ownerDocument, uri = this.namespaceURI;
+      return uri === xhtml && document.documentElement.namespaceURI === xhtml ? document.createElement(name) : document.createElementNS(uri, name);
+    };
+  }
+  function creatorFixed(fullname) {
+    return function () {
+      return this.ownerDocument.createElementNS(fullname.space, fullname.local);
+    };
+  }
+  function creator(name) {
+    var fullname = namespace(name);
+    return (fullname.local ? creatorFixed : creatorInherit)(fullname);
+  }
+  function none() {}
+  function selector(selector) {
+    return selector == null ? none : function () {
+      return this.querySelector(selector);
+    };
+  }
+  function selection_select(select) {
+    if (typeof select !== "function") select = selector(select);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+        if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+          if (("__data__" in node)) subnode.__data__ = node.__data__;
+          subgroup[i] = subnode;
+        }
+      }
+    }
+    return new Selection(subgroups, this._parents);
+  }
+  function array(x) {
+    return typeof x === "object" && ("length" in x) ? x : // Array, TypedArray, NodeList, array-like
+    Array.from(x);
+  }
+  function empty() {
+    return [];
+  }
+  function selectorAll(selector) {
+    return selector == null ? empty : function () {
+      return this.querySelectorAll(selector);
+    };
+  }
+  function arrayAll(select) {
+    return function () {
+      var group = select.apply(this, arguments);
+      return group == null ? [] : array(group);
+    };
+  }
+  function selection_selectAll(select) {
+    if (typeof select === "function") select = arrayAll(select); else select = selectorAll(select);
+    for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          subgroups.push(select.call(node, node.__data__, i, group));
+          parents.push(node);
+        }
+      }
+    }
+    return new Selection(subgroups, parents);
+  }
+  function matcher(selector) {
+    return function () {
+      return this.matches(selector);
+    };
+  }
+  function childMatcher(selector) {
+    return function (node) {
+      return node.matches(selector);
+    };
+  }
+  var find = Array.prototype.find;
+  function childFind(match) {
+    return function () {
+      return find.call(this.children, match);
+    };
+  }
+  function childFirst() {
+    return this.firstElementChild;
+  }
+  function selection_selectChild(match) {
+    return this.select(match == null ? childFirst : childFind(typeof match === "function" ? match : childMatcher(match)));
+  }
+  var filter = Array.prototype.filter;
+  function children() {
+    return this.children;
+  }
+  function childrenFilter(match) {
+    return function () {
+      return filter.call(this.children, match);
+    };
+  }
+  function selection_selectChildren(match) {
+    return this.selectAll(match == null ? children : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
+  }
+  function selection_filter(match) {
+    if (typeof match !== "function") match = matcher(match);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+        if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+          subgroup.push(node);
+        }
+      }
+    }
+    return new Selection(subgroups, this._parents);
+  }
+  function sparse(update) {
+    return new Array(update.length);
+  }
+  function selection_enter() {
+    return new Selection(this._enter || this._groups.map(sparse), this._parents);
+  }
+  function EnterNode(parent, datum) {
+    this.ownerDocument = parent.ownerDocument;
+    this.namespaceURI = parent.namespaceURI;
+    this._next = null;
+    this._parent = parent;
+    this.__data__ = datum;
+  }
+  EnterNode.prototype = {
+    constructor: EnterNode,
+    appendChild: function (child) {
+      return this._parent.insertBefore(child, this._next);
+    },
+    insertBefore: function (child, next) {
+      return this._parent.insertBefore(child, next);
+    },
+    querySelector: function (selector) {
+      return this._parent.querySelector(selector);
+    },
+    querySelectorAll: function (selector) {
+      return this._parent.querySelectorAll(selector);
+    }
+  };
+  function constant(x) {
+    return function () {
+      return x;
+    };
+  }
+  function bindIndex(parent, group, enter, update, exit, data) {
+    var i = 0, node, groupLength = group.length, dataLength = data.length;
+    // Put any non-null nodes that fit into update.
+    // Put any null nodes into enter.
+    // Put any remaining data into enter.
+    for (; i < dataLength; ++i) {
+      if (node = group[i]) {
+        node.__data__ = data[i];
+        update[i] = node;
+      } else {
+        enter[i] = new EnterNode(parent, data[i]);
+      }
+    }
+    // Put any non-null nodes that don’t fit into exit.
+    for (; i < groupLength; ++i) {
+      if (node = group[i]) {
+        exit[i] = node;
+      }
+    }
+  }
+  function bindKey(parent, group, enter, update, exit, data, key) {
+    var i, node, nodeByKeyValue = new Map(), groupLength = group.length, dataLength = data.length, keyValues = new Array(groupLength), keyValue;
+    // Compute the key for each node.
+    // If multiple nodes have the same key, the duplicates are added to exit.
+    for (i = 0; i < groupLength; ++i) {
+      if (node = group[i]) {
+        keyValues[i] = keyValue = key.call(node, node.__data__, i, group) + "";
+        if (nodeByKeyValue.has(keyValue)) {
+          exit[i] = node;
+        } else {
+          nodeByKeyValue.set(keyValue, node);
+        }
+      }
+    }
+    // Compute the key for each datum.
+    // If there a node associated with this key, join and add it to update.
+    // If there is not (or the key is a duplicate), add it to enter.
+    for (i = 0; i < dataLength; ++i) {
+      keyValue = key.call(parent, data[i], i, data) + "";
+      if (node = nodeByKeyValue.get(keyValue)) {
+        update[i] = node;
+        node.__data__ = data[i];
+        nodeByKeyValue.delete(keyValue);
+      } else {
+        enter[i] = new EnterNode(parent, data[i]);
+      }
+    }
+    // Add any remaining nodes that were not bound to data to exit.
+    for (i = 0; i < groupLength; ++i) {
+      if ((node = group[i]) && nodeByKeyValue.get(keyValues[i]) === node) {
+        exit[i] = node;
+      }
+    }
+  }
+  function datum(node) {
+    return node.__data__;
+  }
+  function selection_data(value, key) {
+    if (!arguments.length) return Array.from(this, datum);
+    var bind = key ? bindKey : bindIndex, parents = this._parents, groups = this._groups;
+    if (typeof value !== "function") value = constant(value);
+    for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
+      var parent = parents[j], group = groups[j], groupLength = group.length, data = array(value.call(parent, parent && parent.__data__, j, parents)), dataLength = data.length, enterGroup = enter[j] = new Array(dataLength), updateGroup = update[j] = new Array(dataLength), exitGroup = exit[j] = new Array(groupLength);
+      bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
+      // Now connect the enter nodes to their following update node, such that
+      // appendChild can insert the materialized enter node before this node,
+      // rather than at the end of the parent node.
+      for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
+        if (previous = enterGroup[i0]) {
+          if (i0 >= i1) i1 = i0 + 1;
+          while (!(next = updateGroup[i1]) && ++i1 < dataLength) ;
+          previous._next = next || null;
+        }
+      }
+    }
+    update = new Selection(update, parents);
+    update._enter = enter;
+    update._exit = exit;
+    return update;
+  }
+  function selection_exit() {
+    return new Selection(this._exit || this._groups.map(sparse), this._parents);
+  }
+  function selection_join(onenter, onupdate, onexit) {
+    var enter = this.enter(), update = this, exit = this.exit();
+    enter = typeof onenter === "function" ? onenter(enter) : enter.append(onenter + "");
+    if (onupdate != null) update = onupdate(update);
+    if (onexit == null) exit.remove(); else onexit(exit);
+    return enter && update ? enter.merge(update).order() : update;
+  }
+  function selection_merge(selection) {
+    if (!(selection instanceof Selection)) throw new Error("invalid merge");
+    for (var groups0 = this._groups, groups1 = selection._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+      for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group0[i] || group1[i]) {
+          merge[i] = node;
+        }
+      }
+    }
+    for (; j < m0; ++j) {
+      merges[j] = groups0[j];
+    }
+    return new Selection(merges, this._parents);
+  }
+  function selection_order() {
+    for (var groups = this._groups, j = -1, m = groups.length; ++j < m; ) {
+      for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0; ) {
+        if (node = group[i]) {
+          if (next && node.compareDocumentPosition(next) ^ 4) next.parentNode.insertBefore(node, next);
+          next = node;
+        }
+      }
+    }
+    return this;
+  }
+  function selection_sort(compare) {
+    if (!compare) compare = ascending;
+    function compareNode(a, b) {
+      return a && b ? compare(a.__data__, b.__data__) : !a - !b;
+    }
+    for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          sortgroup[i] = node;
+        }
+      }
+      sortgroup.sort(compareNode);
+    }
+    return new Selection(sortgroups, this._parents).order();
+  }
+  function ascending(a, b) {
+    return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+  }
+  function selection_call() {
+    var callback = arguments[0];
+    arguments[0] = this;
+    callback.apply(null, arguments);
+    return this;
+  }
+  function selection_nodes() {
+    return Array.from(this);
+  }
+  function selection_node() {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
+        var node = group[i];
+        if (node) return node;
+      }
+    }
+    return null;
+  }
+  function selection_size() {
+    let size = 0;
+    for (const node of this) ++size;
+    // eslint-disable-line no-unused-vars
+    return size;
+  }
+  function selection_empty() {
+    return !this.node();
+  }
+  function selection_each(callback) {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+        if (node = group[i]) callback.call(node, node.__data__, i, group);
+      }
+    }
+    return this;
+  }
+  function attrRemove(name) {
+    return function () {
+      this.removeAttribute(name);
+    };
+  }
+  function attrRemoveNS(fullname) {
+    return function () {
+      this.removeAttributeNS(fullname.space, fullname.local);
+    };
+  }
+  function attrConstant(name, value) {
+    return function () {
+      this.setAttribute(name, value);
+    };
+  }
+  function attrConstantNS(fullname, value) {
+    return function () {
+      this.setAttributeNS(fullname.space, fullname.local, value);
+    };
+  }
+  function attrFunction(name, value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      if (v == null) this.removeAttribute(name); else this.setAttribute(name, v);
+    };
+  }
+  function attrFunctionNS(fullname, value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      if (v == null) this.removeAttributeNS(fullname.space, fullname.local); else this.setAttributeNS(fullname.space, fullname.local, v);
+    };
+  }
+  function selection_attr(name, value) {
+    var fullname = namespace(name);
+    if (arguments.length < 2) {
+      var node = this.node();
+      return fullname.local ? node.getAttributeNS(fullname.space, fullname.local) : node.getAttribute(fullname);
+    }
+    return this.each((value == null ? fullname.local ? attrRemoveNS : attrRemove : typeof value === "function" ? fullname.local ? attrFunctionNS : attrFunction : fullname.local ? attrConstantNS : attrConstant)(fullname, value));
+  }
+  function defaultView(node) {
+    return node.ownerDocument && node.ownerDocument.defaultView || // node is a Node
+    node.document && node || // node is a Window
+    node.defaultView;
+  }
+  function styleRemove(name) {
+    return function () {
+      this.style.removeProperty(name);
+    };
+  }
+  function styleConstant(name, value, priority) {
+    return function () {
+      this.style.setProperty(name, value, priority);
+    };
+  }
+  function styleFunction(name, value, priority) {
+    return function () {
+      var v = value.apply(this, arguments);
+      if (v == null) this.style.removeProperty(name); else this.style.setProperty(name, v, priority);
+    };
+  }
+  function selection_style(name, value, priority) {
+    return arguments.length > 1 ? this.each((value == null ? styleRemove : typeof value === "function" ? styleFunction : styleConstant)(name, value, priority == null ? "" : priority)) : styleValue(this.node(), name);
+  }
+  function styleValue(node, name) {
+    return node.style.getPropertyValue(name) || defaultView(node).getComputedStyle(node, null).getPropertyValue(name);
+  }
+  function propertyRemove(name) {
+    return function () {
+      delete this[name];
+    };
+  }
+  function propertyConstant(name, value) {
+    return function () {
+      this[name] = value;
+    };
+  }
+  function propertyFunction(name, value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      if (v == null) delete this[name]; else this[name] = v;
+    };
+  }
+  function selection_property(name, value) {
+    return arguments.length > 1 ? this.each((value == null ? propertyRemove : typeof value === "function" ? propertyFunction : propertyConstant)(name, value)) : this.node()[name];
+  }
+  function classArray(string) {
+    return string.trim().split(/^|\s+/);
+  }
+  function classList(node) {
+    return node.classList || new ClassList(node);
+  }
+  function ClassList(node) {
+    this._node = node;
+    this._names = classArray(node.getAttribute("class") || "");
+  }
+  ClassList.prototype = {
+    add: function (name) {
+      var i = this._names.indexOf(name);
+      if (i < 0) {
+        this._names.push(name);
+        this._node.setAttribute("class", this._names.join(" "));
+      }
+    },
+    remove: function (name) {
+      var i = this._names.indexOf(name);
+      if (i >= 0) {
+        this._names.splice(i, 1);
+        this._node.setAttribute("class", this._names.join(" "));
+      }
+    },
+    contains: function (name) {
+      return this._names.indexOf(name) >= 0;
+    }
+  };
+  function classedAdd(node, names) {
+    var list = classList(node), i = -1, n = names.length;
+    while (++i < n) list.add(names[i]);
+  }
+  function classedRemove(node, names) {
+    var list = classList(node), i = -1, n = names.length;
+    while (++i < n) list.remove(names[i]);
+  }
+  function classedTrue(names) {
+    return function () {
+      classedAdd(this, names);
+    };
+  }
+  function classedFalse(names) {
+    return function () {
+      classedRemove(this, names);
+    };
+  }
+  function classedFunction(names, value) {
+    return function () {
+      (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
+    };
+  }
+  function selection_classed(name, value) {
+    var names = classArray(name + "");
+    if (arguments.length < 2) {
+      var list = classList(this.node()), i = -1, n = names.length;
+      while (++i < n) if (!list.contains(names[i])) return false;
+      return true;
+    }
+    return this.each((typeof value === "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
+  }
+  function textRemove() {
+    this.textContent = "";
+  }
+  function textConstant(value) {
+    return function () {
+      this.textContent = value;
+    };
+  }
+  function textFunction(value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      this.textContent = v == null ? "" : v;
+    };
+  }
+  function selection_text(value) {
+    return arguments.length ? this.each(value == null ? textRemove : (typeof value === "function" ? textFunction : textConstant)(value)) : this.node().textContent;
+  }
+  function htmlRemove() {
+    this.innerHTML = "";
+  }
+  function htmlConstant(value) {
+    return function () {
+      this.innerHTML = value;
+    };
+  }
+  function htmlFunction(value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      this.innerHTML = v == null ? "" : v;
+    };
+  }
+  function selection_html(value) {
+    return arguments.length ? this.each(value == null ? htmlRemove : (typeof value === "function" ? htmlFunction : htmlConstant)(value)) : this.node().innerHTML;
+  }
+  function raise() {
+    if (this.nextSibling) this.parentNode.appendChild(this);
+  }
+  function selection_raise() {
+    return this.each(raise);
+  }
+  function lower() {
+    if (this.previousSibling) this.parentNode.insertBefore(this, this.parentNode.firstChild);
+  }
+  function selection_lower() {
+    return this.each(lower);
+  }
+  function selection_append(name) {
+    var create = typeof name === "function" ? name : creator(name);
+    return this.select(function () {
+      return this.appendChild(create.apply(this, arguments));
+    });
+  }
+  function constantNull() {
+    return null;
+  }
+  function selection_insert(name, before) {
+    var create = typeof name === "function" ? name : creator(name), select = before == null ? constantNull : typeof before === "function" ? before : selector(before);
+    return this.select(function () {
+      return this.insertBefore(create.apply(this, arguments), select.apply(this, arguments) || null);
+    });
+  }
+  function remove() {
+    var parent = this.parentNode;
+    if (parent) parent.removeChild(this);
+  }
+  function selection_remove() {
+    return this.each(remove);
+  }
+  function selection_cloneShallow() {
+    var clone = this.cloneNode(false), parent = this.parentNode;
+    return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+  }
+  function selection_cloneDeep() {
+    var clone = this.cloneNode(true), parent = this.parentNode;
+    return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+  }
+  function selection_clone(deep) {
+    return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
+  }
+  function selection_datum(value) {
+    return arguments.length ? this.property("__data__", value) : this.node().__data__;
+  }
+  function contextListener(listener) {
+    return function (event) {
+      listener.call(this, event, this.__data__);
+    };
+  }
+  function parseTypenames(typenames) {
+    return typenames.trim().split(/^|\s+/).map(function (t) {
+      var name = "", i = t.indexOf(".");
+      if (i >= 0) (name = t.slice(i + 1), t = t.slice(0, i));
+      return {
+        type: t,
+        name: name
+      };
+    });
+  }
+  function onRemove(typename) {
+    return function () {
+      var on = this.__on;
+      if (!on) return;
+      for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
+        if ((o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name)) {
+          this.removeEventListener(o.type, o.listener, o.options);
+        } else {
+          on[++i] = o;
+        }
+      }
+      if (++i) on.length = i; else delete this.__on;
+    };
+  }
+  function onAdd(typename, value, options) {
+    return function () {
+      var on = this.__on, o, listener = contextListener(value);
+      if (on) for (var j = 0, m = on.length; j < m; ++j) {
+        if ((o = on[j]).type === typename.type && o.name === typename.name) {
+          this.removeEventListener(o.type, o.listener, o.options);
+          this.addEventListener(o.type, o.listener = listener, o.options = options);
+          o.value = value;
+          return;
+        }
+      }
+      this.addEventListener(typename.type, listener, options);
+      o = {
+        type: typename.type,
+        name: typename.name,
+        value: value,
+        listener: listener,
+        options: options
+      };
+      if (!on) this.__on = [o]; else on.push(o);
+    };
+  }
+  function selection_on(typename, value, options) {
+    var typenames = parseTypenames(typename + ""), i, n = typenames.length, t;
+    if (arguments.length < 2) {
+      var on = this.node().__on;
+      if (on) for (var j = 0, m = on.length, o; j < m; ++j) {
+        for ((i = 0, o = on[j]); i < n; ++i) {
+          if ((t = typenames[i]).type === o.type && t.name === o.name) {
+            return o.value;
+          }
+        }
+      }
+      return;
+    }
+    on = value ? onAdd : onRemove;
+    for (i = 0; i < n; ++i) this.each(on(typenames[i], value, options));
+    return this;
+  }
+  function dispatchEvent(node, type, params) {
+    var window = defaultView(node), event = window.CustomEvent;
+    if (typeof event === "function") {
+      event = new event(type, params);
+    } else {
+      event = window.document.createEvent("Event");
+      if (params) (event.initEvent(type, params.bubbles, params.cancelable), event.detail = params.detail); else event.initEvent(type, false, false);
+    }
+    node.dispatchEvent(event);
+  }
+  function dispatchConstant(type, params) {
+    return function () {
+      return dispatchEvent(this, type, params);
+    };
+  }
+  function dispatchFunction(type, params) {
+    return function () {
+      return dispatchEvent(this, type, params.apply(this, arguments));
+    };
+  }
+  function selection_dispatch(type, params) {
+    return this.each((typeof params === "function" ? dispatchFunction : dispatchConstant)(type, params));
+  }
+  function* selection_iterator() {
+    for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+      for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+        if (node = group[i]) yield node;
+      }
+    }
+  }
+  var root = [null];
+  function Selection(groups, parents) {
+    this._groups = groups;
+    this._parents = parents;
+  }
+  function selection() {
+    return new Selection([[document.documentElement]], root);
+  }
+  function selection_selection() {
+    return this;
+  }
+  Selection.prototype = selection.prototype = {
+    constructor: Selection,
+    select: selection_select,
+    selectAll: selection_selectAll,
+    selectChild: selection_selectChild,
+    selectChildren: selection_selectChildren,
+    filter: selection_filter,
+    data: selection_data,
+    enter: selection_enter,
+    exit: selection_exit,
+    join: selection_join,
+    merge: selection_merge,
+    selection: selection_selection,
+    order: selection_order,
+    sort: selection_sort,
+    call: selection_call,
+    nodes: selection_nodes,
+    node: selection_node,
+    size: selection_size,
+    empty: selection_empty,
+    each: selection_each,
+    attr: selection_attr,
+    style: selection_style,
+    property: selection_property,
+    classed: selection_classed,
+    text: selection_text,
+    html: selection_html,
+    raise: selection_raise,
+    lower: selection_lower,
+    append: selection_append,
+    insert: selection_insert,
+    remove: selection_remove,
+    clone: selection_clone,
+    datum: selection_datum,
+    on: selection_on,
+    dispatch: selection_dispatch,
+    [Symbol.iterator]: selection_iterator
+  };
+  function select(selector) {
+    return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
+  }
+  function create(name) {
+    return select(creator(name).call(document.documentElement));
+  }
+  var nextId = 0;
+  function local() {
+    return new Local();
+  }
+  function Local() {
+    this._ = "@" + (++nextId).toString(36);
+  }
+  Local.prototype = local.prototype = {
+    constructor: Local,
+    get: function (node) {
+      var id = this._;
+      while (!((id in node))) if (!(node = node.parentNode)) return;
+      return node[id];
+    },
+    set: function (node, value) {
+      return node[this._] = value;
+    },
+    remove: function (node) {
+      return (this._ in node) && delete node[this._];
+    },
+    toString: function () {
+      return this._;
+    }
+  };
+  function sourceEvent(event) {
+    let sourceEvent;
+    while (sourceEvent = event.sourceEvent) event = sourceEvent;
+    return event;
+  }
+  function pointer(event, node) {
+    event = sourceEvent(event);
+    if (node === undefined) node = event.currentTarget;
+    if (node) {
+      var svg = node.ownerSVGElement || node;
+      if (svg.createSVGPoint) {
+        var point = svg.createSVGPoint();
+        (point.x = event.clientX, point.y = event.clientY);
+        point = point.matrixTransform(node.getScreenCTM().inverse());
+        return [point.x, point.y];
+      }
+      if (node.getBoundingClientRect) {
+        var rect = node.getBoundingClientRect();
+        return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
+      }
+    }
+    return [event.pageX, event.pageY];
+  }
+  function pointers(events, node) {
+    if (events.target) {
+      // i.e., instanceof Event, not TouchList or iterable
+      events = sourceEvent(events);
+      if (node === undefined) node = events.currentTarget;
+      events = events.touches || [events];
+    }
+    return Array.from(events, event => pointer(event, node));
+  }
+  function selectAll(selector) {
+    return typeof selector === "string" ? new Selection([document.querySelectorAll(selector)], [document.documentElement]) : new Selection([selector == null ? [] : array(selector)], root);
+  }
+  exports.create = create;
+  exports.creator = creator;
+  exports.local = local;
+  exports.matcher = matcher;
+  exports.namespace = namespace;
+  exports.namespaces = namespaces;
+  exports.pointer = pointer;
+  exports.pointers = pointers;
+  exports.select = select;
+  exports.selectAll = selectAll;
+  exports.selection = selection;
+  exports.selector = selector;
+  exports.selectorAll = selectorAll;
+  exports.style = styleValue;
+  exports.window = defaultView;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"ee4oY":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-transition/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-selection'), require('d3-dispatch'), require('d3-timer'), require('d3-interpolate'), require('d3-color'), require('d3-ease')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-selection', 'd3-dispatch', 'd3-timer', 'd3-interpolate', 'd3-color', 'd3-ease'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3, global.d3, global.d3, global.d3, global.d3, global.d3));
+})(this, function (exports, d3Selection, d3Dispatch, d3Timer, d3Interpolate, d3Color, d3Ease) {
+  "use strict";
+  var emptyOn = d3Dispatch.dispatch("start", "end", "cancel", "interrupt");
+  var emptyTween = [];
+  var CREATED = 0;
+  var SCHEDULED = 1;
+  var STARTING = 2;
+  var STARTED = 3;
+  var RUNNING = 4;
+  var ENDING = 5;
+  var ENDED = 6;
+  function schedule(node, name, id, index, group, timing) {
+    var schedules = node.__transition;
+    if (!schedules) node.__transition = {}; else if ((id in schedules)) return;
+    create(node, id, {
+      name: name,
+      index: index,
+      // For context during callback.
+      group: group,
+      // For context during callback.
+      on: emptyOn,
+      tween: emptyTween,
+      time: timing.time,
+      delay: timing.delay,
+      duration: timing.duration,
+      ease: timing.ease,
+      timer: null,
+      state: CREATED
+    });
+  }
+  function init(node, id) {
+    var schedule = get(node, id);
+    if (schedule.state > CREATED) throw new Error("too late; already scheduled");
+    return schedule;
+  }
+  function set(node, id) {
+    var schedule = get(node, id);
+    if (schedule.state > STARTED) throw new Error("too late; already running");
+    return schedule;
+  }
+  function get(node, id) {
+    var schedule = node.__transition;
+    if (!schedule || !(schedule = schedule[id])) throw new Error("transition not found");
+    return schedule;
+  }
+  function create(node, id, self) {
+    var schedules = node.__transition, tween;
+    // Initialize the self timer when the transition is created.
+    // Note the actual delay is not known until the first callback!
+    schedules[id] = self;
+    self.timer = d3Timer.timer(schedule, 0, self.time);
+    function schedule(elapsed) {
+      self.state = SCHEDULED;
+      self.timer.restart(start, self.delay, self.time);
+      // If the elapsed delay is less than our first sleep, start immediately.
+      if (self.delay <= elapsed) start(elapsed - self.delay);
+    }
+    function start(elapsed) {
+      var i, j, n, o;
+      // If the state is not SCHEDULED, then we previously errored on start.
+      if (self.state !== SCHEDULED) return stop();
+      for (i in schedules) {
+        o = schedules[i];
+        if (o.name !== self.name) continue;
+        // While this element already has a starting transition during this frame,
+        // defer starting an interrupting transition until that transition has a
+        // chance to tick (and possibly end); see d3/d3-transition#54!
+        if (o.state === STARTED) return d3Timer.timeout(start);
+        // Interrupt the active transition, if any.
+        if (o.state === RUNNING) {
+          o.state = ENDED;
+          o.timer.stop();
+          o.on.call("interrupt", node, node.__data__, o.index, o.group);
+          delete schedules[i];
+                  // Cancel any pre-empted transitions.
+} else // Cancel any pre-empted transitions.
+        if (+i < id) {
+          o.state = ENDED;
+          o.timer.stop();
+          o.on.call("cancel", node, node.__data__, o.index, o.group);
+          delete schedules[i];
+        }
+      }
+      // Defer the first tick to end of the current frame; see d3/d3#1576.
+      // Note the transition may be canceled after start and before the first tick!
+      // Note this must be scheduled before the start event; see d3/d3-transition#16!
+      // Assuming this is successful, subsequent callbacks go straight to tick.
+      d3Timer.timeout(function () {
+        if (self.state === STARTED) {
+          self.state = RUNNING;
+          self.timer.restart(tick, self.delay, self.time);
+          tick(elapsed);
+        }
+      });
+      // Dispatch the start event.
+      // Note this must be done before the tween are initialized.
+      self.state = STARTING;
+      self.on.call("start", node, node.__data__, self.index, self.group);
+      if (self.state !== STARTING) return;
+      // interrupted
+      self.state = STARTED;
+      // Initialize the tween, deleting null tween.
+      tween = new Array(n = self.tween.length);
+      for ((i = 0, j = -1); i < n; ++i) {
+        if (o = self.tween[i].value.call(node, node.__data__, self.index, self.group)) {
+          tween[++j] = o;
+        }
+      }
+      tween.length = j + 1;
+    }
+    function tick(elapsed) {
+      var t = elapsed < self.duration ? self.ease.call(null, elapsed / self.duration) : (self.timer.restart(stop), self.state = ENDING, 1), i = -1, n = tween.length;
+      while (++i < n) {
+        tween[i].call(node, t);
+      }
+      // Dispatch the end event.
+      if (self.state === ENDING) {
+        self.on.call("end", node, node.__data__, self.index, self.group);
+        stop();
+      }
+    }
+    function stop() {
+      self.state = ENDED;
+      self.timer.stop();
+      delete schedules[id];
+      for (var i in schedules) return;
+      // eslint-disable-line no-unused-vars
+      delete node.__transition;
+    }
+  }
+  function interrupt(node, name) {
+    var schedules = node.__transition, schedule, active, empty = true, i;
+    if (!schedules) return;
+    name = name == null ? null : name + "";
+    for (i in schedules) {
+      if ((schedule = schedules[i]).name !== name) {
+        empty = false;
+        continue;
+      }
+      active = schedule.state > STARTING && schedule.state < ENDING;
+      schedule.state = ENDED;
+      schedule.timer.stop();
+      schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
+      delete schedules[i];
+    }
+    if (empty) delete node.__transition;
+  }
+  function selection_interrupt(name) {
+    return this.each(function () {
+      interrupt(this, name);
+    });
+  }
+  function tweenRemove(id, name) {
+    var tween0, tween1;
+    return function () {
+      var schedule = set(this, id), tween = schedule.tween;
+      // If this node shared tween with the previous node,
+      // just assign the updated shared tween and we’re done!
+      // Otherwise, copy-on-write.
+      if (tween !== tween0) {
+        tween1 = tween0 = tween;
+        for (var i = 0, n = tween1.length; i < n; ++i) {
+          if (tween1[i].name === name) {
+            tween1 = tween1.slice();
+            tween1.splice(i, 1);
+            break;
+          }
+        }
+      }
+      schedule.tween = tween1;
+    };
+  }
+  function tweenFunction(id, name, value) {
+    var tween0, tween1;
+    if (typeof value !== "function") throw new Error();
+    return function () {
+      var schedule = set(this, id), tween = schedule.tween;
+      // If this node shared tween with the previous node,
+      // just assign the updated shared tween and we’re done!
+      // Otherwise, copy-on-write.
+      if (tween !== tween0) {
+        tween1 = (tween0 = tween).slice();
+        for (var t = {
+          name: name,
+          value: value
+        }, i = 0, n = tween1.length; i < n; ++i) {
+          if (tween1[i].name === name) {
+            tween1[i] = t;
+            break;
+          }
+        }
+        if (i === n) tween1.push(t);
+      }
+      schedule.tween = tween1;
+    };
+  }
+  function transition_tween(name, value) {
+    var id = this._id;
+    name += "";
+    if (arguments.length < 2) {
+      var tween = get(this.node(), id).tween;
+      for (var i = 0, n = tween.length, t; i < n; ++i) {
+        if ((t = tween[i]).name === name) {
+          return t.value;
+        }
+      }
+      return null;
+    }
+    return this.each((value == null ? tweenRemove : tweenFunction)(id, name, value));
+  }
+  function tweenValue(transition, name, value) {
+    var id = transition._id;
+    transition.each(function () {
+      var schedule = set(this, id);
+      (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
+    });
+    return function (node) {
+      return get(node, id).value[name];
+    };
+  }
+  function interpolate(a, b) {
+    var c;
+    return (typeof b === "number" ? d3Interpolate.interpolateNumber : b instanceof d3Color.color ? d3Interpolate.interpolateRgb : (c = d3Color.color(b)) ? (b = c, d3Interpolate.interpolateRgb) : d3Interpolate.interpolateString)(a, b);
+  }
+  function attrRemove(name) {
+    return function () {
+      this.removeAttribute(name);
+    };
+  }
+  function attrRemoveNS(fullname) {
+    return function () {
+      this.removeAttributeNS(fullname.space, fullname.local);
+    };
+  }
+  function attrConstant(name, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function () {
+      var string0 = this.getAttribute(name);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function attrConstantNS(fullname, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function () {
+      var string0 = this.getAttributeNS(fullname.space, fullname.local);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function attrFunction(name, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function () {
+      var string0, value1 = value(this), string1;
+      if (value1 == null) return void this.removeAttribute(name);
+      string0 = this.getAttribute(name);
+      string1 = value1 + "";
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function attrFunctionNS(fullname, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function () {
+      var string0, value1 = value(this), string1;
+      if (value1 == null) return void this.removeAttributeNS(fullname.space, fullname.local);
+      string0 = this.getAttributeNS(fullname.space, fullname.local);
+      string1 = value1 + "";
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function transition_attr(name, value) {
+    var fullname = d3Selection.namespace(name), i = fullname === "transform" ? d3Interpolate.interpolateTransformSvg : interpolate;
+    return this.attrTween(name, typeof value === "function" ? (fullname.local ? attrFunctionNS : attrFunction)(fullname, i, tweenValue(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS : attrRemove)(fullname) : (fullname.local ? attrConstantNS : attrConstant)(fullname, i, value));
+  }
+  function attrInterpolate(name, i) {
+    return function (t) {
+      this.setAttribute(name, i.call(this, t));
+    };
+  }
+  function attrInterpolateNS(fullname, i) {
+    return function (t) {
+      this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+    };
+  }
+  function attrTweenNS(fullname, value) {
+    var t0, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0) t0 = (i0 = i) && attrInterpolateNS(fullname, i);
+      return t0;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function attrTween(name, value) {
+    var t0, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0) t0 = (i0 = i) && attrInterpolate(name, i);
+      return t0;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function transition_attrTween(name, value) {
+    var key = "attr." + name;
+    if (arguments.length < 2) return (key = this.tween(key)) && key._value;
+    if (value == null) return this.tween(key, null);
+    if (typeof value !== "function") throw new Error();
+    var fullname = d3Selection.namespace(name);
+    return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
+  }
+  function delayFunction(id, value) {
+    return function () {
+      init(this, id).delay = +value.apply(this, arguments);
+    };
+  }
+  function delayConstant(id, value) {
+    return (value = +value, function () {
+      init(this, id).delay = value;
+    });
+  }
+  function transition_delay(value) {
+    var id = this._id;
+    return arguments.length ? this.each((typeof value === "function" ? delayFunction : delayConstant)(id, value)) : get(this.node(), id).delay;
+  }
+  function durationFunction(id, value) {
+    return function () {
+      set(this, id).duration = +value.apply(this, arguments);
+    };
+  }
+  function durationConstant(id, value) {
+    return (value = +value, function () {
+      set(this, id).duration = value;
+    });
+  }
+  function transition_duration(value) {
+    var id = this._id;
+    return arguments.length ? this.each((typeof value === "function" ? durationFunction : durationConstant)(id, value)) : get(this.node(), id).duration;
+  }
+  function easeConstant(id, value) {
+    if (typeof value !== "function") throw new Error();
+    return function () {
+      set(this, id).ease = value;
+    };
+  }
+  function transition_ease(value) {
+    var id = this._id;
+    return arguments.length ? this.each(easeConstant(id, value)) : get(this.node(), id).ease;
+  }
+  function easeVarying(id, value) {
+    return function () {
+      var v = value.apply(this, arguments);
+      if (typeof v !== "function") throw new Error();
+      set(this, id).ease = v;
+    };
+  }
+  function transition_easeVarying(value) {
+    if (typeof value !== "function") throw new Error();
+    return this.each(easeVarying(this._id, value));
+  }
+  function transition_filter(match) {
+    if (typeof match !== "function") match = d3Selection.matcher(match);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+        if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+          subgroup.push(node);
+        }
+      }
+    }
+    return new Transition(subgroups, this._parents, this._name, this._id);
+  }
+  function transition_merge(transition) {
+    if (transition._id !== this._id) throw new Error();
+    for (var groups0 = this._groups, groups1 = transition._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+      for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+        if (node = group0[i] || group1[i]) {
+          merge[i] = node;
+        }
+      }
+    }
+    for (; j < m0; ++j) {
+      merges[j] = groups0[j];
+    }
+    return new Transition(merges, this._parents, this._name, this._id);
+  }
+  function start(name) {
+    return (name + "").trim().split(/^|\s+/).every(function (t) {
+      var i = t.indexOf(".");
+      if (i >= 0) t = t.slice(0, i);
+      return !t || t === "start";
+    });
+  }
+  function onFunction(id, name, listener) {
+    var on0, on1, sit = start(name) ? init : set;
+    return function () {
+      var schedule = sit(this, id), on = schedule.on;
+      // If this node shared a dispatch with the previous node,
+      // just assign the updated shared dispatch and we’re done!
+      // Otherwise, copy-on-write.
+      if (on !== on0) (on1 = (on0 = on).copy()).on(name, listener);
+      schedule.on = on1;
+    };
+  }
+  function transition_on(name, listener) {
+    var id = this._id;
+    return arguments.length < 2 ? get(this.node(), id).on.on(name) : this.each(onFunction(id, name, listener));
+  }
+  function removeFunction(id) {
+    return function () {
+      var parent = this.parentNode;
+      for (var i in this.__transition) if (+i !== id) return;
+      if (parent) parent.removeChild(this);
+    };
+  }
+  function transition_remove() {
+    return this.on("end.remove", removeFunction(this._id));
+  }
+  function transition_select(select) {
+    var name = this._name, id = this._id;
+    if (typeof select !== "function") select = d3Selection.selector(select);
+    for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+        if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+          if (("__data__" in node)) subnode.__data__ = node.__data__;
+          subgroup[i] = subnode;
+          schedule(subgroup[i], name, id, i, subgroup, get(node, id));
+        }
+      }
+    }
+    return new Transition(subgroups, this._parents, name, id);
+  }
+  function transition_selectAll(select) {
+    var name = this._name, id = this._id;
+    if (typeof select !== "function") select = d3Selection.selectorAll(select);
+    for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          for (var children = select.call(node, node.__data__, i, group), child, inherit = get(node, id), k = 0, l = children.length; k < l; ++k) {
+            if (child = children[k]) {
+              schedule(child, name, id, k, children, inherit);
+            }
+          }
+          subgroups.push(children);
+          parents.push(node);
+        }
+      }
+    }
+    return new Transition(subgroups, parents, name, id);
+  }
+  var Selection = d3Selection.selection.prototype.constructor;
+  function transition_selection() {
+    return new Selection(this._groups, this._parents);
+  }
+  function styleNull(name, interpolate) {
+    var string00, string10, interpolate0;
+    return function () {
+      var string0 = d3Selection.style(this, name), string1 = (this.style.removeProperty(name), d3Selection.style(this, name));
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : interpolate0 = interpolate(string00 = string0, string10 = string1);
+    };
+  }
+  function styleRemove(name) {
+    return function () {
+      this.style.removeProperty(name);
+    };
+  }
+  function styleConstant(name, interpolate, value1) {
+    var string00, string1 = value1 + "", interpolate0;
+    return function () {
+      var string0 = d3Selection.style(this, name);
+      return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
+    };
+  }
+  function styleFunction(name, interpolate, value) {
+    var string00, string10, interpolate0;
+    return function () {
+      var string0 = d3Selection.style(this, name), value1 = value(this), string1 = value1 + "";
+      if (value1 == null) string1 = value1 = (this.style.removeProperty(name), d3Selection.style(this, name));
+      return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+    };
+  }
+  function styleMaybeRemove(id, name) {
+    var on0, on1, listener0, key = "style." + name, event = "end." + key, remove;
+    return function () {
+      var schedule = set(this, id), on = schedule.on, listener = schedule.value[key] == null ? remove || (remove = styleRemove(name)) : undefined;
+      // If this node shared a dispatch with the previous node,
+      // just assign the updated shared dispatch and we’re done!
+      // Otherwise, copy-on-write.
+      if (on !== on0 || listener0 !== listener) (on1 = (on0 = on).copy()).on(event, listener0 = listener);
+      schedule.on = on1;
+    };
+  }
+  function transition_style(name, value, priority) {
+    var i = (name += "") === "transform" ? d3Interpolate.interpolateTransformCss : interpolate;
+    return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove(name)) : typeof value === "function" ? this.styleTween(name, styleFunction(name, i, tweenValue(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant(name, i, value), priority).on("end.style." + name, null);
+  }
+  function styleInterpolate(name, i, priority) {
+    return function (t) {
+      this.style.setProperty(name, i.call(this, t), priority);
+    };
+  }
+  function styleTween(name, value, priority) {
+    var t, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0) t = (i0 = i) && styleInterpolate(name, i, priority);
+      return t;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function transition_styleTween(name, value, priority) {
+    var key = "style." + (name += "");
+    if (arguments.length < 2) return (key = this.tween(key)) && key._value;
+    if (value == null) return this.tween(key, null);
+    if (typeof value !== "function") throw new Error();
+    return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
+  }
+  function textConstant(value) {
+    return function () {
+      this.textContent = value;
+    };
+  }
+  function textFunction(value) {
+    return function () {
+      var value1 = value(this);
+      this.textContent = value1 == null ? "" : value1;
+    };
+  }
+  function transition_text(value) {
+    return this.tween("text", typeof value === "function" ? textFunction(tweenValue(this, "text", value)) : textConstant(value == null ? "" : value + ""));
+  }
+  function textInterpolate(i) {
+    return function (t) {
+      this.textContent = i.call(this, t);
+    };
+  }
+  function textTween(value) {
+    var t0, i0;
+    function tween() {
+      var i = value.apply(this, arguments);
+      if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
+      return t0;
+    }
+    tween._value = value;
+    return tween;
+  }
+  function transition_textTween(value) {
+    var key = "text";
+    if (arguments.length < 1) return (key = this.tween(key)) && key._value;
+    if (value == null) return this.tween(key, null);
+    if (typeof value !== "function") throw new Error();
+    return this.tween(key, textTween(value));
+  }
+  function transition_transition() {
+    var name = this._name, id0 = this._id, id1 = newId();
+    for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          var inherit = get(node, id0);
+          schedule(node, name, id1, i, group, {
+            time: inherit.time + inherit.delay + inherit.duration,
+            delay: 0,
+            duration: inherit.duration,
+            ease: inherit.ease
+          });
+        }
+      }
+    }
+    return new Transition(groups, this._parents, name, id1);
+  }
+  function transition_end() {
+    var on0, on1, that = this, id = that._id, size = that.size();
+    return new Promise(function (resolve, reject) {
+      var cancel = {
+        value: reject
+      }, end = {
+        value: function () {
+          if (--size === 0) resolve();
+        }
+      };
+      that.each(function () {
+        var schedule = set(this, id), on = schedule.on;
+        // If this node shared a dispatch with the previous node,
+        // just assign the updated shared dispatch and we’re done!
+        // Otherwise, copy-on-write.
+        if (on !== on0) {
+          on1 = (on0 = on).copy();
+          on1._.cancel.push(cancel);
+          on1._.interrupt.push(cancel);
+          on1._.end.push(end);
+        }
+        schedule.on = on1;
+      });
+      // The selection was empty, resolve end immediately
+      if (size === 0) resolve();
+    });
+  }
+  var id = 0;
+  function Transition(groups, parents, name, id) {
+    this._groups = groups;
+    this._parents = parents;
+    this._name = name;
+    this._id = id;
+  }
+  function transition(name) {
+    return d3Selection.selection().transition(name);
+  }
+  function newId() {
+    return ++id;
+  }
+  var selection_prototype = d3Selection.selection.prototype;
+  Transition.prototype = transition.prototype = {
+    constructor: Transition,
+    select: transition_select,
+    selectAll: transition_selectAll,
+    filter: transition_filter,
+    merge: transition_merge,
+    selection: transition_selection,
+    transition: transition_transition,
+    call: selection_prototype.call,
+    nodes: selection_prototype.nodes,
+    node: selection_prototype.node,
+    size: selection_prototype.size,
+    empty: selection_prototype.empty,
+    each: selection_prototype.each,
+    on: transition_on,
+    attr: transition_attr,
+    attrTween: transition_attrTween,
+    style: transition_style,
+    styleTween: transition_styleTween,
+    text: transition_text,
+    textTween: transition_textTween,
+    remove: transition_remove,
+    tween: transition_tween,
+    delay: transition_delay,
+    duration: transition_duration,
+    ease: transition_ease,
+    easeVarying: transition_easeVarying,
+    end: transition_end,
+    [Symbol.iterator]: selection_prototype[Symbol.iterator]
+  };
+  var defaultTiming = {
+    time: null,
+    // Set on use.
+    delay: 0,
+    duration: 250,
+    ease: d3Ease.easeCubicInOut
+  };
+  function inherit(node, id) {
+    var timing;
+    while (!(timing = node.__transition) || !(timing = timing[id])) {
+      if (!(node = node.parentNode)) {
+        throw new Error(`transition ${id} not found`);
+      }
+    }
+    return timing;
+  }
+  function selection_transition(name) {
+    var id, timing;
+    if (name instanceof Transition) {
+      (id = name._id, name = name._name);
+    } else {
+      (id = newId(), (timing = defaultTiming).time = d3Timer.now(), name = name == null ? null : name + "");
+    }
+    for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+      for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+        if (node = group[i]) {
+          schedule(node, name, id, i, group, timing || inherit(node, id));
+        }
+      }
+    }
+    return new Transition(groups, this._parents, name, id);
+  }
+  d3Selection.selection.prototype.interrupt = selection_interrupt;
+  d3Selection.selection.prototype.transition = selection_transition;
+  var root = [null];
+  function active(node, name) {
+    var schedules = node.__transition, schedule, i;
+    if (schedules) {
+      name = name == null ? null : name + "";
+      for (i in schedules) {
+        if ((schedule = schedules[i]).state > SCHEDULED && schedule.name === name) {
+          return new Transition([[node]], root, name, +i);
+        }
+      }
+    }
+    return null;
+  }
+  exports.active = active;
+  exports.interrupt = interrupt;
+  exports.transition = transition;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-selection":"1RFAz","d3-dispatch":"6ygE0","d3-timer":"6ZuUH","d3-interpolate":"6eByj","d3-color":"3mmqs","d3-ease":"3jKwm"}],"6ZuUH":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-timer/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  var frame = 0, // is an animation frame pending?
+  timeout = 0, // is a timeout pending?
+  interval = 0, // are any timers active?
+  pokeDelay = 1000, // how frequently we check for clock skew
+  taskHead, taskTail, clockLast = 0, clockNow = 0, clockSkew = 0, clock = typeof performance === "object" && performance.now ? performance : Date, setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function (f) {
+    setTimeout(f, 17);
+  };
+  function now() {
+    return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
+  }
+  function clearNow() {
+    clockNow = 0;
+  }
+  function Timer() {
+    this._call = this._time = this._next = null;
+  }
+  Timer.prototype = timer.prototype = {
+    constructor: Timer,
+    restart: function (callback, delay, time) {
+      if (typeof callback !== "function") throw new TypeError("callback is not a function");
+      time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
+      if (!this._next && taskTail !== this) {
+        if (taskTail) taskTail._next = this; else taskHead = this;
+        taskTail = this;
+      }
+      this._call = callback;
+      this._time = time;
+      sleep();
+    },
+    stop: function () {
+      if (this._call) {
+        this._call = null;
+        this._time = Infinity;
+        sleep();
+      }
+    }
+  };
+  function timer(callback, delay, time) {
+    var t = new Timer();
+    t.restart(callback, delay, time);
+    return t;
+  }
+  function timerFlush() {
+    now();
+    // Get the current time, if not already set.
+    ++frame;
+    // Pretend we’ve set an alarm, if we haven’t already.
+    var t = taskHead, e;
+    while (t) {
+      if ((e = clockNow - t._time) >= 0) t._call.call(null, e);
+      t = t._next;
+    }
+    --frame;
+  }
+  function wake() {
+    clockNow = (clockLast = clock.now()) + clockSkew;
+    frame = timeout = 0;
+    try {
+      timerFlush();
+    } finally {
+      frame = 0;
+      nap();
+      clockNow = 0;
+    }
+  }
+  function poke() {
+    var now = clock.now(), delay = now - clockLast;
+    if (delay > pokeDelay) (clockSkew -= delay, clockLast = now);
+  }
+  function nap() {
+    var t0, t1 = taskHead, t2, time = Infinity;
+    while (t1) {
+      if (t1._call) {
+        if (time > t1._time) time = t1._time;
+        (t0 = t1, t1 = t1._next);
+      } else {
+        (t2 = t1._next, t1._next = null);
+        t1 = t0 ? t0._next = t2 : taskHead = t2;
+      }
+    }
+    taskTail = t0;
+    sleep(time);
+  }
+  function sleep(time) {
+    if (frame) return;
+    // Soonest alarm already set, or will be.
+    if (timeout) timeout = clearTimeout(timeout);
+    var delay = time - clockNow;
+    // Strictly less than if we recomputed clockNow.
+    if (delay > 24) {
+      if (time < Infinity) timeout = setTimeout(wake, time - clock.now() - clockSkew);
+      if (interval) interval = clearInterval(interval);
+    } else {
+      if (!interval) (clockLast = clock.now(), interval = setInterval(poke, pokeDelay));
+      (frame = 1, setFrame(wake));
+    }
+  }
+  function timeout$1(callback, delay, time) {
+    var t = new Timer();
+    delay = delay == null ? 0 : +delay;
+    t.restart(elapsed => {
+      t.stop();
+      callback(elapsed + delay);
+    }, delay, time);
+    return t;
+  }
+  function interval$1(callback, delay, time) {
+    var t = new Timer(), total = delay;
+    if (delay == null) return (t.restart(callback, delay, time), t);
+    t._restart = t.restart;
+    t.restart = function (callback, delay, time) {
+      (delay = +delay, time = time == null ? now() : +time);
+      t._restart(function tick(elapsed) {
+        elapsed += total;
+        t._restart(tick, total += delay, time);
+        callback(elapsed);
+      }, delay, time);
+    };
+    t.restart(callback, delay, time);
+    return t;
+  }
+  exports.interval = interval$1;
+  exports.now = now;
+  exports.timeout = timeout$1;
+  exports.timer = timer;
+  exports.timerFlush = timerFlush;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"3jKwm":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-ease/ v2.0.0 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  const linear = t => +t;
+  function quadIn(t) {
+    return t * t;
+  }
+  function quadOut(t) {
+    return t * (2 - t);
+  }
+  function quadInOut(t) {
+    return ((t *= 2) <= 1 ? t * t : --t * (2 - t) + 1) / 2;
+  }
+  function cubicIn(t) {
+    return t * t * t;
+  }
+  function cubicOut(t) {
+    return --t * t * t + 1;
+  }
+  function cubicInOut(t) {
+    return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
+  }
+  var exponent = 3;
+  var polyIn = (function custom(e) {
+    e = +e;
+    function polyIn(t) {
+      return Math.pow(t, e);
+    }
+    polyIn.exponent = custom;
+    return polyIn;
+  })(exponent);
+  var polyOut = (function custom(e) {
+    e = +e;
+    function polyOut(t) {
+      return 1 - Math.pow(1 - t, e);
+    }
+    polyOut.exponent = custom;
+    return polyOut;
+  })(exponent);
+  var polyInOut = (function custom(e) {
+    e = +e;
+    function polyInOut(t) {
+      return ((t *= 2) <= 1 ? Math.pow(t, e) : 2 - Math.pow(2 - t, e)) / 2;
+    }
+    polyInOut.exponent = custom;
+    return polyInOut;
+  })(exponent);
+  var pi = Math.PI, halfPi = pi / 2;
+  function sinIn(t) {
+    return +t === 1 ? 1 : 1 - Math.cos(t * halfPi);
+  }
+  function sinOut(t) {
+    return Math.sin(t * halfPi);
+  }
+  function sinInOut(t) {
+    return (1 - Math.cos(pi * t)) / 2;
+  }
+  // tpmt is two power minus ten times t scaled to [0,1]
+  function tpmt(x) {
+    return (Math.pow(2, -10 * x) - 0.0009765625) * 1.0009775171065494;
+  }
+  function expIn(t) {
+    return tpmt(1 - +t);
+  }
+  function expOut(t) {
+    return 1 - tpmt(t);
+  }
+  function expInOut(t) {
+    return ((t *= 2) <= 1 ? tpmt(1 - t) : 2 - tpmt(t - 1)) / 2;
+  }
+  function circleIn(t) {
+    return 1 - Math.sqrt(1 - t * t);
+  }
+  function circleOut(t) {
+    return Math.sqrt(1 - --t * t);
+  }
+  function circleInOut(t) {
+    return ((t *= 2) <= 1 ? 1 - Math.sqrt(1 - t * t) : Math.sqrt(1 - (t -= 2) * t) + 1) / 2;
+  }
+  var b1 = 4 / 11, b2 = 6 / 11, b3 = 8 / 11, b4 = 3 / 4, b5 = 9 / 11, b6 = 10 / 11, b7 = 15 / 16, b8 = 21 / 22, b9 = 63 / 64, b0 = 1 / b1 / b1;
+  function bounceIn(t) {
+    return 1 - bounceOut(1 - t);
+  }
+  function bounceOut(t) {
+    return (t = +t) < b1 ? b0 * t * t : t < b3 ? b0 * (t -= b2) * t + b4 : t < b6 ? b0 * (t -= b5) * t + b7 : b0 * (t -= b8) * t + b9;
+  }
+  function bounceInOut(t) {
+    return ((t *= 2) <= 1 ? 1 - bounceOut(1 - t) : bounceOut(t - 1) + 1) / 2;
+  }
+  var overshoot = 1.70158;
+  var backIn = (function custom(s) {
+    s = +s;
+    function backIn(t) {
+      return (t = +t) * t * (s * (t - 1) + t);
+    }
+    backIn.overshoot = custom;
+    return backIn;
+  })(overshoot);
+  var backOut = (function custom(s) {
+    s = +s;
+    function backOut(t) {
+      return --t * t * ((t + 1) * s + t) + 1;
+    }
+    backOut.overshoot = custom;
+    return backOut;
+  })(overshoot);
+  var backInOut = (function custom(s) {
+    s = +s;
+    function backInOut(t) {
+      return ((t *= 2) < 1 ? t * t * ((s + 1) * t - s) : (t -= 2) * t * ((s + 1) * t + s) + 2) / 2;
+    }
+    backInOut.overshoot = custom;
+    return backInOut;
+  })(overshoot);
+  var tau = 2 * Math.PI, amplitude = 1, period = 0.3;
+  var elasticIn = (function custom(a, p) {
+    var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
+    function elasticIn(t) {
+      return a * tpmt(- --t) * Math.sin((s - t) / p);
+    }
+    elasticIn.amplitude = function (a) {
+      return custom(a, p * tau);
+    };
+    elasticIn.period = function (p) {
+      return custom(a, p);
+    };
+    return elasticIn;
+  })(amplitude, period);
+  var elasticOut = (function custom(a, p) {
+    var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
+    function elasticOut(t) {
+      return 1 - a * tpmt(t = +t) * Math.sin((t + s) / p);
+    }
+    elasticOut.amplitude = function (a) {
+      return custom(a, p * tau);
+    };
+    elasticOut.period = function (p) {
+      return custom(a, p);
+    };
+    return elasticOut;
+  })(amplitude, period);
+  var elasticInOut = (function custom(a, p) {
+    var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
+    function elasticInOut(t) {
+      return ((t = t * 2 - 1) < 0 ? a * tpmt(-t) * Math.sin((s - t) / p) : 2 - a * tpmt(t) * Math.sin((s + t) / p)) / 2;
+    }
+    elasticInOut.amplitude = function (a) {
+      return custom(a, p * tau);
+    };
+    elasticInOut.period = function (p) {
+      return custom(a, p);
+    };
+    return elasticInOut;
+  })(amplitude, period);
+  exports.easeBack = backInOut;
+  exports.easeBackIn = backIn;
+  exports.easeBackInOut = backInOut;
+  exports.easeBackOut = backOut;
+  exports.easeBounce = bounceOut;
+  exports.easeBounceIn = bounceIn;
+  exports.easeBounceInOut = bounceInOut;
+  exports.easeBounceOut = bounceOut;
+  exports.easeCircle = circleInOut;
+  exports.easeCircleIn = circleIn;
+  exports.easeCircleInOut = circleInOut;
+  exports.easeCircleOut = circleOut;
+  exports.easeCubic = cubicInOut;
+  exports.easeCubicIn = cubicIn;
+  exports.easeCubicInOut = cubicInOut;
+  exports.easeCubicOut = cubicOut;
+  exports.easeElastic = elasticOut;
+  exports.easeElasticIn = elasticIn;
+  exports.easeElasticInOut = elasticInOut;
+  exports.easeElasticOut = elasticOut;
+  exports.easeExp = expInOut;
+  exports.easeExpIn = expIn;
+  exports.easeExpInOut = expInOut;
+  exports.easeExpOut = expOut;
+  exports.easeLinear = linear;
+  exports.easePoly = polyInOut;
+  exports.easePolyIn = polyIn;
+  exports.easePolyInOut = polyInOut;
+  exports.easePolyOut = polyOut;
+  exports.easeQuad = quadInOut;
+  exports.easeQuadIn = quadIn;
+  exports.easeQuadInOut = quadInOut;
+  exports.easeQuadOut = quadOut;
+  exports.easeSin = sinInOut;
+  exports.easeSinIn = sinIn;
+  exports.easeSinInOut = sinInOut;
+  exports.easeSinOut = sinOut;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
