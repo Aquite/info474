@@ -20,6 +20,7 @@ var ErrInvalidScheme = errors.New("authorization scheme not supported")
 func BeginSession(signingKey string, store Store, sessionState interface{}, w http.ResponseWriter) (SessionID, error) {
 	//TODO:
 	//- create a new SessionID
+
 	//- save the sessionState to the store
 	//- add a header to the ResponseWriter that looks like this:
 	//    "Authorization: Bearer <sessionID>"
