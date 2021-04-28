@@ -1,4 +1,4 @@
-24483
+24479
 111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-minify-font-values\node_modules\chalk\templates.js121436361000000000 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-overlays\cjs\manageAriaHidden.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\symbol\to-primitive.js121436361000000000 0
@@ -10,7 +10,7 @@
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-colormin\node_modules\supports-color\index.js121436361000000000 0
 63C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\randomfill132636079397739153 1
 86C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\purgecss\node_modules\postcss\lib132636079282881240 1
-44C:\Users\Pavel\Desktop\INFO\474\info474\dist132640596860121222 1
+44C:\Users\Pavel\Desktop\INFO\474\info474\dist132640602654252265 1
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\cssesc\LICENSE-MIT.txt121436361000000000 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\number\parse-float.js121436361000000000 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\relateurl\lib\relate132636079285661237 1
@@ -91,7 +91,7 @@
 78C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\http-signature\CHANGES.md131480975920000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\is-generator-function\package.json132636079411412015 0
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\caniuse-lite\data\features\upgradeinsecurerequests.js121436361000000000 0
-44C:\Users\Pavel\Desktop\INFO\474\info474\docs132639749444257029 1
+44C:\Users\Pavel\Desktop\INFO\474\info474\docs132640596860121222 1
 110C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-normalize-display-values\node_modules\ansi-styles132636079401889148 1
 119C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\unset-value\node_modules\has-value\node_modules\isobject\README.md131060918360000000 0
 96C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\triggerBrowserReflow.js121436361000000000 0
@@ -141,7 +141,7 @@
 61C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\asynckit132636079419061967 1
 70C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\resolve\.eslintrc121436361000000000 0
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-transition\src\transition132640355488351703 1
-50C:\Users\Pavel\Desktop\INFO\474\info474\src\App.js132636114171599882 0
+50C:\Users\Pavel\Desktop\INFO\474\info474\src\App.js132640601736554388 0
 89C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-svgo\node_modules\color-name132636079399379158 1
 94C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\uncss\node_modules\postcss\lib\comment.js121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\core\src\Transformation.js121436361000000000 0
@@ -214,7 +214,7 @@
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\constants-browserify132636079417731946 1
 101C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\http-proxy\lib\http-proxy\passes\web-incoming.js121436361000000000 0
 77C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\querystring\CHANGELOG.md121436361000000000 0
-53C:\Users\Pavel\Desktop\INFO\474\info474\src\Header.js132636120961630725 0
+53C:\Users\Pavel\Desktop\INFO\474\info474\src\Header.js132640599570532601 0
 79C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\watcher\index.d.ts121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-discard-comments\README.md121436361000000000 0
 100C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-modules-values\node_modules\chalk\types132636079289461230 1
@@ -5209,6 +5209,7 @@
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\constants-browserify\test.js130812848470000000 0
 96C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\topojson-client\dist\topojson-client.min.js121436361000000000 0
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\topojson-client\bin\topo2geo121436361000000000 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.0a2b66e4.js132640602653932294 0
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\topojson-client\bin\topomerge121436361000000000 0
 83C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\cjs\Tooltip.js121436361000000000 0
 85C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\topojson-client\bin\topoquantize121436361000000000 0
@@ -9084,7 +9085,7 @@
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\ProgressBar.js121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\typed-array\join.js121436361000000000 0
 62C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\debug\src132636079300938136 1
-63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css132639718609035919 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css132640592371272732 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\array132636079326678123 1
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\ResponsiveEmbed.js121436361000000000 0
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\Row.d.ts121436361000000000 0
@@ -15933,7 +15934,7 @@
 109C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\css-modules-loader-core\node_modules\postcss\lib\node.js131386303530000000 0
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema-traverse\spec\index.spec.js131702816850000000 0
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-format\locale\ar-EH.json121436361000000000 0
-55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132639749444087014 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132640596859891208 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-00132636079306238131 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-01132636079303388119 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-03132636079305008142 1
@@ -16252,7 +16253,6 @@
 118C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\css-modules-loader-core\node_modules\source-map\lib\base64-vlq.js131369414910000000 0
 99C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\jsdom\lib\jsdom\living\generated\InputEvent.js121436361000000000 0
 95C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\es-abstract\2019\RequireObjectCoercible.js121436361000000000 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.57ceabc3.js.map132640596860111222 0
 103C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\jsdom\lib\jsdom\living\generated\InputEventInit.js121436361000000000 0
 88C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-transition\src\transition\end.js132426849630000000 0
 86C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\runtime-react-refresh\src132636079284721232 1
@@ -20075,7 +20075,7 @@
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\modules\es.string.trim-end.js121436361000000000 0
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@types\react\README.md132595873370000000 0
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\modules\es.string.trim-start.js121436361000000000 0
-67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.498c2a87.css.map132639749444217040 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.498c2a87.css.map132640596860011197 0
 102C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\modules\es.symbol.is-concat-spreadable.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\modules\es.symbol.iterator.js121436361000000000 0
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\modules\es.symbol.js121436361000000000 0
@@ -22052,7 +22052,6 @@
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-unique\README.md131144862750000000 0
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-filter\.npmignore130764193040000000 0
 77C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-filter\.travis.yml130764193040000000 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.5a204971.js.map132639749444237037 0
 74C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-filter\index.js130764194370000000 0
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-filter\README.md130764193040000000 0
 70C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\array-filter\test132636079315508121 1
@@ -24469,16 +24468,13 @@
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uncss.ps1132636079427981963 0
 66C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uuid.ps1132636079427541948 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\which.ps1132636079427631968 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132639746927169924 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132639746927229921 0
-63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.498c2a87.css132639749444127033 0
-67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132639746927179938 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.5a204971.js132639749444127033 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js132640592371502734 0
-66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js.map132640592371582756 0
-63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css132640596859931216 0
-67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css.map132640596860011197 0
-63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css132640592371272732 0
-67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css.map132640592371422740 0
-62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.57ceabc3.js132640596859961188 0
-55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132640596859891208 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132640592371502734 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132640592371582756 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.498c2a87.css132640596859931216 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132640592371422740 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.57ceabc3.js132640596859961188 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.57ceabc3.js.map132640596860111222 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.0a2b66e4.js.map132640602654142265 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css132640602653892269 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css.map132640602654062305 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132640602653832289 0
