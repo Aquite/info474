@@ -44,7 +44,7 @@ func GetSessionID(r *http.Request, signingKey string) (SessionID, error) {
 	reqToken = splitToken[1]
 	err := rs.Get(reqToken)
 	// idk how to do the query string part
-	sessionID, error := ValidateID(token, signingKey)
+	sessionID, error := ValidateID(reqToken, signingKey)
 	if error != nil {
 		return InvalidSessionID, error
 	}
