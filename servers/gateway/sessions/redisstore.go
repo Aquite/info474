@@ -65,8 +65,6 @@ func (rs *RedisStore) Get(sid SessionID, sessionState interface{}) error {
 	//for extra-credit using the Pipeline feature of the redis
 	//package to do both the get and the reset of the expiry time
 	//in just one network round trip!
-
-	return nil
 }
 
 //Delete deletes all state data associated with the SessionID from the store.
