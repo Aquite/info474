@@ -221,7 +221,6 @@ const Assignment2 = () => {
       ),
     ])
     .range([0, s - m * 2]);
-  console.log(bucketsForce);
   // Visualization Eight: Choropleth
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -733,7 +732,7 @@ const Assignment2 = () => {
                   fontFamily: "Gill Sans, sans serif",
                 }}
               >
-                Change from 1997-2017
+                Change from 1991-2017
               </text>
               {bucketsForce.map((bin, i) => {
                 const highlight = i < 12;
