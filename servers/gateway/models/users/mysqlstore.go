@@ -2,8 +2,6 @@ package users
 
 import (
 	"database/sql"
-	"fmt"
-	"os"
 )
 
 type SQLStore struct {
@@ -14,76 +12,73 @@ func NewSQLStore(DB *sql.DB) *SQLStore {
 	return &SQLStore{db: DB}
 }
 
-func GetByID(id int64) (*User, error) {
-	q := "select * from users where id = ?"
-	rows, err := db.Query(q, id)
-	defer rows.Close()
+func (sq *SQLStore) GetByID(id int64) (*User, error) {
+	q := "select * from Users where id=?"
+	res, err := sq.db.Query(q, id)
 	if err != nil {
 		return nil, err
 	}
 	var newUser User
 	for res.Next() {
-		res.Scan(&newUser.ID, &newUser.Email, &newUser.UserName, &newUser.PassHash, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
+		res.Scan(&newUser.ID, &newUser.Email, &newUser.PassHash, &newUser.UserName, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
 	}
 	return &newUser, err
 }
 
-func GetByEmail(email string) (*User, error) {
-	q := "select * from users where email = ?"
-	rows, err := db.Query(q, email)
+func (sq *SQLStore) GetByEmail(email string) (*User, error) {
+	q := "select * from Users where email=?"
+	res, err := sq.db.Query(q, email)
 	if err != nil {
 		return nil, err
 	}
 	var newUser User
 	for res.Next() {
-		res.Scan(&newUser.ID, &newUser.Email, &newUser.UserName, &newUser.PassHash, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
-	}
-	return &newUesr, err
-}
-
-func GetByUserName(username string) (*User, error) {
-	q := "select * from users where username=?"
-	res, err := db.Query(q, username)
-	if err != nil {
-		return nil, err
-	}
-	var newUser User
-	for res.Next() {
-		res.Scan(&newUser.ID, &newUser.Email, &newUser.UserName, &newUser.PassHash, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
+		res.Scan(&newUser.ID, &newUser.Email, &newUser.PassHash, &newUser.UserName, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
 	}
 	return &newUser, err
 }
 
-func Insert(user *User) (*User, error) {
-	q := "insert into users(Email, UserName, PassHash, FirstName, LastName, PhotoURL) values (?,?,?,?,?,?)"
-	res, err := db.Exec(q, user.ID, user.Email, user.UserName, user.PassHash, user.FirstName, user.LastName, user.PhotoURL)
+func (sq *SQLStore) GetByUserName(username string) (*User, error) {
+	q := "select * from Users where username=?"
+	res, err := sq.db.Query(q, username)
 	if err != nil {
-		fmt.Printf("error inserting new row: %v\n", err)
 		return nil, err
 	}
-	//get the auto-assigned ID for the new row
+	var newUser User
+	for res.Next() {
+		res.Scan(&newUser.ID, &newUser.Email, &newUser.PassHash, &newUser.UserName, &newUser.FirstName, &newUser.LastName, &newUser.PhotoURL)
+	}
+	return &newUser, err
+}
+
+func (sq *SQLStore) Insert(user *User) (*User, error) {
+	q := "insert into Users(Email, PassHash, UserName, FirstName, LastName, PhotoURL) values (?,?,?,?,?,?)"
+	res, err := sq.db.Exec(q, user.Email, user.PassHash, user.UserName, user.FirstName, user.LastName, user.PhotoURL)
+	if err != nil {
+		return nil, err
+	}
+
 	id, err2 := res.LastInsertId()
 	if err2 != nil {
-		fmt.Printf("error getting new ID: %v\n", id)
 		return nil, err2
 	}
-	return GetByID(id)
+	return sq.GetByID(id)
 }
 
-func Update(id int64, updates *Updates) (*User, error) {
-	q := "update users set FirstName = ?, LastName = ? where id = ?"
-	_, err := db.Exec(q, updates.FirstName, updates.LastName, id)
+func (sq *SQLStore) Update(id int64, updates *Updates) (*User, error) {
+	q := "update Users set FirstName = ?, LastName = ? where id = ?"
+	_, err := sq.db.Exec(q, updates.FirstName, updates.LastName, id)
 	if err != nil {
-		return nil, errors.New("error updating user")
+		return nil, err
 	}
-	return return GetByID(id)
+	return sq.GetByID(id)
 }
 
-func Delete(id int64) error {
-	q := "delete from users where id = ?"
-	_, err := db.Exec(q, id)
+func (sq *SQLStore) Delete(id int64) error {
+	q := "delete from Users where id = ?"
+	_, err := sq.db.Exec(q, id)
 	if err != nil {
-		return errors.New("unable to delete user")
+		return err
 	}
 	return nil
 }

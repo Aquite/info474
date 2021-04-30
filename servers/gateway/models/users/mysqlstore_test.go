@@ -2,6 +2,7 @@ package users
 
 import (
 	"reflect"
+	"regexp"
 	"testing"
 
 	"github.com/DATA-DOG/go-sqlmock"
@@ -83,7 +84,7 @@ func TestGetByID(t *testing.T) {
 		)
 
 		// TODO: update to match the query used in your Store implementation
-		query := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where id=?"
+		query := regexp.QuoteMeta("select * from Users where id=?")
 
 		if c.expectError {
 			// Set up expected query that will expect an error
@@ -177,7 +178,7 @@ func TestGetByEmail(t *testing.T) {
 		)
 
 		// TODO: update to match the query used in your Store implementation
-		query := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where email=?"
+		query := regexp.QuoteMeta("select * from Users where email=?")
 
 		if c.expectError {
 			// Set up expected query that will expect an error
@@ -271,7 +272,7 @@ func TestGetByUserName(t *testing.T) {
 		)
 
 		// TODO: update to match the query used in your Store implementation
-		query := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where username=?"
+		query := regexp.QuoteMeta("select * from Users where username=?")
 
 		if c.expectError {
 			// Set up expected query that will expect an error
@@ -309,11 +310,11 @@ func TestInsert(t *testing.T) {
 	cases := []struct {
 		name         string
 		expectedUser *User
-		nameToGet   string
+		insertedUser *User
 		expectError  bool
 	}{
 		{
-			"User Found",
+			"Insert Successful",
 			&User{
 				1,
 				"test@test.com",
@@ -323,13 +324,37 @@ func TestInsert(t *testing.T) {
 				"lastname",
 				"photourl",
 			},
-			"username",
+			&User{
+				1,
+				"test@test.com",
+				[]byte("passhash123"),
+				"username",
+				"firstname",
+				"lastname",
+				"photourl",
+			},
 			false,
 		},
 		{
-			"User Not Found",
-			&User{},
-			"james",
+			"Inserted bad data",
+			&User{
+				1,
+				"test@test.com",
+				[]byte("passhash123"),
+				"username",
+				"firstname",
+				"lastname",
+				"photourl",
+			},
+			&User{
+				2,
+				"jotaro@kujo.com",
+				[]byte("koichimyonlyson"),
+				"dolphin_lover_69",
+				"Jotaro",
+				"Kujo",
+				"photourl",
+			},
 			true,
 		},
 	}
@@ -342,11 +367,10 @@ func TestInsert(t *testing.T) {
 		}
 		defer db.Close()
 
-		// TODO: update based on the name of your type struct
 		mainSQLStore := &SQLStore{db}
 
 		// Create an expected row to the mock DB
-		row := mock.NewRows([]string{
+		/*row := mock.NewRows([]string{
 			"ID",
 			"Email",
 			"PassHash",
@@ -362,26 +386,25 @@ func TestInsert(t *testing.T) {
 			c.expectedUser.FirstName,
 			c.expectedUser.LastName,
 			c.expectedUser.PhotoURL,
-		)
+		)*/
 
-		// TODO: update to match the query used in your Store implementation
-		query := "select id,email,passHash,username,firstName,lastName,photoUrl from Users where username=?"
+		query := "insert into Users(Email, PassHash, UserName, FirstName, LastName, PhotoURL) values (?,?,?,?,?,?)"
 
 		if c.expectError {
-			// Set up expected query that will expect an error
-			mock.ExpectQuery(query).WithArgs(c.nameToGet).WillReturnError(ErrUserNotFound)
+			/*// Set up expected query that will expect an error
+			mock.ExpectQuery(query).WithArgs(c.expectedUser).WillReturnError(ErrUserNotFound)
 
-			// Test GetByName()
-			user, err := mainSQLStore.GetByUserName(c.nameToGet)
+			// Test Insert()
+			user, err := mainSQLStore.Insert(c.expectedUser)
 			if user != nil || err == nil {
 				t.Errorf("Expected error [%v] but got [%v] instead", ErrUserNotFound, err)
-			}
+			}*/
 		} else {
 			// Set up an expected query with the expected row from the mock DB
-			mock.ExpectQuery(query).WithArgs(c.nameToGet).WillReturnRows(row)
+			mock.ExpectQuery(query).WithArgs(c.insertedUser)
 
 			// Test GetByUserName()
-			user, err := mainSQLStore.GetByUserName(c.nameToGet)
+			user, err := mainSQLStore.Insert(c.insertedUser)
 			if err != nil {
 				t.Errorf("Unexpected error on successful test [%s]: %v", c.name, err)
 			}
