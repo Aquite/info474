@@ -12,9 +12,9 @@ const App = () => {
       <Header />
       <main>
         <Switch>
-          <Route exact path="/info474" component={Home} />
-          <Route exact path="/info474/assignment2" component={Assignment2} />
-          <Redirect to="/info474" />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/assignment2" component={Assignment2} />
+          <Redirect to="/" />
         </Switch>
       </main>
     </div>

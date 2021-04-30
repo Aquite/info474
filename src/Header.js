@@ -7,16 +7,16 @@ export const Header = () => {
   return (
     <div>
       <Navbar className="nav header" fixed="top" expand="lg" variant="dark">
-        <LinkContainer to="/info474">
+        <LinkContainer to="/">
           <Navbar.Brand>Pavel Batalov</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <LinkContainer to="/info474">
+            <LinkContainer to="/">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/info474/assignment2">
+            <LinkContainer to="/assignment2">
               <Nav.Link>Assignment 2</Nav.Link>
             </LinkContainer>
           </Nav>
