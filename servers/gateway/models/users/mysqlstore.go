@@ -8,10 +8,6 @@ type SQLStore struct {
 	db *sql.DB
 }
 
-func NewSQLStore(DB *sql.DB) *SQLStore {
-	return &SQLStore{db: DB}
-}
-
 func (sq *SQLStore) GetByID(id int64) (*User, error) {
 	q := "select * from Users where id=?"
 	res, err := sq.db.Query(q, id)
@@ -66,7 +62,7 @@ func (sq *SQLStore) Insert(user *User) (*User, error) {
 }
 
 func (sq *SQLStore) Update(id int64, updates *Updates) (*User, error) {
-	q := "update Users set FirstName = ?, LastName = ? where id = ?"
+	q := "update Users set FirstName=?, LastName=? where id=?"
 	_, err := sq.db.Exec(q, updates.FirstName, updates.LastName, id)
 	if err != nil {
 		return nil, err
@@ -75,7 +71,7 @@ func (sq *SQLStore) Update(id int64, updates *Updates) (*User, error) {
 }
 
 func (sq *SQLStore) Delete(id int64) error {
-	q := "delete from Users where id = ?"
+	q := "delete from Users where id=?"
 	_, err := sq.db.Exec(q, id)
 	if err != nil {
 		return err
