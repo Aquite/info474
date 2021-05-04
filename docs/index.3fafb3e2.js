@@ -1065,7 +1065,7 @@ try {
       columnNumber: 3
     }
   }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
-    basename: `/${undefined}`,
+    basename: `info474`,
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
