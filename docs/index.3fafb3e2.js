@@ -1064,8 +1064,7 @@ try {
       lineNumber: 8,
       columnNumber: 3
     }
-  }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.BrowserRouter, {
-    basename: `info474`,
+  }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.HashRouter, {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,

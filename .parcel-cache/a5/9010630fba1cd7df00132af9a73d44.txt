@@ -1,4 +1,4 @@
-24484
+24488
 111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-minify-font-values\node_modules\chalk\templates.js121436361000000000 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-overlays\cjs\manageAriaHidden.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\symbol\to-primitive.js121436361000000000 0
@@ -10,7 +10,7 @@
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-colormin\node_modules\supports-color\index.js121436361000000000 0
 63C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\randomfill132636079397739153 1
 86C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\purgecss\node_modules\postcss\lib132636079282881240 1
-44C:\Users\Pavel\Desktop\INFO\474\info474\dist132646236023038454 1
+44C:\Users\Pavel\Desktop\INFO\474\info474\dist132646245300961248 1
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\cssesc\LICENSE-MIT.txt121436361000000000 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\number\parse-float.js121436361000000000 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\relateurl\lib\relate132636079285661237 1
@@ -13201,6 +13201,7 @@
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\dom-helpers\addEventListener132636097886904119 1
 89C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\internals\collection-from.js121436361000000000 0
 107C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-convert-values\node_modules\chalk\node_modules132636079345561933 1
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.38bd3173.js.map132646245300941230 0
 113C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\css-modules-loader-core\node_modules\ansi-regex\package.json132636079417152001 0
 104C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-convert-values\node_modules\chalk\readme.md121436361000000000 0
 100C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-convert-values\node_modules\chalk\types132636079292311233 1
@@ -24478,8 +24479,11 @@
 63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.498c2a87.css132646220232276512 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132646219930585949 0
 62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.67e81b1c.js132646220232296656 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.38bd3173.js132646245300801260 0
 62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js132646236022938489 0
 66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js.map132646236023018450 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css132646245300781265 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.498c2a87.css.map132646245300871236 0
 63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css132646236022708474 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css.map132646236022878452 0
-55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132646232561257061 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132646245300731255 0
