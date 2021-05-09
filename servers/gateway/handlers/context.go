@@ -12,7 +12,7 @@ import (
 //and verifying SessionIDs, the session store
 //and the user store
 
-type HandlerContextStruct struct {
+type HandlerContext struct {
 	key       string
 	sessStore sessions.Store
 	userStore users.Store
