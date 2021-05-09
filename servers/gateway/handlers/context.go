@@ -17,3 +17,14 @@ type HandlerContext struct {
 	sessStore sessions.Store
 	userStore users.Store
 }
+
+func NewHandlerContext(key string, sessStore sessions.Store, userStore users.Store) *HandlerContext {
+	if sessStore == nil {
+		panic("nil sessions store!")
+	}
+	if userStore == nil {
+		panic("nil users store!")
+	}
+
+	return &HandlerContext{key, sessStore, userStore}
+}
