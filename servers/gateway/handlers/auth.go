@@ -29,22 +29,24 @@ func (ctx *HandlerContext) UsersHandler(w http.ResponseWriter, r *http.Request) 
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
+
 		encoder := json.NewEncoder(r.Body)
 		err := encoder.Encode(u)
     if err != nil {
-			fmt.Printf("error encoding struct into JSON: %v\n", err)
+			w.Write([]byte("error encoding struct into JSON: %v\n", err))
 			panic(err)
     }
 	}
 }
 
 func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Request) {
-	// authenticate user
+
+	user := sessionstate.sessionState
 
 	if r.Method == http.MethodGet {
 		p := strings.Split(r.URL.Path, "/")
 		id := p[3]
-		sessionID, err := ctx.userStore.GetByID(id)
+		user, err := ctx.userStore.GetByID(id)
 		if err != nil {
 			fmt.Printf("no such user exists: %v\n", err)
 			w.WriteHeader(http.StatusForbidden)
@@ -52,9 +54,9 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
 			encoder := json.NewEncoder(r.Body)
-			err := encoder.Encode(users.User)
+			err := encoder.Encode(user)
 			if err != nil {
-				fmt.Printf("error encoding struct into JSON: %v\n", err)
+				w.Write([]byte("error encoding struct into JSON: %v\n", err))
 				panic(err)
 			}
 		}
@@ -75,7 +77,7 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 
 		dec := json.NewDecoder(r.Body)
 		if err := dec.Decode(up); err != nil {
-				fmt.Printf("error decoding JSON: %v\n", err)
+			w.Write([]byte("error encoding struct into JSON: %v\n", err))
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
