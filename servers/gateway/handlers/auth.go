@@ -3,8 +3,15 @@ package handlers
 import (
 	"assignments-Aquite/servers/gateway/models/users"
 	"assignments-Aquite/servers/gateway/models/users/user"
+	"assignments-Aquite/servers/gateway/sessions"
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"path"
+	"strings"
+	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 //TODO: define HTTP handler functions as described in the
@@ -83,5 +90,59 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 		w.Header().Set("Content-Type", "application/json")
 		encoder := json.NewEncoder(r.Body)
 		err := encoder.Encode(up)
+	}
+}
+
+// SessionsHandler handles requests for the "sessions" resource, and allows
+// clients to begin a new session using an existing user's credentials.
+func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		if r.Header.Get("Content-type") != "application/json" {
+			http.Error(w, "415-Request body must be in json!", http.StatusUnsupportedMediaType)
+			return
+		}
+		decoder := json.NewDecoder(r.Body)
+		newCredentials := &users.Credentials{}
+		decoder.Decode(newCredentials)
+		user, err := c.UserStore.GetByEmail(newCredentials.Email)
+		if err != nil {
+			bcrypt.GenerateFromPassword([]byte("doesnt matter"), 13)
+
+			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+			return
+		}
+		err = user.Authenticate(newCredentials.Password)
+		if err != nil {
+			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+			return
+		}
+		newSession := &SessionState{time.Now(), user}
+		sessions.BeginSession(c.Key, c.SessionStore, newSession, w)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		enc := json.NewEncoder(w)
+		enc.Encode(user)
+	} else {
+		http.Error(w, "invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+}
+
+// SpecificSessionHandler requests related to a specific authenticated session
+func (c *HandlerContext) SpecificSessionHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "DELETE" {
+		if path.Base(r.URL.String()) != "mine" {
+			http.Error(w, "resource path invalid", http.StatusForbidden)
+			return
+		}
+		_, err := sessions.EndSession(r, c.Key, c.SessionStore)
+		if err != nil {
+			http.Error(w, "resource path invalid", http.StatusNotFound)
+			return
+		}
+		w.Write([]byte("signed out"))
+	} else {
+		http.Error(w, "invalid request method", http.StatusMethodNotAllowed)
+		return
 	}
 }
