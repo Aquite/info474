@@ -10,5 +10,5 @@ import (
 //remember that other packages can only see exported fields!
 type sessionState struct {
 	Time time.Time `json:"time"`
-	User users.User `json:"user"`
+	User *users.User `json:"user"`
 }
