@@ -40,6 +40,8 @@ func TestSessionsHandler(t *testing.T) {
 			t.Fatal(err)
 		}
 
+		handlerctx := 	
+
 		rr := httptest.NewRecorder()
     	handler := http.HandlerFunc(SessionsHandler)
 		handler.serveHTTP(rr, req)

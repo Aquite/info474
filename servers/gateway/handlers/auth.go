@@ -2,11 +2,12 @@ package handlers
 
 import (
 	"assignments-Aquite/servers/gateway/models/users"
-	// "assignments-Aquite/servers/gateway/models/users/user"
 	"assignments-Aquite/servers/gateway/sessions"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"path"
+	"strconv"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -23,99 +24,148 @@ func (ctx *HandlerContext) UsersHandler(w http.ResponseWriter, r *http.Request) 
 			http.Error(w, "request body must be in JSON", http.StatusUnsupportedMediaType)
 			return
 		}
-		u := &users.NewUser{}
+		nu := &users.NewUser{}
 		decoder := json.NewDecoder(r.Body)
-		err := decoder.Decode(u)
+		err := decoder.Decode(nu)
 		if err != nil {
 			http.Error(w, "error decoding response body", http.StatusBadRequest)
 			return
 		}
-		valerr := u.Validate()
+		u, err := nu.ToUser()
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error creating user: %v:", err), http.StatusInternalServerError)
+			return
+		}
+		/*valerr := u.Validate()
 		if valerr != nil {
 			http.Error(w, "invalid credentials", http.StatusUnauthorized)
-		}
+		}*/
 
-		user, err2 := ctx.UserStore.Insert(u)
-		if err2 != nil {
-			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+		u, err = ctx.userStore.Insert(u)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error inserting user: %v:", err), http.StatusInternalServerError)
+			return
 		}
 
 		newSession := &sessionState{time.Now(), u}
-		sessions.BeginSession(ctx.key, ctx.sessStore, newSession, w)
+		_, err = sessions.BeginSession(ctx.key, ctx.sessStore, newSession, w)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error creating session: %v:", err), http.StatusInternalServerError)
+			return
+		}
 
-		w.Header().Set("Content-Type", "application/json")
+		w.Header().Add("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		encoder := json.NewEncoder(r.Body)
-		encerr := encoder.Encode(u)
-    if encerr != nil {
-			w.Write([]byte("error encoding struct into JSON: %v\n", encerr))
-			panic(encerr)
-    }
+		encoder := json.NewEncoder(w)
+		err = encoder.Encode(u)
+    	if err != nil {
+			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
+			return
+    	}
+	} else {
+		http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
+		return
 	}
 }
 
 func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Request) {
 
-	currSession := &sessionState{​​​​​​​​}​​​​​​​​
-	user = currSession.User
-	cred := &users.Credentials{​​​​​​​​}​​​​​​​​
-	decoder.Decode(cred)
-	decerr := user.Authenticate(cred.Password)
-	if decerr != nil {
-		http.Error("User not found". http.StatusUnauthorized)
+	currSessionId, err := sessions.GetSessionID(r, ctx.key)
+	if err != nil {
+		http.Error(w, "You are not authorized to access this content", http.StatusUnauthorized)
+		return
 	}
 
+	strId := path.Base(r.URL.Path)
+	intId := int64(0)
+
 	if r.Method == http.MethodGet {
-		p := strings.Split(r.URL.Path, "/")
-		strid := p[3]
-		id, parseerr := strconv.ParseInt(strid, 10, 32)
-		user, err := ctx.User.GetByID(id)
+		
+
+		if strId == "me" {
+			currSession := &sessionState{}
+			err = ctx.sessStore.Get(currSessionId, currSession)
+			if err != nil {
+				http.Error(w, "Error retrieving inputted ID", http.StatusInternalServerError)
+				return
+			}
+			intId = currSession.User.ID
+		} else {
+			id, err := strconv.Atoi(strId)
+			if err != nil {
+				http.Error(w, "Error retrieving inputted ID", http.StatusInternalServerError)
+				return
+			}
+			intId = int64(id)
+		}
+
+
+		user, err := ctx.userStore.GetByID(intId)
 		if err != nil {
 			http.Error(w, "User not Found", http.StatusNotFound)
-			w.WriteHeader(http.StatusForbidden)
-		} else {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusOK)
-			encoder := json.NewEncoder(r.Body)
-			err := encoder.Encode(user)
-			if err != nil {
-				w.Write([]byte("error encoding struct into JSON: %v\n", err))
-				panic(err)
-			}
+			return
 		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		encoder := json.NewEncoder(w)
+		err = encoder.Encode(user)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
+			return
+		}
+
 	} else if r.Method == http.MethodPatch {
-		p := strings.Split(r.URL.Path, "/")
-		strid := p[3]
-		id, parseerr := strconv.ParseInt(strid, 10, 32)
 
-		currSession := &sessionState()
-		curruser := currSession.User
-		user, iderr := ctx.userStore.GetByID(curruser.ID)
-		if user != curruser {
-			http.Error("User cannot be authenticated", http.StatusForbidden)
+		currSession := &sessionState{}
+		err = ctx.sessStore.Get(currSessionId, currSession)
+		if err != nil {
+			http.Error(w, "Error retrieving session state", http.StatusInternalServerError)
+			return
 		}
 
-		if strid != "me"{
-			http.Error("User cannot be authenticated", http.StatusForbidden)
+		if strId != "me" {
+			id, err := strconv.Atoi(strId)
+			if err != nil {
+				http.Error(w, "Error retrieving inputted ID", http.StatusInternalServerError)
+				return
+			}
+			if int64(id) != currSession.User.ID {
+				http.Error(w, "You are not authorized to edit this content", http.StatusForbidden)
+				return
+			}
 		}
 
 		if r.Header.Get("Content-type") != "application/json" {
-			http.Error("Content type is not supported", http.StatusUnsupportedMediaType)
+			http.Error(w, "Content type is not supported", http.StatusUnsupportedMediaType)
 		}
-		up := users.Updates()
 
+		up := &users.Updates{}
+
+		
 		dec := json.NewDecoder(r.Body)
-		if err := dec.Decode(up); err != nil {
-			w.Write([]byte("error encoding struct into JSON: %v\n", err))
+		err = dec.Decode(up);
+		if err != nil {
+			http.Error(w, fmt.Sprintf("error decoding JSON: %v\n", err), http.StatusBadRequest)
 		}
-		userStruct := &User{}
-		w.WriteHeader(http.StatusOK)
+		if err := currSession.User.ApplyUpdates(up); err != nil {
+			http.Error(w, fmt.Sprintf("Error when applying updates: %v", err), http.StatusInternalServerError)
+			return
+		}
+		if err := ctx.sessStore.Save(currSessionId, currSession); err != nil {
+			http.Error(w, fmt.Sprintf("Error when applying updates: %v", err), http.StatusInternalServerError)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
-		encoder := json.NewEncoder(r.Body)
-		err := encoder.Encode(userStruct)
+		w.WriteHeader(http.StatusOK)
+		encoder := json.NewEncoder(w)
+		err = encoder.Encode(currSession.User)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
+			return
+		}
 	} else {
-		http.Error("Method not supported", http.StatusMethodNotAllowed)
+		http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
 	}
 }
 
