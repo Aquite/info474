@@ -174,7 +174,7 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		if r.Header.Get("Content-type") != "application/json" {
-			http.Error(w, "415-Request body must be in json!", http.StatusUnsupportedMediaType)
+			http.Error(w, "Request body must be in json!", http.StatusUnsupportedMediaType)
 			return
 		}
 		decoder := json.NewDecoder(r.Body)
@@ -182,7 +182,7 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 		decoder.Decode(newCredentials)
 		user, err := c.userStore.GetByEmail(newCredentials.Email)
 		if err != nil {
-			bcrypt.GenerateFromPassword([]byte("doesnt matter"), 13)
+			bcrypt.GenerateFromPassword([]byte("wasting time"), 13)
 
 			http.Error(w, "invalid credentials", http.StatusUnauthorized)
 			return
@@ -193,7 +193,25 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 			return
 		}
 		newSession := &sessionState{time.Now(), user}
-		sessions.BeginSession(c.key, c.sessStore, newSession, w)
+		_, err = sessions.BeginSession(c.key, c.sessStore, newSession, w)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error creating session: %v:", err), http.StatusInternalServerError)
+			return
+		}
+		/*
+		userIP := r.Header.Get("X-Forwarded-For")
+		if len(userIP) != 0 {
+			ipList := strings.Split(userIP, ", ")
+			userIP = ipList[0]
+		} else {
+			userIP = r.RemoteAddr
+		}
+		err = ctx.UserStore.InsertSignIn(thisUser, time.Now(), userIP)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Error logging sign-in: %v:", err), http.StatusInternalServerError)
+		}
+		*/
+
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 		enc := json.NewEncoder(w)
@@ -208,12 +226,12 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 func (c *HandlerContext) SpecificSessionHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "DELETE" {
 		if path.Base(r.URL.String()) != "mine" {
-			http.Error(w, "resource path invalid", http.StatusForbidden)
+			http.Error(w, "You're not allowed to do that", http.StatusForbidden)
 			return
 		}
 		_, err := sessions.EndSession(r, c.key, c.sessStore)
 		if err != nil {
-			http.Error(w, "resource path invalid", http.StatusNotFound)
+			http.Error(w, fmt.Sprintf("Error occured when ending session: %v:", err), http.StatusNotFound)
 			return
 		}
 		w.Write([]byte("signed out"))
