@@ -1,8 +1,9 @@
 package handlers
 
 import (
+	"strconv"
 	"assignments-Aquite/servers/gateway/models/users"
-	"assignments-Aquite/servers/gateway/models/users/user"
+	// "assignments-Aquite/servers/gateway/models/users/user"
 	"assignments-Aquite/servers/gateway/sessions"
 	"encoding/json"
 	"fmt"
@@ -22,40 +23,59 @@ import (
 func (ctx *HandlerContext) UsersHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		if r.Header.Get("Content-type") != "application/json" {
-			w.WriteHeader(http.StatusUnsupportedMediaType)
+			http.Error(w, "unsupported media type", http.StatusUnsupportedMediaType)
 			w.Write([]byte("415-Request body must be in json!"))
 		}
-		u := user.&NewUser
+		u := &NewUser{}
 		decoder := json.NewDecoder(r.Body)
 		err := decoder.Decode(u)
 		if err != nil {
 			fmt.Printf("error decoding JSON: %v\n", err)
 			panic(err)
 		}
-		BeginSession(&ctx.key, &ctx.sessStore, 100, w)
+		valerr := u.Validate()
+		if valerr != nil {
+			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+		}
+
+		user, err2 := ctx.UserStore.Insert(u)
+		if err2 != nil {
+			http.Error(w, "invalid credentials", http.StatusUnauthorized)
+		}
+
+		newSession := &sessionState{time.Now(), u}
+		sessions.BeginSession(ctx.key, ctx.sessStore, newSession, w)
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
 		encoder := json.NewEncoder(r.Body)
-		err := encoder.Encode(u)
-    if err != nil {
-			w.Write([]byte("error encoding struct into JSON: %v\n", err))
-			panic(err)
+		encerr := encoder.Encode(u)
+    if encerr != nil {
+			w.Write([]byte("error encoding struct into JSON: %v\n", encerr))
+			panic(encerr)
     }
 	}
 }
 
 func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Request) {
 
-	user := sessionstate.sessionState
+	currSession := &sessionState{​​​​​​​​}​​​​​​​​
+	user = currSession.User
+	cred := &users.Credentials{​​​​​​​​}​​​​​​​​
+	decoder.Decode(cred)
+	decerr := user.Authenticate(cred.Password)
+	if decerr != nil {
+		http.Error("User not found". http.StatusUnauthorized)
+	}
 
 	if r.Method == http.MethodGet {
 		p := strings.Split(r.URL.Path, "/")
-		id := p[3]
-		user, err := ctx.userStore.GetByID(id)
+		strid := p[3]
+		id, parseerr := strconv.ParseInt(strid, 10, 32)
+		user, err := ctx.User.GetByID(id)
 		if err != nil {
-			fmt.Printf("no such user exists: %v\n", err)
+			http.Error(w, "User not Found", http.StatusNotFound)
 			w.WriteHeader(http.StatusForbidden)
 		} else {
 			w.Header().Set("Content-Type", "application/json")
@@ -67,29 +87,38 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 				panic(err)
 			}
 		}
-	}
-
-	if r.Method == http.MethodPatch {
+	} else if r.Method == http.MethodPatch {
 		p := strings.Split(r.URL.Path, "/")
-		id := p[3]
-		if id != "me" { // or does not match authenticated user
-			fmt.Printf("forbidden status: %v\n", err)
-			w.WriteHeader(http.StatusForbidden)
+		strid := p[3]
+		id, parseerr := strconv.ParseInt(strid, 10, 32)
+
+		currSession := &sessionState()
+		curruser := currSession.User
+		user, iderr := ctx.userStore.GetByID(curruser.ID)
+		if user != curruser {
+			http.Error("User cannot be authenticated", http.StatusForbidden)
 		}
+
+		if strid != "me"{
+			http.Error("User cannot be authenticated", http.StatusForbidden)
+		}
+
 		if r.Header.Get("Content-type") != "application/json" {
-			w.WriteHeader(http.StatusUnsupportedMediaType)
-			w.Write([]byte("415-Request body must be in json!"))
+			http.Error("Content type is not supported", http.StatusUnsupportedMediaType)
 		}
-		up := user.Updates
+		up := users.Updates()
 
 		dec := json.NewDecoder(r.Body)
 		if err := dec.Decode(up); err != nil {
 			w.Write([]byte("error encoding struct into JSON: %v\n", err))
 		}
+		userStruct := &User{}
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 		encoder := json.NewEncoder(r.Body)
-		err := encoder.Encode(up)
+		err := encoder.Encode(userStruct)
+	} else {
+		http.Error("Method not supported", http.StatusMethodNotAllowed)
 	}
 }
 
