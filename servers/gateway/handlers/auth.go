@@ -36,10 +36,6 @@ func (ctx *HandlerContext) UsersHandler(w http.ResponseWriter, r *http.Request) 
 			http.Error(w, fmt.Sprintf("error creating user: %v:", err), http.StatusInternalServerError)
 			return
 		}
-		/*valerr := u.Validate()
-		if valerr != nil {
-			http.Error(w, "invalid credentials", http.StatusUnauthorized)
-		}*/
 
 		u, err = ctx.userStore.Insert(u)
 		if err != nil {
@@ -171,7 +167,7 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 
 // SessionsHandler handles requests for the "sessions" resource, and allows
 // clients to begin a new session using an existing user's credentials.
-func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request) {
+func (ctx *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		if r.Header.Get("Content-type") != "application/json" {
 			http.Error(w, "Request body must be in json!", http.StatusUnsupportedMediaType)
@@ -180,7 +176,7 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 		decoder := json.NewDecoder(r.Body)
 		newCredentials := &users.Credentials{}
 		decoder.Decode(newCredentials)
-		user, err := c.userStore.GetByEmail(newCredentials.Email)
+		user, err := ctx.userStore.GetByEmail(newCredentials.Email)
 		if err != nil {
 			bcrypt.GenerateFromPassword([]byte("wasting time"), 13)
 
@@ -193,7 +189,7 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 			return
 		}
 		newSession := &sessionState{time.Now(), user}
-		_, err = sessions.BeginSession(c.key, c.sessStore, newSession, w)
+		_, err = sessions.BeginSession(ctx.key, ctx.sessStore, newSession, w)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error creating session: %v:", err), http.StatusInternalServerError)
 			return
@@ -223,13 +219,13 @@ func (c *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Request)
 }
 
 // SpecificSessionHandler requests related to a specific authenticated session
-func (c *HandlerContext) SpecificSessionHandler(w http.ResponseWriter, r *http.Request) {
+func (ctx *HandlerContext) SpecificSessionHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "DELETE" {
 		if path.Base(r.URL.String()) != "mine" {
 			http.Error(w, "You're not allowed to do that", http.StatusForbidden)
 			return
 		}
-		_, err := sessions.EndSession(r, c.key, c.sessStore)
+		_, err := sessions.EndSession(r, ctx.key, ctx.sessStore)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error occured when ending session: %v:", err), http.StatusNotFound)
 			return
