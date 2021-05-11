@@ -31,7 +31,7 @@ func main() {
 	datasource := os.Getenv("DSN")
 	redisdb := redis.NewClient(&redis.Options{
 		Addr: redisAddr,
-		Password: "", 
+		Password: "",
 		DB:       0,
 	})
 
@@ -45,7 +45,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	
+
 	mux.HandleFunc("/v1/summary", handlers.SummaryHandler)
 	mux.HandleFunc("/v1/users", handlers.UsersHandler)
 	mux.HandleFunc("/v1/users/", handlers.SpecificUserHandler)

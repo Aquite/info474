@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"path"
 	"strconv"
+	"strings"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -55,10 +56,10 @@ func (ctx *HandlerContext) UsersHandler(w http.ResponseWriter, r *http.Request) 
 
 		encoder := json.NewEncoder(w)
 		err = encoder.Encode(u)
-    	if err != nil {
+		if err != nil {
 			http.Error(w, fmt.Sprintf("Error encoding JSON: %v", err), http.StatusInternalServerError)
 			return
-    	}
+		}
 	} else {
 		http.Error(w, "Method not supported", http.StatusMethodNotAllowed)
 		return
@@ -77,7 +78,6 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 	intId := int64(0)
 
 	if r.Method == http.MethodGet {
-		
 
 		if strId == "me" {
 			currSession := &sessionState{}
@@ -95,7 +95,6 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 			}
 			intId = int64(id)
 		}
-
 
 		user, err := ctx.userStore.GetByID(intId)
 		if err != nil {
@@ -138,9 +137,8 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 
 		up := &users.Updates{}
 
-		
 		dec := json.NewDecoder(r.Body)
-		err = dec.Decode(up);
+		err = dec.Decode(up)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("error decoding JSON: %v\n", err), http.StatusBadRequest)
 		}
@@ -198,7 +196,7 @@ func (ctx *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Reques
 			http.Error(w, fmt.Sprintf("Error creating session: %v:", err), http.StatusInternalServerError)
 			return
 		}
-		/*
+
 		userIP := r.Header.Get("X-Forwarded-For")
 		if len(userIP) != 0 {
 			ipList := strings.Split(userIP, ", ")
@@ -206,11 +204,10 @@ func (ctx *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Reques
 		} else {
 			userIP = r.RemoteAddr
 		}
-		err = ctx.UserStore.InsertSignIn(thisUser, time.Now(), userIP)
+		err = ctx.UserStore.InsertSignIn(user, time.Now(), userIP)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error logging sign-in: %v:", err), http.StatusInternalServerError)
 		}
-		*/
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
