@@ -1,15 +1,16 @@
 package users
 
-import "time"
+import (
+	"time"
+)
 
-var testUser *User = &User{
-	ID:           1,
+var testNewUser *NewUser = &NewUser{
 	Email:        "pavelbat@uw.edu",
-	PassHash:     []byte("hunter2_"),
+	Password:     "hunter2_",
+	PasswordConf: "hunter2_",
 	UserName:     "pavelbat",
 	FirstName:    "Pavel",
 	LastName:     "Batalov",
-	PhotoURL:     "url",
 }
 
 //testUserStore returns same user for all operations
@@ -19,8 +20,9 @@ type testUserStore struct {
 
 //NewtestUserStore creates and returns a new testUserStore
 func NewTestUserStore() *testUserStore {
-	user := testUser
-	return &testUserStore{user}
+	testUser, _ := testNewUser.ToUser()
+	testUser.ID = 1
+	return &testUserStore{testUser}
 }
 
 func (testStore *testUserStore) GetByID(id int64) (*User, error) {

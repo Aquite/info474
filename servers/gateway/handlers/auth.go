@@ -83,7 +83,7 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 			currSession := &sessionState{}
 			err = ctx.sessStore.Get(currSessionId, currSession)
 			if err != nil {
-				http.Error(w, "Error retrieving inputted ID", http.StatusInternalServerError)
+				http.Error(w, "Error getting current session", http.StatusInternalServerError)
 				return
 			}
 			intId = currSession.User.ID
@@ -175,7 +175,11 @@ func (ctx *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Reques
 		}
 		decoder := json.NewDecoder(r.Body)
 		newCredentials := &users.Credentials{}
-		decoder.Decode(newCredentials)
+		err := decoder.Decode(newCredentials)
+		if err != nil {
+			http.Error(w, "error decoding response body", http.StatusBadRequest)
+			return
+		}
 		user, err := ctx.userStore.GetByEmail(newCredentials.Email)
 		if err != nil {
 			bcrypt.GenerateFromPassword([]byte("wasting time"), 13)
@@ -225,11 +229,7 @@ func (ctx *HandlerContext) SpecificSessionHandler(w http.ResponseWriter, r *http
 			http.Error(w, "You're not allowed to do that", http.StatusForbidden)
 			return
 		}
-		_, err := sessions.EndSession(r, ctx.key, ctx.sessStore)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("Error occured when ending session: %v:", err), http.StatusNotFound)
-			return
-		}
+		sessions.EndSession(r, ctx.key, ctx.sessStore)
 		w.Write([]byte("signed out"))
 	} else {
 		http.Error(w, "invalid request method", http.StatusMethodNotAllowed)
