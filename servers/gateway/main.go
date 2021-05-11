@@ -2,11 +2,16 @@ package main
 
 import (
 	"assignments-Aquite/servers/gateway/handlers"
+	"assignments-Aquite/servers/gateway/sessions"
+	"assignments-Aquite/servers/gateway/users"
 	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"time"
+
+	"github.com/go-redis/redis"
 )
 
 //main is the main entry point for the server
@@ -41,16 +46,16 @@ func main() {
 	}
 	defer userStore.Close()
 
-	ctx := handlers.NewHandlerContext(sessionKey, redisdb, userStore)
+	ctx := handlers.NewHandlerContext(sessionKey, sessions.NewRedisStore(redisdb, time.Hour), users.NewSQLStore(userStore))
 
 	mux := http.NewServeMux()
 
 
 	mux.HandleFunc("/v1/summary", handlers.SummaryHandler)
-	mux.HandleFunc("/v1/users", handlers.UsersHandler)
-	mux.HandleFunc("/v1/users/", handlers.SpecificUserHandler)
-	mux.HandleFunc("/v1/sessions", handlers.SessionsHandler)
-	mux.HandleFunc("/v1/sessions/", handlers.SpecificSessionHandler)
+	mux.HandleFunc("/v1/users", ctx.UsersHandler)
+	mux.HandleFunc("/v1/users/", ctx.SpecificUserHandler)
+	mux.HandleFunc("/v1/sessions", ctx.SessionsHandler)
+	mux.HandleFunc("/v1/sessions/", ctx.SpecificSessionHandler)
 
 	wrappedMux := handlers.NewResponseHeader(
 		mux,
