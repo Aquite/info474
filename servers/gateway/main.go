@@ -46,13 +46,13 @@ func main() {
 	mux := http.NewServeMux()
 
 	
-	mux.HandleFunc("/v1/summary", Handlers.SummaryHandler)
-	mux.HandleFunc("/v1/users", Handlers.UsersHandler)
-	mux.HandleFunc("/v1/users/", SpecificUserHandler)
-	mux.HandleFunc("/v1/sessions", SessionsHandler)
-	mux.HandleFunc("/v1/sessions/", SpecificSessionHandler)
+	mux.HandleFunc("/v1/summary", handlers.SummaryHandler)
+	mux.HandleFunc("/v1/users", handlers.UsersHandler)
+	mux.HandleFunc("/v1/users/", handlers.SpecificUserHandler)
+	mux.HandleFunc("/v1/sessions", handlers.SessionsHandler)
+	mux.HandleFunc("/v1/sessions/", handlers.SpecificSessionHandler)
 
-	wrappedMux := Handlers.NewResponseHeader(mux, {"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"
+	wrappedMux := handlers.NewResponseHeader(mux, {"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"
 	, "Access-Control-Expose-Headers", "Access-Control-Max-Age"}, {"*", "GET, PUT, POST, PATCH, DELETE", "Content-Type, Authorization"
 	, "Authorization", "600"})
 
