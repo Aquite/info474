@@ -21,14 +21,14 @@ type ResponseHeader struct {
 	headerValues []string
 }
 
-func (l *ResponseHeader) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	for i := 0; i < len(headerNames); i++ {
-		w.Header().Add(rh.headerNames[i], rh.headerValue[i])
+func (rh *ResponseHeader) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	for i := 0; i < len(rh.headerNames); i++ {
+		w.Header().Add(rh.headerNames[i], rh.headerValues[i])
 	}
 
-	l.handler.ServeHTTP(w, r)
+	rh.handler.ServeHTTP(w, r)
 }
 
-func NewResponseHeader(handlerToWrap http.Handler, headerName string, headerValue string) *ResponseHeader {
+func NewResponseHeader(handlerToWrap http.Handler, headerNames []string, headerValues []string) *ResponseHeader {
 	return &ResponseHeader{handlerToWrap, headerNames, headerValues}
 }
