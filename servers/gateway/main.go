@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"database/sql"
 )
 
 //main is the main entry point for the server
@@ -27,9 +28,14 @@ func main() {
 
 	sessionKey := os.Getenv("SESSIONKEY")
 	redisAddr := os.Getenv("REDISADDR")
-	// new redis client
 	datasource := os.Getenv("DSN")
-	// open SQL database
+	redisdb := redis.NewClient(&redis.Options{
+		Addr: redisAddr,
+	})
+
+	userStore, sqlerr := sql.Open(MySQL, datasource)
+
+	NewHandlerContext(sessionKey, redisdb, userStore)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/v1/summary", Handlers.SummaryHandler)
