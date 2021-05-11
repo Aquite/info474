@@ -301,7 +301,7 @@ func TestSpecificUserHandler(t *testing.T) {
 			"banana",
 			"application/json",
 			[]byte(`{"name":"John",
-			"surname":"Travolta"}`),
+			"surname":Travolta"}`),
 		},
 		{
 			"Method Unsupported",
@@ -411,8 +411,7 @@ func TestSessionsHandler(t *testing.T) {
 		{
 			"Bad JSON",
 			"POST",
-			[]byte(`{"email":"pavelbat@uw.edu", 
-			"pw": "hunter2_"}`),
+			[]byte(`{"email":"pavelbat@uw.edu}`),
 			"application/json",
 			http.StatusBadRequest,
 			&HandlerContext{

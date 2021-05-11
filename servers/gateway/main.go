@@ -1,7 +1,7 @@
 package main
 
 import (
-	Handlers "assignments-Aquite/servers/gateway/handlers"
+	"assignments-Aquite/servers/gateway/handlers"
 	"fmt"
 	"log"
 	"net/http"
@@ -31,17 +31,23 @@ func main() {
 	datasource := os.Getenv("DSN")
 	redisdb := redis.NewClient(&redis.Options{
 		Addr: redisAddr,
+		Password: "", 
+		DB:       0,
 	})
 
-	userStore, sqlerr := sql.Open(MySQL, datasource)
+	userStore, err := sql.Open("mysql", datasource)
+	if err != nil {
+        log.Fatal(fmt.Errorf("err is: %s", "Error opening database"))
+	}
+	defer userStore.Close()
 
-	NewHandlerContext(sessionKey, redisdb, userStore)
+	ctx := handlers.NewHandlerContext(sessionKey, redisdb, userStore)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/v1/summary", Handlers.SummaryHandler)
 	mux.HandleFunc("/v1/users", Handlers.UsersHandler)
 	mux.HandleFunc("/v1/users/", SpecificUserHandler)
-	mux.HandleFunc("/v1/sessions/", SessionsHandler)
+	mux.HandleFunc("/v1/sessions", SessionsHandler)
 	mux.HandleFunc("/v1/sessions/", SpecificSessionHandler)
 
 	wrappedMux := Handlers.NewResponseHeader(mux, {"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"
