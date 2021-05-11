@@ -204,7 +204,7 @@ func (ctx *HandlerContext) SessionsHandler(w http.ResponseWriter, r *http.Reques
 		} else {
 			userIP = r.RemoteAddr
 		}
-		err = ctx.UserStore.InsertSignIn(user, time.Now(), userIP)
+		err = ctx.userStore.InsertSignIn(user, time.Now(), userIP)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Error logging sign-in: %v:", err), http.StatusInternalServerError)
 		}

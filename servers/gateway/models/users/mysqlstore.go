@@ -2,6 +2,7 @@ package users
 
 import (
 	"database/sql"
+	"time"
 )
 
 type SQLStore struct {
@@ -73,6 +74,17 @@ func (sq *SQLStore) Update(id int64, updates *Updates) (*User, error) {
 func (sq *SQLStore) Delete(id int64) error {
 	q := "delete from Users where id=?"
 	_, err := sq.db.Exec(q, id)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+
+//InsertSignIn inserts sign in data to table SignIns
+func (store SQLStore) InsertSignIn(user *User, signInTime time.Time, signInIP string) (error) {
+	inq := "insert into SignIns(userID, signInTime, clientIP) values (?, ?, ?)"
+	_, err := store.db.Exec(inq, user.ID, signInTime, signInIP)
 	if err != nil {
 		return err
 	}

@@ -2,6 +2,7 @@ package users
 
 import (
 	"errors"
+	"time"
 )
 
 //ErrUserNotFound is returned when the user can't be found
@@ -21,6 +22,9 @@ type Store interface {
 	//Insert inserts the user into the database, and returns
 	//the newly-inserted User, complete with the DBMS-assigned ID
 	Insert(user *User) (*User, error)
+
+	//Logs a sign in
+	InsertSignIn(user *User, signInTime time.Time, signInIP string) (error) 
 
 	//Update applies UserUpdates to the given user ID
 	//and returns the newly-updated user
