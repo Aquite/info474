@@ -44,6 +44,8 @@ func main() {
 	ctx := handlers.NewHandlerContext(sessionKey, redisdb, userStore)
 
 	mux := http.NewServeMux()
+
+	
 	mux.HandleFunc("/v1/summary", Handlers.SummaryHandler)
 	mux.HandleFunc("/v1/users", Handlers.UsersHandler)
 	mux.HandleFunc("/v1/users/", SpecificUserHandler)
