@@ -2,11 +2,11 @@ package main
 
 import (
 	"assignments-Aquite/servers/gateway/handlers"
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"database/sql"
 )
 
 //main is the main entry point for the server
@@ -52,9 +52,10 @@ func main() {
 	mux.HandleFunc("/v1/sessions", handlers.SessionsHandler)
 	mux.HandleFunc("/v1/sessions/", handlers.SpecificSessionHandler)
 
-	wrappedMux := handlers.NewResponseHeader(mux, {"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers"
-	, "Access-Control-Expose-Headers", "Access-Control-Max-Age"}, {"*", "GET, PUT, POST, PATCH, DELETE", "Content-Type, Authorization"
-	, "Authorization", "600"})
+	wrappedMux := handlers.NewResponseHeader(
+		mux,
+		[]string{"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers", "Access-Control-Expose-Headers", "Access-Control-Max-Age"},
+		[]string{"*", "GET, PUT, POST, PATCH, DELETE", "Content-Type, Authorization", "Authorization", "600"})
 
 	log.Printf("server is listening at %s", addr)
 	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath, wrappedMux))
