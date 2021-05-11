@@ -1,61 +1,119 @@
 package handlers
 
 import (
+	"assignments-Aquite/servers/gateway/models/users"
+	"assignments-Aquite/servers/gateway/sessions"
+	"bytes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
-
-func TestSessionsHandler(t *testing.T) {
+func TestUserHandler(t *testing.T) {
 	cases := []struct {
-		request     string
-		path        string
-		URL         string
-		expectError bool
+		name              string
+		reqMethod         string
+		reqBody           []byte
+		contentTypeHeader string
+		errCode           int
+		ctx               *HandlerContext
 	}{
 		{
-			"Valid URL",
-			"This is a valid HTML page, so this should work",
-			"https://info441-wi21.github.io/tests/ogall.html",
-			false,
+			"Valid Input",
+			"POST",
+			[]byte(`{"email":"pavelbat@uw.edu",
+			"password":"hunter2_",
+			"passwordConf":"hunter2_",
+			"userName":"pavelbat",
+			"firstName":"Pavel",
+			"lastName":"Batalov"}`),
+			"application/json",
+			http.StatusCreated,
+			&HandlerContext{
+				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
+				userStore: users.NewTestUserStore(),
+				key:       "banana",
+			},
 		},
 		{
-			"Not Found URL",
-			"Remember to check the response status code",
-			"https://info441-wi21.github.io/tests/not-found.html",
-			true,
+			"Bad content type",
+			"POST",
+			[]byte(`{"email":"pavelbat@uw.edu",
+			"password":"hunter2_",
+			"passwordConf":"hunter2_",
+			"userName":"pavelbat",
+			"firstName":"Pavel",
+			"lastName":"Batalov"}`),
+			"application/pavelFile",
+			http.StatusOK,
+			&HandlerContext{
+				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
+				userStore: users.NewTestUserStore(),
+				key:       "banana",
+			},
 		},
 		{
-			"Non-HTML URL",
-			"Remember to check the response content-type to ensure it's an HTML page",
-			"https://info441-wi21.github.io/tests/test.png",
-			true,
+			"Bad body",
+			"POST",
+			[]byte(`pavelformat`),
+			"application/json",
+			http.StatusBadRequest,
+			&HandlerContext{
+				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
+				userStore: users.NewTestUserStore(),
+				key:       "banana",
+			},
+		},
+		{
+			"Bad User Inputs",
+			"POST",
+			[]byte(`{"email":"pavel batalov's email",
+			"password":"hunter2_",
+			"passwordConf":"bananan",
+			"userName":"",
+			"firstName":"Pavel",
+			"lastName":"Batalov"}`),
+			"application/json",
+			http.StatusInternalServerError,
+			&HandlerContext{
+				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
+				userStore: users.NewTestUserStore(),
+				key:       "banana",
+			},
+		},
+		{
+			"Unsupported method",
+			"GET",
+			[]byte(`{"email":"pavelbat@uw.edu",
+			"password":"hunter2_",
+			"passwordConf":"hunter2_",
+			"userName":"pavelbat",
+			"firstName":"Pavel",
+			"lastName":"Batalov"}`),
+			"application/json",
+			http.StatusMethodNotAllowed,
+			&HandlerContext{
+				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
+				userStore: users.NewTestUserStore(),
+				key:       "banana",
+			},
 		},
 	}
+	
+	url := "/v1/users"
 
 	for _, c := range cases {
-		req, err := http.NewRequest("POST", "/v1/sessions", nil)
+		req, err := http.NewRequest(c.reqMethod, url, bytes.NewBuffer(c.reqBody))
 		if err != nil {
-			t.Fatal(err)
+			t.Errorf("Unexpected error on successful test [%s]: %v", c.name, err)
 		}
-
-		handlerctx := 	
-
+		req.Header.Set("Content-Type", c.contentTypeHeader)
 		rr := httptest.NewRecorder()
-    	handler := http.HandlerFunc(SessionsHandler)
-		handler.serveHTTP(rr, req)
-		// Check the status code is what we expect.
-		if status := rr.Code; status != http.StatusOK {
-			t.Errorf("handler returned wrong status code: got %v want %v",
-				status, http.StatusOK)
-		}
-	
-		// Check the response body is what we expect.
-		expected := `{"alive": true}`
-		if rr.Body.String() != expected {
-			t.Errorf("handler returned unexpected body: got %v want %v",
-				rr.Body.String(), expected)
+		c.ctx.UsersHandler(rr, req)
+
+		if rr.Code != c.errCode {
+			t.Errorf("Error on test %v: handler returned wrong status code: got %v want %v", c.name, rr.Code, c.errCode)
 		}
 	}
 }
