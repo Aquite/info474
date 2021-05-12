@@ -1,4 +1,5 @@
 GOOS=linux go build
+GOOS=linux go build -o sumamry
 docker build -t pbatalov/summary .
 go clean
 

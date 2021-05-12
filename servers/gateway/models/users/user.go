@@ -2,6 +2,7 @@ package users
 
 import (
 	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"net/mail"
 	"strings"
@@ -111,7 +112,9 @@ func (nu *NewUser) ToUser() (*User, error) {
 	u.FirstName = nu.FirstName
 	u.LastName = nu.LastName
 	u.UserName = nu.UserName
-	u.PhotoURL = gravatarBasePhotoURL + fmt.Sprintf("%s", md5.Sum([]byte(strings.ToLower(strings.Trim(u.Email, " ")))));
+	emailHasher := md5.New()
+	emailHasher.Write([]byte(strings.ToLower(strings.TrimSpace(u.Email))))
+	u.PhotoURL = gravatarBasePhotoURL + hex.EncodeToString(emailHasher.Sum(nil))
 	
 	err = u.SetPassword(nu.Password)
 	if err != nil {

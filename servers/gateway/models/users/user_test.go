@@ -2,7 +2,7 @@ package users
 
 import (
 	"crypto/md5"
-	"fmt"
+	"encoding/hex"
 	"strings"
 	"testing"
 )
@@ -226,7 +226,10 @@ func TestToUser(t *testing.T) {
 			if err != nil {
 				t.Errorf("case %s: Password \"%s\"failed to encrypt\nDescription: %s", c.name, c.nu.Password, c.desc)
 			}
-			if u.PhotoURL != gravatarBasePhotoURL + fmt.Sprintf("%s", md5.Sum([]byte(strings.ToLower(strings.Trim(c.checkEmail, " "))))) {
+			emailHasher := md5.New()
+			emailHasher.Write([]byte(strings.ToLower(strings.TrimSpace(u.Email))))
+			photoURL := gravatarBasePhotoURL + hex.EncodeToString(emailHasher.Sum(nil))
+			if u.PhotoURL != photoURL {
 				t.Errorf("case %s: Email \"%s\" failed to encrypt\nDescription: %s", c.name, c.nu.Email, c.desc)
 			}
 		}

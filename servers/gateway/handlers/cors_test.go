@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"assignments-Aquite/servers/gateway/models/users"
 	"assignments-Aquite/servers/gateway/sessions"
-	"assignments-Aquite/servers/gateway/users"
 	"bytes"
 	"net/http"
 	"net/http/httptest"
@@ -10,42 +10,47 @@ import (
 	"time"
 )
 
-func TestServeHTTP(t *testing.T) {
+func TestCorsHandler(t *testing.T) {
 	cases := []struct {
-		name         string
-		headerNames  []string
-		headerValues []string
-		testHandler  *HandlerContext
+		name              string
+		method            string
+		reqBody           []byte
+		contentTypeHeader string
+		errCode           int
+		testHandler       *HandlerContext
 	}{
 		{
-			"Valid Test",
-			[]string{"Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers", "Access-Control-Expose-Headers", "Access-Control-Max-Age"},
-			[]string{"*", "GET, PUT, POST, PATCH, DELETE", "Content-Type, Authorization", "Authorization", "600"},
+			"Valid Input",
+			"POST",
+			[]byte(`{"email":"pavelbat@uw.edu",
+			"password":"hunter2_",
+			"passwordConf":"hunter2_",
+			"userName":"pavelbat",
+			"firstName":"Pavel",
+			"lastName":"Batalov"}`),
+			"application/json",
+			http.StatusOK,
 			&HandlerContext{
-				sessStore: sessions.NewMemStore(time.Hour, time.Hour),
-				userStore: users.NewFakeUserStore(),
-				key:       "banana",
+				sessStore:     sessions.NewMemStore(time.Hour, time.Hour),
+				userStore:     users.NewTestUserStore(),
+				key:           "matador",
 			},
 		},
 	}
 
 	for _, c := range cases {
-		req, err := http.NewRequest("POST", "/v1/users", bytes.NewBuffer([]byte(
-			`{"email":"pavelbat@uw.edu",
-			"password":"hunter2_",
-			"passwordConf":"hunter2_",
-			"userName":"pavelbat",
-			"firstName":"Pavel",
-			"lastName":"Batalov"}`)))
+		req, err := http.NewRequest(c.method, "/v1/users", bytes.NewBuffer(c.reqBody))
 		if err != nil {
 			t.Errorf("Unexpected error on successful test [%s]: %v", c.name, err)
 		}
-		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Content-Type", c.contentTypeHeader)
 		rr := httptest.NewRecorder()
 		c.testHandler.UsersHandler(rr, req)
 		testMux := http.NewServeMux()
 		testMux.HandleFunc("/v1/users", c.testHandler.UsersHandler)
-		testCors := NewResponseHeader(testMux, c.headerNames, c.headerValues)
+		testCors := &CorsMW{
+			MyHandler: testMux,
+		}
 		testCors.ServeHTTP(rr, req)
 		headerACAO := rr.Header().Get("Access-Control-Allow-Origin")
 		if headerACAO != "*" {
@@ -53,10 +58,6 @@ func TestServeHTTP(t *testing.T) {
 		}
 		headerACAM := rr.Header().Get("Access-Control-Allow-Methods")
 		if headerACAM != "GET, PUT, POST, PATCH, DELETE" {
-			t.Errorf("Access-Control-Allow-Methods should be %s, but is %v", "GET, PUT, POST, PATCH, DELETE", headerACAM)
-		}
-		headerACAH := rr.Header().Get("Access-Control-Allow-Headers")
-		if headerACAH != "Content-Type, Authorization" {
 			t.Errorf("Access-Control-Allow-Methods should be %s, but is %v", "GET, PUT, POST, PATCH, DELETE", headerACAM)
 		}
 		headerACEH := rr.Header().Get("Access-Control-Expose-Headers")

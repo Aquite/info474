@@ -15,20 +15,21 @@ with the following headers to all requests:
   Access-Control-Max-Age: 600
 */
 
-type ResponseHeader struct {
-	handler      http.Handler
-	headerNames  []string
-	headerValues []string
+//CorsMW is a struct that holds http.Handler MyHandler
+type CorsMW struct {
+	MyHandler http.Handler
 }
 
-func (rh *ResponseHeader) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	for i := 0; i < len(rh.headerNames); i++ {
-		w.Header().Add(rh.headerNames[i], rh.headerValues[i])
-	}
-
-	rh.handler.ServeHTTP(w, r)
+func (c *CorsMW) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, PUT, POST, PATCH, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Expose-Headers", "Authorization")
+	w.Header().Set("Access-Control-Max-Age", "600")
+	c.MyHandler.ServeHTTP(w, r)
 }
 
-func NewResponseHeader(handlerToWrap http.Handler, headerNames []string, headerValues []string) *ResponseHeader {
-	return &ResponseHeader{handlerToWrap, headerNames, headerValues}
+
+func NewCorsMW(handlerToWrap http.Handler) *CorsMW {
+	return &CorsMW{handlerToWrap}
 }
