@@ -8,9 +8,11 @@ import {
   Geography,
   Sphere,
   Graticule,
+  ZoomableGroup,
 } from "react-simple-maps";
 import { html } from "d3-fetch";
 import ReactTooltip from "react-tooltip";
+import SVGBrush from "react-svg-brush";
 
 const Assignment3 = () => {
   const [data, loading] = useFetch(
@@ -21,6 +23,7 @@ const Assignment3 = () => {
   // Do not use setHighlight because you won't do it properly. See the below function
   const [highlight, setHighlight] = useState(
     new Set([
+      "PSE",
       "DZA",
       "BHR",
       "EGY",
@@ -132,7 +135,7 @@ const Assignment3 = () => {
   const m = 20; // margin size
   const t = 4; // text alignment factor
 
-  // Visualization one: Female Labor Force
+  // Left Side: Female Labor Force
   const halfCodeWidth = 30;
 
   const yLabels = (x) => (
@@ -171,7 +174,7 @@ const Assignment3 = () => {
     .domain([0, 100])
     .range([s - m, m]);
 
-  // Visualization three: Female Labor Force over time, World
+  // Bottom: Female Labor Force over time, World
   const femaleWorldTimeline = Array.from(
     rollup(
       dataCountriesOnly,
@@ -189,15 +192,15 @@ const Assignment3 = () => {
     .domain([1991, 2017])
     .range([m * 2, s - m * 2]);
 
-  // Visualization Eight: Choropleth
+  // Right Side: Choropleth
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const colorScale = scaleLinear()
-    .domain([0, 60])
+    .domain([0, 70])
     .range(["aliceblue", "steelblue"]);
 
   const highlightScale = scaleLinear()
-    .domain([0, 60])
+    .domain([0, 70])
     .range(["#fff0f0", "#b54646"]);
 
   return (
@@ -235,49 +238,50 @@ const Assignment3 = () => {
                 scale: 147,
               }}
             >
-              <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-              <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const d = data2017.find(
-                      (s) => s["Country Code"] === geo.properties.ISO_A3
-                    );
-                    let h = false;
-                    if (d != null) {
-                      h = highlight.has(d["Country Code"]) === true;
-                    }
+              <ZoomableGroup>
+                <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => {
+                      const d = data2017.find(
+                        (s) => s["Country Code"] === geo.properties.ISO_A3
+                      );
+                      let h = false;
+                      if (d != null) {
+                        h = highlight.has(d["Country Code"]) === true;
+                      }
 
-                    return (
-                      <Geography
-                        onClick={() => toggleHighlight(d)}
-                        onMouseEnter={() => {
-                          if (d != null) {
-                            setTooltipContent(
-                              d["Country Name"] +
-                                " — " +
-                                Math.round(d[women] * 100) / 100 +
-                                "%"
-                            );
+                      return (
+                        <Geography
+                          onClick={() => toggleHighlight(d)}
+                          onMouseEnter={() => {
+                            if (d != null) {
+                              setTooltipContent(
+                                d["Country Name"] +
+                                  " — " +
+                                  Math.round(d[women] * 100) / 100 +
+                                  "%"
+                              );
+                            }
+                          }}
+                          onMouseLeave={() => {
+                            setTooltipContent("");
+                          }}
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={
+                            d
+                              ? h
+                                ? highlightScale(d[women])
+                                : colorScale(d[women])
+                              : "#F5F4F6"
                           }
-                        }}
-                        onMouseLeave={() => {
-                          setTooltipContent("");
-                        }}
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={
-                          d
-                            ? h
-                              ? highlightScale(d[women])
-                              : colorScale(d[women])
-                            : "#F5F4F6"
-                        }
-                      />
-                    );
-                  })
-                }
-              </Geographies>
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+              </ZoomableGroup>
             </ComposableMap>
           </svg>
           <ReactTooltip>{tooltipContent}</ReactTooltip>
@@ -286,7 +290,23 @@ const Assignment3 = () => {
             width={s * 2}
             height={s / 4}
             style={{ border: "1px solid black" }}
-          ></svg>
+            className="timeline"
+          >
+            <SVGBrush
+              brushType="x"
+              getEventMouse={(event) => {
+                const { clientX, clientY } = event;
+                const { left, top } = document
+                  .querySelector(".timeline")
+                  .getBoundingClientRect();
+                return [clientX - left, clientY - top];
+              }}
+              extent={[
+                [0, m],
+                [s * 2, s / 4 - m],
+              ]}
+            />
+          </svg>
         </div>
       )}
     </div>
