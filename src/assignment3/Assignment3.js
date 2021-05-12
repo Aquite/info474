@@ -10,6 +10,7 @@ import {
   Graticule,
 } from "react-simple-maps";
 import { html } from "d3-fetch";
+import ReactTooltip from "react-tooltip";
 
 const Assignment3 = () => {
   const [data, loading] = useFetch(
@@ -52,6 +53,9 @@ const Assignment3 = () => {
       }
     }
   };
+
+  //Use this with onMouseEnter and onMouseLeave to highlight areas you want
+  const [tooltipContent, setTooltipContent] = useState("");
 
   // Wrangling
   // Isolate to countries
@@ -225,6 +229,7 @@ const Assignment3 = () => {
           </svg>
           <svg width={s} height={s} style={{ border: "1px solid black" }}>
             <ComposableMap
+              data-tip=""
               projectionConfig={{
                 rotate: [-10, 0, 0],
                 scale: 147,
@@ -246,6 +251,19 @@ const Assignment3 = () => {
                     return (
                       <Geography
                         onClick={() => toggleHighlight(d)}
+                        onMouseEnter={() => {
+                          if (d != null) {
+                            setTooltipContent(
+                              d["Country Name"] +
+                                " — " +
+                                Math.round(d[women] * 100) / 100 +
+                                "%"
+                            );
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          setTooltipContent("");
+                        }}
                         key={geo.rsmKey}
                         geography={geo}
                         fill={
@@ -262,6 +280,7 @@ const Assignment3 = () => {
               </Geographies>
             </ComposableMap>
           </svg>
+          <ReactTooltip>{tooltipContent}</ReactTooltip>
           <br />
           <svg
             width={s * 2}
