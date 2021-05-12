@@ -86,10 +86,6 @@ const Assignment2 = () => {
 
   // Column names
   const women = "Labor force, female (% of total labor force)";
-  const safetyNet =
-    "Adequacy of social safety net programs (% of total welfare of beneficiary households)";
-  const employChildren =
-    "Children in employment, wage workers (% of children in employment, ages 7-14)";
 
   // Border designs. 500x500 but working area is 460 x 460
   const s = 500; // viz size

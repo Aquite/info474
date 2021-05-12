@@ -19,6 +19,9 @@ export const Header = () => {
             <LinkContainer to="/assignment2">
               <Nav.Link>Assignment 2</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/assignment3">
+              <Nav.Link>Assignment 3</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
