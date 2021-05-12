@@ -57,8 +57,11 @@ const Assignment3 = () => {
     }
   };
 
-  //Use this with onMouseEnter and onMouseLeave to highlight areas you want
+  // Use this with onMouseEnter and onMouseLeave to highlight areas you want
   const [tooltipContent, setTooltipContent] = useState("");
+
+  // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
+  const [yearRange, setYearRange] = useState([2017, 2017]);
 
   // Wrangling
   // Isolate to countries
@@ -127,6 +130,44 @@ const Assignment3 = () => {
     return d.Year == 2017;
   });
 
+  const dataRanged = (r) => {
+    return Array.from(
+      group(
+        dataCountriesOnly.filter((d) => {
+          return +d.Year >= r[0] || +d.Year <= r[1];
+        }),
+        (d) => d["Country Code"]
+      )
+    )
+      .map((d) => {
+        return d[1].sort((a, b) => {
+          return +a.Year > +b.Year;
+        });
+      })
+      .filter((d) => {
+        return d.length == r.length;
+      });
+  };
+
+  const dataRangedEnds = (r) => {
+    return Array.from(
+      group(
+        dataCountriesOnly.filter((d) => {
+          return +d.Year == r[0] || +d.Year == r[1];
+        }),
+        (d) => d["Country Code"]
+      )
+    )
+      .map((d) => {
+        return d[1].sort((a, b) => {
+          return +a.Year > +b.Year;
+        });
+      })
+      .filter((d) => {
+        return r[0] != r[1] ? d.length == r.length : d.length == 1;
+      });
+  };
+
   // Column names
   const women = "Labor force, female (% of total labor force)";
 
@@ -175,22 +216,8 @@ const Assignment3 = () => {
     .range([s - m, m]);
 
   // Bottom: Female Labor Force over time, World
-  const femaleWorldTimeline = Array.from(
-    rollup(
-      dataCountriesOnly,
-      (v) => mean(v, (d) => d[women]),
-      (d) => +d.Year
-    )
-  )
-    .filter((d) => {
-      return d[1] != 0;
-    })
-    .sort()
-    .slice(1); //not large enough sample size in 1990
 
-  const timeScale = scaleLinear()
-    .domain([1991, 2017])
-    .range([m * 2, s - m * 2]);
+  const timeScale = scaleLinear().domain([20, 980]).range([1991, 2017]);
 
   // Right Side: Choropleth
   const geoUrl =
@@ -231,6 +258,16 @@ const Assignment3 = () => {
             })}
           </svg>
           <svg width={s} height={s} style={{ border: "1px solid black" }}>
+            <text
+              x={s - m}
+              textAnchor="end"
+              y={s - m}
+              style={{ fontSize: 10, fontFamily: "Gill Sans, sans serif" }}
+            >
+              {yearRange[0] == yearRange[1]
+                ? yearRange[0]
+                : yearRange[0] + " - " + yearRange[1]}
+            </text>
             <ComposableMap
               data-tip=""
               projectionConfig={{
@@ -243,9 +280,15 @@ const Assignment3 = () => {
                 <Geographies geography={geoUrl}>
                   {({ geographies }) =>
                     geographies.map((geo) => {
-                      const d = data2017.find(
-                        (s) => s["Country Code"] === geo.properties.ISO_A3
+                      const data = dataRangedEnds(yearRange);
+
+                      const c = data.filter(
+                        (s) => s[0]["Country Code"] === geo.properties.ISO_A3
                       );
+                      let d = null;
+                      if (c[0] != null) {
+                        d = c[0][0];
+                      }
                       let h = false;
                       if (d != null) {
                         h = highlight.has(d["Country Code"]) === true;
@@ -302,9 +345,20 @@ const Assignment3 = () => {
                 return [clientX - left, clientY - top];
               }}
               extent={[
-                [0, m],
-                [s * 2, s / 4 - m],
+                [m, m],
+                [s * 2 - m, s / 4 - m],
               ]}
+              onBrushEnd={({ selection }) => {
+                if (selection != null) {
+                  if (selection[1][0] > 980) {
+                    selection[1][0] = 980;
+                  }
+                  setYearRange([
+                    Math.round(timeScale(selection[0][0])),
+                    Math.round(timeScale(selection[1][0])),
+                  ]);
+                }
+              }}
             />
           </svg>
         </div>
