@@ -1,7 +1,5 @@
 import React from "react";
 import { useFetch } from "./hooks/useFetch";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
 import { extent, max, bin, rollup, group, mean } from "d3-array";
 import { scaleLinear, scaleSqrt } from "d3-scale";
 import {
@@ -175,52 +173,6 @@ const Assignment3 = () => {
     .domain([1991, 2017])
     .range([m * 2, s - m * 2]);
 
-  // Visualization four: Change in female Labor Force as a percentage of total labor force from 1991 to 2017
-  const dataFemChange = Array.from(
-    group(
-      dataCountriesOnly.filter((d) => {
-        return d.Year == 2017 || d.Year == 1991;
-      }),
-      (d) => d["Country Code"]
-    )
-  )
-    .map((d) => {
-      return d[1].sort((a, b) => {
-        return +a.Year > +b.Year;
-      });
-    })
-    .filter((d) => {
-      return d.length == 2;
-    });
-
-  // Visualization Six: Scatterplot
-  const radScale = scaleSqrt()
-    .domain(
-      extent(
-        dataFemChange.map((d) => {
-          return +d[1][women] * 0.01 * +d[1]["Labor force, total"];
-        })
-      )
-    )
-    .range([1, 30]);
-
-  // Visualization Seven: Change in Deltas (histogram)
-  const binForce = bin().thresholds(20);
-  const bucketsForce = binForce(
-    dataFemChange.map((d) => {
-      return +d[1][women] - d[0][women];
-    })
-  );
-  const forceYScale = scaleLinear()
-    .domain([
-      0,
-      max(
-        bucketsForce.map((bin) => {
-          return bin.length;
-        })
-      ),
-    ])
-    .range([0, s - m * 2]);
   // Visualization Eight: Choropleth
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -239,16 +191,17 @@ const Assignment3 = () => {
             {yLabels(s / 2 - halfCodeWidth)}
             {data2017.map((d, i) => {
               if (d[women] != 0) {
+                const highlight = MENA.includes(d["Country Code"]) === true;
                 return (
                   <line
-                    key={"barcode" + i}
+                    key={i}
                     x1={s / 2 - halfCodeWidth}
                     y1={yScale(d[women])}
-                    x2={s / 2 + halfCodeWidth}
+                    x2={s / 2 + halfCodeWidth + (highlight ? 10 : 0)}
                     y2={yScale(d[women])}
                     fill="none"
-                    stroke={"steelblue"}
-                    strokeOpacity={0.33}
+                    stroke={highlight ? "red" : "steelblue"}
+                    strokeOpacity={highlight ? 0.5 : 0.33}
                   />
                 );
               }
