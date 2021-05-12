@@ -12,5 +12,5 @@ create table if not exists SignIns (
     signInID int not null auto_increment primary key,
     userID int not null,
     signInTime datetime not null,
-    clientIP varchar(15) not null
+    clientIP varchar(128) not null
 );
