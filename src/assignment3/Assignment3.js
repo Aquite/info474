@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 import { extent, max, bin, rollup, group, mean } from "d3-array";
 import { scaleLinear, scaleSqrt } from "d3-scale";
@@ -9,11 +9,49 @@ import {
   Sphere,
   Graticule,
 } from "react-simple-maps";
+import { html } from "d3-fetch";
 
 const Assignment3 = () => {
   const [data, loading] = useFetch(
     "https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv"
   );
+
+  // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
+  // Do not use setHighlight because you won't do it properly. See the below function
+  const [highlight, setHighlight] = useState(
+    new Set([
+      "DZA",
+      "BHR",
+      "EGY",
+      "IRN",
+      "IRQ",
+      "ISR",
+      "JOR",
+      "KWT",
+      "LBN",
+      "LBY",
+      "MAR",
+      "OMN",
+      "QAT",
+      "SAU",
+      "SYR",
+      "TUN",
+      "ARE",
+      "YEM",
+    ])
+  );
+
+  // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
+  const toggleHighlight = (c) => {
+    if (c != null) {
+      if (highlight.has(c["Country Code"])) {
+        highlight.delete(c["Country Code"]);
+        setHighlight(new Set(highlight));
+      } else {
+        setHighlight(new Set(highlight.add(c["Country Code"])));
+      }
+    }
+  };
 
   // Wrangling
   // Isolate to countries
@@ -84,10 +122,6 @@ const Assignment3 = () => {
 
   // Column names
   const women = "Labor force, female (% of total labor force)";
-  const safetyNet =
-    "Adequacy of social safety net programs (% of total welfare of beneficiary households)";
-  const employChildren =
-    "Children in employment, wage workers (% of children in employment, ages 7-14)";
 
   // Border designs. 500x500 but working area is 460 x 460
   const s = 500; // viz size
@@ -133,28 +167,6 @@ const Assignment3 = () => {
     .domain([0, 100])
     .range([s - m, m]);
 
-  // Visualization two: Female Labor Force, MENA highlight
-  const MENA = [
-    "DZA",
-    "BHR",
-    "EGY",
-    "IRN",
-    "IRQ",
-    "ISR",
-    "JOR",
-    "KWT",
-    "LBN",
-    "LBY",
-    "MAR",
-    "OMN",
-    "QAT",
-    "SAU",
-    "SYR",
-    "TUN",
-    "ARE",
-    "YEM",
-  ];
-
   // Visualization three: Female Labor Force over time, World
   const femaleWorldTimeline = Array.from(
     rollup(
@@ -180,6 +192,10 @@ const Assignment3 = () => {
     .domain([0, 60])
     .range(["aliceblue", "steelblue"]);
 
+  const highlightScale = scaleLinear()
+    .domain([0, 60])
+    .range(["#fff0f0", "#b54646"]);
+
   return (
     <div>
       <h2>Assignment 3</h2>
@@ -191,17 +207,17 @@ const Assignment3 = () => {
             {yLabels(s / 2 - halfCodeWidth)}
             {data2017.map((d, i) => {
               if (d[women] != 0) {
-                const highlight = MENA.includes(d["Country Code"]) === true;
+                const h = highlight.has(d["Country Code"]) === true;
                 return (
                   <line
                     key={i}
                     x1={s / 2 - halfCodeWidth}
                     y1={yScale(d[women])}
-                    x2={s / 2 + halfCodeWidth + (highlight ? 10 : 0)}
+                    x2={s / 2 + halfCodeWidth + (h ? 10 : 0)}
                     y2={yScale(d[women])}
                     fill="none"
-                    stroke={highlight ? "red" : "steelblue"}
-                    strokeOpacity={highlight ? 0.5 : 0.33}
+                    stroke={h ? "#b54646" : "steelblue"}
+                    strokeOpacity={h ? 0.5 : 0.33}
                   />
                 );
               }
@@ -222,11 +238,23 @@ const Assignment3 = () => {
                     const d = data2017.find(
                       (s) => s["Country Code"] === geo.properties.ISO_A3
                     );
+                    let h = false;
+                    if (d != null) {
+                      h = highlight.has(d["Country Code"]) === true;
+                    }
+
                     return (
                       <Geography
+                        onClick={() => toggleHighlight(d)}
                         key={geo.rsmKey}
                         geography={geo}
-                        fill={d ? colorScale(d[women]) : "#F5F4F6"}
+                        fill={
+                          d
+                            ? h
+                              ? highlightScale(d[women])
+                              : colorScale(d[women])
+                            : "#F5F4F6"
+                        }
                       />
                     );
                   })
@@ -234,6 +262,12 @@ const Assignment3 = () => {
               </Geographies>
             </ComposableMap>
           </svg>
+          <br />
+          <svg
+            width={s * 2}
+            height={s / 4}
+            style={{ border: "1px solid black" }}
+          ></svg>
         </div>
       )}
     </div>
