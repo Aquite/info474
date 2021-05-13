@@ -44,6 +44,7 @@ const Assignment3 = () => {
       "YEM",
     ])
   );
+  
 
   // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
   const toggleHighlight = (c) => {
@@ -230,6 +231,51 @@ const Assignment3 = () => {
     .domain([0, 70])
     .range(["#fff0f0", "#b54646"]);
 
+
+  //line plot stuff
+
+  let highlightArray = [...highlight];
+  //console.log(highlightArray);
+
+  const minYear = 1977 //set to a random year for testing  
+  const maxYear = 2017 //set to a random year for testing
+  let xAxisLength = (s - m) - 45;
+  let xintervalLength = xAxisLength / (maxYear - minYear)
+  function getXForYear(year){
+    return 45 + xintervalLength*(year - minYear);
+  }
+  let yAxisLength = (s - m + t) - (m+t);
+  function getYForPercentage(percentage){
+    return (s - m) - yAxisLength *(percentage/100);
+  }
+  const xScale = scaleLinear()
+  .domain([minYear, maxYear])
+  .range([m, s - m]);
+  let highLightedCountryData = highlightArray.map(function(countryCode){
+    let color = "#" + Math.floor(Math.random()*16777215).toString(16);
+    return {
+      country: countryCode,
+      countryColor: color,
+      dots: data.map(function(row, index){
+        if(row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear)
+          return <circle key={index} cx={getXForYear(row["Year"])} cy={getYForPercentage(row[women])} r="3" stroke="black" fill={color} />;
+      })
+    }
+  })
+  let dots = highLightedCountryData.map(function(row, index){
+    return row.dots;
+  })
+
+  const Linegraph = 
+    <svg width={s} height={s} style={{ border: "1px solid black" }}>
+      {yLabels(50)}
+      <line y1={m} y2={s - m} x1={45} x2={45} stroke="black"/>
+      <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black"/>
+      {dots}
+    </svg>
+  //end of line plot stuff
+  
+
   return (
     <div>
       <h2>Assignment 3</h2>
@@ -237,6 +283,7 @@ const Assignment3 = () => {
         <p>loading data...</p>
       ) : (
         <div>
+          {Linegraph}
           <svg width={s} height={s} style={{ border: "1px solid black" }}>
             {yLabels(s / 2 - halfCodeWidth)}
             {data2017.map((d, i) => {
