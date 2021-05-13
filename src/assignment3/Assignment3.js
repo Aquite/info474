@@ -220,9 +220,9 @@ const Assignment3 = () => {
 
   // Bottom: Female Labor Force over time, World
 
-  const timeScale = scaleLinear().domain([20, 980]).range([1991, 2017]);
+  const timeScale = scaleLinear().domain([20, 980]).range([1991, 2018]);
   const timeScaleReverse = scaleTime()
-    .domain([new Date(1991, 01, 01), new Date(2017, 01, 01)])
+    .domain([new Date(1991, 01, 01), new Date(2018, 01, 01)])
     .range([20, 980]);
 
   // Right Side: Choropleth
@@ -301,7 +301,7 @@ const Assignment3 = () => {
       ) : (
         <div>
           {yearRange[0] != yearRange[1] ? (
-            <div /> //Linegraph
+            Linegraph
           ) : (
             <svg width={s} height={s} style={{ border: "1px solid black" }}>
               {yLabels(s / 2 - halfCodeWidth)}
@@ -337,8 +337,8 @@ const Assignment3 = () => {
                   id="lines"
                   height={4}
                   width={4}
-                  stroke={"SeaGreen"}
-                  strokeWidth={0.5}
+                  stroke={"#776865"}
+                  strokeWidth={0.6}
                   orientation={["diagonal"]}
                 />
                 <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
@@ -431,9 +431,10 @@ const Assignment3 = () => {
             <AxisBottom
               scale={timeScaleReverse}
               top={s / 4 - m * 2}
-              left={0}
+              left={3}
               stroke={"#333333"}
               tickTextFill={"#333333"}
+              numTicks={26}
             />
             <SVGBrush
               brushType="x"
@@ -446,16 +447,16 @@ const Assignment3 = () => {
               }}
               extent={[
                 [m, m],
-                [s * 2 - m, s / 4 - m * 2],
+                [s * 2 - m - 1, s / 4 - m * 2],
               ]}
               onBrushEnd={({ selection }) => {
                 if (selection != null) {
-                  if (selection[1][0] > 980) {
-                    selection[1][0] = 980;
+                  if (selection[1][0] > 979) {
+                    selection[1][0] = 979;
                   }
                   setYearRange([
-                    Math.round(timeScale(selection[0][0])),
-                    Math.round(timeScale(selection[1][0])),
+                    Math.floor(timeScale(selection[0][0])),
+                    Math.floor(timeScale(selection[1][0])),
                   ]);
                 }
               }}
