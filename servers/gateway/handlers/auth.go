@@ -83,7 +83,7 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 			currSession := &sessionState{}
 			err = ctx.sessStore.Get(currSessionId, currSession)
 			if err != nil {
-				http.Error(w, "Error getting current session", http.StatusInternalServerError)
+				http.Error(w, fmt.Sprintf("Error getting session state: %v", err), http.StatusInternalServerError)
 				return
 			}
 			intId = currSession.User.ID
@@ -113,9 +113,9 @@ func (ctx *HandlerContext) SpecificUserHandler(w http.ResponseWriter, r *http.Re
 	} else if r.Method == http.MethodPatch {
 
 		currSession := &sessionState{}
-		err = ctx.sessStore.Get(currSessionId, currSession)
+		_, err = sessions.GetState(r, ctx.key, ctx.sessStore, currSession)
 		if err != nil {
-			http.Error(w, "Error retrieving session state", http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Error getting session state: %v", err), http.StatusInternalServerError)
 			return
 		}
 

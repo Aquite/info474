@@ -10,7 +10,7 @@ export MYSQL_ROOT_PASSWORD=password
 export MYSQL_DATABASE=db
 
 
-export REDISADDR=customNet:6397
+export REDISADDR=rServe:6379
 export SESSIONKEY=bbbff88bc48858d0c7
 
 
@@ -29,7 +29,7 @@ docker run \
     -e TLSCERT=$TLSCERT \
     -e TLSKEY=$TLSKEY \
     -e SESSIONKEY=$SESSIONKEY \
-    -e REDISASSR=$REDISADDR \
+    -e REDISADDR=$REDISADDR \
     -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
     -e MYSQL_DATABASE=$MYSQL_DATABASE \
     -p 443:443 \
