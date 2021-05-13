@@ -236,6 +236,10 @@ const Assignment3 = () => {
     .domain([0, 70])
     .range(["#fff0f0", "#b54646"]);
 
+  const changeScale = scaleLinear()
+    .domain([-15, 0, 15])
+    .range(["#b54646", "#f2f2f2", "#46b557"]);
+
   //line plot stuff
 
   let highlightArray = [...highlight];
@@ -366,8 +370,13 @@ const Assignment3 = () => {
                               if (d != null) {
                                 setTooltipContent(
                                   d["Country Name"] +
-                                    " — " +
-                                    Math.round(d[women] * 100) / 100 +
+                                    ": " +
+                                    Math.round(
+                                      (yearRange[0] == yearRange[1]
+                                        ? d[women]
+                                        : c[0][1][women] - d[women]) * 100
+                                    ) /
+                                      100 +
                                     "%"
                                 );
                               }
@@ -377,7 +386,13 @@ const Assignment3 = () => {
                             }}
                             key={geo.rsmKey}
                             geography={geo}
-                            fill={d ? colorScale(d[women]) : "#F5F4F6"}
+                            fill={
+                              d
+                                ? yearRange[0] != yearRange[1]
+                                  ? changeScale(+c[0][1][women] - +d[women])
+                                  : colorScale(d[women])
+                                : "#F5F4F6"
+                            }
                           />
                           {h ? (
                             <Geography
@@ -386,8 +401,13 @@ const Assignment3 = () => {
                                 if (d != null) {
                                   setTooltipContent(
                                     d["Country Name"] +
-                                      " — " +
-                                      Math.round(d[women] * 100) / 100 +
+                                      ": " +
+                                      Math.round(
+                                        (yearRange[0] == yearRange[1]
+                                          ? d[women]
+                                          : c[0][1][women] - d[women]) * 100
+                                      ) /
+                                        100 +
                                       "%"
                                   );
                                 }
