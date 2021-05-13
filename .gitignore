@@ -2,8 +2,11 @@
 
 # dependencies
 /node_modules
+/.parcel-cache
 /.pnp
 .pnp.js
+
+.parcel-cache/
 
 # testing
 /coverage
