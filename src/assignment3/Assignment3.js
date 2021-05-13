@@ -258,16 +258,6 @@ const Assignment3 = () => {
             })}
           </svg>
           <svg width={s} height={s} style={{ border: "1px solid black" }}>
-            <text
-              x={s - m}
-              textAnchor="end"
-              y={s - m}
-              style={{ fontSize: 10, fontFamily: "Gill Sans, sans serif" }}
-            >
-              {yearRange[0] == yearRange[1]
-                ? yearRange[0]
-                : yearRange[0] + " - " + yearRange[1]}
-            </text>
             <ComposableMap
               data-tip=""
               projectionConfig={{
@@ -326,6 +316,16 @@ const Assignment3 = () => {
                 </Geographies>
               </ZoomableGroup>
             </ComposableMap>
+            <text
+              x={s - m}
+              textAnchor="end"
+              y={s - m}
+              style={{ fontSize: 10, fontFamily: "Gill Sans, sans serif" }}
+            >
+              {yearRange[0] == yearRange[1]
+                ? yearRange[0]
+                : yearRange[0] + " - " + yearRange[1]}
+            </text>
           </svg>
           <ReactTooltip>{tooltipContent}</ReactTooltip>
           <br />
