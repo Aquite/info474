@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 import { extent, max, bin, rollup, group, mean } from "d3-array";
-import { scaleLinear, scaleSqrt } from "d3-scale";
+import { scaleLinear } from "d3-scale";
+import { scaleTime } from "@vx/scale";
+import { AxisBottom } from "@vx/axis";
+import { PatternLines } from "@vx/pattern";
 import {
   ComposableMap,
   Geographies,
@@ -44,7 +47,6 @@ const Assignment3 = () => {
       "YEM",
     ])
   );
-  
 
   // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
   const toggleHighlight = (c) => {
@@ -219,6 +221,9 @@ const Assignment3 = () => {
   // Bottom: Female Labor Force over time, World
 
   const timeScale = scaleLinear().domain([20, 980]).range([1991, 2017]);
+  const timeScaleReverse = scaleTime()
+    .domain([new Date(1991, 01, 01), new Date(2017, 01, 01)])
+    .range([20, 980]);
 
   // Right Side: Choropleth
   const geoUrl =
@@ -231,50 +236,62 @@ const Assignment3 = () => {
     .domain([0, 70])
     .range(["#fff0f0", "#b54646"]);
 
-
   //line plot stuff
 
   let highlightArray = [...highlight];
   //console.log(highlightArray);
 
-  const minYear = 1977 //set to a random year for testing  
-  const maxYear = 2017 //set to a random year for testing
-  let xAxisLength = (s - m) - 45;
-  let xintervalLength = xAxisLength / (maxYear - minYear)
-  function getXForYear(year){
-    return 45 + xintervalLength*(year - minYear);
+  const minYear = 1991; //set to a random year for testing
+  const maxYear = 2017; //set to a random year for testing
+  let xAxisLength = s - m - 45;
+  let xintervalLength = xAxisLength / (maxYear - minYear);
+  function getXForYear(year) {
+    return 45 + xintervalLength * (year - minYear);
   }
-  let yAxisLength = (s - m + t) - (m+t);
-  function getYForPercentage(percentage){
-    return (s - m) - yAxisLength *(percentage/100);
+  let yAxisLength = s - m + t - (m + t);
+  function getYForPercentage(percentage) {
+    return s - m - yAxisLength * (percentage / 100);
   }
   const xScale = scaleLinear()
-  .domain([minYear, maxYear])
-  .range([m, s - m]);
-  let highLightedCountryData = highlightArray.map(function(countryCode){
-    let color = "#" + Math.floor(Math.random()*16777215).toString(16);
+    .domain([minYear, maxYear])
+    .range([m, s - m]);
+  let highLightedCountryData = highlightArray.map(function (countryCode) {
+    let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
     return {
       country: countryCode,
       countryColor: color,
-      dots: data.map(function(row, index){
-        if(row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear)
-          return <circle key={index} cx={getXForYear(row["Year"])} cy={getYForPercentage(row[women])} r="3" stroke="black" fill={color} />;
-      })
-    }
-  })
-  let dots = highLightedCountryData.map(function(row, index){
+      dots: data.map(function (row, index) {
+        if (
+          row["Country Code"] === countryCode &&
+          row["Year"] >= minYear &&
+          row["Year"] <= maxYear
+        )
+          return (
+            <circle
+              key={index}
+              cx={getXForYear(row["Year"])}
+              cy={getYForPercentage(row[women])}
+              r="3"
+              stroke="black"
+              fill={color}
+            />
+          );
+      }),
+    };
+  });
+  let dots = highLightedCountryData.map(function (row, index) {
     return row.dots;
-  })
+  });
 
-  const Linegraph = 
+  const Linegraph = (
     <svg width={s} height={s} style={{ border: "1px solid black" }}>
       {yLabels(50)}
-      <line y1={m} y2={s - m} x1={45} x2={45} stroke="black"/>
-      <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black"/>
+      <line y1={m} y2={s - m} x1={45} x2={45} stroke="black" />
+      <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black" />
       {dots}
     </svg>
+  );
   //end of line plot stuff
-  
 
   return (
     <div>
@@ -283,27 +300,30 @@ const Assignment3 = () => {
         <p>loading data...</p>
       ) : (
         <div>
-          {Linegraph}
-          <svg width={s} height={s} style={{ border: "1px solid black" }}>
-            {yLabels(s / 2 - halfCodeWidth)}
-            {data2017.map((d, i) => {
-              if (d[women] != 0) {
-                const h = highlight.has(d["Country Code"]) === true;
-                return (
-                  <line
-                    key={i}
-                    x1={s / 2 - halfCodeWidth}
-                    y1={yScale(d[women])}
-                    x2={s / 2 + halfCodeWidth + (h ? 10 : 0)}
-                    y2={yScale(d[women])}
-                    fill="none"
-                    stroke={h ? "#b54646" : "steelblue"}
-                    strokeOpacity={h ? 0.5 : 0.33}
-                  />
-                );
-              }
-            })}
-          </svg>
+          {yearRange[0] != yearRange[1] ? (
+            <div /> //Linegraph
+          ) : (
+            <svg width={s} height={s} style={{ border: "1px solid black" }}>
+              {yLabels(s / 2 - halfCodeWidth)}
+              {data2017.map((d, i) => {
+                if (d[women] != 0) {
+                  const h = highlight.has(d["Country Code"]) === true;
+                  return (
+                    <line
+                      key={i}
+                      x1={s / 2 - halfCodeWidth}
+                      y1={yScale(d[women])}
+                      x2={s / 2 + halfCodeWidth + (h ? 10 : 0)}
+                      y2={yScale(d[women])}
+                      fill="none"
+                      stroke={h ? "#b54646" : "steelblue"}
+                      strokeOpacity={h ? 0.5 : 0.33}
+                    />
+                  );
+                }
+              })}
+            </svg>
+          )}
           <svg width={s} height={s} style={{ border: "1px solid black" }}>
             <ComposableMap
               data-tip=""
@@ -313,6 +333,14 @@ const Assignment3 = () => {
               }}
             >
               <ZoomableGroup>
+                <PatternLines
+                  id="lines"
+                  height={4}
+                  width={4}
+                  stroke={"SeaGreen"}
+                  strokeWidth={0.5}
+                  orientation={["diagonal"]}
+                />
                 <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
                 <Geographies geography={geoUrl}>
                   {({ geographies }) =>
@@ -330,33 +358,51 @@ const Assignment3 = () => {
                       if (d != null) {
                         h = highlight.has(d["Country Code"]) === true;
                       }
-
                       return (
-                        <Geography
-                          onClick={() => toggleHighlight(d)}
-                          onMouseEnter={() => {
-                            if (d != null) {
-                              setTooltipContent(
-                                d["Country Name"] +
-                                  " — " +
-                                  Math.round(d[women] * 100) / 100 +
-                                  "%"
-                              );
-                            }
-                          }}
-                          onMouseLeave={() => {
-                            setTooltipContent("");
-                          }}
-                          key={geo.rsmKey}
-                          geography={geo}
-                          fill={
-                            d
-                              ? h
-                                ? highlightScale(d[women])
-                                : colorScale(d[women])
-                              : "#F5F4F6"
-                          }
-                        />
+                        <React.Fragment key={geo.rsmKey + "frag"}>
+                          <Geography
+                            onClick={() => toggleHighlight(d)}
+                            onMouseEnter={() => {
+                              if (d != null) {
+                                setTooltipContent(
+                                  d["Country Name"] +
+                                    " — " +
+                                    Math.round(d[women] * 100) / 100 +
+                                    "%"
+                                );
+                              }
+                            }}
+                            onMouseLeave={() => {
+                              setTooltipContent("");
+                            }}
+                            key={geo.rsmKey}
+                            geography={geo}
+                            fill={d ? colorScale(d[women]) : "#F5F4F6"}
+                          />
+                          {h ? (
+                            <Geography
+                              onClick={() => toggleHighlight(d)}
+                              onMouseEnter={() => {
+                                if (d != null) {
+                                  setTooltipContent(
+                                    d["Country Name"] +
+                                      " — " +
+                                      Math.round(d[women] * 100) / 100 +
+                                      "%"
+                                  );
+                                }
+                              }}
+                              onMouseLeave={() => {
+                                setTooltipContent("");
+                              }}
+                              key={geo.rsmKey + "highlight"}
+                              geography={geo}
+                              fill={"url('#lines')"}
+                            />
+                          ) : (
+                            <div />
+                          )}
+                        </React.Fragment>
                       );
                     })
                   }
@@ -382,6 +428,13 @@ const Assignment3 = () => {
             style={{ border: "1px solid black" }}
             className="timeline"
           >
+            <AxisBottom
+              scale={timeScaleReverse}
+              top={s / 4 - m * 2}
+              left={0}
+              stroke={"#333333"}
+              tickTextFill={"#333333"}
+            />
             <SVGBrush
               brushType="x"
               getEventMouse={(event) => {
@@ -393,7 +446,7 @@ const Assignment3 = () => {
               }}
               extent={[
                 [m, m],
-                [s * 2 - m, s / 4 - m],
+                [s * 2 - m, s / 4 - m * 2],
               ]}
               onBrushEnd={({ selection }) => {
                 if (selection != null) {
