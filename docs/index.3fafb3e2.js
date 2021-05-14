@@ -45904,10 +45904,10 @@ try {
             return (
               /*#__PURE__*/_reactDefault.default.createElement("line", {
                 key: countryCode + year + "line",
-                x1: getXForYear(year),
-                y1: getYForPercentage(countryData[year]),
-                x2: getXForYear(nextYear),
-                y2: getYForPercentage(countryData[nextYear]),
+                x1: getXForYear(year) - 1,
+                y1: getYForPercentage(countryData[year]) + 1,
+                x2: getXForYear(nextYear) - 1,
+                y2: getYForPercentage(countryData[nextYear]) + 1,
                 stroke: "#776865",
                 __self: this,
                 __source: {
