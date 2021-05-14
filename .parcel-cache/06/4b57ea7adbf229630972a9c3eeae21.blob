@@ -1,0 +1,398 @@
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _hooksUseFetch = require("./hooks/useFetch");
+  var _d3Array = require("d3-array");
+  var _d3Scale = require("d3-scale");
+  var _reactSimpleMaps = require("react-simple-maps");
+  require("d3-fetch");
+  var _reactTooltip = require("react-tooltip");
+  var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
+  var _reactSvgBrush = require("react-svg-brush");
+  var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment3\\Assignment3.js", _s = $RefreshSig$();
+  const Assignment3 = () => {
+    _s();
+    const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
+    // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
+    // Do not use setHighlight because you won't do it properly. See the below function
+    const [highlight, setHighlight] = _react.useState(new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"]));
+    // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
+    const toggleHighlight = c => {
+      if (c != null) {
+        if (highlight.has(c["Country Code"])) {
+          highlight.delete(c["Country Code"]);
+          setHighlight(new Set(highlight));
+        } else {
+          setHighlight(new Set(highlight.add(c["Country Code"])));
+        }
+      }
+    };
+    // Use this with onMouseEnter and onMouseLeave to highlight areas you want
+    const [tooltipContent, setTooltipContent] = _react.useState("");
+    // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
+    const [yearRange, setYearRange] = _react.useState([2017, 2017]);
+    // Wrangling
+    // Isolate to countries
+    // List of country codes that aren't countries
+    // Should not be included in the data set
+    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+    // Checks whether a country's code is included in the dataset
+    const checkCode = d => {
+      return !badCodes.includes(d["Country Code"]);
+    };
+    // The data we want to work with
+    const dataCountriesOnly = data.filter(checkCode);
+    const data2017 = dataCountriesOnly.filter(d => {
+      return d.Year == 2017;
+    });
+    const dataRanged = r => {
+      return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+        return +d.Year >= r[0] || +d.Year <= r[1];
+      }), d => d["Country Code"])).map(d => {
+        return d[1].sort((a, b) => {
+          return +a.Year > +b.Year;
+        });
+      }).filter(d => {
+        return d.length == 2;
+      });
+    };
+    const dataRangedEnds = r => {
+      return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+        return +d.Year == r[0] || +d.Year == r[1];
+      }), d => d["Country Code"])).map(d => {
+        return d[1].sort((a, b) => {
+          return +a.Year > +b.Year;
+        });
+      }).filter(d => {
+        return d.length == 2;
+      });
+    };
+    // Column names
+    const women = "Labor force, female (% of total labor force)";
+    // Border designs. 500x500 but working area is 460 x 460
+    const s = 500;
+    // viz size
+    const m = 20;
+    // margin size
+    const t = 4;
+    // text alignment factor
+    // Left Side: Female Labor Force
+    const halfCodeWidth = 30;
+    const yLabels = x => /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 183,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: x - 12,
+      textAnchor: "end",
+      y: m + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 184,
+        columnNumber: 7
+      }
+    }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: x - 12,
+      textAnchor: "end",
+      y: s - m + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 192,
+        columnNumber: 7
+      }
+    }, "0%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: x - 12,
+      textAnchor: "end",
+      y: s / 2 + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 200,
+        columnNumber: 7
+      }
+    }, "50%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: x - 10,
+      y1: m,
+      x2: x,
+      y2: m,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 208,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: x - 10,
+      y1: s - m,
+      x2: x,
+      y2: s - m,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 209,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: x - 10,
+      y1: s / 2,
+      x2: x,
+      y2: s / 2,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 210,
+        columnNumber: 7
+      }
+    }));
+    const yScale = _d3Scale.scaleLinear().domain([0, 100]).range([s - m, m]);
+    // Bottom: Female Labor Force over time, World
+    const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2017]);
+    // Right Side: Choropleth
+    const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+    const colorScale = _d3Scale.scaleLinear().domain([0, 70]).range(["aliceblue", "steelblue"]);
+    const highlightScale = _d3Scale.scaleLinear().domain([0, 70]).range(["#fff0f0", "#b54646"]);
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 234,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 235,
+          columnNumber: 7
+        }
+      }, "Assignment 3"), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 237,
+          columnNumber: 9
+        }
+      }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 239,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 240,
+          columnNumber: 11
+        }
+      }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
+        if (d[women] != 0) {
+          const h = highlight.has(d["Country Code"]) === true;
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: s / 2 - halfCodeWidth,
+              y1: yScale(d[women]),
+              x2: s / 2 + halfCodeWidth + (h ? 10 : 0),
+              y2: yScale(d[women]),
+              fill: "none",
+              stroke: h ? "#b54646" : "steelblue",
+              strokeOpacity: h ? 0.5 : 0.33,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 246,
+                columnNumber: 19
+              }
+            })
+          );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 260,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 261,
+          columnNumber: 13
+        }
+      }, "x=", s - m, "textAnchor=\"end\" y=", s - m, "style=", {
+        fontSize: 10,
+        fontFamily: "Gill Sans, sans serif"
+      }, ">", yearRange), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
+        "data-tip": "",
+        projectionConfig: {
+          rotate: [-10, 0, 0],
+          scale: 147
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 267,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ZoomableGroup, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 274,
+          columnNumber: 15
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
+        stroke: "#E4E5E6",
+        strokeWidth: 0.5,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 275,
+          columnNumber: 17
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
+        geography: geoUrl,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 276,
+          columnNumber: 17
+        }
+      }, ({geographies}) => geographies.map(geo => {
+        const data = dataRangedEnds(yearRange);
+        const c = data.filter(s => s[0]["Country Code"] === geo.properties.ISO_A3);
+        let d = null;
+        if (c[0] != null) {
+          d = c[0][0];
+        }
+        let h = false;
+        if (d != null) {
+          h = highlight.has(d["Country Code"]) === true;
+        }
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            onClick: () => toggleHighlight(d),
+            onMouseEnter: () => {
+              if (d != null) {
+                setTooltipContent(d["Country Name"] + " — " + Math.round(d[women] * 100) / 100 + "%");
+              }
+            },
+            onMouseLeave: () => {
+              setTooltipContent("");
+            },
+            key: geo.rsmKey,
+            geography: geo,
+            fill: d ? h ? highlightScale(d[women]) : colorScale(d[women]) : "#F5F4F6",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 294,
+              columnNumber: 25
+            }
+          })
+        );
+      }))))), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 326,
+          columnNumber: 11
+        }
+      }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 327,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s * 2,
+        height: s / 4,
+        style: {
+          border: "1px solid black"
+        },
+        className: "timeline",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 328,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSvgBrushDefault.default, {
+        brushType: "x",
+        getEventMouse: event => {
+          const {clientX, clientY} = event;
+          const {left, top} = document.querySelector(".timeline").getBoundingClientRect();
+          return [clientX - left, clientY - top];
+        },
+        extent: [[m, m], [s * 2 - m, s / 4 - m]],
+        onBrushEnd: ({selection}) => {
+          if (selection != null) {
+            if (selection[1][0] > 980) {
+              selection[1][0] = 980;
+            }
+            setYearRange([Math.round(timeScale(selection[0][0])), Math.round(timeScale(selection[1][0]))]);
+          }
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 334,
+          columnNumber: 13
+        }
+      }))))
+    );
+  };
+  _s(Assignment3, "RElh/o4OmWX/dRwsURIV3C6lkfY=", false, function () {
+    return [_hooksUseFetch.useFetch];
+  });
+  _c = Assignment3;
+  exports.default = Assignment3;
+  var _c;
+  $RefreshReg$(_c, "Assignment3");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

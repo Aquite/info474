@@ -1,0 +1,816 @@
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _hooksUseFetch = require("./hooks/useFetch");
+  var _reactBootstrapTabs = require("react-bootstrap/Tabs");
+  var _reactBootstrapTabsDefault = _parcelHelpers.interopDefault(_reactBootstrapTabs);
+  var _reactBootstrapTab = require("react-bootstrap/Tab");
+  var _reactBootstrapTabDefault = _parcelHelpers.interopDefault(_reactBootstrapTab);
+  var _d3Array = require("d3-array");
+  var _d3Scale = require("d3-scale");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
+  const Assignment2 = () => {
+    _s();
+    const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
+    // Wrangling
+    // Isolate to countries
+    // List of country codes that aren't countries
+    // Should not be included in the data set
+    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+    // Checks whether a country's code is included in the dataset
+    const checkCode = d => {
+      return !badCodes.includes(d["Country Code"]);
+    };
+    // The data we want to work with
+    const dataCountriesOnly = data.filter(checkCode);
+    const data2017 = dataCountriesOnly.filter(d => {
+      return d.Year == 2017;
+    });
+    // Column names
+    const women = "Labor force, female (% of total labor force)";
+    const safetyNet = "Adequacy of social safety net programs (% of total welfare of beneficiary households)";
+    const employChildren = "Children in employment, wage workers (% of children in employment, ages 7-14)";
+    // Border designs. 500x500 but working area is 460 x 460
+    const s = 500;
+    // viz size
+    const m = 20;
+    // margin size
+    const t = 4;
+    // text alignment factor
+    // Visualization one: Female Labor Force
+    const halfCodeWidth = 30;
+    const femLabels = /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 95,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: s / 2 - halfCodeWidth - 12,
+      textAnchor: "end",
+      y: m + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 96,
+        columnNumber: 7
+      }
+    }, "100"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: s / 2 - halfCodeWidth - 12,
+      textAnchor: "end",
+      y: s - m + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 104,
+        columnNumber: 7
+      }
+    }, "0"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+      x: s / 2 - halfCodeWidth - 12,
+      textAnchor: "end",
+      y: s / 2 + t,
+      style: {
+        fontSize: 15,
+        fontFamily: "Gill Sans, sans serif"
+      },
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 112,
+        columnNumber: 7
+      }
+    }, "50"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: s / 2 - halfCodeWidth - 10,
+      y1: m,
+      x2: s / 2 - halfCodeWidth,
+      y2: m,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 120,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: s / 2 - halfCodeWidth - 10,
+      y1: s - m,
+      x2: s / 2 - halfCodeWidth,
+      y2: s - m,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 127,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: s / 2 - halfCodeWidth - 10,
+      y1: s / 2,
+      x2: s / 2 - halfCodeWidth,
+      y2: s / 2,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 134,
+        columnNumber: 7
+      }
+    }));
+    const yScale = _d3Scale.scaleLinear().domain([0, 100]).range([s - m, m]);
+    // Visualization two: Female Labor Force, MENA highlight
+    const MENA = ["DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"];
+    // Visualization three: Female Labor Force over time, World
+    const femaleWorldTimeline = Array.from(_d3Array.rollup(dataCountriesOnly, v => _d3Array.mean(v, d => d[women]), d => +d.Year)).filter(d => {
+      return d[1] != 0;
+    }).sort().slice(1);
+    // not large enough sample size in 1990
+    const timeScale = _d3Scale.scaleLinear().domain([1991, 2017]).range([m * 2, s - m * 2]);
+    // Visualization four: Change in female Labor Force as a percentage of total labor force from 1991 to 2017
+    const femChange = Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+      return d.Year == 2017 || d.Year == 1991;
+    }), d => d["Country Code"])).map(d => {
+      return d[1].sort(d => d.Year);
+    });
+    console.log(femChange);
+    // Visualization Five: Female Labor force
+    /*const binFemale = bin().thresholds([0, 10, 20, 30, 40, 50, 60, 70, 80, 90]);
+    const bucketsFemale = binFemale(
+    data2017.map((d) => {
+    if (+d[women] != 0) {
+    console.log(d["Country Name"], d[women]);
+    return +d[women];
+    }
+    })
+    );
+    console.log(
+    extent(
+    data2017.map((d) => {
+    if (d[women] != 0) {
+    return +d[women];
+    }
+    })
+    )
+    );
+    console.log(bucketsFemale);
+    const femYScale = scaleLinear()
+    .domain([
+    0,
+    max(
+    bucketsFemale.map((bin) => {
+    return bin.length;
+    })
+    ),
+    ])
+    .range([0, s - m * 2]);*/
+    // Visualization Six: Unemployment by country in 2015
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 236,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h4", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 237,
+          columnNumber: 7
+        }
+      }, "These are my assignment 2 visualizations"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 238,
+          columnNumber: 7
+        }
+      }, loading && "loading data!"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabsDefault.default, {
+        defaultActiveKey: "women",
+        id: "assignment-2-tabs",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 239,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "women",
+        title: "Female Labor Force 2017 (Barcode)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 240,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 241,
+          columnNumber: 11
+        }
+      }, "Female labor force as a percentage of the total labor force in 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 244,
+          columnNumber: 11
+        }
+      }, femLabels, data2017.map((d, i) => {
+        if (d[women] != 0) {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: s / 2 - halfCodeWidth,
+              y1: yScale(d[women]),
+              x2: s / 2 + halfCodeWidth,
+              y2: yScale(d[women]),
+              fill: "none",
+              stroke: "steelblue",
+              strokeOpacity: 0.33,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 249,
+                columnNumber: 19
+              }
+            })
+          );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 263,
+          columnNumber: 11
+        }
+      }, "This chart shows the female to male ratio of the world labor force. Each line on the bar graph represents a country. Most countries appear to be roughly evenly divided, with just under 50% of the workforce being female. However, the data also skews left, indicating many countries contain few women in the workforce while no countries contain few men.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "menawomen",
+        title: "Female Labor Force in MENA, 2017 (Hightlight)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 272,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 276,
+          columnNumber: 11
+        }
+      }, "Female labor force as a percentage of the total labor force in 2017 with the MENA region in red"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 280,
+          columnNumber: 11
+        }
+      }, femLabels, data2017.map((d, i) => {
+        if (d[women] != 0) {
+          const highlight = MENA.includes(d["Country Code"]) === true;
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: s / 2 - halfCodeWidth,
+              y1: yScale(d[women]),
+              x2: s / 2 + halfCodeWidth + (highlight ? 10 : 0),
+              y2: yScale(d[women]),
+              fill: "none",
+              stroke: highlight ? "red" : "steelblue",
+              strokeOpacity: highlight ? 0.5 : 0.33,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 286,
+                columnNumber: 19
+              }
+            })
+          );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 300,
+          columnNumber: 11
+        }
+      }, "The MENA region consists of countries from the Middle East and North Africa. I've highlighted those countries in red and extended them to be visible without requiring color. All of the MENA countries fail to pass 25% female workforce, with the solitary of outlier of Israel at around 46%. Palestine is not included in the dataset.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "averagefemale",
+        title: "Average Female Labor, 1991-2017 (line)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 308,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 312,
+          columnNumber: 11
+        }
+      }, "Average female labor force among recorded countries as a percentage of total labor force among recorded countries from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 316,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: m * 2,
+        y1: s / 2,
+        x2: s - m * 2,
+        y2: s / 2,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 317,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "end",
+        x: m * 2 - 4,
+        y: s / 2 + 3,
+        style: {
+          fontSize: 15,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 324,
+          columnNumber: 13
+        }
+      }, "50%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: m * 2,
+        y1: m,
+        x2: s - m * 2,
+        y2: m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 335,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "end",
+        x: m * 2 - 4,
+        y: m + 3,
+        style: {
+          fontSize: 15,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 336,
+          columnNumber: 13
+        }
+      }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: m * 2,
+        y1: s - m,
+        x2: s - m * 2,
+        y2: s - m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 347,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "end",
+        x: m * 2 - 10,
+        y: s - m + 3,
+        style: {
+          fontSize: 15,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 354,
+          columnNumber: 13
+        }
+      }, "0%"), femaleWorldTimeline.map((d, i) => {
+        if (i != 0) {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 368,
+                columnNumber: 19
+              }
+            }, /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: timeScale(femaleWorldTimeline[i - 1][0]),
+              y1: yScale(femaleWorldTimeline[i - 1][1]),
+              x2: timeScale(d[0]),
+              y2: yScale(d[1]),
+              fill: "none",
+              stroke: "steelblue",
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 369,
+                columnNumber: 21
+              }
+            }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: "label " + i,
+              x1: timeScale(d[0]),
+              y1: s - m,
+              x2: timeScale(d[0]),
+              y2: m,
+              opacity: 0.3,
+              fill: "none",
+              stroke: "black",
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 378,
+                columnNumber: 21
+              }
+            }), d[0] % 5 == 1 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
+              key: "year" + i,
+              textAnchor: "middle",
+              x: timeScale(d[0]),
+              y: s - m / 2,
+              style: {
+                fontSize: 10,
+                fontFamily: "Gill Sans, sans serif"
+              },
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 389,
+                columnNumber: 23
+              }
+            }, d[0]) : /*#__PURE__*/_reactDefault.default.createElement("text", {
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 402,
+                columnNumber: 23
+              }
+            }))
+          );
+        } else {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 408,
+                columnNumber: 19
+              }
+            }, /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: "label " + i,
+              x1: timeScale(d[0]),
+              y1: s - m,
+              x2: timeScale(d[0]),
+              y2: m,
+              opacity: 0.3,
+              fill: "none",
+              stroke: "black",
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 409,
+                columnNumber: 21
+              }
+            }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+              key: "year" + i,
+              textAnchor: "middle",
+              x: timeScale(d[0]),
+              y: s - m / 2,
+              style: {
+                fontSize: 10,
+                fontFamily: "Gill Sans, sans serif"
+              },
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 419,
+                columnNumber: 21
+              }
+            }, d[0]))
+          );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 436,
+          columnNumber: 11
+        }
+      }, "Although we can see the female labor force roughly increasing, it isn't at a significant enough pace to reach 50% anytime soon. This indicates that globally, the world is unequal. Note: this is an average of all countries, not weighted by population, so it is not the percentage of the world labor force that is female.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "changes",
+        title: "Change in Female Labor, 1991-2017 (idk what to call this one)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 444,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 448,
+          columnNumber: 11
+        }
+      }, "Change in female Labor Force as a percentage of total labor force from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 452,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 4,
+        y1: m,
+        x2: s / 4,
+        y2: s - m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 453,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s - s / 4,
+        y1: m,
+        x2: s - s / 4,
+        y2: s - m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 454,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: s / 4,
+        y: s - m / 2,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 461,
+          columnNumber: 13
+        }
+      }, "1991"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        textAnchor: "middle",
+        x: s - s / 4,
+        y: s - m / 2,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 472,
+          columnNumber: 13
+        }
+      }, "2017"), data2017.map((d, i) => {
+        if (d[women] != 0) {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: s / 2 - halfCodeWidth,
+              y1: yScale(d[women]),
+              x2: s / 2 + halfCodeWidth,
+              y2: yScale(d[women]),
+              fill: "none",
+              stroke: "steelblue",
+              strokeOpacity: 0.33,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 487,
+                columnNumber: 19
+              }
+            })
+          );
+        }
+      }))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "safety",
+        title: "Social Safety Net (Barcode)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 502,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 503,
+          columnNumber: 11
+        }
+      }, "Adequacy of social safety net programs (% of total welfare of beneficiary households) by country in 2010"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        style: {
+          border: "1px solid black"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 507,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - halfCodeWidth - 12,
+        textAnchor: "end",
+        y: m + t,
+        style: {
+          fontSize: 15,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 508,
+          columnNumber: 13
+        }
+      }, "100"), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s / 2 - halfCodeWidth - 12,
+        textAnchor: "end",
+        y: s - m + t,
+        style: {
+          fontSize: 15,
+          fontFamily: "Gill Sans, sans serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 516,
+          columnNumber: 13
+        }
+      }, "0"), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - halfCodeWidth - 10,
+        y1: m,
+        x2: s / 2 - halfCodeWidth,
+        y2: m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 524,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+        x1: s / 2 - halfCodeWidth - 10,
+        y1: s - m,
+        x2: s / 2 - halfCodeWidth,
+        y2: s - m,
+        stroke: "black",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 531,
+          columnNumber: 13
+        }
+      }), data2017.map((d, i) => {
+        if (d[safetyNet] != 0) {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i,
+              x1: s / 2 - halfCodeWidth,
+              y1: yScale(d[safetyNet]),
+              x2: s / 2 + halfCodeWidth,
+              y2: yScale(d[safetyNet]),
+              fill: "none",
+              stroke: "steelblue",
+              strokeOpacity: 0.5,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 541,
+                columnNumber: 19
+              }
+            })
+          );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("h5", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 555,
+          columnNumber: 11
+        }
+      }, "From WorldBank:"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 556,
+          columnNumber: 11
+        }
+      }, "\"Adequacy of social safety net programs is measured by the total transfer amount received by the population participating in social safety net programs as a share of their total welfare. Welfare is defined as the total income or total expenditure of beneficiary households. Social safety net programs include cash transfers and last resort programs, noncontributory social pensions, other cash transfers programs (child, family and orphan allowances, birth and death grants, disability benefits, and other allowances), conditional cash transfers, in-kind food transfers (food stamps and vouchers, food rations, supplementary feeding, and emergency food distribution), school feeding, other social assistance programs (housing allowances, scholarships, fee waivers, health subsidies, and other social assistance) and public works programs (cash for work and food for work). Estimates include both direct and indirect beneficiaries.\""), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 573,
+          columnNumber: 11
+        }
+      }, "Thus, we can see that for the majority of countries, saftey net programs are often inadequate and fail to meet the expenditures of beneficiary households")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "children",
+        title: "Male vs Female Child Labor (Scatterplot)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 579,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "unemploy",
+        title: "Unemployment (Geodata)",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 583,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "five",
+        title: "Five",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 584,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
+        eventKey: "six",
+        title: "Six",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 609,
+          columnNumber: 9
+        }
+      })))
+    );
+  };
+  _s(Assignment2, "Jm65JCcgUFoenM4DufkEA80vRVI=", false, function () {
+    return [_hooksUseFetch.useFetch];
+  });
+  _c = Assignment2;
+  exports.default = Assignment2;
+  var _c;
+  $RefreshReg$(_c, "Assignment2");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
