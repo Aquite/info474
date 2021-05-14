@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
-import { extent, max, bin, rollup, group, mean } from "d3-array";
+import { group } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { scaleTime } from "@vx/scale";
 import { AxisBottom, AxisLeft } from "@vx/axis";
@@ -10,10 +10,8 @@ import {
   Geographies,
   Geography,
   Sphere,
-  Graticule,
   ZoomableGroup,
 } from "react-simple-maps";
-import { html } from "d3-fetch";
 import ReactTooltip from "react-tooltip";
 import SVGBrush from "react-svg-brush";
 
@@ -430,25 +428,7 @@ const Assignment3 = () => {
     });
   };
 
-  const dataRanged = (r) => {
-    return Array.from(
-      group(
-        dataCountriesOnly.filter((d) => {
-          return +d.Year >= r[0] || +d.Year <= r[1];
-        }),
-        (d) => d["Country Code"]
-      )
-    )
-      .map((d) => {
-        return d[1].sort((a, b) => {
-          return +a.Year > +b.Year;
-        });
-      })
-      .filter((d) => {
-        return d.length == r.length;
-      });
-  };
-
+  // filters the range of data to endyears based on years
   const dataRangedEnds = (r) => {
     return Array.from(
       group(
@@ -468,7 +448,7 @@ const Assignment3 = () => {
       });
   };
 
-  // Column names
+  // Column names. used in d[women] to pull column
   const women = "Labor force, female (% of total labor force)";
 
   // Border designs. 500x500 but working area is 460 x 460
@@ -479,43 +459,11 @@ const Assignment3 = () => {
   // Left Side: Female Labor Force
   const halfCodeWidth = 30;
 
-  const yLabels = (x) => (
-    <React.Fragment>
-      <text
-        x={x - 12}
-        textAnchor="end"
-        y={m + t}
-        style={{ fontSize: 15, fontFamily: "Gill Sans, sans serif" }}
-      >
-        100%
-      </text>
-      <text
-        x={x - 12}
-        textAnchor="end"
-        y={s - m + t}
-        style={{ fontSize: 15, fontFamily: "Gill Sans, sans serif" }}
-      >
-        0%
-      </text>
-      <text
-        x={x - 12}
-        textAnchor="end"
-        y={s / 2 + t}
-        style={{ fontSize: 15, fontFamily: "Gill Sans, sans serif" }}
-      >
-        50%
-      </text>
-      <line x1={x - 10} y1={m} x2={x} y2={m} stroke={"black"} />
-      <line x1={x - 10} y1={s - m} x2={x} y2={s - m} stroke={"black"} />
-      <line x1={x - 10} y1={s / 2} x2={x} y2={s / 2} stroke={"black"} />
-    </React.Fragment>
-  );
-
   const yScale = scaleLinear()
     .domain([0, 100])
     .range([s - m, m]);
 
-  // Bottom: Female Labor Force over time, World
+  // Bottom Side: Female Labor Force over time, World
 
   const timeScale = scaleLinear().domain([20, 980]).range([1991, 2018]);
   const timeScaleReverse = scaleTime()
@@ -553,16 +501,15 @@ const Assignment3 = () => {
     .domain([-15, 0, 15])
     .range(["#b54646", "#f2f2f2", "#46b557"]);
 
-  //line plot stuff
+  // Alternate Left Side: line plot stuff
 
   let highlightArray = [...highlight];
 
   const minYear = yearRange[0]; //set to a random year for testing
-  let maxYear = yearRange[1]; //set to a random year for testing
-  if((yearRange[0] + 5) > yearRange[1])
-  {
+  const maxYear = yearRange[1]; //set to a random year for testing
+  /*if (yearRange[0] + 5 > yearRange[1]) {
     maxYear = yearRange[0] + 5;
-  }
+  }*/
   let xAxisLength = s - m - 45;
   let xintervalLength = xAxisLength / (maxYear - minYear);
   function getXForYear(year) {
@@ -575,29 +522,29 @@ const Assignment3 = () => {
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([m, s - m]);
-  
+
   let [constLineplotColors, updateLineplotColors] = useState({});
 
   let highLightedCountryData = highlightArray.map(function (countryCode) {
-
     let countryData = {};
     let countryName = "Unknown Country";
-    data.forEach(function(row){
-      if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear)
-      {
+    data.forEach(function (row) {
+      if (
+        row["Country Code"] === countryCode &&
+        row["Year"] >= minYear &&
+        row["Year"] <= maxYear
+      ) {
         countryData[parseInt(row["Year"])] = row[women];
         countryName = row["Country Name"];
-        if(constLineplotColors[countryCode] === undefined)
-        {
-          constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-          updateLineplotColors({...constLineplotColors});
+        if (constLineplotColors[countryCode] === undefined) {
+          constLineplotColors[countryCode] =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
+          updateLineplotColors({ ...constLineplotColors });
         }
       }
-    })
+    });
     let color = constLineplotColors[countryCode];
-    if(countryCode === "TCA")
-      console.log(countryData)
-    let countryDots = Object.keys(countryData).map(function(year){
+    let countryDots = Object.keys(countryData).map(function (year) {
       return (
         <circle
           key={countryCode + year + " circle"}
@@ -610,11 +557,11 @@ const Assignment3 = () => {
           <title>{countryName + ", " + year + ": " + countryData[year]}</title>
         </circle>
       );
-    })
-    let countryLines = Object.keys(countryData).map(function(year, index){
+    });
+    let countryLines = Object.keys(countryData).map(function (year, index) {
       let nextYear = parseInt(year) + 1;
-      if(year < maxYear && countryData[nextYear] !== undefined)// || year === minYear + 1)
-      {
+      if (year < maxYear && countryData[nextYear] !== undefined) {
+        // || year === minYear + 1)
         return (
           <line
             key={countryCode + year + "line"}
@@ -622,18 +569,25 @@ const Assignment3 = () => {
             y1={getYForPercentage(countryData[year])}
             x2={getXForYear(nextYear)}
             y2={getYForPercentage(countryData[nextYear])}
-            stroke="black"
-          > 
-            <title>{countryName}</title>
+            stroke="#776865"
+          >
+            <title>
+              {countryName +
+                ", " +
+                year +
+                ": " +
+                Math.round(countryData[year] * 100) / 100 +
+                "%"}
+            </title>
           </line>
         );
       }
-    })
+    });
     return {
       country: countryCode,
       countryColor: color,
       dots: countryDots,
-      lines: countryLines
+      lines: countryLines,
     };
   });
   let dots = highLightedCountryData.map(function (row, index) {
@@ -644,22 +598,44 @@ const Assignment3 = () => {
   });
 
   const timeScaleLineGraph = scaleTime()
-    .domain([new Date(minYear, 1, 1), new Date(maxYear, 1, 1)])
-    .range([45, s-m]);
+    .domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)])
+    .range([45, s - m]);
 
   const Linegraph = (
     <svg width={s} height={s}>
-      {yLabels(50)}
-      <line y1={m} y2={s - m} x1={45} x2={45} stroke="black" />
-      <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black" />
       {lines}
-      {dots}
+      {highlight.size == 0 ? (
+        <text
+          textAnchor="middle"
+          style={{
+            fontSize: 14,
+            fontFamily: "Gill Sans, sans-serif",
+          }}
+          x={s / 2}
+          y={s / 2}
+        >
+          Choose some countries above or on the map
+        </text>
+      ) : (
+        <React.Fragment />
+      )}
       <AxisBottom
-              scale={timeScaleLineGraph}
-              top={s  - m }
-              stroke={"#333333"}
-              tickTextFill={"#333333"}
-            />
+        scale={timeScaleLineGraph}
+        top={s - m - 1}
+        stroke={"#333333"}
+        tickTextFill={"#333333"}
+        numTicks={
+          maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear
+        }
+      />
+      <AxisLeft
+        scale={yScale}
+        top={-1}
+        left={2 * m + 5}
+        stroke={"#333333"}
+        tickTextFill={"#333333"}
+        numTicks={5}
+      />
     </svg>
   );
   //end of line plot stuff
@@ -945,7 +921,7 @@ const Assignment3 = () => {
               x={s - m}
               textAnchor="end"
               y={m}
-              style={{ fontSize: 10, fontFamily: "Gill Sans, sans serif" }}
+              style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
             >
               {yearRange[0] == yearRange[1]
                 ? yearRange[0]
@@ -964,6 +940,7 @@ const Assignment3 = () => {
                     x2={timeScaleReverse(new Date(d.Year, 01, 01))}
                     y2={worldLineScale(d[women])}
                     stroke="steelblue"
+                    key={i + " line"}
                   >
                     <title>{"World: " + worldData[i - 1][women]}</title>
                   </line>
@@ -1044,6 +1021,7 @@ const Assignment3 = () => {
 
 export default Assignment3;
 
+// This goes in countries to make the tooltip work but it lags everything out. Would like to fix with Colin later
 /*                            onMouseEnter={() => {
                               if (d != null) {
                                 setTooltipContent(
