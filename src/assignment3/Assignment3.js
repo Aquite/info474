@@ -135,9 +135,11 @@ const Assignment3 = () => {
   // The data we want to work with
   const dataCountriesOnly = data.filter(checkCode);
 
-  const data2017 = dataCountriesOnly.filter((d) => {
-    return d.Year == 2017;
-  });
+  const dataYearOnly = (y) => {
+    return dataCountriesOnly.filter((d) => {
+      return d.Year == y;
+    });
+  };
 
   const dataRanged = (r) => {
     return Array.from(
@@ -294,7 +296,7 @@ const Assignment3 = () => {
   });
 
   const Linegraph = (
-    <svg width={s} height={s} style={{ border: "1px solid black" }}>
+    <svg width={s} height={s}>
       {yLabels(50)}
       <line y1={m} y2={s - m} x1={45} x2={45} stroke="black" />
       <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black" />
@@ -313,20 +315,20 @@ const Assignment3 = () => {
           {yearRange[0] != yearRange[1] ? (
             Linegraph
           ) : (
-            <svg width={s} height={s} style={{ border: "1px solid black" }}>
+            <svg width={s} height={s}>
               {yLabels(s / 2 - halfCodeWidth)}
-              {data2017.map((d, i) => {
+              {dataYearOnly(yearRange[0]).map((d, i) => {
                 if (d[women] != 0) {
                   const h = highlight.has(d["Country Code"]) === true;
                   return (
                     <line
                       key={i + " barcode"}
-                      x1={s / 2 - halfCodeWidth}
+                      x1={s / 2 - halfCodeWidth - (h ? 10 : 0)}
                       y1={yScale(d[women])}
                       x2={s / 2 + halfCodeWidth + (h ? 10 : 0)}
                       y2={yScale(d[women])}
                       fill="none"
-                      stroke={h ? "#b54646" : "steelblue"}
+                      stroke={h ? "#776865" : "steelblue"}
                       strokeOpacity={h ? 0.5 : 0.33}
                     />
                   );
@@ -334,7 +336,7 @@ const Assignment3 = () => {
               })}
             </svg>
           )}
-          <svg width={s} height={s} style={{ border: "1px solid black" }}>
+          <svg width={s} height={s}>
             <ComposableMap
               data-tip=""
               projectionConfig={{
@@ -448,12 +450,7 @@ const Assignment3 = () => {
           </svg>
           <ReactTooltip>{tooltipContent}</ReactTooltip>
           <br />
-          <svg
-            width={s * 2}
-            height={s / 4}
-            style={{ border: "1px solid black" }}
-            className="timeline"
-          >
+          <svg width={s * 2} height={s / 4} className="timeline">
             <AxisBottom
               scale={timeScaleReverse}
               top={s / 4 - m * 2}
@@ -481,7 +478,7 @@ const Assignment3 = () => {
                   height={30}
                   width={30}
                   style={{ fillOpacity: "0" }}
-                  onClick={() => setYearRange([1991 + value, 1991 + value])}
+                  onMouseDown={() => setYearRange([1991 + value, 1991 + value])}
                 />
               );
             })}
