@@ -26381,7 +26381,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./App.css":"h6p59","react-router-dom":"1PMSK","bootstrap/dist/css/bootstrap.min.css":"5GTF8","./Header.js":"6RY8l","./assignment2/Assignment2.js":"3i3xx","./Home.js":"44uys","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./assignment3/Assignment3.js":"6mjNJ"}],"h6p59":[function() {},{}],"1PMSK":[function(require,module,exports) {
+},{"react":"3b2NM","./App.css":"h6p59","react-router-dom":"1PMSK","bootstrap/dist/css/bootstrap.min.css":"5GTF8","./Header.js":"6RY8l","./assignment2/Assignment2.js":"3i3xx","./assignment3/Assignment3.js":"6mjNJ","./Home.js":"44uys","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"h6p59":[function() {},{}],"1PMSK":[function(require,module,exports) {
 "use strict";
 if ("development" === "production") {
   module.exports = require("./cjs/react-router-dom.min.js");
@@ -45708,40 +45708,7 @@ var define;
   });
 });
 
-},{}],"44uys":[function(require,module,exports) {
-var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-try {
-  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-  _parcelHelpers.defineInteropFlag(exports);
-  var _react = require('react');
-  var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Home.js";
-  const Home = () => {
-    return (
-      /*#__PURE__*/_reactDefault.default.createElement("div", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 5,
-          columnNumber: 5
-        }
-      }, "Click on one of the assignments above!")
-    );
-  };
-  _c = Home;
-  exports.default = Home;
-  var _c;
-  $RefreshReg$(_c, "Home");
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6mjNJ":[function(require,module,exports) {
+},{}],"6mjNJ":[function(require,module,exports) {
 var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -45754,6 +45721,9 @@ try {
   var _hooksUseFetch = require("./hooks/useFetch");
   var _d3Array = require("d3-array");
   var _d3Scale = require("d3-scale");
+  var _vxScale = require("@vx/scale");
+  var _vxAxis = require("@vx/axis");
+  var _vxPattern = require("@vx/pattern");
   var _reactSimpleMaps = require("react-simple-maps");
   require("d3-fetch");
   var _reactTooltip = require("react-tooltip");
@@ -45764,9 +45734,38 @@ try {
   const Assignment3 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
+    // Have fun scrolling
+    const groupings = [{
+      name: "World",
+      codes: new Set([])
+    }, {
+      name: "North America",
+      codes: new Set(["ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR"])
+    }, {
+      name: "South America",
+      codes: new Set(["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN"])
+    }, {
+      name: "Europe",
+      codes: new Set(["ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX"])
+    }, {
+      name: "MENA",
+      codes: new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"])
+    }, {
+      name: "Asia",
+      codes: new Set(["AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM"])
+    }, {
+      name: "Africa",
+      codes: new Set(["AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
+    }, {
+      name: "Oceania",
+      codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM"])
+    }];
+    // List of country codes that aren't countries
+    // Should not be included in the data set
+    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
     // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
     // Do not use setHighlight because you won't do it properly. See the below function
-    const [highlight, setHighlight] = _react.useState(new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"]));
+    const [highlight, setHighlight] = _react.useState(new Set(groupings[3].codes));
     // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
     const toggleHighlight = c => {
       if (c != null) {
@@ -45782,20 +45781,22 @@ try {
     const [tooltipContent, setTooltipContent] = _react.useState("");
     // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
     const [yearRange, setYearRange] = _react.useState([2017, 2017]);
-    // Wrangling
-    // Isolate to countries
-    // List of country codes that aren't countries
-    // Should not be included in the data set
-    const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+    const changeYear = y => {
+      if (yearRange[0] != y && yearRange[1] != y) {
+        setYearRange([y, y]);
+      }
+    };
     // Checks whether a country's code is included in the dataset
     const checkCode = d => {
       return !badCodes.includes(d["Country Code"]);
     };
     // The data we want to work with
     const dataCountriesOnly = data.filter(checkCode);
-    const data2017 = dataCountriesOnly.filter(d => {
-      return d.Year == 2017;
-    });
+    const dataYearOnly = y => {
+      return dataCountriesOnly.filter(d => {
+        return d.Year == y;
+      });
+    };
     const dataRanged = r => {
       return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
         return +d.Year >= r[0] || +d.Year <= r[1];
@@ -45833,7 +45834,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 183,
+        lineNumber: 483,
         columnNumber: 5
       }
     }, /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -45847,7 +45848,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 184,
+        lineNumber: 484,
         columnNumber: 7
       }
     }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -45861,7 +45862,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 192,
+        lineNumber: 492,
         columnNumber: 7
       }
     }, "0%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -45875,7 +45876,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 200,
+        lineNumber: 500,
         columnNumber: 7
       }
     }, "50%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -45887,7 +45888,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 208,
+        lineNumber: 508,
         columnNumber: 7
       }
     }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -45899,7 +45900,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 209,
+        lineNumber: 509,
         columnNumber: 7
       }
     }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -45911,107 +45912,239 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 210,
+        lineNumber: 510,
         columnNumber: 7
       }
     }));
     const yScale = _d3Scale.scaleLinear().domain([0, 100]).range([s - m, m]);
     // Bottom: Female Labor Force over time, World
-    const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2017]);
+    const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2018]);
+    const timeScaleReverse = _vxScale.scaleTime().domain([new Date(1991, 01, 01), new Date(2018, 01, 01)]).range([20, 980]);
     // Right Side: Choropleth
     const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
     const colorScale = _d3Scale.scaleLinear().domain([0, 70]).range(["aliceblue", "steelblue"]);
     const highlightScale = _d3Scale.scaleLinear().domain([0, 70]).range(["#fff0f0", "#b54646"]);
+    const changeScale = _d3Scale.scaleLinear().domain([-15, 0, 15]).range(["#b54646", "#f2f2f2", "#46b557"]);
+    // line plot stuff
+    let highlightArray = [...highlight];
+    // console.log(highlightArray);
+    const minYear = 1991;
+    // set to a random year for testing
+    const maxYear = 2017;
+    // set to a random year for testing
+    let xAxisLength = s - m - 45;
+    let xintervalLength = xAxisLength / (maxYear - minYear);
+    function getXForYear(year) {
+      return 45 + xintervalLength * (year - minYear);
+    }
+    let yAxisLength = s - m + t - (m + t);
+    function getYForPercentage(percentage) {
+      return s - m - yAxisLength * (percentage / 100);
+    }
+    const xScale = _d3Scale.scaleLinear().domain([minYear, maxYear]).range([m, s - m]);
+    let highLightedCountryData = highlightArray.map(function (countryCode) {
+      let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      return {
+        country: countryCode,
+        countryColor: color,
+        dots: data.map(function (row, index) {
+          if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) return (
+            /*#__PURE__*/_reactDefault.default.createElement("circle", {
+              key: index + " circle",
+              cx: getXForYear(row["Year"]),
+              cy: getYForPercentage(row[women]),
+              r: "3",
+              stroke: "black",
+              fill: color,
+              __self: this,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 571,
+                columnNumber: 13
+              }
+            })
+          );
+        })
+      };
+    });
+    let dots = highLightedCountryData.map(function (row, index) {
+      return row.dots;
+    });
+    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
+      width: s,
+      height: s,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 588,
+        columnNumber: 5
+      }
+    }, yLabels(50), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      y1: m,
+      y2: s - m,
+      x1: 45,
+      x2: 45,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 590,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: 45,
+      x2: s - m,
+      y1: s - m,
+      y2: s - m,
+      stroke: "black",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 591,
+        columnNumber: 7
+      }
+    }), dots);
+    // end of line plot stuff
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 234,
+          lineNumber: 598,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 235,
+          lineNumber: 599,
           columnNumber: 7
         }
       }, "Assignment 3"), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 237,
+          lineNumber: 601,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 239,
+          lineNumber: 603,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
-        width: s,
-        height: s,
-        style: {
-          border: "1px solid black"
-        },
+        width: s * 2,
+        height: s / 4,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 240,
+          lineNumber: 604,
           columnNumber: 11
         }
-      }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
+      }, groupings.map((g, i) => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+            key: i + " frag",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 607,
+              columnNumber: 17
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            cx: s / groupings.length * 2 * i + s / groupings.length,
+            cy: s / 8,
+            r: 50,
+            style: {
+              fill: "steelblue"
+            },
+            fillOpacity: [...highlight].every(e => g.codes.has(e)) && [...g.codes].every(e => highlight.has(e)) ? "0.5" : "0.15",
+            onClick: () => {
+              setHighlight(new Set(g.codes));
+            },
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 608,
+              columnNumber: 19
+            }
+          }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+            x: s / groupings.length * 2 * i + s / groupings.length,
+            y: s / 8,
+            textAnchor: "middle",
+            style: {
+              fontSize: 14,
+              fontFamily: "Gill Sans, sans-serif"
+            },
+            onClick: () => {
+              setHighlight(new Set(g.codes));
+            },
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 623,
+              columnNumber: 19
+            }
+          }, g.name))
+        );
+      })), /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 641,
+          columnNumber: 11
+        }
+      }), yearRange[0] != yearRange[1] ? Linegraph : /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 645,
+          columnNumber: 13
+        }
+      }, yLabels(s / 2 - halfCodeWidth), dataYearOnly(yearRange[0]).map((d, i) => {
         if (d[women] != 0) {
           const h = highlight.has(d["Country Code"]) === true;
           return (
             /*#__PURE__*/_reactDefault.default.createElement("line", {
-              key: i,
-              x1: s / 2 - halfCodeWidth,
+              key: i + " barcode",
+              x1: s / 2 - halfCodeWidth - (h ? 10 : 0),
               y1: yScale(d[women]),
               x2: s / 2 + halfCodeWidth + (h ? 10 : 0),
               y2: yScale(d[women]),
               fill: "none",
-              stroke: h ? "#b54646" : "steelblue",
+              stroke: h ? "#776865" : "steelblue",
               strokeOpacity: h ? 0.5 : 0.33,
+              onClick: () => toggleHighlight(d),
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 246,
-                columnNumber: 19
+                lineNumber: 651,
+                columnNumber: 21
               }
-            })
+            }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 662,
+                columnNumber: 23
+              }
+            }, d["Country Name"]))
           );
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
         height: s,
-        style: {
-          border: "1px solid black"
-        },
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 260,
+          lineNumber: 669,
           columnNumber: 11
         }
-      }, /*#__PURE__*/_reactDefault.default.createElement("text", {
-        x: s - m,
-        textAnchor: "end",
-        y: s - m,
-        style: {
-          fontSize: 10,
-          fontFamily: "Gill Sans, sans serif"
-        },
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 261,
-          columnNumber: 13
-        }
-      }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1]), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
         "data-tip": "",
         projectionConfig: {
           rotate: [-10, 0, 0],
@@ -46020,23 +46153,36 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 271,
+          lineNumber: 670,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ZoomableGroup, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278,
+          lineNumber: 677,
           columnNumber: 15
         }
-      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
+      }, /*#__PURE__*/_reactDefault.default.createElement(_vxPattern.PatternLines, {
+        id: "lines",
+        height: 4,
+        width: 4,
+        stroke: "#776865",
+        strokeWidth: 0.6,
+        orientation: ["diagonal"],
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 678,
+          columnNumber: 17
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
         stroke: "#E4E5E6",
         strokeWidth: 0.5,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279,
+          lineNumber: 686,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
@@ -46044,7 +46190,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 280,
+          lineNumber: 687,
           columnNumber: 17
         }
       }, ({geographies}) => geographies.map(geo => {
@@ -46059,80 +46205,170 @@ try {
           h = highlight.has(d["Country Code"]) === true;
         }
         return (
-          /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
-            onClick: () => toggleHighlight(d),
-            onMouseEnter: () => {
-              if (d != null) {
-                setTooltipContent(d["Country Name"] + " — " + Math.round(d[women] * 100) / 100 + "%");
-              }
-            },
-            onMouseLeave: () => {
-              setTooltipContent("");
-            },
-            key: geo.rsmKey,
-            geography: geo,
-            fill: d ? h ? highlightScale(d[women]) : colorScale(d[women]) : "#F5F4F6",
+          /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+            key: geo.rsmKey + "frag",
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 298,
+              lineNumber: 704,
               columnNumber: 25
             }
-          })
+          }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            onClick: () => toggleHighlight(d),
+            key: geo.rsmKey,
+            geography: geo,
+            fill: d ? yearRange[0] != yearRange[1] ? changeScale(+c[0][1][women] - +d[women]) : colorScale(d[women]) : "#F5F4F6",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 705,
+              columnNumber: 27
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 717,
+              columnNumber: 29
+            }
+          }, d ? d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[women] : c[0][1][women] - d[women]) * 100) / 100 + "%" : "No data")), h ? /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            onClick: () => toggleHighlight(d),
+            key: geo.rsmKey + "highlight",
+            geography: geo,
+            fill: "url('#lines')",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 732,
+              columnNumber: 29
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 738,
+              columnNumber: 31
+            }
+          }, d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[women] : c[0][1][women] - d[women]) * 100) / 100 + "%")) : /*#__PURE__*/_reactDefault.default.createElement("div", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 751,
+              columnNumber: 29
+            }
+          }))
         );
-      }))))), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+      })))), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s - m,
+        textAnchor: "end",
+        y: s - m,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans serif"
+        },
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 330,
+          lineNumber: 760,
+          columnNumber: 13
+        }
+      }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 771,
           columnNumber: 11
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 331,
+          lineNumber: 772,
           columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s * 2,
         height: s / 4,
-        style: {
-          border: "1px solid black"
-        },
         className: "timeline",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 332,
+          lineNumber: 773,
           columnNumber: 11
         }
-      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSvgBrushDefault.default, {
+      }, /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+        scale: timeScaleReverse,
+        top: s / 4 - m * 2,
+        left: 3,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        numTicks: 26,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 774,
+          columnNumber: 13
+        }
+      }), [...Array(27).keys()].map(value => {
+        return yearRange[0] == yearRange[1] && yearRange[0] == value + 1991 ? /*#__PURE__*/_reactDefault.default.createElement("rect", {
+          key: value,
+          x: timeScaleReverse(new Date(value + 1991, 01, 01)) - 15,
+          y: s / 4 - m * 2 + 5,
+          height: 30,
+          width: 30,
+          style: {
+            fill: "steelblue",
+            fillOpacity: "0.15"
+          },
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 785,
+            columnNumber: 17
+          }
+        }) : /*#__PURE__*/_reactDefault.default.createElement("rect", {
+          key: value,
+          x: timeScaleReverse(new Date(value + 1991, 01, 01)) - 15,
+          y: s / 4 - m * 2 + 5,
+          height: 30,
+          width: 30,
+          style: {
+            fillOpacity: "0"
+          },
+          onMouseDown: () => setYearRange([1991 + value, 1991 + value]),
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 794,
+            columnNumber: 17
+          }
+        });
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSvgBrushDefault.default, {
         brushType: "x",
         getEventMouse: event => {
           const {clientX, clientY} = event;
           const {left, top} = document.querySelector(".timeline").getBoundingClientRect();
           return [clientX - left, clientY - top];
         },
-        extent: [[m, m], [s * 2 - m, s / 4 - m]],
+        extent: [[m, m], [s * 2 - m - 1, s / 4 - m * 2]],
         onBrushEnd: ({selection}) => {
           if (selection != null) {
-            if (selection[1][0] > 980) {
-              selection[1][0] = 980;
+            if (selection[1][0] > 979) {
+              selection[1][0] = 979;
             }
-            setYearRange([Math.round(timeScale(selection[0][0])), Math.round(timeScale(selection[1][0]))]);
+            setYearRange([Math.floor(timeScale(selection[0][0])), Math.floor(timeScale(selection[1][0]))]);
           }
         },
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 338,
+          lineNumber: 805,
           columnNumber: 13
         }
       }))))
     );
   };
-  _s(Assignment3, "RElh/o4OmWX/dRwsURIV3C6lkfY=", false, function () {
+  _s(Assignment3, "JMraqkvC3ZCOdKU0f78y2S6P4lk=", false, function () {
     return [_hooksUseFetch.useFetch];
   });
   _c = Assignment3;
@@ -46145,7 +46381,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"2QsrW","d3-array":"7CLUA","d3-scale":"2UZ4X","react-simple-maps":"5OxNq","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-fetch":"3eyo6","react-tooltip":"2diLT","react-svg-brush":"4bkEt"}],"2QsrW":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"2QsrW","d3-array":"7CLUA","d3-scale":"2UZ4X","react-simple-maps":"5OxNq","d3-fetch":"3eyo6","react-tooltip":"2diLT","react-svg-brush":"4bkEt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/axis":"L6nNU","@vx/scale":"7H3DO","@vx/pattern":"7INAJ"}],"2QsrW":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -49297,6 +49533,10302 @@ var define;
   }]);
 });
 
-},{"react":"3b2NM"}],"5GTF8":[function() {},{}]},["1j6wU","3Imd1","5rkFb"], "5rkFb", "parcelRequireaa24")
+},{"react":"3b2NM"}],"L6nNU":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+var _exportNames = {
+  Axis: true,
+  AxisLeft: true,
+  AxisRight: true,
+  AxisTop: true,
+  AxisBottom: true,
+  Orientation: true
+};
+exports.Orientation = exports.AxisBottom = exports.AxisTop = exports.AxisRight = exports.AxisLeft = exports.Axis = void 0;
+
+var _Axis = _interopRequireDefault(require("./axis/Axis"));
+
+exports.Axis = _Axis.default;
+
+var _AxisLeft = _interopRequireDefault(require("./axis/AxisLeft"));
+
+exports.AxisLeft = _AxisLeft.default;
+
+var _AxisRight = _interopRequireDefault(require("./axis/AxisRight"));
+
+exports.AxisRight = _AxisRight.default;
+
+var _AxisTop = _interopRequireDefault(require("./axis/AxisTop"));
+
+exports.AxisTop = _AxisTop.default;
+
+var _AxisBottom = _interopRequireDefault(require("./axis/AxisBottom"));
+
+exports.AxisBottom = _AxisBottom.default;
+
+var _orientation = _interopRequireDefault(require("./constants/orientation"));
+
+exports.Orientation = _orientation.default;
+
+var _types = require("./types");
+
+Object.keys(_types).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _types[key];
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./axis/Axis":"5wfZb","./axis/AxisLeft":"4Gkn1","./axis/AxisRight":"4dekt","./axis/AxisTop":"2lv0p","./axis/AxisBottom":"OorfP","./constants/orientation":"28066","./types":"1F27S"}],"5wfZb":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Axis;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _group = require("@vx/group");
+
+var _scale = require("@vx/scale");
+
+var _AxisRenderer = _interopRequireDefault(require("./AxisRenderer"));
+
+var _getTickPosition = _interopRequireDefault(require("../utils/getTickPosition"));
+
+var _getTickFormatter = _interopRequireDefault(require("../utils/getTickFormatter"));
+
+var _createPoint = _interopRequireDefault(require("../utils/createPoint"));
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Axis(_ref) {
+  var _ref$children = _ref.children,
+      children = _ref$children === void 0 ? _AxisRenderer.default : _ref$children,
+      axisClassName = _ref.axisClassName,
+      _ref$hideAxisLine = _ref.hideAxisLine,
+      hideAxisLine = _ref$hideAxisLine === void 0 ? false : _ref$hideAxisLine,
+      _ref$hideTicks = _ref.hideTicks,
+      hideTicks = _ref$hideTicks === void 0 ? false : _ref$hideTicks,
+      _ref$hideZero = _ref.hideZero,
+      hideZero = _ref$hideZero === void 0 ? false : _ref$hideZero,
+      _ref$left = _ref.left,
+      left = _ref$left === void 0 ? 0 : _ref$left,
+      _ref$numTicks = _ref.numTicks,
+      numTicks = _ref$numTicks === void 0 ? 10 : _ref$numTicks,
+      _ref$orientation = _ref.orientation,
+      orientation = _ref$orientation === void 0 ? _orientation.default.bottom : _ref$orientation,
+      _ref$rangePadding = _ref.rangePadding,
+      rangePadding = _ref$rangePadding === void 0 ? 0 : _ref$rangePadding,
+      scale = _ref.scale,
+      tickFormat = _ref.tickFormat,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      tickValues = _ref.tickValues,
+      _ref$top = _ref.top,
+      top = _ref$top === void 0 ? 0 : _ref$top,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["children", "axisClassName", "hideAxisLine", "hideTicks", "hideZero", "left", "numTicks", "orientation", "rangePadding", "scale", "tickFormat", "tickLength", "tickValues", "top"]);
+
+  var format = tickFormat != null ? tickFormat : (0, _getTickFormatter.default)(scale);
+  var isLeft = orientation === _orientation.default.left;
+  var isTop = orientation === _orientation.default.top;
+  var horizontal = isTop || orientation === _orientation.default.bottom;
+  var tickPosition = (0, _getTickPosition.default)(scale);
+  var tickSign = isLeft || isTop ? -1 : 1;
+  var range = scale.range();
+  var axisFromPoint = (0, _createPoint.default)({
+    x: Number(range[0]) + 0.5 - rangePadding,
+    y: 0
+  }, horizontal);
+  var axisToPoint = (0, _createPoint.default)({
+    x: Number(range[range.length - 1]) + 0.5 + rangePadding,
+    y: 0
+  }, horizontal);
+  var filteredTickValues = (tickValues != null ? tickValues : (0, _scale.getTicks)(scale, numTicks)).map(function (value, index) {
+    return {
+      value: value,
+      index: index
+    };
+  }).filter(function (_ref2) {
+    var value = _ref2.value;
+    return !hideZero || value !== 0 && value !== '0';
+  });
+  var ticks = filteredTickValues.map(function (_ref3) {
+    var value = _ref3.value,
+        index = _ref3.index;
+    var scaledValue = (0, _scale.coerceNumber)(tickPosition(value));
+    return {
+      value: value,
+      index: index,
+      from: (0, _createPoint.default)({
+        x: scaledValue,
+        y: 0
+      }, horizontal),
+      to: (0, _createPoint.default)({
+        x: scaledValue,
+        y: tickLength * tickSign
+      }, horizontal),
+      formattedValue: format(value, index, filteredTickValues)
+    };
+  });
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: (0, _classnames.default)('vx-axis', axisClassName),
+    top: top,
+    left: left
+  }, children(_extends({}, restProps, {
+    axisFromPoint: axisFromPoint,
+    axisToPoint: axisToPoint,
+    hideAxisLine: hideAxisLine,
+    hideTicks: hideTicks,
+    hideZero: hideZero,
+    horizontal: horizontal,
+    numTicks: numTicks,
+    orientation: orientation,
+    rangePadding: rangePadding,
+    scale: scale,
+    tickFormat: format,
+    tickLength: tickLength,
+    tickPosition: tickPosition,
+    tickSign: tickSign,
+    ticks: ticks
+  })));
+}
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","@vx/group":"6phi6","@vx/scale":"7H3DO","./AxisRenderer":"Eqi8f","../utils/getTickPosition":"Lf4hr","../utils/getTickFormatter":"43uwO","../utils/createPoint":"3gR9T","../constants/orientation":"28066"}],"6phi6":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.Group = void 0;
+
+var _Group = _interopRequireDefault(require("./Group"));
+
+exports.Group = _Group.default;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Group":"5bMIk"}],"5bMIk":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Group;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Group(_ref) {
+  var _ref$top = _ref.top,
+      top = _ref$top === void 0 ? 0 : _ref$top,
+      _ref$left = _ref.left,
+      left = _ref$left === void 0 ? 0 : _ref$left,
+      transform = _ref.transform,
+      className = _ref.className,
+      children = _ref.children,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["top", "left", "transform", "className", "children", "innerRef"]);
+
+  return /*#__PURE__*/_react.default.createElement("g", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-group', className),
+    transform: transform || "translate(" + left + ", " + top + ")"
+  }, restProps), children);
+}
+
+Group.propTypes = {
+  top: _propTypes.default.number,
+  left: _propTypes.default.number,
+  transform: _propTypes.default.string,
+  className: _propTypes.default.string,
+  children: _propTypes.default.node,
+  innerRef: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.func, _propTypes.default.object])
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc"}],"7H3DO":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+var _exportNames = {
+  scaleBand: true,
+  scalePoint: true,
+  scaleLinear: true,
+  scaleTime: true,
+  scaleUtc: true,
+  scaleLog: true,
+  scalePower: true,
+  scaleOrdinal: true,
+  scaleQuantize: true,
+  scaleQuantile: true,
+  scaleSymlog: true,
+  scaleThreshold: true,
+  scaleSqrt: true,
+  createScale: true,
+  updateScale: true,
+  inferScaleType: true,
+  coerceNumber: true,
+  getTicks: true,
+  toString: true
+};
+exports.toString = exports.getTicks = exports.coerceNumber = exports.inferScaleType = exports.updateScale = exports.createScale = exports.scaleSqrt = exports.scaleThreshold = exports.scaleSymlog = exports.scaleQuantile = exports.scaleQuantize = exports.scaleOrdinal = exports.scalePower = exports.scaleLog = exports.scaleUtc = exports.scaleTime = exports.scaleLinear = exports.scalePoint = exports.scaleBand = void 0;
+
+var _band = _interopRequireDefault(require("./scales/band"));
+
+exports.scaleBand = _band.default;
+
+var _point = _interopRequireDefault(require("./scales/point"));
+
+exports.scalePoint = _point.default;
+
+var _linear = _interopRequireDefault(require("./scales/linear"));
+
+exports.scaleLinear = _linear.default;
+
+var _time = _interopRequireDefault(require("./scales/time"));
+
+exports.scaleTime = _time.default;
+
+var _utc = _interopRequireDefault(require("./scales/utc"));
+
+exports.scaleUtc = _utc.default;
+
+var _log = _interopRequireDefault(require("./scales/log"));
+
+exports.scaleLog = _log.default;
+
+var _power = _interopRequireDefault(require("./scales/power"));
+
+exports.scalePower = _power.default;
+
+var _ordinal = _interopRequireDefault(require("./scales/ordinal"));
+
+exports.scaleOrdinal = _ordinal.default;
+
+var _quantize = _interopRequireDefault(require("./scales/quantize"));
+
+exports.scaleQuantize = _quantize.default;
+
+var _quantile = _interopRequireDefault(require("./scales/quantile"));
+
+exports.scaleQuantile = _quantile.default;
+
+var _symlog = _interopRequireDefault(require("./scales/symlog"));
+
+exports.scaleSymlog = _symlog.default;
+
+var _threshold = _interopRequireDefault(require("./scales/threshold"));
+
+exports.scaleThreshold = _threshold.default;
+
+var _squareRoot = _interopRequireDefault(require("./scales/squareRoot"));
+
+exports.scaleSqrt = _squareRoot.default;
+
+var _createScale = _interopRequireDefault(require("./createScale"));
+
+exports.createScale = _createScale.default;
+
+var _updateScale = _interopRequireDefault(require("./updateScale"));
+
+exports.updateScale = _updateScale.default;
+
+var _inferScaleType = _interopRequireDefault(require("./utils/inferScaleType"));
+
+exports.inferScaleType = _inferScaleType.default;
+
+var _coerceNumber = _interopRequireDefault(require("./utils/coerceNumber"));
+
+exports.coerceNumber = _coerceNumber.default;
+
+var _getTicks = _interopRequireDefault(require("./utils/getTicks"));
+
+exports.getTicks = _getTicks.default;
+
+var _toString = _interopRequireDefault(require("./utils/toString"));
+
+exports.toString = _toString.default;
+
+var _Base = require("./types/Base");
+
+Object.keys(_Base).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _Base[key];
+});
+
+var _Nice = require("./types/Nice");
+
+Object.keys(_Nice).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _Nice[key];
+});
+
+var _Scale = require("./types/Scale");
+
+Object.keys(_Scale).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _Scale[key];
+});
+
+var _ScaleConfig = require("./types/ScaleConfig");
+
+Object.keys(_ScaleConfig).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _ScaleConfig[key];
+});
+
+var _ScaleInterpolate = require("./types/ScaleInterpolate");
+
+Object.keys(_ScaleInterpolate).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _ScaleInterpolate[key];
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./scales/band":"3c0yn","./scales/point":"3kZya","./scales/linear":"4Ushr","./scales/time":"39rJr","./scales/utc":"tsY8v","./scales/log":"2gxw5","./scales/power":"2Ox1U","./scales/ordinal":"3Ge01","./scales/quantize":"3uCKE","./scales/quantile":"5KT11","./scales/symlog":"3lffw","./scales/threshold":"DYakF","./scales/squareRoot":"273wo","./createScale":"1gDLM","./updateScale":"5oz9N","./utils/inferScaleType":"4FmTx","./utils/coerceNumber":"3nVGv","./utils/getTicks":"6RIqt","./utils/toString":"71Ljq","./types/Base":"3iF1U","./types/Nice":"3FBu2","./types/Scale":"6es0R","./types/ScaleConfig":"4sMkm","./types/ScaleInterpolate":"4CjAX"}],"3c0yn":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createBandScale;
+exports.updateBandScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateBandScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'align', 'padding', 'round');
+exports.updateBandScale = updateBandScale;
+
+function createBandScale(config) {
+  return updateBandScale((0, _d3Scale.scaleBand)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"Kt37N":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = scaleOperator;
+exports.ALL_OPERATORS = void 0;
+
+var _domain = _interopRequireDefault(require("./domain"));
+
+var _range = _interopRequireDefault(require("./range"));
+
+var _align = _interopRequireDefault(require("./align"));
+
+var _base = _interopRequireDefault(require("./base"));
+
+var _clamp = _interopRequireDefault(require("./clamp"));
+
+var _constant = _interopRequireDefault(require("./constant"));
+
+var _exponent = _interopRequireDefault(require("./exponent"));
+
+var _interpolate = _interopRequireDefault(require("./interpolate"));
+
+var _nice = _interopRequireDefault(require("./nice"));
+
+var _padding = _interopRequireDefault(require("./padding"));
+
+var _reverse = _interopRequireDefault(require("./reverse"));
+
+var _round = _interopRequireDefault(require("./round"));
+
+var _unknown = _interopRequireDefault(require("./unknown"));
+
+var _zero = _interopRequireDefault(require("./zero"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * List of all operators, in order of execution
+ */
+var ALL_OPERATORS = [// domain => nice => zero
+'domain', 'nice', 'zero', // interpolate before round
+'interpolate', 'round', // set range then reverse
+'range', 'reverse', // Order does not matter for these operators
+'align', 'base', 'clamp', 'constant', 'exponent', 'padding', 'unknown'];
+exports.ALL_OPERATORS = ALL_OPERATORS;
+// Use Record to enforce that all keys in OperatorType must exist.
+var operators = {
+  domain: _domain.default,
+  nice: _nice.default,
+  zero: _zero.default,
+  interpolate: _interpolate.default,
+  round: _round.default,
+  align: _align.default,
+  base: _base.default,
+  clamp: _clamp.default,
+  constant: _constant.default,
+  exponent: _exponent.default,
+  padding: _padding.default,
+  range: _range.default,
+  reverse: _reverse.default,
+  unknown: _unknown.default
+};
+
+function scaleOperator() {
+  for (var _len = arguments.length, ops = new Array(_len), _key = 0; _key < _len; _key++) {
+    ops[_key] = arguments[_key];
+  }
+
+  var selection = new Set(ops);
+  var selectedOps = ALL_OPERATORS.filter(function (o) {
+    return selection.has(o);
+  });
+  return function applyOperators(scale, config) {
+    if (typeof config !== 'undefined') {
+      selectedOps.forEach(function (op) {
+        operators[op](scale, config);
+      });
+    }
+
+    return scale;
+  };
+}
+},{"./domain":"3EUe7","./range":"48EoQ","./align":"1Rr9h","./base":"6oA0a","./clamp":"5CzUS","./constant":"3gWkY","./exponent":"5m9so","./interpolate":"5mWqP","./nice":"7Bbq9","./padding":"3fEAd","./reverse":"2JT2t","./round":"5p3B8","./unknown":"cyLC5","./zero":"UCcrZ"}],"3EUe7":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyDomain;
+
+function applyDomain(scale, config) {
+  if (config.domain) {
+    if ('nice' in scale || 'quantiles' in scale) {
+      // continuous input scales
+      scale.domain(config.domain);
+    } else if ('padding' in scale) {
+      // point and band scales
+      scale.domain(config.domain);
+    } else {
+      // ordinal and threshold scale
+      scale.domain(config.domain);
+    }
+  }
+}
+},{}],"48EoQ":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyRange;
+
+function applyRange(scale, config) {
+  if (config.range) {
+    if ('padding' in scale) {
+      // point and band scales
+      scale.range(config.range);
+    } else {
+      // the rest
+      scale.range(config.range);
+    }
+  }
+}
+},{}],"1Rr9h":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyAlign;
+
+function applyAlign(scale, config) {
+  if ('align' in scale && 'align' in config && typeof config.align !== 'undefined') {
+    scale.align(config.align);
+  }
+}
+},{}],"6oA0a":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyBase;
+
+function applyBase(scale, config) {
+  if ('base' in scale && 'base' in config && typeof config.base !== 'undefined') {
+    scale.base(config.base);
+  }
+}
+},{}],"5CzUS":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyClamp;
+
+function applyClamp(scale, config) {
+  if ('clamp' in scale && 'clamp' in config && typeof config.clamp !== 'undefined') {
+    scale.clamp(config.clamp);
+  }
+}
+},{}],"3gWkY":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyConstant;
+
+function applyConstant(scale, config) {
+  if ('constant' in scale && 'constant' in config && typeof config.constant !== 'undefined') {
+    scale.constant(config.constant);
+  }
+}
+},{}],"5m9so":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyExponent;
+
+function applyExponent(scale, config) {
+  if ('exponent' in scale && 'exponent' in config && typeof config.exponent !== 'undefined') {
+    scale.exponent(config.exponent);
+  }
+}
+},{}],"5mWqP":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyInterpolate;
+
+var _createColorInterpolator = _interopRequireDefault(require("../utils/createColorInterpolator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function applyInterpolate(scale, config) {
+  if ('interpolate' in config && 'interpolate' in scale && typeof config.interpolate !== 'undefined') {
+    var interpolator = (0, _createColorInterpolator.default)(config.interpolate);
+    scale.interpolate(interpolator);
+  }
+}
+},{"../utils/createColorInterpolator":"3Hfl2"}],"3Hfl2":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createColorInterpolator;
+
+var _d3Interpolate = require("d3-interpolate");
+
+var interpolatorMap = {
+  lab: _d3Interpolate.interpolateLab,
+  hcl: _d3Interpolate.interpolateHcl,
+  'hcl-long': _d3Interpolate.interpolateHclLong,
+  hsl: _d3Interpolate.interpolateHsl,
+  'hsl-long': _d3Interpolate.interpolateHslLong,
+  cubehelix: _d3Interpolate.interpolateCubehelix,
+  'cubehelix-long': _d3Interpolate.interpolateCubehelixLong,
+  rgb: _d3Interpolate.interpolateRgb
+};
+
+function createColorInterpolator(interpolate) {
+  switch (interpolate) {
+    case 'lab':
+    case 'hcl':
+    case 'hcl-long':
+    case 'hsl':
+    case 'hsl-long':
+    case 'cubehelix':
+    case 'cubehelix-long':
+    case 'rgb':
+      return interpolatorMap[interpolate];
+
+    default:
+  }
+
+  var type = interpolate.type,
+      gamma = interpolate.gamma;
+  var interpolator = interpolatorMap[type];
+  return typeof gamma === 'undefined' ? interpolator : interpolator.gamma(gamma);
+}
+},{"d3-interpolate":"3R7Kj"}],"3R7Kj":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-interpolate/ v1.4.0 Copyright 2019 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-color')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-color'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3));
+})(this, function (exports, d3Color) {
+  "use strict";
+  function basis(t1, v0, v1, v2, v3) {
+    var t2 = t1 * t1, t3 = t2 * t1;
+    return ((1 - 3 * t1 + 3 * t2 - t3) * v0 + (4 - 6 * t2 + 3 * t3) * v1 + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2 + t3 * v3) / 6;
+  }
+  function basis$1(values) {
+    var n = values.length - 1;
+    return function (t) {
+      var i = t <= 0 ? t = 0 : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n), v1 = values[i], v2 = values[i + 1], v0 = i > 0 ? values[i - 1] : 2 * v1 - v2, v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
+      return basis((t - i / n) * n, v0, v1, v2, v3);
+    };
+  }
+  function basisClosed(values) {
+    var n = values.length;
+    return function (t) {
+      var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n), v0 = values[(i + n - 1) % n], v1 = values[i % n], v2 = values[(i + 1) % n], v3 = values[(i + 2) % n];
+      return basis((t - i / n) * n, v0, v1, v2, v3);
+    };
+  }
+  function constant(x) {
+    return function () {
+      return x;
+    };
+  }
+  function linear(a, d) {
+    return function (t) {
+      return a + t * d;
+    };
+  }
+  function exponential(a, b, y) {
+    return (a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function (t) {
+      return Math.pow(a + t * b, y);
+    });
+  }
+  function hue(a, b) {
+    var d = b - a;
+    return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : constant(isNaN(a) ? b : a);
+  }
+  function gamma(y) {
+    return (y = +y) === 1 ? nogamma : function (a, b) {
+      return b - a ? exponential(a, b, y) : constant(isNaN(a) ? b : a);
+    };
+  }
+  function nogamma(a, b) {
+    var d = b - a;
+    return d ? linear(a, d) : constant(isNaN(a) ? b : a);
+  }
+  var rgb = (function rgbGamma(y) {
+    var color = gamma(y);
+    function rgb(start, end) {
+      var r = color((start = d3Color.rgb(start)).r, (end = d3Color.rgb(end)).r), g = color(start.g, end.g), b = color(start.b, end.b), opacity = nogamma(start.opacity, end.opacity);
+      return function (t) {
+        start.r = r(t);
+        start.g = g(t);
+        start.b = b(t);
+        start.opacity = opacity(t);
+        return start + "";
+      };
+    }
+    rgb.gamma = rgbGamma;
+    return rgb;
+  })(1);
+  function rgbSpline(spline) {
+    return function (colors) {
+      var n = colors.length, r = new Array(n), g = new Array(n), b = new Array(n), i, color;
+      for (i = 0; i < n; ++i) {
+        color = d3Color.rgb(colors[i]);
+        r[i] = color.r || 0;
+        g[i] = color.g || 0;
+        b[i] = color.b || 0;
+      }
+      r = spline(r);
+      g = spline(g);
+      b = spline(b);
+      color.opacity = 1;
+      return function (t) {
+        color.r = r(t);
+        color.g = g(t);
+        color.b = b(t);
+        return color + "";
+      };
+    };
+  }
+  var rgbBasis = rgbSpline(basis$1);
+  var rgbBasisClosed = rgbSpline(basisClosed);
+  function numberArray(a, b) {
+    if (!b) b = [];
+    var n = a ? Math.min(b.length, a.length) : 0, c = b.slice(), i;
+    return function (t) {
+      for (i = 0; i < n; ++i) c[i] = a[i] * (1 - t) + b[i] * t;
+      return c;
+    };
+  }
+  function isNumberArray(x) {
+    return ArrayBuffer.isView(x) && !(x instanceof DataView);
+  }
+  function array(a, b) {
+    return (isNumberArray(b) ? numberArray : genericArray)(a, b);
+  }
+  function genericArray(a, b) {
+    var nb = b ? b.length : 0, na = a ? Math.min(nb, a.length) : 0, x = new Array(na), c = new Array(nb), i;
+    for (i = 0; i < na; ++i) x[i] = value(a[i], b[i]);
+    for (; i < nb; ++i) c[i] = b[i];
+    return function (t) {
+      for (i = 0; i < na; ++i) c[i] = x[i](t);
+      return c;
+    };
+  }
+  function date(a, b) {
+    var d = new Date();
+    return (a = +a, b = +b, function (t) {
+      return (d.setTime(a * (1 - t) + b * t), d);
+    });
+  }
+  function number(a, b) {
+    return (a = +a, b = +b, function (t) {
+      return a * (1 - t) + b * t;
+    });
+  }
+  function object(a, b) {
+    var i = {}, c = {}, k;
+    if (a === null || typeof a !== "object") a = {};
+    if (b === null || typeof b !== "object") b = {};
+    for (k in b) {
+      if ((k in a)) {
+        i[k] = value(a[k], b[k]);
+      } else {
+        c[k] = b[k];
+      }
+    }
+    return function (t) {
+      for (k in i) c[k] = i[k](t);
+      return c;
+    };
+  }
+  var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g, reB = new RegExp(reA.source, "g");
+  function zero(b) {
+    return function () {
+      return b;
+    };
+  }
+  function one(b) {
+    return function (t) {
+      return b(t) + "";
+    };
+  }
+  function string(a, b) {
+    var bi = reA.lastIndex = reB.lastIndex = 0, // scan index for next number in b
+    am, // current match in a
+    bm, // current match in b
+    bs, // string preceding current number in b, if any
+    i = -1, // index in s
+    s = [], // string constants and placeholders
+    q = [];
+    // number interpolators
+    // Coerce inputs to strings.
+    (a = a + "", b = b + "");
+    // Interpolate pairs of numbers in a & b.
+    while ((am = reA.exec(a)) && (bm = reB.exec(b))) {
+      if ((bs = bm.index) > bi) {
+        // a string precedes the next number in b
+        bs = b.slice(bi, bs);
+        if (s[i]) s[i] += bs; else // coalesce with previous string
+        s[++i] = bs;
+      }
+      if ((am = am[0]) === (bm = bm[0])) {
+        // numbers in a & b match
+        if (s[i]) s[i] += bm; else // coalesce with previous string
+        s[++i] = bm;
+      } else {
+        // interpolate non-matching numbers
+        s[++i] = null;
+        q.push({
+          i: i,
+          x: number(am, bm)
+        });
+      }
+      bi = reB.lastIndex;
+    }
+    // Add remains of b.
+    if (bi < b.length) {
+      bs = b.slice(bi);
+      if (s[i]) s[i] += bs; else // coalesce with previous string
+      s[++i] = bs;
+    }
+    // Special optimization for only a single match.
+    // Otherwise, interpolate each of the numbers and rejoin the string.
+    return s.length < 2 ? q[0] ? one(q[0].x) : zero(b) : (b = q.length, function (t) {
+      for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
+      return s.join("");
+    });
+  }
+  function value(a, b) {
+    var t = typeof b, c;
+    return b == null || t === "boolean" ? constant(b) : (t === "number" ? number : t === "string" ? (c = d3Color.color(b)) ? (b = c, rgb) : string : b instanceof d3Color.color ? rgb : b instanceof Date ? date : isNumberArray(b) ? numberArray : Array.isArray(b) ? genericArray : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object : number)(a, b);
+  }
+  function discrete(range) {
+    var n = range.length;
+    return function (t) {
+      return range[Math.max(0, Math.min(n - 1, Math.floor(t * n)))];
+    };
+  }
+  function hue$1(a, b) {
+    var i = hue(+a, +b);
+    return function (t) {
+      var x = i(t);
+      return x - 360 * Math.floor(x / 360);
+    };
+  }
+  function round(a, b) {
+    return (a = +a, b = +b, function (t) {
+      return Math.round(a * (1 - t) + b * t);
+    });
+  }
+  var degrees = 180 / Math.PI;
+  var identity = {
+    translateX: 0,
+    translateY: 0,
+    rotate: 0,
+    skewX: 0,
+    scaleX: 1,
+    scaleY: 1
+  };
+  function decompose(a, b, c, d, e, f) {
+    var scaleX, scaleY, skewX;
+    if (scaleX = Math.sqrt(a * a + b * b)) (a /= scaleX, b /= scaleX);
+    if (skewX = a * c + b * d) (c -= a * skewX, d -= b * skewX);
+    if (scaleY = Math.sqrt(c * c + d * d)) (c /= scaleY, d /= scaleY, skewX /= scaleY);
+    if (a * d < b * c) (a = -a, b = -b, skewX = -skewX, scaleX = -scaleX);
+    return {
+      translateX: e,
+      translateY: f,
+      rotate: Math.atan2(b, a) * degrees,
+      skewX: Math.atan(skewX) * degrees,
+      scaleX: scaleX,
+      scaleY: scaleY
+    };
+  }
+  var cssNode, cssRoot, cssView, svgNode;
+  function parseCss(value) {
+    if (value === "none") return identity;
+    if (!cssNode) (cssNode = document.createElement("DIV"), cssRoot = document.documentElement, cssView = document.defaultView);
+    cssNode.style.transform = value;
+    value = cssView.getComputedStyle(cssRoot.appendChild(cssNode), null).getPropertyValue("transform");
+    cssRoot.removeChild(cssNode);
+    value = value.slice(7, -1).split(",");
+    return decompose(+value[0], +value[1], +value[2], +value[3], +value[4], +value[5]);
+  }
+  function parseSvg(value) {
+    if (value == null) return identity;
+    if (!svgNode) svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    svgNode.setAttribute("transform", value);
+    if (!(value = svgNode.transform.baseVal.consolidate())) return identity;
+    value = value.matrix;
+    return decompose(value.a, value.b, value.c, value.d, value.e, value.f);
+  }
+  function interpolateTransform(parse, pxComma, pxParen, degParen) {
+    function pop(s) {
+      return s.length ? s.pop() + " " : "";
+    }
+    function translate(xa, ya, xb, yb, s, q) {
+      if (xa !== xb || ya !== yb) {
+        var i = s.push("translate(", null, pxComma, null, pxParen);
+        q.push({
+          i: i - 4,
+          x: number(xa, xb)
+        }, {
+          i: i - 2,
+          x: number(ya, yb)
+        });
+      } else if (xb || yb) {
+        s.push("translate(" + xb + pxComma + yb + pxParen);
+      }
+    }
+    function rotate(a, b, s, q) {
+      if (a !== b) {
+        if (a - b > 180) b += 360; else if (b - a > 180) a += 360;
+        // shortest path
+        q.push({
+          i: s.push(pop(s) + "rotate(", null, degParen) - 2,
+          x: number(a, b)
+        });
+      } else if (b) {
+        s.push(pop(s) + "rotate(" + b + degParen);
+      }
+    }
+    function skewX(a, b, s, q) {
+      if (a !== b) {
+        q.push({
+          i: s.push(pop(s) + "skewX(", null, degParen) - 2,
+          x: number(a, b)
+        });
+      } else if (b) {
+        s.push(pop(s) + "skewX(" + b + degParen);
+      }
+    }
+    function scale(xa, ya, xb, yb, s, q) {
+      if (xa !== xb || ya !== yb) {
+        var i = s.push(pop(s) + "scale(", null, ",", null, ")");
+        q.push({
+          i: i - 4,
+          x: number(xa, xb)
+        }, {
+          i: i - 2,
+          x: number(ya, yb)
+        });
+      } else if (xb !== 1 || yb !== 1) {
+        s.push(pop(s) + "scale(" + xb + "," + yb + ")");
+      }
+    }
+    return function (a, b) {
+      var s = [], // string constants and placeholders
+      q = [];
+      // number interpolators
+      (a = parse(a), b = parse(b));
+      translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
+      rotate(a.rotate, b.rotate, s, q);
+      skewX(a.skewX, b.skewX, s, q);
+      scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
+      a = b = null;
+      // gc
+      return function (t) {
+        var i = -1, n = q.length, o;
+        while (++i < n) s[(o = q[i]).i] = o.x(t);
+        return s.join("");
+      };
+    };
+  }
+  var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
+  var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+  var rho = Math.SQRT2, rho2 = 2, rho4 = 4, epsilon2 = 1e-12;
+  function cosh(x) {
+    return ((x = Math.exp(x)) + 1 / x) / 2;
+  }
+  function sinh(x) {
+    return ((x = Math.exp(x)) - 1 / x) / 2;
+  }
+  function tanh(x) {
+    return ((x = Math.exp(2 * x)) - 1) / (x + 1);
+  }
+  // p0 = [ux0, uy0, w0]
+  // p1 = [ux1, uy1, w1]
+  function zoom(p0, p1) {
+    var ux0 = p0[0], uy0 = p0[1], w0 = p0[2], ux1 = p1[0], uy1 = p1[1], w1 = p1[2], dx = ux1 - ux0, dy = uy1 - uy0, d2 = dx * dx + dy * dy, i, S;
+    // Special case for u0 ≅ u1.
+    if (d2 < epsilon2) {
+      S = Math.log(w1 / w0) / rho;
+      i = function (t) {
+        return [ux0 + t * dx, uy0 + t * dy, w0 * Math.exp(rho * t * S)];
+      };
+          // General case.
+} else // General case.
+    {
+      var d1 = Math.sqrt(d2), b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1), b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1), r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0), r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
+      S = (r1 - r0) / rho;
+      i = function (t) {
+        var s = t * S, coshr0 = cosh(r0), u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
+        return [ux0 + u * dx, uy0 + u * dy, w0 * coshr0 / cosh(rho * s + r0)];
+      };
+    }
+    i.duration = S * 1000;
+    return i;
+  }
+  function hsl(hue) {
+    return function (start, end) {
+      var h = hue((start = d3Color.hsl(start)).h, (end = d3Color.hsl(end)).h), s = nogamma(start.s, end.s), l = nogamma(start.l, end.l), opacity = nogamma(start.opacity, end.opacity);
+      return function (t) {
+        start.h = h(t);
+        start.s = s(t);
+        start.l = l(t);
+        start.opacity = opacity(t);
+        return start + "";
+      };
+    };
+  }
+  var hsl$1 = hsl(hue);
+  var hslLong = hsl(nogamma);
+  function lab(start, end) {
+    var l = nogamma((start = d3Color.lab(start)).l, (end = d3Color.lab(end)).l), a = nogamma(start.a, end.a), b = nogamma(start.b, end.b), opacity = nogamma(start.opacity, end.opacity);
+    return function (t) {
+      start.l = l(t);
+      start.a = a(t);
+      start.b = b(t);
+      start.opacity = opacity(t);
+      return start + "";
+    };
+  }
+  function hcl(hue) {
+    return function (start, end) {
+      var h = hue((start = d3Color.hcl(start)).h, (end = d3Color.hcl(end)).h), c = nogamma(start.c, end.c), l = nogamma(start.l, end.l), opacity = nogamma(start.opacity, end.opacity);
+      return function (t) {
+        start.h = h(t);
+        start.c = c(t);
+        start.l = l(t);
+        start.opacity = opacity(t);
+        return start + "";
+      };
+    };
+  }
+  var hcl$1 = hcl(hue);
+  var hclLong = hcl(nogamma);
+  function cubehelix(hue) {
+    return (function cubehelixGamma(y) {
+      y = +y;
+      function cubehelix(start, end) {
+        var h = hue((start = d3Color.cubehelix(start)).h, (end = d3Color.cubehelix(end)).h), s = nogamma(start.s, end.s), l = nogamma(start.l, end.l), opacity = nogamma(start.opacity, end.opacity);
+        return function (t) {
+          start.h = h(t);
+          start.s = s(t);
+          start.l = l(Math.pow(t, y));
+          start.opacity = opacity(t);
+          return start + "";
+        };
+      }
+      cubehelix.gamma = cubehelixGamma;
+      return cubehelix;
+    })(1);
+  }
+  var cubehelix$1 = cubehelix(hue);
+  var cubehelixLong = cubehelix(nogamma);
+  function piecewise(interpolate, values) {
+    var i = 0, n = values.length - 1, v = values[0], I = new Array(n < 0 ? 0 : n);
+    while (i < n) I[i] = interpolate(v, v = values[++i]);
+    return function (t) {
+      var i = Math.max(0, Math.min(n - 1, Math.floor(t *= n)));
+      return I[i](t - i);
+    };
+  }
+  function quantize(interpolator, n) {
+    var samples = new Array(n);
+    for (var i = 0; i < n; ++i) samples[i] = interpolator(i / (n - 1));
+    return samples;
+  }
+  exports.interpolate = value;
+  exports.interpolateArray = array;
+  exports.interpolateBasis = basis$1;
+  exports.interpolateBasisClosed = basisClosed;
+  exports.interpolateCubehelix = cubehelix$1;
+  exports.interpolateCubehelixLong = cubehelixLong;
+  exports.interpolateDate = date;
+  exports.interpolateDiscrete = discrete;
+  exports.interpolateHcl = hcl$1;
+  exports.interpolateHclLong = hclLong;
+  exports.interpolateHsl = hsl$1;
+  exports.interpolateHslLong = hslLong;
+  exports.interpolateHue = hue$1;
+  exports.interpolateLab = lab;
+  exports.interpolateNumber = number;
+  exports.interpolateNumberArray = numberArray;
+  exports.interpolateObject = object;
+  exports.interpolateRgb = rgb;
+  exports.interpolateRgbBasis = rgbBasis;
+  exports.interpolateRgbBasisClosed = rgbBasisClosed;
+  exports.interpolateRound = round;
+  exports.interpolateString = string;
+  exports.interpolateTransformCss = interpolateTransformCss;
+  exports.interpolateTransformSvg = interpolateTransformSvg;
+  exports.interpolateZoom = zoom;
+  exports.piecewise = piecewise;
+  exports.quantize = quantize;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-color":"2WNiD"}],"2WNiD":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-color/ v1.4.1 Copyright 2020 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  function define(constructor, factory, prototype) {
+    constructor.prototype = factory.prototype = prototype;
+    prototype.constructor = constructor;
+  }
+  function extend(parent, definition) {
+    var prototype = Object.create(parent.prototype);
+    for (var key in definition) prototype[key] = definition[key];
+    return prototype;
+  }
+  function Color() {}
+  var darker = 0.7;
+  var brighter = 1 / darker;
+  var reI = "\\s*([+-]?\\d+)\\s*", reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*", reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*", reHex = /^#([0-9a-f]{3,8})$/, reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"), reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"), reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"), reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"), reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"), reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
+  var named = {
+    aliceblue: 0xf0f8ff,
+    antiquewhite: 0xfaebd7,
+    aqua: 0x00ffff,
+    aquamarine: 0x7fffd4,
+    azure: 0xf0ffff,
+    beige: 0xf5f5dc,
+    bisque: 0xffe4c4,
+    black: 0x000000,
+    blanchedalmond: 0xffebcd,
+    blue: 0x0000ff,
+    blueviolet: 0x8a2be2,
+    brown: 0xa52a2a,
+    burlywood: 0xdeb887,
+    cadetblue: 0x5f9ea0,
+    chartreuse: 0x7fff00,
+    chocolate: 0xd2691e,
+    coral: 0xff7f50,
+    cornflowerblue: 0x6495ed,
+    cornsilk: 0xfff8dc,
+    crimson: 0xdc143c,
+    cyan: 0x00ffff,
+    darkblue: 0x00008b,
+    darkcyan: 0x008b8b,
+    darkgoldenrod: 0xb8860b,
+    darkgray: 0xa9a9a9,
+    darkgreen: 0x006400,
+    darkgrey: 0xa9a9a9,
+    darkkhaki: 0xbdb76b,
+    darkmagenta: 0x8b008b,
+    darkolivegreen: 0x556b2f,
+    darkorange: 0xff8c00,
+    darkorchid: 0x9932cc,
+    darkred: 0x8b0000,
+    darksalmon: 0xe9967a,
+    darkseagreen: 0x8fbc8f,
+    darkslateblue: 0x483d8b,
+    darkslategray: 0x2f4f4f,
+    darkslategrey: 0x2f4f4f,
+    darkturquoise: 0x00ced1,
+    darkviolet: 0x9400d3,
+    deeppink: 0xff1493,
+    deepskyblue: 0x00bfff,
+    dimgray: 0x696969,
+    dimgrey: 0x696969,
+    dodgerblue: 0x1e90ff,
+    firebrick: 0xb22222,
+    floralwhite: 0xfffaf0,
+    forestgreen: 0x228b22,
+    fuchsia: 0xff00ff,
+    gainsboro: 0xdcdcdc,
+    ghostwhite: 0xf8f8ff,
+    gold: 0xffd700,
+    goldenrod: 0xdaa520,
+    gray: 0x808080,
+    green: 0x008000,
+    greenyellow: 0xadff2f,
+    grey: 0x808080,
+    honeydew: 0xf0fff0,
+    hotpink: 0xff69b4,
+    indianred: 0xcd5c5c,
+    indigo: 0x4b0082,
+    ivory: 0xfffff0,
+    khaki: 0xf0e68c,
+    lavender: 0xe6e6fa,
+    lavenderblush: 0xfff0f5,
+    lawngreen: 0x7cfc00,
+    lemonchiffon: 0xfffacd,
+    lightblue: 0xadd8e6,
+    lightcoral: 0xf08080,
+    lightcyan: 0xe0ffff,
+    lightgoldenrodyellow: 0xfafad2,
+    lightgray: 0xd3d3d3,
+    lightgreen: 0x90ee90,
+    lightgrey: 0xd3d3d3,
+    lightpink: 0xffb6c1,
+    lightsalmon: 0xffa07a,
+    lightseagreen: 0x20b2aa,
+    lightskyblue: 0x87cefa,
+    lightslategray: 0x778899,
+    lightslategrey: 0x778899,
+    lightsteelblue: 0xb0c4de,
+    lightyellow: 0xffffe0,
+    lime: 0x00ff00,
+    limegreen: 0x32cd32,
+    linen: 0xfaf0e6,
+    magenta: 0xff00ff,
+    maroon: 0x800000,
+    mediumaquamarine: 0x66cdaa,
+    mediumblue: 0x0000cd,
+    mediumorchid: 0xba55d3,
+    mediumpurple: 0x9370db,
+    mediumseagreen: 0x3cb371,
+    mediumslateblue: 0x7b68ee,
+    mediumspringgreen: 0x00fa9a,
+    mediumturquoise: 0x48d1cc,
+    mediumvioletred: 0xc71585,
+    midnightblue: 0x191970,
+    mintcream: 0xf5fffa,
+    mistyrose: 0xffe4e1,
+    moccasin: 0xffe4b5,
+    navajowhite: 0xffdead,
+    navy: 0x000080,
+    oldlace: 0xfdf5e6,
+    olive: 0x808000,
+    olivedrab: 0x6b8e23,
+    orange: 0xffa500,
+    orangered: 0xff4500,
+    orchid: 0xda70d6,
+    palegoldenrod: 0xeee8aa,
+    palegreen: 0x98fb98,
+    paleturquoise: 0xafeeee,
+    palevioletred: 0xdb7093,
+    papayawhip: 0xffefd5,
+    peachpuff: 0xffdab9,
+    peru: 0xcd853f,
+    pink: 0xffc0cb,
+    plum: 0xdda0dd,
+    powderblue: 0xb0e0e6,
+    purple: 0x800080,
+    rebeccapurple: 0x663399,
+    red: 0xff0000,
+    rosybrown: 0xbc8f8f,
+    royalblue: 0x4169e1,
+    saddlebrown: 0x8b4513,
+    salmon: 0xfa8072,
+    sandybrown: 0xf4a460,
+    seagreen: 0x2e8b57,
+    seashell: 0xfff5ee,
+    sienna: 0xa0522d,
+    silver: 0xc0c0c0,
+    skyblue: 0x87ceeb,
+    slateblue: 0x6a5acd,
+    slategray: 0x708090,
+    slategrey: 0x708090,
+    snow: 0xfffafa,
+    springgreen: 0x00ff7f,
+    steelblue: 0x4682b4,
+    tan: 0xd2b48c,
+    teal: 0x008080,
+    thistle: 0xd8bfd8,
+    tomato: 0xff6347,
+    turquoise: 0x40e0d0,
+    violet: 0xee82ee,
+    wheat: 0xf5deb3,
+    white: 0xffffff,
+    whitesmoke: 0xf5f5f5,
+    yellow: 0xffff00,
+    yellowgreen: 0x9acd32
+  };
+  define(Color, color, {
+    copy: function (channels) {
+      return Object.assign(new this.constructor(), this, channels);
+    },
+    displayable: function () {
+      return this.rgb().displayable();
+    },
+    hex: color_formatHex,
+    // Deprecated! Use color.formatHex.
+    formatHex: color_formatHex,
+    formatHsl: color_formatHsl,
+    formatRgb: color_formatRgb,
+    toString: color_formatRgb
+  });
+  function color_formatHex() {
+    return this.rgb().formatHex();
+  }
+  function color_formatHsl() {
+    return hslConvert(this).formatHsl();
+  }
+  function color_formatRgb() {
+    return this.rgb().formatRgb();
+  }
+  function color(format) {
+    var m, l;
+    format = (format + "").trim().toLowerCase();
+    return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : // #ff0000
+    l === 3 ? new Rgb(m >> 8 & 0xf | m >> 4 & 0xf0, m >> 4 & 0xf | m & 0xf0, (m & 0xf) << 4 | m & 0xf, 1) : // #f00
+    l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) : // #ff000000
+    l === 4 ? rgba(m >> 12 & 0xf | m >> 8 & 0xf0, m >> 8 & 0xf | m >> 4 & 0xf0, m >> 4 & 0xf | m & 0xf0, ((m & 0xf) << 4 | m & 0xf) / 0xff) : // #f000
+    null) : // invalid hex
+    (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) : // rgb(255, 0, 0)
+    (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : // rgb(100%, 0%, 0%)
+    (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) : // rgba(255, 0, 0, 1)
+    (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : // rgb(100%, 0%, 0%, 1)
+    (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : // hsl(120, 50%, 50%)
+    (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : // hsla(120, 50%, 50%, 1)
+    named.hasOwnProperty(format) ? rgbn(named[format]) : // eslint-disable-line no-prototype-builtins
+    format === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+  }
+  function rgbn(n) {
+    return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
+  }
+  function rgba(r, g, b, a) {
+    if (a <= 0) r = g = b = NaN;
+    return new Rgb(r, g, b, a);
+  }
+  function rgbConvert(o) {
+    if (!(o instanceof Color)) o = color(o);
+    if (!o) return new Rgb();
+    o = o.rgb();
+    return new Rgb(o.r, o.g, o.b, o.opacity);
+  }
+  function rgb(r, g, b, opacity) {
+    return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+  }
+  function Rgb(r, g, b, opacity) {
+    this.r = +r;
+    this.g = +g;
+    this.b = +b;
+    this.opacity = +opacity;
+  }
+  define(Rgb, rgb, extend(Color, {
+    brighter: function (k) {
+      k = k == null ? brighter : Math.pow(brighter, k);
+      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+    },
+    darker: function (k) {
+      k = k == null ? darker : Math.pow(darker, k);
+      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+    },
+    rgb: function () {
+      return this;
+    },
+    displayable: function () {
+      return -0.5 <= this.r && this.r < 255.5 && (-0.5 <= this.g && this.g < 255.5) && (-0.5 <= this.b && this.b < 255.5) && (0 <= this.opacity && this.opacity <= 1);
+    },
+    hex: rgb_formatHex,
+    // Deprecated! Use color.formatHex.
+    formatHex: rgb_formatHex,
+    formatRgb: rgb_formatRgb,
+    toString: rgb_formatRgb
+  }));
+  function rgb_formatHex() {
+    return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+  }
+  function rgb_formatRgb() {
+    var a = this.opacity;
+    a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+    return (a === 1 ? "rgb(" : "rgba(") + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", " + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", " + Math.max(0, Math.min(255, Math.round(this.b) || 0)) + (a === 1 ? ")" : ", " + a + ")");
+  }
+  function hex(value) {
+    value = Math.max(0, Math.min(255, Math.round(value) || 0));
+    return (value < 16 ? "0" : "") + value.toString(16);
+  }
+  function hsla(h, s, l, a) {
+    if (a <= 0) h = s = l = NaN; else if (l <= 0 || l >= 1) h = s = NaN; else if (s <= 0) h = NaN;
+    return new Hsl(h, s, l, a);
+  }
+  function hslConvert(o) {
+    if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
+    if (!(o instanceof Color)) o = color(o);
+    if (!o) return new Hsl();
+    if (o instanceof Hsl) return o;
+    o = o.rgb();
+    var r = o.r / 255, g = o.g / 255, b = o.b / 255, min = Math.min(r, g, b), max = Math.max(r, g, b), h = NaN, s = max - min, l = (max + min) / 2;
+    if (s) {
+      if (r === max) h = (g - b) / s + (g < b) * 6; else if (g === max) h = (b - r) / s + 2; else h = (r - g) / s + 4;
+      s /= l < 0.5 ? max + min : 2 - max - min;
+      h *= 60;
+    } else {
+      s = l > 0 && l < 1 ? 0 : h;
+    }
+    return new Hsl(h, s, l, o.opacity);
+  }
+  function hsl(h, s, l, opacity) {
+    return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+  }
+  function Hsl(h, s, l, opacity) {
+    this.h = +h;
+    this.s = +s;
+    this.l = +l;
+    this.opacity = +opacity;
+  }
+  define(Hsl, hsl, extend(Color, {
+    brighter: function (k) {
+      k = k == null ? brighter : Math.pow(brighter, k);
+      return new Hsl(this.h, this.s, this.l * k, this.opacity);
+    },
+    darker: function (k) {
+      k = k == null ? darker : Math.pow(darker, k);
+      return new Hsl(this.h, this.s, this.l * k, this.opacity);
+    },
+    rgb: function () {
+      var h = this.h % 360 + (this.h < 0) * 360, s = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < 0.5 ? l : 1 - l) * s, m1 = 2 * l - m2;
+      return new Rgb(hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2), hsl2rgb(h, m1, m2), hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2), this.opacity);
+    },
+    displayable: function () {
+      return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && (0 <= this.l && this.l <= 1) && (0 <= this.opacity && this.opacity <= 1);
+    },
+    formatHsl: function () {
+      var a = this.opacity;
+      a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+      return (a === 1 ? "hsl(" : "hsla(") + (this.h || 0) + ", " + (this.s || 0) * 100 + "%, " + (this.l || 0) * 100 + "%" + (a === 1 ? ")" : ", " + a + ")");
+    }
+  }));
+  /*From FvD 13.37, CSS Color Module Level 3*/
+  function hsl2rgb(h, m1, m2) {
+    return (h < 60 ? m1 + (m2 - m1) * h / 60 : h < 180 ? m2 : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60 : m1) * 255;
+  }
+  var deg2rad = Math.PI / 180;
+  var rad2deg = 180 / Math.PI;
+  // https://observablehq.com/@mbostock/lab-and-rgb
+  var K = 18, Xn = 0.96422, Yn = 1, Zn = 0.82521, t0 = 4 / 29, t1 = 6 / 29, t2 = 3 * t1 * t1, t3 = t1 * t1 * t1;
+  function labConvert(o) {
+    if (o instanceof Lab) return new Lab(o.l, o.a, o.b, o.opacity);
+    if (o instanceof Hcl) return hcl2lab(o);
+    if (!(o instanceof Rgb)) o = rgbConvert(o);
+    var r = rgb2lrgb(o.r), g = rgb2lrgb(o.g), b = rgb2lrgb(o.b), y = xyz2lab((0.2225045 * r + 0.7168786 * g + 0.0606169 * b) / Yn), x, z;
+    if (r === g && g === b) x = z = y; else {
+      x = xyz2lab((0.4360747 * r + 0.3850649 * g + 0.1430804 * b) / Xn);
+      z = xyz2lab((0.0139322 * r + 0.0971045 * g + 0.7141733 * b) / Zn);
+    }
+    return new Lab(116 * y - 16, 500 * (x - y), 200 * (y - z), o.opacity);
+  }
+  function gray(l, opacity) {
+    return new Lab(l, 0, 0, opacity == null ? 1 : opacity);
+  }
+  function lab(l, a, b, opacity) {
+    return arguments.length === 1 ? labConvert(l) : new Lab(l, a, b, opacity == null ? 1 : opacity);
+  }
+  function Lab(l, a, b, opacity) {
+    this.l = +l;
+    this.a = +a;
+    this.b = +b;
+    this.opacity = +opacity;
+  }
+  define(Lab, lab, extend(Color, {
+    brighter: function (k) {
+      return new Lab(this.l + K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+    },
+    darker: function (k) {
+      return new Lab(this.l - K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+    },
+    rgb: function () {
+      var y = (this.l + 16) / 116, x = isNaN(this.a) ? y : y + this.a / 500, z = isNaN(this.b) ? y : y - this.b / 200;
+      x = Xn * lab2xyz(x);
+      y = Yn * lab2xyz(y);
+      z = Zn * lab2xyz(z);
+      return new Rgb(lrgb2rgb(3.1338561 * x - 1.6168667 * y - 0.4906146 * z), lrgb2rgb(-0.9787684 * x + 1.9161415 * y + 0.0334540 * z), lrgb2rgb(0.0719453 * x - 0.2289914 * y + 1.4052427 * z), this.opacity);
+    }
+  }));
+  function xyz2lab(t) {
+    return t > t3 ? Math.pow(t, 1 / 3) : t / t2 + t0;
+  }
+  function lab2xyz(t) {
+    return t > t1 ? t * t * t : t2 * (t - t0);
+  }
+  function lrgb2rgb(x) {
+    return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055);
+  }
+  function rgb2lrgb(x) {
+    return (x /= 255) <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+  }
+  function hclConvert(o) {
+    if (o instanceof Hcl) return new Hcl(o.h, o.c, o.l, o.opacity);
+    if (!(o instanceof Lab)) o = labConvert(o);
+    if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
+    var h = Math.atan2(o.b, o.a) * rad2deg;
+    return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
+  }
+  function lch(l, c, h, opacity) {
+    return arguments.length === 1 ? hclConvert(l) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
+  }
+  function hcl(h, c, l, opacity) {
+    return arguments.length === 1 ? hclConvert(h) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
+  }
+  function Hcl(h, c, l, opacity) {
+    this.h = +h;
+    this.c = +c;
+    this.l = +l;
+    this.opacity = +opacity;
+  }
+  function hcl2lab(o) {
+    if (isNaN(o.h)) return new Lab(o.l, 0, 0, o.opacity);
+    var h = o.h * deg2rad;
+    return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
+  }
+  define(Hcl, hcl, extend(Color, {
+    brighter: function (k) {
+      return new Hcl(this.h, this.c, this.l + K * (k == null ? 1 : k), this.opacity);
+    },
+    darker: function (k) {
+      return new Hcl(this.h, this.c, this.l - K * (k == null ? 1 : k), this.opacity);
+    },
+    rgb: function () {
+      return hcl2lab(this).rgb();
+    }
+  }));
+  var A = -0.14861, B = +1.78277, C = -0.29227, D = -0.90649, E = +1.97294, ED = E * D, EB = E * B, BC_DA = B * C - D * A;
+  function cubehelixConvert(o) {
+    if (o instanceof Cubehelix) return new Cubehelix(o.h, o.s, o.l, o.opacity);
+    if (!(o instanceof Rgb)) o = rgbConvert(o);
+    var r = o.r / 255, g = o.g / 255, b = o.b / 255, l = (BC_DA * b + ED * r - EB * g) / (BC_DA + ED - EB), bl = b - l, k = (E * (g - l) - C * bl) / D, s = Math.sqrt(k * k + bl * bl) / (E * l * (1 - l)), // NaN if l=0 or l=1
+    h = s ? Math.atan2(k, bl) * rad2deg - 120 : NaN;
+    return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
+  }
+  function cubehelix(h, s, l, opacity) {
+    return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
+  }
+  function Cubehelix(h, s, l, opacity) {
+    this.h = +h;
+    this.s = +s;
+    this.l = +l;
+    this.opacity = +opacity;
+  }
+  define(Cubehelix, cubehelix, extend(Color, {
+    brighter: function (k) {
+      k = k == null ? brighter : Math.pow(brighter, k);
+      return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+    },
+    darker: function (k) {
+      k = k == null ? darker : Math.pow(darker, k);
+      return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+    },
+    rgb: function () {
+      var h = isNaN(this.h) ? 0 : (this.h + 120) * deg2rad, l = +this.l, a = isNaN(this.s) ? 0 : this.s * l * (1 - l), cosh = Math.cos(h), sinh = Math.sin(h);
+      return new Rgb(255 * (l + a * (A * cosh + B * sinh)), 255 * (l + a * (C * cosh + D * sinh)), 255 * (l + a * (E * cosh)), this.opacity);
+    }
+  }));
+  exports.color = color;
+  exports.cubehelix = cubehelix;
+  exports.gray = gray;
+  exports.hcl = hcl;
+  exports.hsl = hsl;
+  exports.lab = lab;
+  exports.lch = lch;
+  exports.rgb = rgb;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"7Bbq9":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyNice;
+
+var _d3Time = require("d3-time");
+
+var _isUtcScale = _interopRequireDefault(require("../utils/isUtcScale"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var localTimeIntervals = {
+  day: _d3Time.timeDay,
+  hour: _d3Time.timeHour,
+  minute: _d3Time.timeMinute,
+  month: _d3Time.timeMonth,
+  second: _d3Time.timeSecond,
+  week: _d3Time.timeWeek,
+  year: _d3Time.timeYear
+};
+var utcIntervals = {
+  day: _d3Time.utcDay,
+  hour: _d3Time.utcHour,
+  minute: _d3Time.utcMinute,
+  month: _d3Time.utcMonth,
+  second: _d3Time.utcSecond,
+  week: _d3Time.utcWeek,
+  year: _d3Time.utcYear
+};
+
+function applyNice(scale, config) {
+  if ('nice' in config && typeof config.nice !== 'undefined' && 'nice' in scale) {
+    var nice = config.nice;
+
+    if (typeof nice === 'boolean') {
+      if (nice) {
+        scale.nice();
+      }
+    } else if (typeof nice === 'number') {
+      scale.nice(nice);
+    } else {
+      var timeScale = scale;
+      var isUtc = (0, _isUtcScale.default)(timeScale);
+
+      if (typeof nice === 'string') {
+        timeScale.nice(isUtc ? utcIntervals[nice] : localTimeIntervals[nice]);
+      } else {
+        var interval = nice.interval,
+            step = nice.step;
+        var parsedInterval = (isUtc ? utcIntervals[interval] : localTimeIntervals[interval]).every(step);
+
+        if (parsedInterval != null) {
+          timeScale.nice(parsedInterval);
+        }
+      }
+    }
+  }
+}
+},{"d3-time":"7nvX6","../utils/isUtcScale":"4wIWx"}],"7nvX6":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-time/ v1.1.0 Copyright 2019 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  var t0 = new Date(), t1 = new Date();
+  function newInterval(floori, offseti, count, field) {
+    function interval(date) {
+      return (floori(date = arguments.length === 0 ? new Date() : new Date(+date)), date);
+    }
+    interval.floor = function (date) {
+      return (floori(date = new Date(+date)), date);
+    };
+    interval.ceil = function (date) {
+      return (floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date);
+    };
+    interval.round = function (date) {
+      var d0 = interval(date), d1 = interval.ceil(date);
+      return date - d0 < d1 - date ? d0 : d1;
+    };
+    interval.offset = function (date, step) {
+      return (offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date);
+    };
+    interval.range = function (start, stop, step) {
+      var range = [], previous;
+      start = interval.ceil(start);
+      step = step == null ? 1 : Math.floor(step);
+      if (!(start < stop) || !(step > 0)) return range;
+      // also handles Invalid Date
+      do (range.push(previous = new Date(+start)), offseti(start, step), floori(start)); while (previous < start && start < stop);
+      return range;
+    };
+    interval.filter = function (test) {
+      return newInterval(function (date) {
+        if (date >= date) while ((floori(date), !test(date))) date.setTime(date - 1);
+      }, function (date, step) {
+        if (date >= date) {
+          if (step < 0) while (++step <= 0) {
+            while ((offseti(date, -1), !test(date))) {}
+          } else while (--step >= 0) {
+            while ((offseti(date, +1), !test(date))) {}
+          }
+        }
+      });
+    };
+    if (count) {
+      interval.count = function (start, end) {
+        (t0.setTime(+start), t1.setTime(+end));
+        (floori(t0), floori(t1));
+        return Math.floor(count(t0, t1));
+      };
+      interval.every = function (step) {
+        step = Math.floor(step);
+        return !isFinite(step) || !(step > 0) ? null : !(step > 1) ? interval : interval.filter(field ? function (d) {
+          return field(d) % step === 0;
+        } : function (d) {
+          return interval.count(0, d) % step === 0;
+        });
+      };
+    }
+    return interval;
+  }
+  var millisecond = newInterval(function () {}, function (date, step) {
+    date.setTime(+date + step);
+  }, function (start, end) {
+    return end - start;
+  });
+  // An optimized implementation for this simple case.
+  millisecond.every = function (k) {
+    k = Math.floor(k);
+    if (!isFinite(k) || !(k > 0)) return null;
+    if (!(k > 1)) return millisecond;
+    return newInterval(function (date) {
+      date.setTime(Math.floor(date / k) * k);
+    }, function (date, step) {
+      date.setTime(+date + step * k);
+    }, function (start, end) {
+      return (end - start) / k;
+    });
+  };
+  var milliseconds = millisecond.range;
+  var durationSecond = 1e3;
+  var durationMinute = 6e4;
+  var durationHour = 36e5;
+  var durationDay = 864e5;
+  var durationWeek = 6048e5;
+  var second = newInterval(function (date) {
+    date.setTime(date - date.getMilliseconds());
+  }, function (date, step) {
+    date.setTime(+date + step * durationSecond);
+  }, function (start, end) {
+    return (end - start) / durationSecond;
+  }, function (date) {
+    return date.getUTCSeconds();
+  });
+  var seconds = second.range;
+  var minute = newInterval(function (date) {
+    date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond);
+  }, function (date, step) {
+    date.setTime(+date + step * durationMinute);
+  }, function (start, end) {
+    return (end - start) / durationMinute;
+  }, function (date) {
+    return date.getMinutes();
+  });
+  var minutes = minute.range;
+  var hour = newInterval(function (date) {
+    date.setTime(date - date.getMilliseconds() - date.getSeconds() * durationSecond - date.getMinutes() * durationMinute);
+  }, function (date, step) {
+    date.setTime(+date + step * durationHour);
+  }, function (start, end) {
+    return (end - start) / durationHour;
+  }, function (date) {
+    return date.getHours();
+  });
+  var hours = hour.range;
+  var day = newInterval(function (date) {
+    date.setHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setDate(date.getDate() + step);
+  }, function (start, end) {
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationDay;
+  }, function (date) {
+    return date.getDate() - 1;
+  });
+  var days = day.range;
+  function weekday(i) {
+    return newInterval(function (date) {
+      date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
+      date.setHours(0, 0, 0, 0);
+    }, function (date, step) {
+      date.setDate(date.getDate() + step * 7);
+    }, function (start, end) {
+      return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * durationMinute) / durationWeek;
+    });
+  }
+  var sunday = weekday(0);
+  var monday = weekday(1);
+  var tuesday = weekday(2);
+  var wednesday = weekday(3);
+  var thursday = weekday(4);
+  var friday = weekday(5);
+  var saturday = weekday(6);
+  var sundays = sunday.range;
+  var mondays = monday.range;
+  var tuesdays = tuesday.range;
+  var wednesdays = wednesday.range;
+  var thursdays = thursday.range;
+  var fridays = friday.range;
+  var saturdays = saturday.range;
+  var month = newInterval(function (date) {
+    date.setDate(1);
+    date.setHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setMonth(date.getMonth() + step);
+  }, function (start, end) {
+    return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+  }, function (date) {
+    return date.getMonth();
+  });
+  var months = month.range;
+  var year = newInterval(function (date) {
+    date.setMonth(0, 1);
+    date.setHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setFullYear(date.getFullYear() + step);
+  }, function (start, end) {
+    return end.getFullYear() - start.getFullYear();
+  }, function (date) {
+    return date.getFullYear();
+  });
+  // An optimized implementation for this simple case.
+  year.every = function (k) {
+    return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : newInterval(function (date) {
+      date.setFullYear(Math.floor(date.getFullYear() / k) * k);
+      date.setMonth(0, 1);
+      date.setHours(0, 0, 0, 0);
+    }, function (date, step) {
+      date.setFullYear(date.getFullYear() + step * k);
+    });
+  };
+  var years = year.range;
+  var utcMinute = newInterval(function (date) {
+    date.setUTCSeconds(0, 0);
+  }, function (date, step) {
+    date.setTime(+date + step * durationMinute);
+  }, function (start, end) {
+    return (end - start) / durationMinute;
+  }, function (date) {
+    return date.getUTCMinutes();
+  });
+  var utcMinutes = utcMinute.range;
+  var utcHour = newInterval(function (date) {
+    date.setUTCMinutes(0, 0, 0);
+  }, function (date, step) {
+    date.setTime(+date + step * durationHour);
+  }, function (start, end) {
+    return (end - start) / durationHour;
+  }, function (date) {
+    return date.getUTCHours();
+  });
+  var utcHours = utcHour.range;
+  var utcDay = newInterval(function (date) {
+    date.setUTCHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setUTCDate(date.getUTCDate() + step);
+  }, function (start, end) {
+    return (end - start) / durationDay;
+  }, function (date) {
+    return date.getUTCDate() - 1;
+  });
+  var utcDays = utcDay.range;
+  function utcWeekday(i) {
+    return newInterval(function (date) {
+      date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
+      date.setUTCHours(0, 0, 0, 0);
+    }, function (date, step) {
+      date.setUTCDate(date.getUTCDate() + step * 7);
+    }, function (start, end) {
+      return (end - start) / durationWeek;
+    });
+  }
+  var utcSunday = utcWeekday(0);
+  var utcMonday = utcWeekday(1);
+  var utcTuesday = utcWeekday(2);
+  var utcWednesday = utcWeekday(3);
+  var utcThursday = utcWeekday(4);
+  var utcFriday = utcWeekday(5);
+  var utcSaturday = utcWeekday(6);
+  var utcSundays = utcSunday.range;
+  var utcMondays = utcMonday.range;
+  var utcTuesdays = utcTuesday.range;
+  var utcWednesdays = utcWednesday.range;
+  var utcThursdays = utcThursday.range;
+  var utcFridays = utcFriday.range;
+  var utcSaturdays = utcSaturday.range;
+  var utcMonth = newInterval(function (date) {
+    date.setUTCDate(1);
+    date.setUTCHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setUTCMonth(date.getUTCMonth() + step);
+  }, function (start, end) {
+    return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+  }, function (date) {
+    return date.getUTCMonth();
+  });
+  var utcMonths = utcMonth.range;
+  var utcYear = newInterval(function (date) {
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setUTCFullYear(date.getUTCFullYear() + step);
+  }, function (start, end) {
+    return end.getUTCFullYear() - start.getUTCFullYear();
+  }, function (date) {
+    return date.getUTCFullYear();
+  });
+  // An optimized implementation for this simple case.
+  utcYear.every = function (k) {
+    return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : newInterval(function (date) {
+      date.setUTCFullYear(Math.floor(date.getUTCFullYear() / k) * k);
+      date.setUTCMonth(0, 1);
+      date.setUTCHours(0, 0, 0, 0);
+    }, function (date, step) {
+      date.setUTCFullYear(date.getUTCFullYear() + step * k);
+    });
+  };
+  var utcYears = utcYear.range;
+  exports.timeDay = day;
+  exports.timeDays = days;
+  exports.timeFriday = friday;
+  exports.timeFridays = fridays;
+  exports.timeHour = hour;
+  exports.timeHours = hours;
+  exports.timeInterval = newInterval;
+  exports.timeMillisecond = millisecond;
+  exports.timeMilliseconds = milliseconds;
+  exports.timeMinute = minute;
+  exports.timeMinutes = minutes;
+  exports.timeMonday = monday;
+  exports.timeMondays = mondays;
+  exports.timeMonth = month;
+  exports.timeMonths = months;
+  exports.timeSaturday = saturday;
+  exports.timeSaturdays = saturdays;
+  exports.timeSecond = second;
+  exports.timeSeconds = seconds;
+  exports.timeSunday = sunday;
+  exports.timeSundays = sundays;
+  exports.timeThursday = thursday;
+  exports.timeThursdays = thursdays;
+  exports.timeTuesday = tuesday;
+  exports.timeTuesdays = tuesdays;
+  exports.timeWednesday = wednesday;
+  exports.timeWednesdays = wednesdays;
+  exports.timeWeek = sunday;
+  exports.timeWeeks = sundays;
+  exports.timeYear = year;
+  exports.timeYears = years;
+  exports.utcDay = utcDay;
+  exports.utcDays = utcDays;
+  exports.utcFriday = utcFriday;
+  exports.utcFridays = utcFridays;
+  exports.utcHour = utcHour;
+  exports.utcHours = utcHours;
+  exports.utcMillisecond = millisecond;
+  exports.utcMilliseconds = milliseconds;
+  exports.utcMinute = utcMinute;
+  exports.utcMinutes = utcMinutes;
+  exports.utcMonday = utcMonday;
+  exports.utcMondays = utcMondays;
+  exports.utcMonth = utcMonth;
+  exports.utcMonths = utcMonths;
+  exports.utcSaturday = utcSaturday;
+  exports.utcSaturdays = utcSaturdays;
+  exports.utcSecond = second;
+  exports.utcSeconds = seconds;
+  exports.utcSunday = utcSunday;
+  exports.utcSundays = utcSundays;
+  exports.utcThursday = utcThursday;
+  exports.utcThursdays = utcThursdays;
+  exports.utcTuesday = utcTuesday;
+  exports.utcTuesdays = utcTuesdays;
+  exports.utcWednesday = utcWednesday;
+  exports.utcWednesdays = utcWednesdays;
+  exports.utcWeek = utcSunday;
+  exports.utcWeeks = utcSundays;
+  exports.utcYear = utcYear;
+  exports.utcYears = utcYears;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"4wIWx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = isUtcScale;
+var TEST_TIME = new Date(Date.UTC(2020, 1, 2, 3, 4, 5));
+var TEST_FORMAT = '%Y-%m-%d %H:%M';
+/**
+ * Check if the scale is UTC or Time scale
+ * When local time is equal to UTC, always return true
+ * @param scale time or utc scale
+ */
+
+function isUtcScale(scale) {
+  // The only difference between time and utc scale is
+  // whether the tick format function is utcFormat or timeFormat
+  var output = scale.tickFormat(1, TEST_FORMAT)(TEST_TIME);
+  return output === '2020-02-02 03:04';
+}
+},{}],"3fEAd":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyPadding;
+
+function applyPadding(scale, config) {
+  if ('padding' in scale && 'padding' in config && typeof config.padding !== 'undefined') {
+    scale.padding(config.padding);
+  }
+
+  if ('paddingInner' in scale && 'paddingInner' in config && typeof config.paddingInner !== 'undefined') {
+    scale.paddingInner(config.paddingInner);
+  }
+
+  if ('paddingOuter' in scale && 'paddingOuter' in config && typeof config.paddingOuter !== 'undefined') {
+    scale.paddingOuter(config.paddingOuter);
+  }
+}
+},{}],"2JT2t":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyReverse;
+
+function applyReverse(scale, config) {
+  if (config.reverse) {
+    var reversedRange = scale.range().slice().reverse();
+
+    if ('padding' in scale) {
+      // point and band scales
+      scale.range(reversedRange);
+    } else {
+      // the rest
+      scale.range(reversedRange);
+    }
+  }
+}
+},{}],"5p3B8":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyRound;
+
+var _d3Interpolate = require("d3-interpolate");
+
+function applyRound(scale, config) {
+  if ('round' in config && typeof config.round !== 'undefined') {
+    if (config.round && 'interpolate' in config && typeof config.interpolate !== 'undefined') {
+      console.warn("[vx/scale/applyRound] ignoring round: scale config contains round and interpolate. only applying interpolate. config:", config);
+    } else if ('round' in scale) {
+      // for point and band scales
+      scale.round(config.round);
+    } else if ('interpolate' in scale && config.round) {
+      // for continuous output scales
+      // setting config.round = true
+      // is actually setting interpolator to interpolateRound
+      // as these scales do not have scale.round() function
+      scale.interpolate(_d3Interpolate.interpolateRound);
+    }
+  }
+}
+},{"d3-interpolate":"3R7Kj"}],"cyLC5":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyUnknown;
+
+function applyUnknown(scale, config) {
+  if ('unknown' in scale && 'unknown' in config && typeof config.unknown !== 'undefined') {
+    scale.unknown(config.unknown);
+  }
+}
+},{}],"UCcrZ":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = applyZero;
+
+function applyZero(scale, config) {
+  if ('zero' in config && config.zero === true) {
+    var domain = scale.domain();
+    var a = domain[0],
+        b = domain[1];
+    var isDescending = b < a;
+
+    var _ref = isDescending ? [b, a] : [a, b],
+        min = _ref[0],
+        max = _ref[1];
+
+    var domainWithZero = [Math.min(0, min), Math.max(0, max)];
+    scale.domain(isDescending ? domainWithZero.reverse() : domainWithZero);
+  }
+}
+},{}],"3kZya":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createPointScale;
+exports.updatePointScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updatePointScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'align', 'padding', 'round');
+exports.updatePointScale = updatePointScale;
+
+function createPointScale(config) {
+  return updatePointScale((0, _d3Scale.scalePoint)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"4Ushr":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createLinearScale;
+exports.updateLinearScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateLinearScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'interpolate', 'nice', 'round', 'zero');
+exports.updateLinearScale = updateLinearScale;
+
+function createLinearScale(config) {
+  return updateLinearScale((0, _d3Scale.scaleLinear)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"39rJr":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createTimeScale;
+exports.updateTimeScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateTimeScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'interpolate', 'nice', 'round');
+exports.updateTimeScale = updateTimeScale;
+
+function createTimeScale(config) {
+  return updateTimeScale((0, _d3Scale.scaleTime)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"tsY8v":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createUtcScale;
+exports.updateUtcScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateUtcScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'interpolate', 'nice', 'round');
+exports.updateUtcScale = updateUtcScale;
+
+function createUtcScale(config) {
+  return updateUtcScale((0, _d3Scale.scaleUtc)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"2gxw5":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createLogScale;
+exports.updateLogScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateLogScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'base', 'clamp', 'interpolate', 'nice', 'round');
+exports.updateLogScale = updateLogScale;
+
+function createLogScale(config) {
+  return updateLogScale((0, _d3Scale.scaleLog)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"2Ox1U":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createPowScale;
+exports.updatePowScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updatePowScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'exponent', 'interpolate', 'nice', 'round', 'zero');
+exports.updatePowScale = updatePowScale;
+
+function createPowScale(config) {
+  return updatePowScale((0, _d3Scale.scalePow)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"3Ge01":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createOrdinalScale;
+exports.updateOrdinalScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateOrdinalScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'unknown');
+exports.updateOrdinalScale = updateOrdinalScale;
+
+function createOrdinalScale(config) {
+  return updateOrdinalScale((0, _d3Scale.scaleOrdinal)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"3uCKE":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createQuantizeScale;
+exports.updateQuantizeScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateQuantizeScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'nice', 'zero');
+exports.updateQuantizeScale = updateQuantizeScale;
+
+function createQuantizeScale(config) {
+  return updateQuantizeScale((0, _d3Scale.scaleQuantize)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"5KT11":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createQuantileScale;
+exports.updateQuantileScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateQuantileScale = (0, _scaleOperator.default)('domain', 'range', 'reverse');
+exports.updateQuantileScale = updateQuantileScale;
+
+function createQuantileScale(config) {
+  return updateQuantileScale((0, _d3Scale.scaleQuantile)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"3lffw":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createSymlogScale;
+exports.updateSymlogScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateSymlogScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'constant', 'nice', 'zero');
+exports.updateSymlogScale = updateSymlogScale;
+
+function createSymlogScale(config) {
+  return updateSymlogScale((0, _d3Scale.scaleSymlog)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"DYakF":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createThresholdScale;
+exports.updateThresholdScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateThresholdScale = (0, _scaleOperator.default)('domain', 'range', 'reverse');
+exports.updateThresholdScale = updateThresholdScale;
+
+function createThresholdScale(config) {
+  return updateThresholdScale((0, _d3Scale.scaleThreshold)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"273wo":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createSqrtScale;
+exports.updateSqrtScale = void 0;
+
+var _d3Scale = require("d3-scale");
+
+var _scaleOperator = _interopRequireDefault(require("../operators/scaleOperator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var updateSqrtScale = (0, _scaleOperator.default)('domain', 'range', 'reverse', 'clamp', 'interpolate', 'nice', 'round', 'zero');
+exports.updateSqrtScale = updateSqrtScale;
+
+function createSqrtScale(config) {
+  return updateSqrtScale((0, _d3Scale.scaleSqrt)(), config);
+}
+},{"d3-scale":"2UZ4X","../operators/scaleOperator":"Kt37N"}],"1gDLM":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _linear = _interopRequireDefault(require("./scales/linear"));
+
+var _log = _interopRequireDefault(require("./scales/log"));
+
+var _power = _interopRequireDefault(require("./scales/power"));
+
+var _squareRoot = _interopRequireDefault(require("./scales/squareRoot"));
+
+var _symlog = _interopRequireDefault(require("./scales/symlog"));
+
+var _time = _interopRequireDefault(require("./scales/time"));
+
+var _utc = _interopRequireDefault(require("./scales/utc"));
+
+var _quantile = _interopRequireDefault(require("./scales/quantile"));
+
+var _quantize = _interopRequireDefault(require("./scales/quantize"));
+
+var _threshold = _interopRequireDefault(require("./scales/threshold"));
+
+var _ordinal = _interopRequireDefault(require("./scales/ordinal"));
+
+var _point = _interopRequireDefault(require("./scales/point"));
+
+var _band = _interopRequireDefault(require("./scales/band"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Actual implementation
+function createScale(config) {
+  if (typeof config !== 'undefined' && 'type' in config) {
+    switch (config.type) {
+      case 'linear':
+        return (0, _linear.default)(config);
+
+      case 'log':
+        return (0, _log.default)(config);
+
+      case 'pow':
+        return (0, _power.default)(config);
+
+      case 'sqrt':
+        return (0, _squareRoot.default)(config);
+
+      case 'symlog':
+        return (0, _symlog.default)(config);
+
+      case 'time':
+        return (0, _time.default)(config);
+
+      case 'utc':
+        return (0, _utc.default)(config);
+
+      case 'quantile':
+        return (0, _quantile.default)(config);
+
+      case 'quantize':
+        return (0, _quantize.default)(config);
+
+      case 'threshold':
+        return (0, _threshold.default)(config);
+
+      case 'ordinal':
+        return (0, _ordinal.default)(config);
+
+      case 'point':
+        return (0, _point.default)(config);
+
+      case 'band':
+        return (0, _band.default)(config);
+
+      default:
+    }
+  } // If type is not specified, fallback to linear scale
+
+
+  return (0, _linear.default)(config);
+}
+
+var _default = createScale;
+exports.default = _default;
+},{"./scales/linear":"4Ushr","./scales/log":"2gxw5","./scales/power":"2Ox1U","./scales/squareRoot":"273wo","./scales/symlog":"3lffw","./scales/time":"39rJr","./scales/utc":"tsY8v","./scales/quantile":"5KT11","./scales/quantize":"3uCKE","./scales/threshold":"DYakF","./scales/ordinal":"3Ge01","./scales/point":"3kZya","./scales/band":"3c0yn"}],"5oz9N":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _scaleOperator = _interopRequireWildcard(require("./operators/scaleOperator"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var applyAllOperators = _scaleOperator.default.apply(void 0, _scaleOperator.ALL_OPERATORS); // Overload function signature for more strict typing, e.g.,
+// If the scale is a ScaleLinear, the config is a linear config.
+
+
+// Actual implementation
+function updateScale(scale, config) {
+  return applyAllOperators(scale.copy(), config);
+}
+
+var _default = updateScale;
+exports.default = _default;
+},{"./operators/scaleOperator":"Kt37N"}],"4FmTx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = inferScaleType;
+
+var _isUtcScale = _interopRequireDefault(require("./isUtcScale"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function inferScaleType(scale) {
+  // Try a sequence of typeguards to figure out the scale type
+  if ('paddingInner' in scale) {
+    return 'band';
+  }
+
+  if ('padding' in scale) {
+    return 'point';
+  }
+
+  if ('quantiles' in scale) {
+    return 'quantile';
+  }
+
+  if ('base' in scale) {
+    return 'log';
+  }
+
+  if ('exponent' in scale) {
+    return scale.exponent() === 0.5 ? 'sqrt' : 'pow';
+  }
+
+  if ('constant' in scale) {
+    return 'symlog';
+  }
+
+  if ('clamp' in scale) {
+    // Linear, Time or Utc scales
+    if (scale.ticks()[0] instanceof Date) {
+      return (0, _isUtcScale.default)(scale) ? 'utc' : 'time';
+    }
+
+    return 'linear';
+  }
+
+  if ('nice' in scale) {
+    return 'quantize';
+  }
+
+  if ('invertExtent' in scale) {
+    return 'threshold';
+  }
+
+  return 'ordinal';
+}
+},{"./isUtcScale":"4wIWx"}],"3nVGv":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = coerceNumber;
+
+function coerceNumber(val) {
+  if ((typeof val === 'function' || typeof val === 'object' && !!val) && 'valueOf' in val) {
+    var num = val.valueOf();
+    if (typeof num === 'number') return num;
+  }
+
+  return val;
+}
+},{}],"6RIqt":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = getTicks;
+
+function getTicks(scale, numTicks) {
+  // Because `Scale` is generic type which maybe a subset of AnyD3Scale
+  // that may not have `ticks` field,
+  // TypeScript will not let us do the `'ticks' in scale` check directly.
+  // Have to manually cast and expand type first.
+  var s = scale;
+
+  if ('ticks' in s) {
+    return s.ticks(numTicks);
+  }
+
+  return s.domain().filter(function (_, index, arr) {
+    return numTicks == null || arr.length <= numTicks || index % Math.round((arr.length - 1) / numTicks) === 0;
+  });
+}
+},{}],"71Ljq":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = toString;
+
+function toString(x) {
+  return x == null ? void 0 : x.toString();
+}
+},{}],"3iF1U":[function(require,module,exports) {
+"use strict";
+},{}],"3FBu2":[function(require,module,exports) {
+"use strict";
+},{}],"6es0R":[function(require,module,exports) {
+"use strict";
+},{}],"4sMkm":[function(require,module,exports) {
+"use strict";
+},{}],"4CjAX":[function(require,module,exports) {
+"use strict";
+},{}],"Eqi8f":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AxisRenderer;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _shape = require("@vx/shape");
+
+var _text = require("@vx/text");
+
+var _getLabelTransform = _interopRequireDefault(require("../utils/getLabelTransform"));
+
+var _Ticks = _interopRequireDefault(require("./Ticks"));
+
+var _ = require("..");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+var defaultTextProps = {
+  textAnchor: 'middle',
+  fontFamily: 'Arial',
+  fontSize: 10,
+  fill: '#222'
+};
+
+function AxisRenderer(_ref) {
+  var axisFromPoint = _ref.axisFromPoint,
+      axisLineClassName = _ref.axisLineClassName,
+      axisToPoint = _ref.axisToPoint,
+      hideAxisLine = _ref.hideAxisLine,
+      hideTicks = _ref.hideTicks,
+      horizontal = _ref.horizontal,
+      _ref$label = _ref.label,
+      label = _ref$label === void 0 ? '' : _ref$label,
+      labelClassName = _ref.labelClassName,
+      _ref$labelOffset = _ref.labelOffset,
+      labelOffset = _ref$labelOffset === void 0 ? 14 : _ref$labelOffset,
+      _ref$labelProps = _ref.labelProps,
+      labelProps = _ref$labelProps === void 0 ? defaultTextProps : _ref$labelProps,
+      _ref$orientation = _ref.orientation,
+      orientation = _ref$orientation === void 0 ? _.Orientation.bottom : _ref$orientation,
+      scale = _ref.scale,
+      _ref$stroke = _ref.stroke,
+      stroke = _ref$stroke === void 0 ? '#222' : _ref$stroke,
+      strokeDasharray = _ref.strokeDasharray,
+      _ref$strokeWidth = _ref.strokeWidth,
+      strokeWidth = _ref$strokeWidth === void 0 ? 1 : _ref$strokeWidth,
+      tickClassName = _ref.tickClassName,
+      tickComponent = _ref.tickComponent,
+      _ref$tickLabelProps = _ref.tickLabelProps,
+      tickLabelProps = _ref$tickLabelProps === void 0 ? function () {
+    return (
+      /** tickValue, index */
+      defaultTextProps
+    );
+  } : _ref$tickLabelProps,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      _ref$tickStroke = _ref.tickStroke,
+      tickStroke = _ref$tickStroke === void 0 ? '#222' : _ref$tickStroke,
+      tickTransform = _ref.tickTransform,
+      ticks = _ref.ticks,
+      _ref$ticksComponent = _ref.ticksComponent,
+      ticksComponent = _ref$ticksComponent === void 0 ? _Ticks.default : _ref$ticksComponent;
+  // compute the max tick label size to compute label offset
+  var allTickLabelProps = ticks.map(function (_ref2) {
+    var value = _ref2.value,
+        index = _ref2.index;
+    return tickLabelProps(value, index);
+  });
+  var maxTickLabelFontSize = Math.max.apply(Math, [10].concat(allTickLabelProps.map(function (props) {
+    return typeof props.fontSize === 'number' ? props.fontSize : 0;
+  })));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, ticksComponent({
+    hideTicks: hideTicks,
+    horizontal: horizontal,
+    orientation: orientation,
+    scale: scale,
+    tickClassName: tickClassName,
+    tickComponent: tickComponent,
+    tickLabelProps: allTickLabelProps,
+    tickStroke: tickStroke,
+    tickTransform: tickTransform,
+    ticks: ticks
+  }), !hideAxisLine && /*#__PURE__*/_react.default.createElement(_shape.Line, {
+    className: (0, _classnames.default)('vx-axis-line', axisLineClassName),
+    from: axisFromPoint,
+    to: axisToPoint,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
+    strokeDasharray: strokeDasharray
+  }), label && /*#__PURE__*/_react.default.createElement(_text.Text, _extends({
+    className: (0, _classnames.default)('vx-axis-label', labelClassName)
+  }, (0, _getLabelTransform.default)({
+    labelOffset: labelOffset,
+    labelProps: labelProps,
+    orientation: orientation,
+    range: scale.range(),
+    tickLabelFontSize: maxTickLabelFontSize,
+    tickLength: tickLength
+  }), labelProps), label));
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/shape":"1mqSb","@vx/text":"2nkDq","../utils/getLabelTransform":"6P5dd","./Ticks":"5UEJw","..":"L6nNU"}],"1mqSb":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+var _exportNames = {
+  Arc: true,
+  Pie: true,
+  Line: true,
+  LinePath: true,
+  LineRadial: true,
+  Area: true,
+  AreaClosed: true,
+  AreaStack: true,
+  Bar: true,
+  BarRounded: true,
+  BarGroup: true,
+  BarGroupHorizontal: true,
+  BarStack: true,
+  BarStackHorizontal: true,
+  Stack: true,
+  stackOffset: true,
+  stackOrder: true,
+  LinkHorizontal: true,
+  LinkVertical: true,
+  LinkRadial: true,
+  LinkHorizontalCurve: true,
+  LinkVerticalCurve: true,
+  LinkRadialCurve: true,
+  LinkHorizontalLine: true,
+  LinkVerticalLine: true,
+  LinkRadialLine: true,
+  LinkHorizontalStep: true,
+  LinkVerticalStep: true,
+  LinkRadialStep: true,
+  Polygon: true,
+  Circle: true,
+  SplitLinePath: true,
+  STACK_OFFSETS: true,
+  STACK_OFFSET_NAMES: true,
+  STACK_ORDERS: true,
+  STACK_ORDER_NAMES: true,
+  degreesToRadians: true,
+  pathHorizontalDiagonal: true,
+  pathVerticalDiagonal: true,
+  pathRadialDiagonal: true,
+  pathHorizontalCurve: true,
+  pathVerticalCurve: true,
+  pathRadialCurve: true,
+  pathHorizontalLine: true,
+  pathVerticalLine: true,
+  pathRadialLine: true,
+  pathHorizontalStep: true,
+  pathVerticalStep: true,
+  pathRadialStep: true,
+  getPoints: true,
+  getPoint: true
+};
+exports.getPoint = exports.getPoints = exports.pathRadialStep = exports.pathVerticalStep = exports.pathHorizontalStep = exports.pathRadialLine = exports.pathVerticalLine = exports.pathHorizontalLine = exports.pathRadialCurve = exports.pathVerticalCurve = exports.pathHorizontalCurve = exports.pathRadialDiagonal = exports.pathVerticalDiagonal = exports.pathHorizontalDiagonal = exports.degreesToRadians = exports.STACK_ORDER_NAMES = exports.STACK_ORDERS = exports.STACK_OFFSET_NAMES = exports.STACK_OFFSETS = exports.SplitLinePath = exports.Circle = exports.Polygon = exports.LinkRadialStep = exports.LinkVerticalStep = exports.LinkHorizontalStep = exports.LinkRadialLine = exports.LinkVerticalLine = exports.LinkHorizontalLine = exports.LinkRadialCurve = exports.LinkVerticalCurve = exports.LinkHorizontalCurve = exports.LinkRadial = exports.LinkVertical = exports.LinkHorizontal = exports.stackOrder = exports.stackOffset = exports.Stack = exports.BarStackHorizontal = exports.BarStack = exports.BarGroupHorizontal = exports.BarGroup = exports.BarRounded = exports.Bar = exports.AreaStack = exports.AreaClosed = exports.Area = exports.LineRadial = exports.LinePath = exports.Line = exports.Pie = exports.Arc = void 0;
+
+var _Arc = _interopRequireDefault(require("./shapes/Arc"));
+
+exports.Arc = _Arc.default;
+
+var _Pie = _interopRequireDefault(require("./shapes/Pie"));
+
+exports.Pie = _Pie.default;
+
+var _Line = _interopRequireDefault(require("./shapes/Line"));
+
+exports.Line = _Line.default;
+
+var _LinePath = _interopRequireDefault(require("./shapes/LinePath"));
+
+exports.LinePath = _LinePath.default;
+
+var _LineRadial = _interopRequireDefault(require("./shapes/LineRadial"));
+
+exports.LineRadial = _LineRadial.default;
+
+var _Area = _interopRequireDefault(require("./shapes/Area"));
+
+exports.Area = _Area.default;
+
+var _AreaClosed = _interopRequireDefault(require("./shapes/AreaClosed"));
+
+exports.AreaClosed = _AreaClosed.default;
+
+var _AreaStack = _interopRequireDefault(require("./shapes/AreaStack"));
+
+exports.AreaStack = _AreaStack.default;
+
+var _Bar = _interopRequireDefault(require("./shapes/Bar"));
+
+exports.Bar = _Bar.default;
+
+var _BarRounded = _interopRequireDefault(require("./shapes/BarRounded"));
+
+exports.BarRounded = _BarRounded.default;
+
+var _BarGroup = _interopRequireDefault(require("./shapes/BarGroup"));
+
+exports.BarGroup = _BarGroup.default;
+
+var _BarGroupHorizontal = _interopRequireDefault(require("./shapes/BarGroupHorizontal"));
+
+exports.BarGroupHorizontal = _BarGroupHorizontal.default;
+
+var _BarStack = _interopRequireDefault(require("./shapes/BarStack"));
+
+exports.BarStack = _BarStack.default;
+
+var _BarStackHorizontal = _interopRequireDefault(require("./shapes/BarStackHorizontal"));
+
+exports.BarStackHorizontal = _BarStackHorizontal.default;
+
+var _Stack = _interopRequireDefault(require("./shapes/Stack"));
+
+exports.Stack = _Stack.default;
+
+var _stackOffset = _interopRequireWildcard(require("./util/stackOffset"));
+
+exports.stackOffset = _stackOffset.default;
+exports.STACK_OFFSETS = _stackOffset.STACK_OFFSETS;
+exports.STACK_OFFSET_NAMES = _stackOffset.STACK_OFFSET_NAMES;
+
+var _stackOrder = _interopRequireWildcard(require("./util/stackOrder"));
+
+exports.stackOrder = _stackOrder.default;
+exports.STACK_ORDERS = _stackOrder.STACK_ORDERS;
+exports.STACK_ORDER_NAMES = _stackOrder.STACK_ORDER_NAMES;
+
+var _trigonometry = require("./util/trigonometry");
+
+exports.degreesToRadians = _trigonometry.degreesToRadians;
+
+var _LinkHorizontal = _interopRequireWildcard(require("./shapes/link/diagonal/LinkHorizontal"));
+
+exports.LinkHorizontal = _LinkHorizontal.default;
+exports.pathHorizontalDiagonal = _LinkHorizontal.pathHorizontalDiagonal;
+
+var _LinkVertical = _interopRequireWildcard(require("./shapes/link/diagonal/LinkVertical"));
+
+exports.LinkVertical = _LinkVertical.default;
+exports.pathVerticalDiagonal = _LinkVertical.pathVerticalDiagonal;
+
+var _LinkRadial = _interopRequireWildcard(require("./shapes/link/diagonal/LinkRadial"));
+
+exports.LinkRadial = _LinkRadial.default;
+exports.pathRadialDiagonal = _LinkRadial.pathRadialDiagonal;
+
+var _LinkHorizontalCurve = _interopRequireWildcard(require("./shapes/link/curve/LinkHorizontalCurve"));
+
+exports.LinkHorizontalCurve = _LinkHorizontalCurve.default;
+exports.pathHorizontalCurve = _LinkHorizontalCurve.pathHorizontalCurve;
+
+var _LinkVerticalCurve = _interopRequireWildcard(require("./shapes/link/curve/LinkVerticalCurve"));
+
+exports.LinkVerticalCurve = _LinkVerticalCurve.default;
+exports.pathVerticalCurve = _LinkVerticalCurve.pathVerticalCurve;
+
+var _LinkRadialCurve = _interopRequireWildcard(require("./shapes/link/curve/LinkRadialCurve"));
+
+exports.LinkRadialCurve = _LinkRadialCurve.default;
+exports.pathRadialCurve = _LinkRadialCurve.pathRadialCurve;
+
+var _LinkHorizontalLine = _interopRequireWildcard(require("./shapes/link/line/LinkHorizontalLine"));
+
+exports.LinkHorizontalLine = _LinkHorizontalLine.default;
+exports.pathHorizontalLine = _LinkHorizontalLine.pathHorizontalLine;
+
+var _LinkVerticalLine = _interopRequireWildcard(require("./shapes/link/line/LinkVerticalLine"));
+
+exports.LinkVerticalLine = _LinkVerticalLine.default;
+exports.pathVerticalLine = _LinkVerticalLine.pathVerticalLine;
+
+var _LinkRadialLine = _interopRequireWildcard(require("./shapes/link/line/LinkRadialLine"));
+
+exports.LinkRadialLine = _LinkRadialLine.default;
+exports.pathRadialLine = _LinkRadialLine.pathRadialLine;
+
+var _LinkHorizontalStep = _interopRequireWildcard(require("./shapes/link/step/LinkHorizontalStep"));
+
+exports.LinkHorizontalStep = _LinkHorizontalStep.default;
+exports.pathHorizontalStep = _LinkHorizontalStep.pathHorizontalStep;
+
+var _LinkVerticalStep = _interopRequireWildcard(require("./shapes/link/step/LinkVerticalStep"));
+
+exports.LinkVerticalStep = _LinkVerticalStep.default;
+exports.pathVerticalStep = _LinkVerticalStep.pathVerticalStep;
+
+var _LinkRadialStep = _interopRequireWildcard(require("./shapes/link/step/LinkRadialStep"));
+
+exports.LinkRadialStep = _LinkRadialStep.default;
+exports.pathRadialStep = _LinkRadialStep.pathRadialStep;
+
+var _Polygon = _interopRequireWildcard(require("./shapes/Polygon"));
+
+exports.Polygon = _Polygon.default;
+exports.getPoints = _Polygon.getPoints;
+exports.getPoint = _Polygon.getPoint;
+
+var _Circle = _interopRequireDefault(require("./shapes/Circle"));
+
+exports.Circle = _Circle.default;
+
+var _SplitLinePath = _interopRequireDefault(require("./shapes/SplitLinePath"));
+
+exports.SplitLinePath = _SplitLinePath.default;
+
+var _D3ShapeConfig = require("./types/D3ShapeConfig");
+
+Object.keys(_D3ShapeConfig).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _D3ShapeConfig[key];
+});
+
+var _D3ShapeFactories = require("./util/D3ShapeFactories");
+
+Object.keys(_D3ShapeFactories).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  exports[key] = _D3ShapeFactories[key];
+});
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./shapes/Arc":"7eS2h","./shapes/Pie":"Wmyan","./shapes/Line":"5OAxx","./shapes/LinePath":"7ndXe","./shapes/LineRadial":"21jRu","./shapes/Area":"6zomr","./shapes/AreaClosed":"4K3nu","./shapes/AreaStack":"2vTAv","./shapes/Bar":"1jASh","./shapes/BarRounded":"1xvIG","./shapes/BarGroup":"67JBv","./shapes/BarGroupHorizontal":"3IUBE","./shapes/BarStack":"27sAo","./shapes/BarStackHorizontal":"7K3jO","./shapes/Stack":"2Cir6","./util/stackOffset":"30WhK","./util/stackOrder":"7GkEO","./util/trigonometry":"1383a","./shapes/link/diagonal/LinkHorizontal":"51nCa","./shapes/link/diagonal/LinkVertical":"2nzvl","./shapes/link/diagonal/LinkRadial":"3N8dH","./shapes/link/curve/LinkHorizontalCurve":"2DBAd","./shapes/link/curve/LinkVerticalCurve":"2jP8d","./shapes/link/curve/LinkRadialCurve":"4Xw9l","./shapes/link/line/LinkHorizontalLine":"7MjXp","./shapes/link/line/LinkVerticalLine":"kfNqK","./shapes/link/line/LinkRadialLine":"4loLA","./shapes/link/step/LinkHorizontalStep":"2d34H","./shapes/link/step/LinkVerticalStep":"6ZEYf","./shapes/link/step/LinkRadialStep":"3iQHf","./shapes/Polygon":"3WDgE","./shapes/Circle":"3aeNs","./shapes/SplitLinePath":"4LCUs","./types/D3ShapeConfig":"4uk4h","./util/D3ShapeFactories":"4m6TI"}],"7eS2h":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Arc;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Arc(_ref) {
+  var className = _ref.className,
+      data = _ref.data,
+      innerRadius = _ref.innerRadius,
+      outerRadius = _ref.outerRadius,
+      cornerRadius = _ref.cornerRadius,
+      startAngle = _ref.startAngle,
+      endAngle = _ref.endAngle,
+      padAngle = _ref.padAngle,
+      padRadius = _ref.padRadius,
+      children = _ref.children,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "data", "innerRadius", "outerRadius", "cornerRadius", "startAngle", "endAngle", "padAngle", "padRadius", "children", "innerRef"]);
+
+  var path = (0, _D3ShapeFactories.arc)({
+    innerRadius: innerRadius,
+    outerRadius: outerRadius,
+    cornerRadius: cornerRadius,
+    startAngle: startAngle,
+    endAngle: endAngle,
+    padAngle: padAngle,
+    padRadius: padRadius
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: path
+  }));
+  if (!data) return null;
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-arc', className),
+    d: path(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/D3ShapeFactories":"4m6TI"}],"4m6TI":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.arc = arc;
+exports.area = area;
+exports.line = line;
+exports.pie = pie;
+exports.radialLine = radialLine;
+exports.stack = stack;
+
+var _d3Shape = require("d3-shape");
+
+var _setNumberOrNumberAccessor = _interopRequireDefault(require("./setNumberOrNumberAccessor"));
+
+var _stackOrder = _interopRequireDefault(require("./stackOrder"));
+
+var _stackOffset = _interopRequireDefault(require("./stackOffset"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function arc(_temp) {
+  var _ref = _temp === void 0 ? {} : _temp,
+      innerRadius = _ref.innerRadius,
+      outerRadius = _ref.outerRadius,
+      cornerRadius = _ref.cornerRadius,
+      startAngle = _ref.startAngle,
+      endAngle = _ref.endAngle,
+      padAngle = _ref.padAngle,
+      padRadius = _ref.padRadius;
+
+  var path = (0, _d3Shape.arc)();
+  if (innerRadius != null) (0, _setNumberOrNumberAccessor.default)(path.innerRadius, innerRadius);
+  if (outerRadius != null) (0, _setNumberOrNumberAccessor.default)(path.outerRadius, outerRadius);
+  if (cornerRadius != null) (0, _setNumberOrNumberAccessor.default)(path.cornerRadius, cornerRadius);
+  if (startAngle != null) (0, _setNumberOrNumberAccessor.default)(path.startAngle, startAngle);
+  if (endAngle != null) (0, _setNumberOrNumberAccessor.default)(path.endAngle, endAngle);
+  if (padAngle != null) (0, _setNumberOrNumberAccessor.default)(path.padAngle, padAngle);
+  if (padRadius != null) (0, _setNumberOrNumberAccessor.default)(path.padRadius, padRadius);
+  return path;
+}
+
+function area(_temp2) {
+  var _ref2 = _temp2 === void 0 ? {} : _temp2,
+      x = _ref2.x,
+      x0 = _ref2.x0,
+      x1 = _ref2.x1,
+      y = _ref2.y,
+      y0 = _ref2.y0,
+      y1 = _ref2.y1,
+      defined = _ref2.defined,
+      curve = _ref2.curve;
+
+  var path = (0, _d3Shape.area)();
+  if (x) (0, _setNumberOrNumberAccessor.default)(path.x, x);
+  if (x0) (0, _setNumberOrNumberAccessor.default)(path.x0, x0);
+  if (x1) (0, _setNumberOrNumberAccessor.default)(path.x1, x1);
+  if (y) (0, _setNumberOrNumberAccessor.default)(path.y, y);
+  if (y0) (0, _setNumberOrNumberAccessor.default)(path.y0, y0);
+  if (y1) (0, _setNumberOrNumberAccessor.default)(path.y1, y1);
+  if (defined) path.defined(defined);
+  if (curve) path.curve(curve);
+  return path;
+}
+
+function line(_temp3) {
+  var _ref3 = _temp3 === void 0 ? {} : _temp3,
+      x = _ref3.x,
+      y = _ref3.y,
+      defined = _ref3.defined,
+      curve = _ref3.curve;
+
+  var path = (0, _d3Shape.line)();
+  if (x) (0, _setNumberOrNumberAccessor.default)(path.x, x);
+  if (y) (0, _setNumberOrNumberAccessor.default)(path.y, y);
+  if (defined) path.defined(defined);
+  if (curve) path.curve(curve);
+  return path;
+}
+
+function pie(_temp4) {
+  var _ref4 = _temp4 === void 0 ? {} : _temp4,
+      startAngle = _ref4.startAngle,
+      endAngle = _ref4.endAngle,
+      padAngle = _ref4.padAngle,
+      value = _ref4.value,
+      sort = _ref4.sort,
+      sortValues = _ref4.sortValues;
+
+  var path = (0, _d3Shape.pie)(); // ts can't distinguish between these method overloads
+
+  if (sort === null) path.sort(sort);else if (sort != null) path.sort(sort);
+  if (sortValues === null) path.sortValues(sortValues);else if (sortValues != null) path.sortValues(sortValues);
+  if (value != null) path.value(value);
+  if (padAngle != null) (0, _setNumberOrNumberAccessor.default)(path.padAngle, padAngle);
+  if (startAngle != null) (0, _setNumberOrNumberAccessor.default)(path.startAngle, startAngle);
+  if (endAngle != null) (0, _setNumberOrNumberAccessor.default)(path.endAngle, endAngle);
+  return path;
+}
+
+function radialLine(_temp5) {
+  var _ref5 = _temp5 === void 0 ? {} : _temp5,
+      angle = _ref5.angle,
+      radius = _ref5.radius,
+      defined = _ref5.defined,
+      curve = _ref5.curve;
+
+  var path = (0, _d3Shape.radialLine)();
+  if (angle) (0, _setNumberOrNumberAccessor.default)(path.angle, angle);
+  if (radius) (0, _setNumberOrNumberAccessor.default)(path.radius, radius);
+  if (defined) path.defined(defined);
+  if (curve) path.curve(curve);
+  return path;
+}
+
+function stack(_ref6) {
+  var keys = _ref6.keys,
+      value = _ref6.value,
+      order = _ref6.order,
+      offset = _ref6.offset;
+  var path = (0, _d3Shape.stack)();
+  if (keys) path.keys(keys);
+  if (value) (0, _setNumberOrNumberAccessor.default)(path.value, value);
+  if (order) path.order((0, _stackOrder.default)(order));
+  if (offset) path.offset((0, _stackOffset.default)(offset));
+  return path;
+}
+},{"d3-shape":"fW1hY","./setNumberOrNumberAccessor":"54E8e","./stackOrder":"7GkEO","./stackOffset":"30WhK"}],"fW1hY":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-shape/ v1.3.7 Copyright 2019 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-path')) : typeof define === 'function' && define.amd ? define(['exports', 'd3-path'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({}), global.d3));
+})(this, function (exports, d3Path) {
+  "use strict";
+  function constant(x) {
+    return function constant() {
+      return x;
+    };
+  }
+  var abs = Math.abs;
+  var atan2 = Math.atan2;
+  var cos = Math.cos;
+  var max = Math.max;
+  var min = Math.min;
+  var sin = Math.sin;
+  var sqrt = Math.sqrt;
+  var epsilon = 1e-12;
+  var pi = Math.PI;
+  var halfPi = pi / 2;
+  var tau = 2 * pi;
+  function acos(x) {
+    return x > 1 ? 0 : x < -1 ? pi : Math.acos(x);
+  }
+  function asin(x) {
+    return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
+  }
+  function arcInnerRadius(d) {
+    return d.innerRadius;
+  }
+  function arcOuterRadius(d) {
+    return d.outerRadius;
+  }
+  function arcStartAngle(d) {
+    return d.startAngle;
+  }
+  function arcEndAngle(d) {
+    return d.endAngle;
+  }
+  function arcPadAngle(d) {
+    return d && d.padAngle;
+  }
+  function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
+    var x10 = x1 - x0, y10 = y1 - y0, x32 = x3 - x2, y32 = y3 - y2, t = y32 * x10 - x32 * y10;
+    if (t * t < epsilon) return;
+    t = (x32 * (y0 - y2) - y32 * (x0 - x2)) / t;
+    return [x0 + t * x10, y0 + t * y10];
+  }
+  // Compute perpendicular offset line of length rc.
+  // http://mathworld.wolfram.com/Circle-LineIntersection.html
+  function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
+    var x01 = x0 - x1, y01 = y0 - y1, lo = (cw ? rc : -rc) / sqrt(x01 * x01 + y01 * y01), ox = lo * y01, oy = -lo * x01, x11 = x0 + ox, y11 = y0 + oy, x10 = x1 + ox, y10 = y1 + oy, x00 = (x11 + x10) / 2, y00 = (y11 + y10) / 2, dx = x10 - x11, dy = y10 - y11, d2 = dx * dx + dy * dy, r = r1 - rc, D = x11 * y10 - x10 * y11, d = (dy < 0 ? -1 : 1) * sqrt(max(0, r * r * d2 - D * D)), cx0 = (D * dy - dx * d) / d2, cy0 = (-D * dx - dy * d) / d2, cx1 = (D * dy + dx * d) / d2, cy1 = (-D * dx + dy * d) / d2, dx0 = cx0 - x00, dy0 = cy0 - y00, dx1 = cx1 - x00, dy1 = cy1 - y00;
+    // Pick the closer of the two intersection points.
+    // TODO Is there a faster way to determine which intersection to use?
+    if (dx0 * dx0 + dy0 * dy0 > dx1 * dx1 + dy1 * dy1) (cx0 = cx1, cy0 = cy1);
+    return {
+      cx: cx0,
+      cy: cy0,
+      x01: -ox,
+      y01: -oy,
+      x11: cx0 * (r1 / r - 1),
+      y11: cy0 * (r1 / r - 1)
+    };
+  }
+  function arc() {
+    var innerRadius = arcInnerRadius, outerRadius = arcOuterRadius, cornerRadius = constant(0), padRadius = null, startAngle = arcStartAngle, endAngle = arcEndAngle, padAngle = arcPadAngle, context = null;
+    function arc() {
+      var buffer, r, r0 = +innerRadius.apply(this, arguments), r1 = +outerRadius.apply(this, arguments), a0 = startAngle.apply(this, arguments) - halfPi, a1 = endAngle.apply(this, arguments) - halfPi, da = abs(a1 - a0), cw = a1 > a0;
+      if (!context) context = buffer = d3Path.path();
+      // Ensure that the outer radius is always larger than the inner radius.
+      if (r1 < r0) (r = r1, r1 = r0, r0 = r);
+      // Is it a point?
+      if (!(r1 > epsilon)) context.moveTo(0, 0); else // Or is it a circle or annulus?
+      if (da > tau - epsilon) {
+        context.moveTo(r1 * cos(a0), r1 * sin(a0));
+        context.arc(0, 0, r1, a0, a1, !cw);
+        if (r0 > epsilon) {
+          context.moveTo(r0 * cos(a1), r0 * sin(a1));
+          context.arc(0, 0, r0, a1, a0, cw);
+        }
+              // Or is it a circular or annular sector?
+} else // Or is it a circular or annular sector?
+      {
+        var a01 = a0, a11 = a1, a00 = a0, a10 = a1, da0 = da, da1 = da, ap = padAngle.apply(this, arguments) / 2, rp = ap > epsilon && (padRadius ? +padRadius.apply(this, arguments) : sqrt(r0 * r0 + r1 * r1)), rc = min(abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)), rc0 = rc, rc1 = rc, t0, t1;
+        // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
+        if (rp > epsilon) {
+          var p0 = asin(rp / r0 * sin(ap)), p1 = asin(rp / r1 * sin(ap));
+          if ((da0 -= p0 * 2) > epsilon) (p0 *= cw ? 1 : -1, a00 += p0, a10 -= p0); else (da0 = 0, a00 = a10 = (a0 + a1) / 2);
+          if ((da1 -= p1 * 2) > epsilon) (p1 *= cw ? 1 : -1, a01 += p1, a11 -= p1); else (da1 = 0, a01 = a11 = (a0 + a1) / 2);
+        }
+        var x01 = r1 * cos(a01), y01 = r1 * sin(a01), x10 = r0 * cos(a10), y10 = r0 * sin(a10);
+        // Apply rounded corners?
+        if (rc > epsilon) {
+          var x11 = r1 * cos(a11), y11 = r1 * sin(a11), x00 = r0 * cos(a00), y00 = r0 * sin(a00), oc;
+          // Restrict the corner radius according to the sector angle.
+          if (da < pi && (oc = intersect(x01, y01, x00, y00, x11, y11, x10, y10))) {
+            var ax = x01 - oc[0], ay = y01 - oc[1], bx = x11 - oc[0], by = y11 - oc[1], kc = 1 / sin(acos((ax * bx + ay * by) / (sqrt(ax * ax + ay * ay) * sqrt(bx * bx + by * by))) / 2), lc = sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
+            rc0 = min(rc, (r0 - lc) / (kc - 1));
+            rc1 = min(rc, (r1 - lc) / (kc + 1));
+          }
+        }
+        // Is the sector collapsed to a line?
+        if (!(da1 > epsilon)) context.moveTo(x01, y01); else // Does the sector’s outer ring have rounded corners?
+        if (rc1 > epsilon) {
+          t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+          t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+          context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
+          // Have the corners merged?
+          if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw); else // Otherwise, draw the two corners and the ring.
+          {
+            context.arc(t0.cx, t0.cy, rc1, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r1, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
+            context.arc(t1.cx, t1.cy, rc1, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+          }
+                  // Or is the outer ring just a circular arc?
+} else // Or is the outer ring just a circular arc?
+        (context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw));
+        // Is there no inner ring, and it’s a circular sector?
+        // Or perhaps it’s an annular sector collapsed due to padding?
+        if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10); else // Does the sector’s inner ring (or point) have rounded corners?
+        if (rc0 > epsilon) {
+          t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+          t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+          context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
+          // Have the corners merged?
+          if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t1.y01, t1.x01), !cw); else // Otherwise, draw the two corners and the ring.
+          {
+            context.arc(t0.cx, t0.cy, rc0, atan2(t0.y01, t0.x01), atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r0, atan2(t0.cy + t0.y11, t0.cx + t0.x11), atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
+            context.arc(t1.cx, t1.cy, rc0, atan2(t1.y11, t1.x11), atan2(t1.y01, t1.x01), !cw);
+          }
+                  // Or is the inner ring just a circular arc?
+} else // Or is the inner ring just a circular arc?
+        context.arc(0, 0, r0, a10, a00, cw);
+      }
+      context.closePath();
+      if (buffer) return (context = null, buffer + "" || null);
+    }
+    arc.centroid = function () {
+      var r = (+innerRadius.apply(this, arguments) + +outerRadius.apply(this, arguments)) / 2, a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi / 2;
+      return [cos(a) * r, sin(a) * r];
+    };
+    arc.innerRadius = function (_) {
+      return arguments.length ? (innerRadius = typeof _ === "function" ? _ : constant(+_), arc) : innerRadius;
+    };
+    arc.outerRadius = function (_) {
+      return arguments.length ? (outerRadius = typeof _ === "function" ? _ : constant(+_), arc) : outerRadius;
+    };
+    arc.cornerRadius = function (_) {
+      return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant(+_), arc) : cornerRadius;
+    };
+    arc.padRadius = function (_) {
+      return arguments.length ? (padRadius = _ == null ? null : typeof _ === "function" ? _ : constant(+_), arc) : padRadius;
+    };
+    arc.startAngle = function (_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant(+_), arc) : startAngle;
+    };
+    arc.endAngle = function (_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant(+_), arc) : endAngle;
+    };
+    arc.padAngle = function (_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), arc) : padAngle;
+    };
+    arc.context = function (_) {
+      return arguments.length ? (context = _ == null ? null : _, arc) : context;
+    };
+    return arc;
+  }
+  function Linear(context) {
+    this._context = context;
+  }
+  Linear.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+        default:
+          this._context.lineTo(x, y);
+          break;
+      }
+    }
+  };
+  function curveLinear(context) {
+    return new Linear(context);
+  }
+  function x(p) {
+    return p[0];
+  }
+  function y(p) {
+    return p[1];
+  }
+  function line() {
+    var x$1 = x, y$1 = y, defined = constant(true), context = null, curve = curveLinear, output = null;
+    function line(data) {
+      var i, n = data.length, d, defined0 = false, buffer;
+      if (context == null) output = curve(buffer = d3Path.path());
+      for (i = 0; i <= n; ++i) {
+        if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+          if (defined0 = !defined0) output.lineStart(); else output.lineEnd();
+        }
+        if (defined0) output.point(+x$1(d, i, data), +y$1(d, i, data));
+      }
+      if (buffer) return (output = null, buffer + "" || null);
+    }
+    line.x = function (_) {
+      return arguments.length ? (x$1 = typeof _ === "function" ? _ : constant(+_), line) : x$1;
+    };
+    line.y = function (_) {
+      return arguments.length ? (y$1 = typeof _ === "function" ? _ : constant(+_), line) : y$1;
+    };
+    line.defined = function (_) {
+      return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
+    };
+    line.curve = function (_) {
+      return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
+    };
+    line.context = function (_) {
+      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
+    };
+    return line;
+  }
+  function area() {
+    var x0 = x, x1 = null, y0 = constant(0), y1 = y, defined = constant(true), context = null, curve = curveLinear, output = null;
+    function area(data) {
+      var i, j, k, n = data.length, d, defined0 = false, buffer, x0z = new Array(n), y0z = new Array(n);
+      if (context == null) output = curve(buffer = d3Path.path());
+      for (i = 0; i <= n; ++i) {
+        if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+          if (defined0 = !defined0) {
+            j = i;
+            output.areaStart();
+            output.lineStart();
+          } else {
+            output.lineEnd();
+            output.lineStart();
+            for (k = i - 1; k >= j; --k) {
+              output.point(x0z[k], y0z[k]);
+            }
+            output.lineEnd();
+            output.areaEnd();
+          }
+        }
+        if (defined0) {
+          (x0z[i] = +x0(d, i, data), y0z[i] = +y0(d, i, data));
+          output.point(x1 ? +x1(d, i, data) : x0z[i], y1 ? +y1(d, i, data) : y0z[i]);
+        }
+      }
+      if (buffer) return (output = null, buffer + "" || null);
+    }
+    function arealine() {
+      return line().defined(defined).curve(curve).context(context);
+    }
+    area.x = function (_) {
+      return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
+    };
+    area.x0 = function (_) {
+      return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), area) : x0;
+    };
+    area.x1 = function (_) {
+      return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : x1;
+    };
+    area.y = function (_) {
+      return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), y1 = null, area) : y0;
+    };
+    area.y0 = function (_) {
+      return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), area) : y0;
+    };
+    area.y1 = function (_) {
+      return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
+    };
+    area.lineX0 = area.lineY0 = function () {
+      return arealine().x(x0).y(y0);
+    };
+    area.lineY1 = function () {
+      return arealine().x(x0).y(y1);
+    };
+    area.lineX1 = function () {
+      return arealine().x(x1).y(y0);
+    };
+    area.defined = function (_) {
+      return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
+    };
+    area.curve = function (_) {
+      return arguments.length ? (curve = _, context != null && (output = curve(context)), area) : curve;
+    };
+    area.context = function (_) {
+      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
+    };
+    return area;
+  }
+  function descending(a, b) {
+    return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+  }
+  function identity(d) {
+    return d;
+  }
+  function pie() {
+    var value = identity, sortValues = descending, sort = null, startAngle = constant(0), endAngle = constant(tau), padAngle = constant(0);
+    function pie(data) {
+      var i, n = data.length, j, k, sum = 0, index = new Array(n), arcs = new Array(n), a0 = +startAngle.apply(this, arguments), da = Math.min(tau, Math.max(-tau, endAngle.apply(this, arguments) - a0)), a1, p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)), pa = p * (da < 0 ? -1 : 1), v;
+      for (i = 0; i < n; ++i) {
+        if ((v = arcs[index[i] = i] = +value(data[i], i, data)) > 0) {
+          sum += v;
+        }
+      }
+      // Optionally sort the arcs by previously-computed values or by data.
+      if (sortValues != null) index.sort(function (i, j) {
+        return sortValues(arcs[i], arcs[j]);
+      }); else if (sort != null) index.sort(function (i, j) {
+        return sort(data[i], data[j]);
+      });
+      // Compute the arcs! They are stored in the original data's order.
+      for ((i = 0, k = sum ? (da - n * pa) / sum : 0); i < n; (++i, a0 = a1)) {
+        (j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
+          data: data[j],
+          index: i,
+          value: v,
+          startAngle: a0,
+          endAngle: a1,
+          padAngle: p
+        });
+      }
+      return arcs;
+    }
+    pie.value = function (_) {
+      return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), pie) : value;
+    };
+    pie.sortValues = function (_) {
+      return arguments.length ? (sortValues = _, sort = null, pie) : sortValues;
+    };
+    pie.sort = function (_) {
+      return arguments.length ? (sort = _, sortValues = null, pie) : sort;
+    };
+    pie.startAngle = function (_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant(+_), pie) : startAngle;
+    };
+    pie.endAngle = function (_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant(+_), pie) : endAngle;
+    };
+    pie.padAngle = function (_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), pie) : padAngle;
+    };
+    return pie;
+  }
+  var curveRadialLinear = curveRadial(curveLinear);
+  function Radial(curve) {
+    this._curve = curve;
+  }
+  Radial.prototype = {
+    areaStart: function () {
+      this._curve.areaStart();
+    },
+    areaEnd: function () {
+      this._curve.areaEnd();
+    },
+    lineStart: function () {
+      this._curve.lineStart();
+    },
+    lineEnd: function () {
+      this._curve.lineEnd();
+    },
+    point: function (a, r) {
+      this._curve.point(r * Math.sin(a), r * -Math.cos(a));
+    }
+  };
+  function curveRadial(curve) {
+    function radial(context) {
+      return new Radial(curve(context));
+    }
+    radial._curve = curve;
+    return radial;
+  }
+  function lineRadial(l) {
+    var c = l.curve;
+    (l.angle = l.x, delete l.x);
+    (l.radius = l.y, delete l.y);
+    l.curve = function (_) {
+      return arguments.length ? c(curveRadial(_)) : c()._curve;
+    };
+    return l;
+  }
+  function lineRadial$1() {
+    return lineRadial(line().curve(curveRadialLinear));
+  }
+  function areaRadial() {
+    var a = area().curve(curveRadialLinear), c = a.curve, x0 = a.lineX0, x1 = a.lineX1, y0 = a.lineY0, y1 = a.lineY1;
+    (a.angle = a.x, delete a.x);
+    (a.startAngle = a.x0, delete a.x0);
+    (a.endAngle = a.x1, delete a.x1);
+    (a.radius = a.y, delete a.y);
+    (a.innerRadius = a.y0, delete a.y0);
+    (a.outerRadius = a.y1, delete a.y1);
+    (a.lineStartAngle = function () {
+      return lineRadial(x0());
+    }, delete a.lineX0);
+    (a.lineEndAngle = function () {
+      return lineRadial(x1());
+    }, delete a.lineX1);
+    (a.lineInnerRadius = function () {
+      return lineRadial(y0());
+    }, delete a.lineY0);
+    (a.lineOuterRadius = function () {
+      return lineRadial(y1());
+    }, delete a.lineY1);
+    a.curve = function (_) {
+      return arguments.length ? c(curveRadial(_)) : c()._curve;
+    };
+    return a;
+  }
+  function pointRadial(x, y) {
+    return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
+  }
+  var slice = Array.prototype.slice;
+  function linkSource(d) {
+    return d.source;
+  }
+  function linkTarget(d) {
+    return d.target;
+  }
+  function link(curve) {
+    var source = linkSource, target = linkTarget, x$1 = x, y$1 = y, context = null;
+    function link() {
+      var buffer, argv = slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
+      if (!context) context = buffer = d3Path.path();
+      curve(context, +x$1.apply(this, (argv[0] = s, argv)), +y$1.apply(this, argv), +x$1.apply(this, (argv[0] = t, argv)), +y$1.apply(this, argv));
+      if (buffer) return (context = null, buffer + "" || null);
+    }
+    link.source = function (_) {
+      return arguments.length ? (source = _, link) : source;
+    };
+    link.target = function (_) {
+      return arguments.length ? (target = _, link) : target;
+    };
+    link.x = function (_) {
+      return arguments.length ? (x$1 = typeof _ === "function" ? _ : constant(+_), link) : x$1;
+    };
+    link.y = function (_) {
+      return arguments.length ? (y$1 = typeof _ === "function" ? _ : constant(+_), link) : y$1;
+    };
+    link.context = function (_) {
+      return arguments.length ? (context = _ == null ? null : _, link) : context;
+    };
+    return link;
+  }
+  function curveHorizontal(context, x0, y0, x1, y1) {
+    context.moveTo(x0, y0);
+    context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
+  }
+  function curveVertical(context, x0, y0, x1, y1) {
+    context.moveTo(x0, y0);
+    context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
+  }
+  function curveRadial$1(context, x0, y0, x1, y1) {
+    var p0 = pointRadial(x0, y0), p1 = pointRadial(x0, y0 = (y0 + y1) / 2), p2 = pointRadial(x1, y0), p3 = pointRadial(x1, y1);
+    context.moveTo(p0[0], p0[1]);
+    context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
+  }
+  function linkHorizontal() {
+    return link(curveHorizontal);
+  }
+  function linkVertical() {
+    return link(curveVertical);
+  }
+  function linkRadial() {
+    var l = link(curveRadial$1);
+    (l.angle = l.x, delete l.x);
+    (l.radius = l.y, delete l.y);
+    return l;
+  }
+  var circle = {
+    draw: function (context, size) {
+      var r = Math.sqrt(size / pi);
+      context.moveTo(r, 0);
+      context.arc(0, 0, r, 0, tau);
+    }
+  };
+  var cross = {
+    draw: function (context, size) {
+      var r = Math.sqrt(size / 5) / 2;
+      context.moveTo(-3 * r, -r);
+      context.lineTo(-r, -r);
+      context.lineTo(-r, -3 * r);
+      context.lineTo(r, -3 * r);
+      context.lineTo(r, -r);
+      context.lineTo(3 * r, -r);
+      context.lineTo(3 * r, r);
+      context.lineTo(r, r);
+      context.lineTo(r, 3 * r);
+      context.lineTo(-r, 3 * r);
+      context.lineTo(-r, r);
+      context.lineTo(-3 * r, r);
+      context.closePath();
+    }
+  };
+  var tan30 = Math.sqrt(1 / 3), tan30_2 = tan30 * 2;
+  var diamond = {
+    draw: function (context, size) {
+      var y = Math.sqrt(size / tan30_2), x = y * tan30;
+      context.moveTo(0, -y);
+      context.lineTo(x, 0);
+      context.lineTo(0, y);
+      context.lineTo(-x, 0);
+      context.closePath();
+    }
+  };
+  var ka = 0.89081309152928522810, kr = Math.sin(pi / 10) / Math.sin(7 * pi / 10), kx = Math.sin(tau / 10) * kr, ky = -Math.cos(tau / 10) * kr;
+  var star = {
+    draw: function (context, size) {
+      var r = Math.sqrt(size * ka), x = kx * r, y = ky * r;
+      context.moveTo(0, -r);
+      context.lineTo(x, y);
+      for (var i = 1; i < 5; ++i) {
+        var a = tau * i / 5, c = Math.cos(a), s = Math.sin(a);
+        context.lineTo(s * r, -c * r);
+        context.lineTo(c * x - s * y, s * x + c * y);
+      }
+      context.closePath();
+    }
+  };
+  var square = {
+    draw: function (context, size) {
+      var w = Math.sqrt(size), x = -w / 2;
+      context.rect(x, x, w, w);
+    }
+  };
+  var sqrt3 = Math.sqrt(3);
+  var triangle = {
+    draw: function (context, size) {
+      var y = -Math.sqrt(size / (sqrt3 * 3));
+      context.moveTo(0, y * 2);
+      context.lineTo(-sqrt3 * y, -y);
+      context.lineTo(sqrt3 * y, -y);
+      context.closePath();
+    }
+  };
+  var c = -0.5, s = Math.sqrt(3) / 2, k = 1 / Math.sqrt(12), a = (k / 2 + 1) * 3;
+  var wye = {
+    draw: function (context, size) {
+      var r = Math.sqrt(size / a), x0 = r / 2, y0 = r * k, x1 = x0, y1 = r * k + r, x2 = -x1, y2 = y1;
+      context.moveTo(x0, y0);
+      context.lineTo(x1, y1);
+      context.lineTo(x2, y2);
+      context.lineTo(c * x0 - s * y0, s * x0 + c * y0);
+      context.lineTo(c * x1 - s * y1, s * x1 + c * y1);
+      context.lineTo(c * x2 - s * y2, s * x2 + c * y2);
+      context.lineTo(c * x0 + s * y0, c * y0 - s * x0);
+      context.lineTo(c * x1 + s * y1, c * y1 - s * x1);
+      context.lineTo(c * x2 + s * y2, c * y2 - s * x2);
+      context.closePath();
+    }
+  };
+  var symbols = [circle, cross, diamond, square, star, triangle, wye];
+  function symbol() {
+    var type = constant(circle), size = constant(64), context = null;
+    function symbol() {
+      var buffer;
+      if (!context) context = buffer = d3Path.path();
+      type.apply(this, arguments).draw(context, +size.apply(this, arguments));
+      if (buffer) return (context = null, buffer + "" || null);
+    }
+    symbol.type = function (_) {
+      return arguments.length ? (type = typeof _ === "function" ? _ : constant(_), symbol) : type;
+    };
+    symbol.size = function (_) {
+      return arguments.length ? (size = typeof _ === "function" ? _ : constant(+_), symbol) : size;
+    };
+    symbol.context = function (_) {
+      return arguments.length ? (context = _ == null ? null : _, symbol) : context;
+    };
+    return symbol;
+  }
+  function noop() {}
+  function point(that, x, y) {
+    that._context.bezierCurveTo((2 * that._x0 + that._x1) / 3, (2 * that._y0 + that._y1) / 3, (that._x0 + 2 * that._x1) / 3, (that._y0 + 2 * that._y1) / 3, (that._x0 + 4 * that._x1 + x) / 6, (that._y0 + 4 * that._y1 + y) / 6);
+  }
+  function Basis(context) {
+    this._context = context;
+  }
+  Basis.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._y0 = this._y1 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 3:
+          point(this, this._x1, this._y1);
+        case 2:
+          this._context.lineTo(this._x1, this._y1);
+          break;
+      }
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+          this._context.lineTo((5 * this._x0 + this._x1) / 6, (5 * this._y0 + this._y1) / 6);
+        default:
+          point(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = x);
+      (this._y0 = this._y1, this._y1 = y);
+    }
+  };
+  function basis(context) {
+    return new Basis(context);
+  }
+  function BasisClosed(context) {
+    this._context = context;
+  }
+  BasisClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 1:
+          {
+            this._context.moveTo(this._x2, this._y2);
+            this._context.closePath();
+            break;
+          }
+        case 2:
+          {
+            this._context.moveTo((this._x2 + 2 * this._x3) / 3, (this._y2 + 2 * this._y3) / 3);
+            this._context.lineTo((this._x3 + 2 * this._x2) / 3, (this._y3 + 2 * this._y2) / 3);
+            this._context.closePath();
+            break;
+          }
+        case 3:
+          {
+            this.point(this._x2, this._y2);
+            this.point(this._x3, this._y3);
+            this.point(this._x4, this._y4);
+            break;
+          }
+      }
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          (this._x2 = x, this._y2 = y);
+          break;
+        case 1:
+          this._point = 2;
+          (this._x3 = x, this._y3 = y);
+          break;
+        case 2:
+          this._point = 3;
+          (this._x4 = x, this._y4 = y);
+          this._context.moveTo((this._x0 + 4 * this._x1 + x) / 6, (this._y0 + 4 * this._y1 + y) / 6);
+          break;
+        default:
+          point(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = x);
+      (this._y0 = this._y1, this._y1 = y);
+    }
+  };
+  function basisClosed(context) {
+    return new BasisClosed(context);
+  }
+  function BasisOpen(context) {
+    this._context = context;
+  }
+  BasisOpen.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._y0 = this._y1 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line || this._line !== 0 && this._point === 3) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+          var x0 = (this._x0 + 4 * this._x1 + x) / 6, y0 = (this._y0 + 4 * this._y1 + y) / 6;
+          this._line ? this._context.lineTo(x0, y0) : this._context.moveTo(x0, y0);
+          break;
+        case 3:
+          this._point = 4;
+        default:
+          point(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = x);
+      (this._y0 = this._y1, this._y1 = y);
+    }
+  };
+  function basisOpen(context) {
+    return new BasisOpen(context);
+  }
+  function Bundle(context, beta) {
+    this._basis = new Basis(context);
+    this._beta = beta;
+  }
+  Bundle.prototype = {
+    lineStart: function () {
+      this._x = [];
+      this._y = [];
+      this._basis.lineStart();
+    },
+    lineEnd: function () {
+      var x = this._x, y = this._y, j = x.length - 1;
+      if (j > 0) {
+        var x0 = x[0], y0 = y[0], dx = x[j] - x0, dy = y[j] - y0, i = -1, t;
+        while (++i <= j) {
+          t = i / j;
+          this._basis.point(this._beta * x[i] + (1 - this._beta) * (x0 + t * dx), this._beta * y[i] + (1 - this._beta) * (y0 + t * dy));
+        }
+      }
+      this._x = this._y = null;
+      this._basis.lineEnd();
+    },
+    point: function (x, y) {
+      this._x.push(+x);
+      this._y.push(+y);
+    }
+  };
+  var bundle = (function custom(beta) {
+    function bundle(context) {
+      return beta === 1 ? new Basis(context) : new Bundle(context, beta);
+    }
+    bundle.beta = function (beta) {
+      return custom(+beta);
+    };
+    return bundle;
+  })(0.85);
+  function point$1(that, x, y) {
+    that._context.bezierCurveTo(that._x1 + that._k * (that._x2 - that._x0), that._y1 + that._k * (that._y2 - that._y0), that._x2 + that._k * (that._x1 - x), that._y2 + that._k * (that._y1 - y), that._x2, that._y2);
+  }
+  function Cardinal(context, tension) {
+    this._context = context;
+    this._k = (1 - tension) / 6;
+  }
+  Cardinal.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._y0 = this._y1 = this._y2 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 2:
+          this._context.lineTo(this._x2, this._y2);
+          break;
+        case 3:
+          point$1(this, this._x1, this._y1);
+          break;
+      }
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+          (this._x1 = x, this._y1 = y);
+          break;
+        case 2:
+          this._point = 3;
+        default:
+          point$1(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var cardinal = (function custom(tension) {
+    function cardinal(context) {
+      return new Cardinal(context, tension);
+    }
+    cardinal.tension = function (tension) {
+      return custom(+tension);
+    };
+    return cardinal;
+  })(0);
+  function CardinalClosed(context, tension) {
+    this._context = context;
+    this._k = (1 - tension) / 6;
+  }
+  CardinalClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 = this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 1:
+          {
+            this._context.moveTo(this._x3, this._y3);
+            this._context.closePath();
+            break;
+          }
+        case 2:
+          {
+            this._context.lineTo(this._x3, this._y3);
+            this._context.closePath();
+            break;
+          }
+        case 3:
+          {
+            this.point(this._x3, this._y3);
+            this.point(this._x4, this._y4);
+            this.point(this._x5, this._y5);
+            break;
+          }
+      }
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          (this._x3 = x, this._y3 = y);
+          break;
+        case 1:
+          this._point = 2;
+          this._context.moveTo(this._x4 = x, this._y4 = y);
+          break;
+        case 2:
+          this._point = 3;
+          (this._x5 = x, this._y5 = y);
+          break;
+        default:
+          point$1(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var cardinalClosed = (function custom(tension) {
+    function cardinal(context) {
+      return new CardinalClosed(context, tension);
+    }
+    cardinal.tension = function (tension) {
+      return custom(+tension);
+    };
+    return cardinal;
+  })(0);
+  function CardinalOpen(context, tension) {
+    this._context = context;
+    this._k = (1 - tension) / 6;
+  }
+  CardinalOpen.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._y0 = this._y1 = this._y2 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line || this._line !== 0 && this._point === 3) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+          this._line ? this._context.lineTo(this._x2, this._y2) : this._context.moveTo(this._x2, this._y2);
+          break;
+        case 3:
+          this._point = 4;
+        default:
+          point$1(this, x, y);
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var cardinalOpen = (function custom(tension) {
+    function cardinal(context) {
+      return new CardinalOpen(context, tension);
+    }
+    cardinal.tension = function (tension) {
+      return custom(+tension);
+    };
+    return cardinal;
+  })(0);
+  function point$2(that, x, y) {
+    var x1 = that._x1, y1 = that._y1, x2 = that._x2, y2 = that._y2;
+    if (that._l01_a > epsilon) {
+      var a = 2 * that._l01_2a + 3 * that._l01_a * that._l12_a + that._l12_2a, n = 3 * that._l01_a * (that._l01_a + that._l12_a);
+      x1 = (x1 * a - that._x0 * that._l12_2a + that._x2 * that._l01_2a) / n;
+      y1 = (y1 * a - that._y0 * that._l12_2a + that._y2 * that._l01_2a) / n;
+    }
+    if (that._l23_a > epsilon) {
+      var b = 2 * that._l23_2a + 3 * that._l23_a * that._l12_a + that._l12_2a, m = 3 * that._l23_a * (that._l23_a + that._l12_a);
+      x2 = (x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m;
+      y2 = (y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m;
+    }
+    that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
+  }
+  function CatmullRom(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+  CatmullRom.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._y0 = this._y1 = this._y2 = NaN;
+      this._l01_a = this._l12_a = this._l23_a = this._l01_2a = this._l12_2a = this._l23_2a = this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 2:
+          this._context.lineTo(this._x2, this._y2);
+          break;
+        case 3:
+          this.point(this._x2, this._y2);
+          break;
+      }
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      if (this._point) {
+        var x23 = this._x2 - x, y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+        default:
+          point$2(this, x, y);
+          break;
+      }
+      (this._l01_a = this._l12_a, this._l12_a = this._l23_a);
+      (this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a);
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var catmullRom = (function custom(alpha) {
+    function catmullRom(context) {
+      return alpha ? new CatmullRom(context, alpha) : new Cardinal(context, 0);
+    }
+    catmullRom.alpha = function (alpha) {
+      return custom(+alpha);
+    };
+    return catmullRom;
+  })(0.5);
+  function CatmullRomClosed(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+  CatmullRomClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 = this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
+      this._l01_a = this._l12_a = this._l23_a = this._l01_2a = this._l12_2a = this._l23_2a = this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 1:
+          {
+            this._context.moveTo(this._x3, this._y3);
+            this._context.closePath();
+            break;
+          }
+        case 2:
+          {
+            this._context.lineTo(this._x3, this._y3);
+            this._context.closePath();
+            break;
+          }
+        case 3:
+          {
+            this.point(this._x3, this._y3);
+            this.point(this._x4, this._y4);
+            this.point(this._x5, this._y5);
+            break;
+          }
+      }
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      if (this._point) {
+        var x23 = this._x2 - x, y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          (this._x3 = x, this._y3 = y);
+          break;
+        case 1:
+          this._point = 2;
+          this._context.moveTo(this._x4 = x, this._y4 = y);
+          break;
+        case 2:
+          this._point = 3;
+          (this._x5 = x, this._y5 = y);
+          break;
+        default:
+          point$2(this, x, y);
+          break;
+      }
+      (this._l01_a = this._l12_a, this._l12_a = this._l23_a);
+      (this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a);
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var catmullRomClosed = (function custom(alpha) {
+    function catmullRom(context) {
+      return alpha ? new CatmullRomClosed(context, alpha) : new CardinalClosed(context, 0);
+    }
+    catmullRom.alpha = function (alpha) {
+      return custom(+alpha);
+    };
+    return catmullRom;
+  })(0.5);
+  function CatmullRomOpen(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+  CatmullRomOpen.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._x2 = this._y0 = this._y1 = this._y2 = NaN;
+      this._l01_a = this._l12_a = this._l23_a = this._l01_2a = this._l12_2a = this._l23_2a = this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._line || this._line !== 0 && this._point === 3) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      if (this._point) {
+        var x23 = this._x2 - x, y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+          this._line ? this._context.lineTo(this._x2, this._y2) : this._context.moveTo(this._x2, this._y2);
+          break;
+        case 3:
+          this._point = 4;
+        default:
+          point$2(this, x, y);
+          break;
+      }
+      (this._l01_a = this._l12_a, this._l12_a = this._l23_a);
+      (this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a);
+      (this._x0 = this._x1, this._x1 = this._x2, this._x2 = x);
+      (this._y0 = this._y1, this._y1 = this._y2, this._y2 = y);
+    }
+  };
+  var catmullRomOpen = (function custom(alpha) {
+    function catmullRom(context) {
+      return alpha ? new CatmullRomOpen(context, alpha) : new CardinalOpen(context, 0);
+    }
+    catmullRom.alpha = function (alpha) {
+      return custom(+alpha);
+    };
+    return catmullRom;
+  })(0.5);
+  function LinearClosed(context) {
+    this._context = context;
+  }
+  LinearClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function () {
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (this._point) this._context.closePath();
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      if (this._point) this._context.lineTo(x, y); else (this._point = 1, this._context.moveTo(x, y));
+    }
+  };
+  function linearClosed(context) {
+    return new LinearClosed(context);
+  }
+  function sign(x) {
+    return x < 0 ? -1 : 1;
+  }
+  // Calculate the slopes of the tangents (Hermite-type interpolation) based on
+  // the following paper: Steffen, M. 1990. A Simple Method for Monotonic
+  // Interpolation in One Dimension. Astronomy and Astrophysics, Vol. 239, NO.
+  // NOV(II), P. 443, 1990.
+  function slope3(that, x2, y2) {
+    var h0 = that._x1 - that._x0, h1 = x2 - that._x1, s0 = (that._y1 - that._y0) / (h0 || h1 < 0 && -0), s1 = (y2 - that._y1) / (h1 || h0 < 0 && -0), p = (s0 * h1 + s1 * h0) / (h0 + h1);
+    return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p)) || 0;
+  }
+  // Calculate a one-sided slope.
+  function slope2(that, t) {
+    var h = that._x1 - that._x0;
+    return h ? (3 * (that._y1 - that._y0) / h - t) / 2 : t;
+  }
+  // According to https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Representations
+  // "you can express cubic Hermite interpolation in terms of cubic Bézier curves
+  // with respect to the four values p0, p0 + m0 / 3, p1 - m1 / 3, p1".
+  function point$3(that, t0, t1) {
+    var x0 = that._x0, y0 = that._y0, x1 = that._x1, y1 = that._y1, dx = (x1 - x0) / 3;
+    that._context.bezierCurveTo(x0 + dx, y0 + dx * t0, x1 - dx, y1 - dx * t1, x1, y1);
+  }
+  function MonotoneX(context) {
+    this._context = context;
+  }
+  MonotoneX.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x0 = this._x1 = this._y0 = this._y1 = this._t0 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      switch (this._point) {
+        case 2:
+          this._context.lineTo(this._x1, this._y1);
+          break;
+        case 3:
+          point$3(this, this._t0, slope2(this, this._t0));
+          break;
+      }
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function (x, y) {
+      var t1 = NaN;
+      (x = +x, y = +y);
+      if (x === this._x1 && y === this._y1) return;
+      // Ignore coincident points.
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+          break;
+        case 2:
+          this._point = 3;
+          point$3(this, slope2(this, t1 = slope3(this, x, y)), t1);
+          break;
+        default:
+          point$3(this, this._t0, t1 = slope3(this, x, y));
+          break;
+      }
+      (this._x0 = this._x1, this._x1 = x);
+      (this._y0 = this._y1, this._y1 = y);
+      this._t0 = t1;
+    }
+  };
+  function MonotoneY(context) {
+    this._context = new ReflectContext(context);
+  }
+  (MonotoneY.prototype = Object.create(MonotoneX.prototype)).point = function (x, y) {
+    MonotoneX.prototype.point.call(this, y, x);
+  };
+  function ReflectContext(context) {
+    this._context = context;
+  }
+  ReflectContext.prototype = {
+    moveTo: function (x, y) {
+      this._context.moveTo(y, x);
+    },
+    closePath: function () {
+      this._context.closePath();
+    },
+    lineTo: function (x, y) {
+      this._context.lineTo(y, x);
+    },
+    bezierCurveTo: function (x1, y1, x2, y2, x, y) {
+      this._context.bezierCurveTo(y1, x1, y2, x2, y, x);
+    }
+  };
+  function monotoneX(context) {
+    return new MonotoneX(context);
+  }
+  function monotoneY(context) {
+    return new MonotoneY(context);
+  }
+  function Natural(context) {
+    this._context = context;
+  }
+  Natural.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x = [];
+      this._y = [];
+    },
+    lineEnd: function () {
+      var x = this._x, y = this._y, n = x.length;
+      if (n) {
+        this._line ? this._context.lineTo(x[0], y[0]) : this._context.moveTo(x[0], y[0]);
+        if (n === 2) {
+          this._context.lineTo(x[1], y[1]);
+        } else {
+          var px = controlPoints(x), py = controlPoints(y);
+          for (var i0 = 0, i1 = 1; i1 < n; (++i0, ++i1)) {
+            this._context.bezierCurveTo(px[0][i0], py[0][i0], px[1][i0], py[1][i0], x[i1], y[i1]);
+          }
+        }
+      }
+      if (this._line || this._line !== 0 && n === 1) this._context.closePath();
+      this._line = 1 - this._line;
+      this._x = this._y = null;
+    },
+    point: function (x, y) {
+      this._x.push(+x);
+      this._y.push(+y);
+    }
+  };
+  // See https://www.particleincell.com/2012/bezier-splines/ for derivation.
+  function controlPoints(x) {
+    var i, n = x.length - 1, m, a = new Array(n), b = new Array(n), r = new Array(n);
+    (a[0] = 0, b[0] = 2, r[0] = x[0] + 2 * x[1]);
+    for (i = 1; i < n - 1; ++i) (a[i] = 1, b[i] = 4, r[i] = 4 * x[i] + 2 * x[i + 1]);
+    (a[n - 1] = 2, b[n - 1] = 7, r[n - 1] = 8 * x[n - 1] + x[n]);
+    for (i = 1; i < n; ++i) (m = a[i] / b[i - 1], b[i] -= m, r[i] -= m * r[i - 1]);
+    a[n - 1] = r[n - 1] / b[n - 1];
+    for (i = n - 2; i >= 0; --i) a[i] = (r[i] - a[i + 1]) / b[i];
+    b[n - 1] = (x[n] + a[n - 1]) / 2;
+    for (i = 0; i < n - 1; ++i) b[i] = 2 * x[i + 1] - a[i + 1];
+    return [a, b];
+  }
+  function natural(context) {
+    return new Natural(context);
+  }
+  function Step(context, t) {
+    this._context = context;
+    this._t = t;
+  }
+  Step.prototype = {
+    areaStart: function () {
+      this._line = 0;
+    },
+    areaEnd: function () {
+      this._line = NaN;
+    },
+    lineStart: function () {
+      this._x = this._y = NaN;
+      this._point = 0;
+    },
+    lineEnd: function () {
+      if (0 < this._t && this._t < 1 && this._point === 2) this._context.lineTo(this._x, this._y);
+      if (this._line || this._line !== 0 && this._point === 1) this._context.closePath();
+      if (this._line >= 0) (this._t = 1 - this._t, this._line = 1 - this._line);
+    },
+    point: function (x, y) {
+      (x = +x, y = +y);
+      switch (this._point) {
+        case 0:
+          this._point = 1;
+          this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+          break;
+        case 1:
+          this._point = 2;
+        default:
+          {
+            if (this._t <= 0) {
+              this._context.lineTo(this._x, y);
+              this._context.lineTo(x, y);
+            } else {
+              var x1 = this._x * (1 - this._t) + x * this._t;
+              this._context.lineTo(x1, this._y);
+              this._context.lineTo(x1, y);
+            }
+            break;
+          }
+      }
+      (this._x = x, this._y = y);
+    }
+  };
+  function step(context) {
+    return new Step(context, 0.5);
+  }
+  function stepBefore(context) {
+    return new Step(context, 0);
+  }
+  function stepAfter(context) {
+    return new Step(context, 1);
+  }
+  function none(series, order) {
+    if (!((n = series.length) > 1)) return;
+    for (var i = 1, j, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
+      (s0 = s1, s1 = series[order[i]]);
+      for (j = 0; j < m; ++j) {
+        s1[j][1] += s1[j][0] = isNaN(s0[j][1]) ? s0[j][0] : s0[j][1];
+      }
+    }
+  }
+  function none$1(series) {
+    var n = series.length, o = new Array(n);
+    while (--n >= 0) o[n] = n;
+    return o;
+  }
+  function stackValue(d, key) {
+    return d[key];
+  }
+  function stack() {
+    var keys = constant([]), order = none$1, offset = none, value = stackValue;
+    function stack(data) {
+      var kz = keys.apply(this, arguments), i, m = data.length, n = kz.length, sz = new Array(n), oz;
+      for (i = 0; i < n; ++i) {
+        for (var ki = kz[i], si = sz[i] = new Array(m), j = 0, sij; j < m; ++j) {
+          si[j] = sij = [0, +value(data[j], ki, j, data)];
+          sij.data = data[j];
+        }
+        si.key = ki;
+      }
+      for ((i = 0, oz = order(sz)); i < n; ++i) {
+        sz[oz[i]].index = i;
+      }
+      offset(sz, oz);
+      return sz;
+    }
+    stack.keys = function (_) {
+      return arguments.length ? (keys = typeof _ === "function" ? _ : constant(slice.call(_)), stack) : keys;
+    };
+    stack.value = function (_) {
+      return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), stack) : value;
+    };
+    stack.order = function (_) {
+      return arguments.length ? (order = _ == null ? none$1 : typeof _ === "function" ? _ : constant(slice.call(_)), stack) : order;
+    };
+    stack.offset = function (_) {
+      return arguments.length ? (offset = _ == null ? none : _, stack) : offset;
+    };
+    return stack;
+  }
+  function expand(series, order) {
+    if (!((n = series.length) > 0)) return;
+    for (var i, n, j = 0, m = series[0].length, y; j < m; ++j) {
+      for (y = i = 0; i < n; ++i) y += series[i][j][1] || 0;
+      if (y) for (i = 0; i < n; ++i) series[i][j][1] /= y;
+    }
+    none(series, order);
+  }
+  function diverging(series, order) {
+    if (!((n = series.length) > 0)) return;
+    for (var i, j = 0, d, dy, yp, yn, n, m = series[order[0]].length; j < m; ++j) {
+      for ((yp = yn = 0, i = 0); i < n; ++i) {
+        if ((dy = (d = series[order[i]][j])[1] - d[0]) > 0) {
+          (d[0] = yp, d[1] = yp += dy);
+        } else if (dy < 0) {
+          (d[1] = yn, d[0] = yn += dy);
+        } else {
+          (d[0] = 0, d[1] = dy);
+        }
+      }
+    }
+  }
+  function silhouette(series, order) {
+    if (!((n = series.length) > 0)) return;
+    for (var j = 0, s0 = series[order[0]], n, m = s0.length; j < m; ++j) {
+      for (var i = 0, y = 0; i < n; ++i) y += series[i][j][1] || 0;
+      s0[j][1] += s0[j][0] = -y / 2;
+    }
+    none(series, order);
+  }
+  function wiggle(series, order) {
+    if (!((n = series.length) > 0) || !((m = (s0 = series[order[0]]).length) > 0)) return;
+    for (var y = 0, j = 1, s0, m, n; j < m; ++j) {
+      for (var i = 0, s1 = 0, s2 = 0; i < n; ++i) {
+        var si = series[order[i]], sij0 = si[j][1] || 0, sij1 = si[j - 1][1] || 0, s3 = (sij0 - sij1) / 2;
+        for (var k = 0; k < i; ++k) {
+          var sk = series[order[k]], skj0 = sk[j][1] || 0, skj1 = sk[j - 1][1] || 0;
+          s3 += skj0 - skj1;
+        }
+        (s1 += sij0, s2 += s3 * sij0);
+      }
+      s0[j - 1][1] += s0[j - 1][0] = y;
+      if (s1) y -= s2 / s1;
+    }
+    s0[j - 1][1] += s0[j - 1][0] = y;
+    none(series, order);
+  }
+  function appearance(series) {
+    var peaks = series.map(peak);
+    return none$1(series).sort(function (a, b) {
+      return peaks[a] - peaks[b];
+    });
+  }
+  function peak(series) {
+    var i = -1, j = 0, n = series.length, vi, vj = -Infinity;
+    while (++i < n) if ((vi = +series[i][1]) > vj) (vj = vi, j = i);
+    return j;
+  }
+  function ascending(series) {
+    var sums = series.map(sum);
+    return none$1(series).sort(function (a, b) {
+      return sums[a] - sums[b];
+    });
+  }
+  function sum(series) {
+    var s = 0, i = -1, n = series.length, v;
+    while (++i < n) if (v = +series[i][1]) s += v;
+    return s;
+  }
+  function descending$1(series) {
+    return ascending(series).reverse();
+  }
+  function insideOut(series) {
+    var n = series.length, i, j, sums = series.map(sum), order = appearance(series), top = 0, bottom = 0, tops = [], bottoms = [];
+    for (i = 0; i < n; ++i) {
+      j = order[i];
+      if (top < bottom) {
+        top += sums[j];
+        tops.push(j);
+      } else {
+        bottom += sums[j];
+        bottoms.push(j);
+      }
+    }
+    return bottoms.reverse().concat(tops);
+  }
+  function reverse(series) {
+    return none$1(series).reverse();
+  }
+  exports.arc = arc;
+  exports.area = area;
+  exports.areaRadial = areaRadial;
+  exports.curveBasis = basis;
+  exports.curveBasisClosed = basisClosed;
+  exports.curveBasisOpen = basisOpen;
+  exports.curveBundle = bundle;
+  exports.curveCardinal = cardinal;
+  exports.curveCardinalClosed = cardinalClosed;
+  exports.curveCardinalOpen = cardinalOpen;
+  exports.curveCatmullRom = catmullRom;
+  exports.curveCatmullRomClosed = catmullRomClosed;
+  exports.curveCatmullRomOpen = catmullRomOpen;
+  exports.curveLinear = curveLinear;
+  exports.curveLinearClosed = linearClosed;
+  exports.curveMonotoneX = monotoneX;
+  exports.curveMonotoneY = monotoneY;
+  exports.curveNatural = natural;
+  exports.curveStep = step;
+  exports.curveStepAfter = stepAfter;
+  exports.curveStepBefore = stepBefore;
+  exports.line = line;
+  exports.lineRadial = lineRadial$1;
+  exports.linkHorizontal = linkHorizontal;
+  exports.linkRadial = linkRadial;
+  exports.linkVertical = linkVertical;
+  exports.pie = pie;
+  exports.pointRadial = pointRadial;
+  exports.radialArea = areaRadial;
+  exports.radialLine = lineRadial$1;
+  exports.stack = stack;
+  exports.stackOffsetDiverging = diverging;
+  exports.stackOffsetExpand = expand;
+  exports.stackOffsetNone = none;
+  exports.stackOffsetSilhouette = silhouette;
+  exports.stackOffsetWiggle = wiggle;
+  exports.stackOrderAppearance = appearance;
+  exports.stackOrderAscending = ascending;
+  exports.stackOrderDescending = descending$1;
+  exports.stackOrderInsideOut = insideOut;
+  exports.stackOrderNone = none$1;
+  exports.stackOrderReverse = reverse;
+  exports.symbol = symbol;
+  exports.symbolCircle = circle;
+  exports.symbolCross = cross;
+  exports.symbolDiamond = diamond;
+  exports.symbolSquare = square;
+  exports.symbolStar = star;
+  exports.symbolTriangle = triangle;
+  exports.symbolWye = wye;
+  exports.symbols = symbols;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"d3-path":"m838t"}],"m838t":[function(require,module,exports) {
+var define;
+// https://d3js.org/d3-path/ v1.0.9 Copyright 2019 Mike Bostock
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = global || self, factory(global.d3 = global.d3 || ({})));
+})(this, function (exports) {
+  "use strict";
+  var pi = Math.PI, tau = 2 * pi, epsilon = 1e-6, tauEpsilon = tau - epsilon;
+  function Path() {
+    this._x0 = this._y0 = // start of current subpath
+    this._x1 = this._y1 = null;
+    // end of current subpath
+    this._ = "";
+  }
+  function path() {
+    return new Path();
+  }
+  Path.prototype = path.prototype = {
+    constructor: Path,
+    moveTo: function (x, y) {
+      this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y);
+    },
+    closePath: function () {
+      if (this._x1 !== null) {
+        (this._x1 = this._x0, this._y1 = this._y0);
+        this._ += "Z";
+      }
+    },
+    lineTo: function (x, y) {
+      this._ += "L" + (this._x1 = +x) + "," + (this._y1 = +y);
+    },
+    quadraticCurveTo: function (x1, y1, x, y) {
+      this._ += "Q" + +x1 + "," + +y1 + "," + (this._x1 = +x) + "," + (this._y1 = +y);
+    },
+    bezierCurveTo: function (x1, y1, x2, y2, x, y) {
+      this._ += "C" + +x1 + "," + +y1 + "," + +x2 + "," + +y2 + "," + (this._x1 = +x) + "," + (this._y1 = +y);
+    },
+    arcTo: function (x1, y1, x2, y2, r) {
+      (x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r);
+      var x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error("negative radius: " + r);
+      // Is this path empty? Move to (x1,y1).
+      if (this._x1 === null) {
+        this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
+              // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+} else // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+      if (!(l01_2 > epsilon)) ; else // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
+      // Equivalently, is (x1,y1) coincident with (x2,y2)?
+      // Or, is the radius zero? Line to (x1,y1).
+      if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+        this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
+              // Otherwise, draw an arc!
+} else // Otherwise, draw an arc!
+      {
+        var x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
+        // If the start tangent is not coincident with (x0,y0), line to.
+        if (Math.abs(t01 - 1) > epsilon) {
+          this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
+        }
+        this._ += "A" + r + "," + r + ",0,0," + +(y01 * x20 > x01 * y20) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
+      }
+    },
+    arc: function (x, y, r, a0, a1, ccw) {
+      (x = +x, y = +y, r = +r, ccw = !!ccw);
+      var dx = r * Math.cos(a0), dy = r * Math.sin(a0), x0 = x + dx, y0 = y + dy, cw = 1 ^ ccw, da = ccw ? a0 - a1 : a1 - a0;
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error("negative radius: " + r);
+      // Is this path empty? Move to (x0,y0).
+      if (this._x1 === null) {
+        this._ += "M" + x0 + "," + y0;
+              // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+} else // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+      if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+        this._ += "L" + x0 + "," + y0;
+      }
+      // Is this arc empty? We’re done.
+      if (!r) return;
+      // Does the angle go the wrong way? Flip the direction.
+      if (da < 0) da = da % tau + tau;
+      // Is this a complete circle? Draw two arcs to complete the circle.
+      if (da > tauEpsilon) {
+        this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x - dx) + "," + (y - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
+              // Is this arc non-empty? Draw an arc!
+} else // Is this arc non-empty? Draw an arc!
+      if (da > epsilon) {
+        this._ += "A" + r + "," + r + ",0," + +(da >= pi) + "," + cw + "," + (this._x1 = x + r * Math.cos(a1)) + "," + (this._y1 = y + r * Math.sin(a1));
+      }
+    },
+    rect: function (x, y, w, h) {
+      this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y) + "h" + +w + "v" + +h + "h" + -w + "Z";
+    },
+    toString: function () {
+      return this._;
+    }
+  };
+  exports.path = path;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"54E8e":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = setNumberOrNumberAccessor;
+
+/**
+ * This is a workaround for TypeScript not inferring the correct
+ * method overload/signature for some d3 shape methods.
+ */
+function setNumberOrNumberAccessor(func, value) {
+  if (typeof value === 'number') func(value);else func(value);
+}
+},{}],"7GkEO":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = stackOrder;
+exports.STACK_ORDER_NAMES = exports.STACK_ORDERS = void 0;
+
+var _d3Shape = require("d3-shape");
+
+var STACK_ORDERS = {
+  ascending: _d3Shape.stackOrderAscending,
+  descending: _d3Shape.stackOrderDescending,
+  insideout: _d3Shape.stackOrderInsideOut,
+  none: _d3Shape.stackOrderNone,
+  reverse: _d3Shape.stackOrderReverse
+};
+exports.STACK_ORDERS = STACK_ORDERS;
+var STACK_ORDER_NAMES = Object.keys(STACK_ORDERS);
+exports.STACK_ORDER_NAMES = STACK_ORDER_NAMES;
+
+function stackOrder(order) {
+  return order && STACK_ORDERS[order] || STACK_ORDERS.none;
+}
+},{"d3-shape":"fW1hY"}],"30WhK":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = stackOffset;
+exports.STACK_OFFSET_NAMES = exports.STACK_OFFSETS = void 0;
+
+var _d3Shape = require("d3-shape");
+
+var STACK_OFFSETS = {
+  expand: _d3Shape.stackOffsetExpand,
+  diverging: _d3Shape.stackOffsetDiverging,
+  none: _d3Shape.stackOffsetNone,
+  silhouette: _d3Shape.stackOffsetSilhouette,
+  wiggle: _d3Shape.stackOffsetWiggle
+};
+exports.STACK_OFFSETS = STACK_OFFSETS;
+var STACK_OFFSET_NAMES = Object.keys(STACK_OFFSETS);
+exports.STACK_OFFSET_NAMES = STACK_OFFSET_NAMES;
+
+function stackOffset(offset) {
+  return offset && STACK_OFFSETS[offset] || STACK_OFFSETS.none;
+}
+},{"d3-shape":"fW1hY"}],"Wmyan":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Pie;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _group = require("@vx/group");
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Pie(_ref) {
+  var className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? [] : _ref$data,
+      centroid = _ref.centroid,
+      _ref$innerRadius = _ref.innerRadius,
+      innerRadius = _ref$innerRadius === void 0 ? 0 : _ref$innerRadius,
+      outerRadius = _ref.outerRadius,
+      cornerRadius = _ref.cornerRadius,
+      startAngle = _ref.startAngle,
+      endAngle = _ref.endAngle,
+      padAngle = _ref.padAngle,
+      padRadius = _ref.padRadius,
+      pieSort = _ref.pieSort,
+      pieSortValues = _ref.pieSortValues,
+      pieValue = _ref.pieValue,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "top", "left", "data", "centroid", "innerRadius", "outerRadius", "cornerRadius", "startAngle", "endAngle", "padAngle", "padRadius", "pieSort", "pieSortValues", "pieValue", "children"]);
+
+  var path = (0, _D3ShapeFactories.arc)({
+    innerRadius: innerRadius,
+    outerRadius: outerRadius,
+    cornerRadius: cornerRadius,
+    padRadius: padRadius
+  });
+  var pie = (0, _D3ShapeFactories.pie)({
+    startAngle: startAngle,
+    endAngle: endAngle,
+    padAngle: padAngle,
+    value: pieValue,
+    sort: pieSort,
+    sortValues: pieSortValues
+  });
+  var arcs = pie(data); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    arcs: arcs,
+    path: path,
+    pie: pie
+  }));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: "vx-pie-arcs-group",
+    top: top,
+    left: left
+  }, arcs.map(function (arc, i) {
+    return /*#__PURE__*/_react.default.createElement("g", {
+      key: "pie-arc-" + i
+    }, /*#__PURE__*/_react.default.createElement("path", _extends({
+      className: (0, _classnames.default)('vx-pie-arc', className),
+      d: path(arc) || ''
+    }, restProps)), centroid == null ? void 0 : centroid(path.centroid(arc), arc));
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/group":"6phi6","../util/D3ShapeFactories":"4m6TI"}],"5OAxx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Line;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Line(_ref) {
+  var _ref$from = _ref.from,
+      from = _ref$from === void 0 ? {
+    x: 0,
+    y: 0
+  } : _ref$from,
+      _ref$to = _ref.to,
+      to = _ref$to === void 0 ? {
+    x: 1,
+    y: 1
+  } : _ref$to,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === void 0 ? 'transparent' : _ref$fill,
+      className = _ref.className,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["from", "to", "fill", "className", "innerRef"]);
+
+  return /*#__PURE__*/_react.default.createElement("line", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-line', className),
+    x1: from.x,
+    y1: from.y,
+    x2: to.x,
+    y2: to.y,
+    fill: fill
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc"}],"7ndXe":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = LinePath;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function LinePath(_ref) {
+  var children = _ref.children,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? [] : _ref$data,
+      x = _ref.x,
+      y = _ref.y,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === void 0 ? 'transparent' : _ref$fill,
+      className = _ref.className,
+      curve = _ref.curve,
+      innerRef = _ref.innerRef,
+      _ref$defined = _ref.defined,
+      defined = _ref$defined === void 0 ? function () {
+    return true;
+  } : _ref$defined,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["children", "data", "x", "y", "fill", "className", "curve", "innerRef", "defined"]);
+
+  var path = (0, _D3ShapeFactories.line)({
+    x: x,
+    y: y,
+    defined: defined,
+    curve: curve
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: path
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-linepath', className),
+    d: path(data) || '',
+    fill: fill
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/D3ShapeFactories":"4m6TI"}],"21jRu":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = LineRadial;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function LineRadial(_ref) {
+  var className = _ref.className,
+      angle = _ref.angle,
+      radius = _ref.radius,
+      defined = _ref.defined,
+      curve = _ref.curve,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? [] : _ref$data,
+      innerRef = _ref.innerRef,
+      children = _ref.children,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === void 0 ? 'transparent' : _ref$fill,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "angle", "radius", "defined", "curve", "data", "innerRef", "children", "fill"]);
+
+  var path = (0, _D3ShapeFactories.radialLine)({
+    angle: angle,
+    radius: radius,
+    defined: defined,
+    curve: curve
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: path
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-line-radial', className),
+    d: path(data) || '',
+    fill: fill
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/D3ShapeFactories":"4m6TI"}],"6zomr":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Area;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Area(_ref) {
+  var children = _ref.children,
+      x = _ref.x,
+      x0 = _ref.x0,
+      x1 = _ref.x1,
+      y = _ref.y,
+      y0 = _ref.y0,
+      y1 = _ref.y1,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? [] : _ref$data,
+      _ref$defined = _ref.defined,
+      defined = _ref$defined === void 0 ? function () {
+    return true;
+  } : _ref$defined,
+      className = _ref.className,
+      curve = _ref.curve,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["children", "x", "x0", "x1", "y", "y0", "y1", "data", "defined", "className", "curve", "innerRef"]);
+
+  var path = (0, _D3ShapeFactories.area)({
+    x: x,
+    x0: x0,
+    x1: x1,
+    y: y,
+    y0: y0,
+    y1: y1,
+    defined: defined,
+    curve: curve
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: path
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-area', className),
+    d: path(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/D3ShapeFactories":"4m6TI"}],"4K3nu":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AreaClosed;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _setNumberOrNumberAccessor = _interopRequireDefault(require("../util/setNumberOrNumberAccessor"));
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function AreaClosed(_ref) {
+  var x = _ref.x,
+      x0 = _ref.x0,
+      x1 = _ref.x1,
+      y = _ref.y,
+      y1 = _ref.y1,
+      y0 = _ref.y0,
+      yScale = _ref.yScale,
+      _ref$data = _ref.data,
+      data = _ref$data === void 0 ? [] : _ref$data,
+      _ref$defined = _ref.defined,
+      defined = _ref$defined === void 0 ? function () {
+    return true;
+  } : _ref$defined,
+      className = _ref.className,
+      curve = _ref.curve,
+      innerRef = _ref.innerRef,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["x", "x0", "x1", "y", "y1", "y0", "yScale", "data", "defined", "className", "curve", "innerRef", "children"]);
+
+  var path = (0, _D3ShapeFactories.area)({
+    x: x,
+    x0: x0,
+    x1: x1,
+    defined: defined,
+    curve: curve
+  });
+
+  if (y0) {
+    (0, _setNumberOrNumberAccessor.default)(path.y0, y0);
+  } else {
+    /**
+     * by default set the baseline to the first element of the yRange
+     * @TODO take the minimum instead?
+     */
+    path.y0(yScale.range()[0]);
+  }
+
+  if (y && !y1) (0, _setNumberOrNumberAccessor.default)(path.y1, y);
+  if (y1 && !y) (0, _setNumberOrNumberAccessor.default)(path.y1, y1); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: path
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-area-closed', className),
+    d: path(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/setNumberOrNumberAccessor":"54E8e","../util/D3ShapeFactories":"4m6TI"}],"2vTAv":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AreaStack;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Stack = _interopRequireDefault(require("./Stack"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function AreaStack(_ref) {
+  var className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      keys = _ref.keys,
+      data = _ref.data,
+      curve = _ref.curve,
+      defined = _ref.defined,
+      x = _ref.x,
+      x0 = _ref.x0,
+      x1 = _ref.x1,
+      y0 = _ref.y0,
+      y1 = _ref.y1,
+      value = _ref.value,
+      order = _ref.order,
+      offset = _ref.offset,
+      color = _ref.color,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "top", "left", "keys", "data", "curve", "defined", "x", "x0", "x1", "y0", "y1", "value", "order", "offset", "color", "children"]);
+
+  return /*#__PURE__*/_react.default.createElement(_Stack.default, _extends({
+    className: className,
+    top: top,
+    left: left,
+    keys: keys,
+    data: data,
+    curve: curve,
+    defined: defined,
+    x: x,
+    x0: x0,
+    x1: x1,
+    y0: y0,
+    y1: y1,
+    value: value,
+    order: order,
+    offset: offset,
+    color: color
+  }, restProps), children || function (_ref2) {
+    var stacks = _ref2.stacks,
+        path = _ref2.path;
+    return stacks.map(function (series, i) {
+      return /*#__PURE__*/_react.default.createElement("path", _extends({
+        className: (0, _classnames.default)('vx-area-stack', className),
+        key: "area-stack-" + i + "-" + (series.key || ''),
+        d: path(series) || '',
+        fill: color == null ? void 0 : color(series.key, i)
+      }, restProps));
+    });
+  });
+}
+},{"react":"3b2NM","classnames":"5aJRc","./Stack":"2Cir6"}],"2Cir6":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Stack;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _group = require("@vx/group");
+
+var _D3ShapeFactories = require("../util/D3ShapeFactories");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Stack(_ref) {
+  var className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      keys = _ref.keys,
+      data = _ref.data,
+      curve = _ref.curve,
+      defined = _ref.defined,
+      x = _ref.x,
+      x0 = _ref.x0,
+      x1 = _ref.x1,
+      y0 = _ref.y0,
+      y1 = _ref.y1,
+      value = _ref.value,
+      order = _ref.order,
+      offset = _ref.offset,
+      color = _ref.color,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "top", "left", "keys", "data", "curve", "defined", "x", "x0", "x1", "y0", "y1", "value", "order", "offset", "color", "children"]);
+
+  var stack = (0, _D3ShapeFactories.stack)({
+    keys: keys,
+    value: value,
+    order: order,
+    offset: offset
+  });
+  var path = (0, _D3ShapeFactories.area)({
+    x: x,
+    x0: x0,
+    x1: x1,
+    y0: y0,
+    y1: y1,
+    curve: curve,
+    defined: defined
+  });
+  var stacks = stack(data); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    stacks: stacks,
+    path: path,
+    stack: stack
+  }));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    top: top,
+    left: left
+  }, stacks.map(function (series, i) {
+    return /*#__PURE__*/_react.default.createElement("path", _extends({
+      className: (0, _classnames.default)('vx-stack', className),
+      key: "stack-" + i + "-" + (series.key || ''),
+      d: path(series) || '',
+      fill: color == null ? void 0 : color(series.key, i)
+    }, restProps));
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/group":"6phi6","../util/D3ShapeFactories":"4m6TI"}],"1jASh":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Bar;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Bar(_ref) {
+  var className = _ref.className,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "innerRef"]);
+
+  return /*#__PURE__*/_react.default.createElement("rect", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-bar', className)
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc"}],"1xvIG":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = BarRounded;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function BarRounded(_ref) {
+  var className = _ref.className,
+      innerRef = _ref.innerRef,
+      x = _ref.x,
+      y = _ref.y,
+      width = _ref.width,
+      height = _ref.height,
+      radius = _ref.radius,
+      _ref$all = _ref.all,
+      all = _ref$all === void 0 ? false : _ref$all,
+      _ref$top = _ref.top,
+      top = _ref$top === void 0 ? false : _ref$top,
+      _ref$bottom = _ref.bottom,
+      bottom = _ref$bottom === void 0 ? false : _ref$bottom,
+      _ref$left = _ref.left,
+      left = _ref$left === void 0 ? false : _ref$left,
+      _ref$right = _ref.right,
+      right = _ref$right === void 0 ? false : _ref$right,
+      _ref$topLeft = _ref.topLeft,
+      topLeft = _ref$topLeft === void 0 ? false : _ref$topLeft,
+      _ref$topRight = _ref.topRight,
+      topRight = _ref$topRight === void 0 ? false : _ref$topRight,
+      _ref$bottomLeft = _ref.bottomLeft,
+      bottomLeft = _ref$bottomLeft === void 0 ? false : _ref$bottomLeft,
+      _ref$bottomRight = _ref.bottomRight,
+      bottomRight = _ref$bottomRight === void 0 ? false : _ref$bottomRight,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "innerRef", "x", "y", "width", "height", "radius", "all", "top", "bottom", "left", "right", "topLeft", "topRight", "bottomLeft", "bottomRight"]);
+
+  topRight = all || top || right || topRight;
+  bottomRight = all || bottom || right || bottomRight;
+  bottomLeft = all || bottom || left || bottomLeft;
+  topLeft = all || top || left || topLeft; // clamp radius to center of shortest side of the rect
+
+  radius = Math.min(radius, Math.min(width, height) / 2);
+  var diameter = 2 * radius;
+  var path = ("M" + (x + radius) + "," + y + " h" + (width - diameter) + "\n " + (topRight ? "a" + radius + "," + radius + " 0 0 1 " + radius + "," + radius : "h" + radius + "v" + radius) + "\n v" + (height - diameter) + "\n " + (bottomRight ? "a" + radius + "," + radius + " 0 0 1 " + -radius + "," + radius : "v" + radius + "h" + -radius) + "\n h" + (diameter - width) + "\n " + (bottomLeft ? "a" + radius + "," + radius + " 0 0 1 " + -radius + "," + -radius : "h" + -radius + "v" + -radius) + "\n v" + (diameter - height) + "\n " + (topLeft ? "a" + radius + "," + radius + " 0 0 1 " + radius + "," + -radius : "v" + -radius + "h" + radius) + "\nz").split('\n').join('');
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-bar-rounded', className),
+    d: path
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc"}],"67JBv":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = BarGroupComponent;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _group = require("@vx/group");
+
+var _Bar = _interopRequireDefault(require("./Bar"));
+
+var _getBandwidth = _interopRequireDefault(require("../util/getBandwidth"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/**
+ * Generates bar groups as an array of objects and renders `<rect />`s for each datum grouped by `key`. A general setup might look like this:
+ *
+ * ```js
+ * const data = [{
+ *  date: date1,
+ *  key1: value,
+ *  key2: value,
+ *  key3: value
+ * }, {
+ *  date: date2,
+ *  key1: value,
+ *  key2: value,
+ *  key3: value,
+ * }];
+ *
+ * const x0 = d => d.date;
+ * const keys = [key1, key2, key3];
+ *
+ * const x0Scale = scaleBand({
+ *  domain: data.map(x0),
+ *  padding: 0.2
+ * });
+ * const x1Scale = scaleBand({
+ *  domain: keys,
+ *  padding: 0.1
+ * });
+ * const yScale = scaleLinear({
+ *   domain: [0, Math.max(...data.map(d => Math.max(...keys.map(key => d[key]))))]
+ * });
+ * const color = scaleOrdinal({
+ *   domain: keys,
+ *   range: [blue, green, purple]
+ * });
+ * ```
+ *
+ * Example: [https://vx-demo.now.sh/bargroup](https://vx-demo.now.sh/bargroup)
+ */
+function BarGroupComponent(_ref) {
+  var data = _ref.data,
+      className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      x0 = _ref.x0,
+      x0Scale = _ref.x0Scale,
+      x1Scale = _ref.x1Scale,
+      yScale = _ref.yScale,
+      color = _ref.color,
+      keys = _ref.keys,
+      height = _ref.height,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["data", "className", "top", "left", "x0", "x0Scale", "x1Scale", "yScale", "color", "keys", "height", "children"]);
+
+  var barWidth = (0, _getBandwidth.default)(x1Scale);
+  var barGroups = data.map(function (group, i) {
+    return {
+      index: i,
+      x0: x0Scale(x0(group)),
+      bars: keys.map(function (key, j) {
+        var value = group[key];
+        return {
+          index: j,
+          key: key,
+          value: value,
+          width: barWidth,
+          x: x1Scale(key) || 0,
+          y: yScale(value) || 0,
+          color: color(key, j),
+          height: height - (yScale(value) || 0)
+        };
+      })
+    };
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children(barGroups));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: (0, _classnames.default)('vx-bar-group', className),
+    top: top,
+    left: left
+  }, barGroups.map(function (barGroup) {
+    return /*#__PURE__*/_react.default.createElement(_group.Group, {
+      key: "bar-group-" + barGroup.index + "-" + barGroup.x0,
+      left: barGroup.x0
+    }, barGroup.bars.map(function (bar) {
+      return /*#__PURE__*/_react.default.createElement(_Bar.default, _extends({
+        key: "bar-group-bar-" + barGroup.index + "-" + bar.index + "-" + bar.value + "-" + bar.key,
+        x: bar.x,
+        y: bar.y,
+        width: bar.width,
+        height: bar.height,
+        fill: bar.color
+      }, restProps));
+    }));
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/group":"6phi6","./Bar":"1jASh","../util/getBandwidth":"2PlUu"}],"2PlUu":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = getBandwidth;
+
+function getBandwidth(scale) {
+  if ('bandwidth' in scale) {
+    return scale.bandwidth();
+  }
+
+  var range = scale.range();
+  var domain = scale.domain();
+  return Math.abs(range[range.length - 1] - range[0]) / domain.length;
+}
+},{}],"3IUBE":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = BarGroupHorizontalComponent;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _group = require("@vx/group");
+
+var _Bar = _interopRequireDefault(require("./Bar"));
+
+var _getBandwidth = _interopRequireDefault(require("../util/getBandwidth"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function BarGroupHorizontalComponent(_ref) {
+  var data = _ref.data,
+      className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      _ref$x = _ref.x,
+      x = _ref$x === void 0 ? function () {
+    return (
+      /** val */
+      0
+    );
+  } : _ref$x,
+      y0 = _ref.y0,
+      y0Scale = _ref.y0Scale,
+      y1Scale = _ref.y1Scale,
+      xScale = _ref.xScale,
+      color = _ref.color,
+      keys = _ref.keys,
+      width = _ref.width,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["data", "className", "top", "left", "x", "y0", "y0Scale", "y1Scale", "xScale", "color", "keys", "width", "children"]);
+
+  var barHeight = (0, _getBandwidth.default)(y1Scale);
+  var barGroups = data.map(function (group, i) {
+    return {
+      index: i,
+      y0: y0Scale(y0(group)) || 0,
+      bars: keys.map(function (key, j) {
+        var value = group[key];
+        return {
+          index: j,
+          key: key,
+          value: value,
+          height: barHeight,
+          x: x(value) || 0,
+          y: y1Scale(key) || 0,
+          color: color(key, j),
+          width: xScale(value) || 0
+        };
+      })
+    };
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children(barGroups));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: (0, _classnames.default)('vx-bar-group-horizontal', className),
+    top: top,
+    left: left
+  }, barGroups.map(function (barGroup) {
+    return /*#__PURE__*/_react.default.createElement(_group.Group, {
+      key: "bar-group-" + barGroup.index + "-" + barGroup.y0,
+      top: barGroup.y0
+    }, barGroup.bars.map(function (bar) {
+      return /*#__PURE__*/_react.default.createElement(_Bar.default, _extends({
+        key: "bar-group-bar-" + barGroup.index + "-" + bar.index + "-" + bar.value + "-" + bar.key,
+        x: bar.x,
+        y: bar.y,
+        width: bar.width,
+        height: bar.height,
+        fill: bar.color
+      }, restProps));
+    }));
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/group":"6phi6","./Bar":"1jASh","../util/getBandwidth":"2PlUu"}],"27sAo":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = BarStackComponent;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Shape = require("d3-shape");
+
+var _group = require("@vx/group");
+
+var _accessors = require("../util/accessors");
+
+var _getBandwidth = _interopRequireDefault(require("../util/getBandwidth"));
+
+var _setNumberOrNumberAccessor = _interopRequireDefault(require("../util/setNumberOrNumberAccessor"));
+
+var _stackOrder = _interopRequireDefault(require("../util/stackOrder"));
+
+var _stackOffset = _interopRequireDefault(require("../util/stackOffset"));
+
+var _Bar = _interopRequireDefault(require("./Bar"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function BarStackComponent(_ref) {
+  var data = _ref.data,
+      className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      x = _ref.x,
+      _ref$y = _ref.y0,
+      y0 = _ref$y === void 0 ? _accessors.getFirstItem : _ref$y,
+      _ref$y2 = _ref.y1,
+      y1 = _ref$y2 === void 0 ? _accessors.getSecondItem : _ref$y2,
+      xScale = _ref.xScale,
+      yScale = _ref.yScale,
+      color = _ref.color,
+      keys = _ref.keys,
+      value = _ref.value,
+      order = _ref.order,
+      offset = _ref.offset,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["data", "className", "top", "left", "x", "y0", "y1", "xScale", "yScale", "color", "keys", "value", "order", "offset", "children"]);
+
+  var stack = (0, _d3Shape.stack)();
+  if (keys) stack.keys(keys);
+  if (value) (0, _setNumberOrNumberAccessor.default)(stack.value, value);
+  if (order) stack.order((0, _stackOrder.default)(order));
+  if (offset) stack.offset((0, _stackOffset.default)(offset));
+  var stacks = stack(data);
+  var barWidth = (0, _getBandwidth.default)(xScale);
+  var barStacks = stacks.map(function (barStack, i) {
+    var key = barStack.key;
+    return {
+      index: i,
+      key: key,
+      bars: barStack.map(function (bar, j) {
+        var barHeight = (yScale(y0(bar)) || 0) - (yScale(y1(bar)) || 0);
+        var barY = yScale(y1(bar));
+        var barX = 'bandwidth' in xScale ? xScale(x(bar.data)) : Math.max((xScale(x(bar.data)) || 0) - barWidth / 2);
+        return {
+          bar: bar,
+          key: key,
+          index: j,
+          height: barHeight,
+          width: barWidth,
+          x: barX || 0,
+          y: barY || 0,
+          color: color(barStack.key, j)
+        };
+      })
+    };
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children(barStacks));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: (0, _classnames.default)('vx-bar-stack', className),
+    top: top,
+    left: left
+  }, barStacks.map(function (barStack) {
+    return barStack.bars.map(function (bar) {
+      return /*#__PURE__*/_react.default.createElement(_Bar.default, _extends({
+        key: "bar-stack-" + barStack.index + "-" + bar.index,
+        x: bar.x,
+        y: bar.y,
+        height: bar.height,
+        width: bar.width,
+        fill: bar.color
+      }, restProps));
+    });
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-shape":"fW1hY","@vx/group":"6phi6","../util/accessors":"4cR4z","../util/getBandwidth":"2PlUu","../util/setNumberOrNumberAccessor":"54E8e","../util/stackOrder":"7GkEO","../util/stackOffset":"30WhK","./Bar":"1jASh"}],"4cR4z":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.getX = getX;
+exports.getY = getY;
+exports.getSource = getSource;
+exports.getTarget = getTarget;
+exports.getFirstItem = getFirstItem;
+exports.getSecondItem = getSecondItem;
+
+function getX(l) {
+  return typeof (l == null ? void 0 : l.x) === 'number' ? l == null ? void 0 : l.x : 0;
+}
+
+function getY(l) {
+  return typeof (l == null ? void 0 : l.y) === 'number' ? l == null ? void 0 : l.y : 0;
+}
+
+function getSource(l) {
+  return l == null ? void 0 : l.source;
+}
+
+function getTarget(l) {
+  return l == null ? void 0 : l.target;
+}
+
+function getFirstItem(d) {
+  return d == null ? void 0 : d[0];
+}
+
+function getSecondItem(d) {
+  return d == null ? void 0 : d[1];
+}
+},{}],"7K3jO":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = BarStackHorizontal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Shape = require("d3-shape");
+
+var _group = require("@vx/group");
+
+var _accessors = require("../util/accessors");
+
+var _getBandwidth = _interopRequireDefault(require("../util/getBandwidth"));
+
+var _setNumberOrNumberAccessor = _interopRequireDefault(require("../util/setNumberOrNumberAccessor"));
+
+var _stackOrder = _interopRequireDefault(require("../util/stackOrder"));
+
+var _stackOffset = _interopRequireDefault(require("../util/stackOffset"));
+
+var _Bar = _interopRequireDefault(require("./Bar"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function BarStackHorizontal(_ref) {
+  var data = _ref.data,
+      className = _ref.className,
+      top = _ref.top,
+      left = _ref.left,
+      y = _ref.y,
+      _ref$x = _ref.x0,
+      x0 = _ref$x === void 0 ? _accessors.getFirstItem : _ref$x,
+      _ref$x2 = _ref.x1,
+      x1 = _ref$x2 === void 0 ? _accessors.getSecondItem : _ref$x2,
+      xScale = _ref.xScale,
+      yScale = _ref.yScale,
+      color = _ref.color,
+      keys = _ref.keys,
+      value = _ref.value,
+      order = _ref.order,
+      offset = _ref.offset,
+      children = _ref.children,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["data", "className", "top", "left", "y", "x0", "x1", "xScale", "yScale", "color", "keys", "value", "order", "offset", "children"]);
+
+  var stack = (0, _d3Shape.stack)();
+  if (keys) stack.keys(keys);
+  if (value) (0, _setNumberOrNumberAccessor.default)(stack.value, value);
+  if (order) stack.order((0, _stackOrder.default)(order));
+  if (offset) stack.offset((0, _stackOffset.default)(offset));
+  var stacks = stack(data);
+  var barHeight = (0, _getBandwidth.default)(yScale);
+  var barStacks = stacks.map(function (barStack, i) {
+    var key = barStack.key;
+    return {
+      index: i,
+      key: key,
+      bars: barStack.map(function (bar, j) {
+        var barWidth = (xScale(x1(bar)) || 0) - (xScale(x0(bar)) || 0);
+        var barX = xScale(x0(bar));
+        var barY = 'bandwidth' in yScale ? yScale(y(bar.data)) : Math.max((yScale(y(bar.data)) || 0) - barWidth / 2);
+        return {
+          bar: bar,
+          key: key,
+          index: j,
+          height: barHeight,
+          width: barWidth,
+          x: barX || 0,
+          y: barY || 0,
+          color: color(barStack.key, j)
+        };
+      })
+    };
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children(barStacks));
+  return /*#__PURE__*/_react.default.createElement(_group.Group, {
+    className: (0, _classnames.default)('vx-bar-stack-horizontal', className),
+    top: top,
+    left: left
+  }, barStacks.map(function (barStack) {
+    return barStack.bars.map(function (bar) {
+      return /*#__PURE__*/_react.default.createElement(_Bar.default, _extends({
+        key: "bar-stack-" + barStack.index + "-" + bar.index,
+        x: bar.x,
+        y: bar.y,
+        height: bar.height,
+        width: bar.width,
+        fill: bar.color
+      }, restProps));
+    });
+  }));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-shape":"fW1hY","@vx/group":"6phi6","../util/accessors":"4cR4z","../util/getBandwidth":"2PlUu","../util/setNumberOrNumberAccessor":"54E8e","../util/stackOrder":"7GkEO","../util/stackOffset":"30WhK","./Bar":"1jASh"}],"1383a":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.degreesToRadians = void 0;
+
+var degreesToRadians = function degreesToRadians(degrees) {
+  return Math.PI / 180 * degrees;
+};
+
+exports.degreesToRadians = degreesToRadians;
+},{}],"51nCa":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathHorizontalDiagonal = pathHorizontalDiagonal;
+exports.default = LinkHorizontalDiagonal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Shape = require("d3-shape");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathHorizontalDiagonal(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (data) {
+    var link = (0, _d3Shape.linkHorizontal)();
+    link.x(x);
+    link.y(y);
+    link.source(source);
+    link.target(target);
+    return link(data);
+  };
+}
+
+function LinkHorizontalDiagonal(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getY : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getX : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathHorizontalDiagonal({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-horizontal-diagonal', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-shape":"fW1hY","../../../util/accessors":"4cR4z"}],"2nzvl":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathVerticalDiagonal = pathVerticalDiagonal;
+exports.default = LinkVerticalDiagonal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Shape = require("d3-shape");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathVerticalDiagonal(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (data) {
+    var link = (0, _d3Shape.linkVertical)();
+    link.x(x);
+    link.y(y);
+    link.source(source);
+    link.target(target);
+    return link(data);
+  };
+}
+
+function LinkVerticalDiagonal(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathVerticalDiagonal({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-vertical-diagonal', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-shape":"fW1hY","../../../util/accessors":"4cR4z"}],"3N8dH":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathRadialDiagonal = pathRadialDiagonal;
+exports.default = LinkRadialDiagonal;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Shape = require("d3-shape");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathRadialDiagonal(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      angle = _ref.angle,
+      radius = _ref.radius;
+  return function (data) {
+    var link = (0, _d3Shape.linkRadial)();
+    link.angle(angle);
+    link.radius(radius);
+    link.source(source);
+    link.target(target);
+    return link(data);
+  };
+}
+
+function LinkRadialDiagonal(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$angle = _ref2.angle,
+      angle = _ref2$angle === void 0 ? _accessors.getX : _ref2$angle,
+      _ref2$radius = _ref2.radius,
+      radius = _ref2$radius === void 0 ? _accessors.getY : _ref2$radius,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "angle", "radius", "source", "target"]);
+
+  var pathGen = path || pathRadialDiagonal({
+    source: source,
+    target: target,
+    angle: angle,
+    radius: radius
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-radial-diagonal', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-shape":"fW1hY","../../../util/accessors":"4cR4z"}],"2DBAd":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathHorizontalCurve = pathHorizontalCurve;
+exports.default = LinkHorizontalCurve;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathHorizontalCurve(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y,
+      percent = _ref.percent;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var dx = tx - sx;
+    var dy = ty - sy;
+    var ix = percent * (dx + dy);
+    var iy = percent * (dy - dx);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.bezierCurveTo(sx + ix, sy + iy, tx + iy, ty - ix, tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkHorizontalCurve(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$percent = _ref2.percent,
+      percent = _ref2$percent === void 0 ? 0.2 : _ref2$percent,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getY : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getX : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "percent", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathHorizontalCurve({
+    source: source,
+    target: target,
+    x: x,
+    y: y,
+    percent: percent
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-horizontal-curve', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"2jP8d":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathVerticalCurve = pathVerticalCurve;
+exports.default = LinkVerticalCurve;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathVerticalCurve(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y,
+      percent = _ref.percent;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var dx = tx - sx;
+    var dy = ty - sy;
+    var ix = percent * (dx + dy);
+    var iy = percent * (dy - dx);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.bezierCurveTo(sx + ix, sy + iy, tx + iy, ty - ix, tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkVerticalCurve(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$percent = _ref2.percent,
+      percent = _ref2$percent === void 0 ? 0.2 : _ref2$percent,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "percent", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathVerticalCurve({
+    source: source,
+    target: target,
+    x: x,
+    y: y,
+    percent: percent
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-vertical-curve', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"4Xw9l":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathRadialCurve = pathRadialCurve;
+exports.default = LinkRadialCurve;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathRadialCurve(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y,
+      percent = _ref.percent;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sa = x(sourceData) - Math.PI / 2;
+    var sr = y(sourceData);
+    var ta = x(targetData) - Math.PI / 2;
+    var tr = y(targetData);
+    var sc = Math.cos(sa);
+    var ss = Math.sin(sa);
+    var tc = Math.cos(ta);
+    var ts = Math.sin(ta);
+    var sx = sr * sc;
+    var sy = sr * ss;
+    var tx = tr * tc;
+    var ty = tr * ts;
+    var dx = tx - sx;
+    var dy = ty - sy;
+    var ix = percent * (dx + dy);
+    var iy = percent * (dy - dx);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.bezierCurveTo(sx + ix, sy + iy, tx + iy, ty - ix, tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkRadialCurve(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      data = _ref2.data,
+      innerRef = _ref2.innerRef,
+      path = _ref2.path,
+      _ref2$percent = _ref2.percent,
+      percent = _ref2$percent === void 0 ? 0.2 : _ref2$percent,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "data", "innerRef", "path", "percent", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathRadialCurve({
+    source: source,
+    target: target,
+    x: x,
+    y: y,
+    percent: percent
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-radial-curve', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"7MjXp":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathHorizontalLine = pathHorizontalLine;
+exports.default = LinkHorizontalLine;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathHorizontalLine(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (data) {
+    var sourceData = source(data);
+    var targetData = target(data);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.lineTo(tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkHorizontalLine(_ref2) {
+  var className = _ref2.className,
+      children = _ref2.children,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getY : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getX : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "children", "innerRef", "data", "path", "x", "y", "source", "target"]);
+
+  var pathGen = path || pathHorizontalLine({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-horizontal-line', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"kfNqK":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathVerticalLine = pathVerticalLine;
+exports.default = LinkVerticalLine;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathVerticalLine(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (data) {
+    var sourceData = source(data);
+    var targetData = target(data);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.lineTo(tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkVerticalLine(_ref2) {
+  var className = _ref2.className,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      children = _ref2.children,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "innerRef", "data", "path", "x", "y", "source", "target", "children"]);
+
+  var pathGen = path || pathVerticalLine({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-vertical-line', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"4loLA":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathRadialLine = pathRadialLine;
+exports.default = LinkRadialLine;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathRadialLine(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (data) {
+    var sourceData = source(data);
+    var targetData = target(data);
+    var sa = x(sourceData) - Math.PI / 2;
+    var sr = y(sourceData);
+    var ta = x(targetData) - Math.PI / 2;
+    var tr = y(targetData);
+    var sc = Math.cos(sa);
+    var ss = Math.sin(sa);
+    var tc = Math.cos(ta);
+    var ts = Math.sin(ta);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sr * sc, sr * ss);
+    path.lineTo(tr * tc, tr * ts);
+    return path.toString();
+  };
+}
+
+function LinkRadialLine(_ref2) {
+  var className = _ref2.className,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      children = _ref2.children,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "innerRef", "data", "path", "x", "y", "source", "target", "children"]);
+
+  var pathGen = path || pathRadialLine({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-radial-line', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"2d34H":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathHorizontalStep = pathHorizontalStep;
+exports.default = LinkHorizontalStep;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathHorizontalStep(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y,
+      percent = _ref.percent;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.lineTo(sx + (tx - sx) * percent, sy);
+    path.lineTo(sx + (tx - sx) * percent, ty);
+    path.lineTo(tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkHorizontalStep(_ref2) {
+  var className = _ref2.className,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$percent = _ref2.percent,
+      percent = _ref2$percent === void 0 ? 0.5 : _ref2$percent,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      children = _ref2.children,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "innerRef", "data", "path", "percent", "x", "y", "source", "target", "children"]);
+
+  var pathGen = path || pathHorizontalStep({
+    source: source,
+    target: target,
+    x: x,
+    y: y,
+    percent: percent
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-horizontal-step', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"6ZEYf":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathVerticalStep = pathVerticalStep;
+exports.default = LinkVerticalStep;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _d3Path = require("d3-path");
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathVerticalStep(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y,
+      percent = _ref.percent;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var path = (0, _d3Path.path)();
+    path.moveTo(sx, sy);
+    path.lineTo(sx, sy + (ty - sy) * percent);
+    path.lineTo(tx, sy + (ty - sy) * percent);
+    path.lineTo(tx, ty);
+    return path.toString();
+  };
+}
+
+function LinkVerticalStep(_ref2) {
+  var className = _ref2.className,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$percent = _ref2.percent,
+      percent = _ref2$percent === void 0 ? 0.5 : _ref2$percent,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      children = _ref2.children,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "innerRef", "data", "path", "percent", "x", "y", "source", "target", "children"]);
+
+  var pathGen = path || pathVerticalStep({
+    source: source,
+    target: target,
+    x: x,
+    y: y,
+    percent: percent
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-vertical-step', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","d3-path":"m838t","../../../util/accessors":"4cR4z"}],"3iQHf":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathRadialStep = pathRadialStep;
+exports.default = LinkRadialStep;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _accessors = require("../../../util/accessors");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function pathRadialStep(_ref) {
+  var source = _ref.source,
+      target = _ref.target,
+      x = _ref.x,
+      y = _ref.y;
+  return function (link) {
+    var sourceData = source(link);
+    var targetData = target(link);
+    var sx = x(sourceData);
+    var sy = y(sourceData);
+    var tx = x(targetData);
+    var ty = y(targetData);
+    var sa = sx - Math.PI / 2;
+    var sr = sy;
+    var ta = tx - Math.PI / 2;
+    var tr = ty;
+    var sc = Math.cos(sa);
+    var ss = Math.sin(sa);
+    var tc = Math.cos(ta);
+    var ts = Math.sin(ta);
+    var sf = Math.abs(ta - sa) > Math.PI ? ta <= sa : ta > sa;
+    return "\n      M" + sr * sc + "," + sr * ss + "\n      A" + sr + "," + sr + ",0,0," + (sf ? 1 : 0) + "," + sr * tc + "," + sr * ts + "\n      L" + tr * tc + "," + tr * ts + "\n    ";
+  };
+}
+
+function LinkRadialStep(_ref2) {
+  var className = _ref2.className,
+      innerRef = _ref2.innerRef,
+      data = _ref2.data,
+      path = _ref2.path,
+      _ref2$x = _ref2.x,
+      x = _ref2$x === void 0 ? _accessors.getX : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === void 0 ? _accessors.getY : _ref2$y,
+      _ref2$source = _ref2.source,
+      source = _ref2$source === void 0 ? _accessors.getSource : _ref2$source,
+      _ref2$target = _ref2.target,
+      target = _ref2$target === void 0 ? _accessors.getTarget : _ref2$target,
+      children = _ref2.children,
+      restProps = _objectWithoutPropertiesLoose(_ref2, ["className", "innerRef", "data", "path", "x", "y", "source", "target", "children"]);
+
+  var pathGen = path || pathRadialStep({
+    source: source,
+    target: target,
+    x: x,
+    y: y
+  });
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    path: pathGen
+  }));
+  return /*#__PURE__*/_react.default.createElement("path", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-link vx-link-radial-step', className),
+    d: pathGen(data) || ''
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../../../util/accessors":"4cR4z"}],"3WDgE":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Polygon;
+exports.getPoints = exports.getPoint = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _trigonometry = require("../util/trigonometry");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var DEFAULT_CENTER = {
+  x: 0,
+  y: 0
+};
+
+var getPoint = function getPoint(_ref) {
+  var sides = _ref.sides,
+      size = _ref.size,
+      _ref$center = _ref.center,
+      center = _ref$center === void 0 ? DEFAULT_CENTER : _ref$center,
+      _ref$rotate = _ref.rotate,
+      rotate = _ref$rotate === void 0 ? 0 : _ref$rotate,
+      side = _ref.side;
+  var degrees = 360 / sides * side - rotate;
+  var radians = (0, _trigonometry.degreesToRadians)(degrees);
+  return {
+    x: center.x + size * Math.cos(radians),
+    y: center.y + size * Math.sin(radians)
+  };
+};
+
+exports.getPoint = getPoint;
+
+var getPoints = function getPoints(_ref2) {
+  var sides = _ref2.sides,
+      size = _ref2.size,
+      center = _ref2.center,
+      rotate = _ref2.rotate;
+  return new Array(sides).fill(0).map(function (_, side) {
+    return getPoint({
+      sides: sides,
+      size: size,
+      center: center,
+      rotate: rotate,
+      side: side
+    });
+  });
+};
+
+exports.getPoints = getPoints;
+
+function Polygon(_ref3) {
+  var sides = _ref3.sides,
+      _ref3$size = _ref3.size,
+      size = _ref3$size === void 0 ? 25 : _ref3$size,
+      _ref3$center = _ref3.center,
+      center = _ref3$center === void 0 ? DEFAULT_CENTER : _ref3$center,
+      _ref3$rotate = _ref3.rotate,
+      rotate = _ref3$rotate === void 0 ? 0 : _ref3$rotate,
+      className = _ref3.className,
+      children = _ref3.children,
+      innerRef = _ref3.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref3, ["sides", "size", "center", "rotate", "className", "children", "innerRef"]);
+
+  var points = getPoints({
+    sides: sides,
+    size: size,
+    center: center,
+    rotate: rotate
+  }).map(function (_ref4) {
+    var x = _ref4.x,
+        y = _ref4.y;
+    return [x, y];
+  }); // eslint-disable-next-line react/jsx-no-useless-fragment
+
+  if (children) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, children({
+    points: points
+  }));
+  return /*#__PURE__*/_react.default.createElement("polygon", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-polygon', className),
+    points: points.join(' ')
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","../util/trigonometry":"1383a"}],"3aeNs":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Circle;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function Circle(_ref) {
+  var className = _ref.className,
+      innerRef = _ref.innerRef,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["className", "innerRef"]);
+
+  return /*#__PURE__*/_react.default.createElement("circle", _extends({
+    ref: innerRef,
+    className: (0, _classnames.default)('vx-circle', className)
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc"}],"4LCUs":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = SplitLinePath;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _LinePath = _interopRequireDefault(require("./LinePath"));
+
+var _getSplitLineSegments = _interopRequireDefault(require("../util/getSplitLineSegments"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function SplitLinePath(_ref) {
+  var children = _ref.children,
+      className = _ref.className,
+      curve = _ref.curve,
+      defined = _ref.defined,
+      sampleRate = _ref.sampleRate,
+      segments = _ref.segments,
+      x = _ref.x,
+      y = _ref.y,
+      styles = _ref.styles;
+  // combine data to first draw entire path
+  var combinedSegments = (0, _react.useMemo)(function () {
+    return segments.reduce(function (flat, segmentData) {
+      return flat.concat([].concat(segmentData));
+    }, []);
+  }, [segments]);
+  return /*#__PURE__*/_react.default.createElement(_LinePath.default, {
+    data: combinedSegments,
+    defined: defined,
+    curve: curve,
+    x: x,
+    y: y
+  }, function (_ref2) {
+    var path = _ref2.path;
+    // use entire path to interpolate individual segments
+    var entirePath = path(combinedSegments);
+    var computedLineSegments = (0, _getSplitLineSegments.default)({
+      path: entirePath || '',
+      segments: segments,
+      sampleRate: sampleRate
+    });
+    return computedLineSegments.map(function (segment, index) {
+      return children ? children({
+        index: index,
+        segment: segment,
+        styles: styles[index] || styles[index % styles.length]
+      }) : /*#__PURE__*/_react.default.createElement(_LinePath.default, _extends({
+        key: index,
+        className: className,
+        data: segment,
+        x: function x(d) {
+          return d.x || 0;
+        },
+        y: function y(d) {
+          return d.y || 0;
+        }
+      }, styles[index] || styles[index % styles.length]));
+    });
+  });
+}
+
+SplitLinePath.propTypes = {
+  segments: _propTypes.default.arrayOf(_propTypes.default.array).isRequired,
+  styles: _propTypes.default.array.isRequired,
+  children: _propTypes.default.func,
+  className: _propTypes.default.string,
+  sampleRate: _propTypes.default.number
+};
+},{"prop-types":"4dfy5","react":"3b2NM","./LinePath":"7ndXe","../util/getSplitLineSegments":"1TDum"}],"1TDum":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.getSplitLineSegments = getSplitLineSegments;
+exports.default = void 0;
+
+var _memoize = _interopRequireDefault(require("lodash/memoize"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MEASUREMENT_ELEMENT_ID = '__vx_splitpath_svg_path_measurement_id';
+var SVG_NAMESPACE_URL = 'http://www.w3.org/2000/svg';
+
+function getSplitLineSegments(_ref) {
+  var path = _ref.path,
+      segments = _ref.segments,
+      _ref$sampleRate = _ref.sampleRate,
+      sampleRate = _ref$sampleRate === void 0 ? 0.25 : _ref$sampleRate;
+
+  try {
+    var pathElement = document.getElementById(MEASUREMENT_ELEMENT_ID); // create a single path element if not done already
+
+    if (!pathElement) {
+      var svg = document.createElementNS(SVG_NAMESPACE_URL, 'svg'); // not visible
+
+      svg.style.opacity = '0';
+      svg.style.width = '0';
+      svg.style.height = '0'; // off screen
+
+      svg.style.position = 'absolute';
+      svg.style.top = '-100%';
+      svg.style.left = '-100%'; // no mouse events
+
+      svg.style.pointerEvents = 'none';
+      pathElement = document.createElementNS(SVG_NAMESPACE_URL, 'path');
+      pathElement.setAttribute('id', MEASUREMENT_ELEMENT_ID);
+      svg.appendChild(pathElement);
+      document.body.appendChild(svg);
+    }
+
+    pathElement.setAttribute('d', path);
+    var totalPathLength = pathElement.getTotalLength();
+    var totalPieces = segments.reduce(function (sum, curr) {
+      return sum + curr.length;
+    }, 0);
+    var pieceSize = totalPathLength / totalPieces;
+    var cumulativeSize = 0;
+    var lineSegments = segments.map(function (segment) {
+      var segmentPointCount = segment.length;
+      var coords = [];
+
+      for (var i = 0; i < segmentPointCount + sampleRate; i += sampleRate) {
+        var distance = (cumulativeSize + i) * pieceSize;
+        var point = pathElement.getPointAtLength(distance);
+        coords.push(point);
+      }
+
+      cumulativeSize += segmentPointCount;
+      return coords;
+    });
+    return lineSegments;
+  } catch (e) {
+    return [];
+  }
+}
+
+var _default = (0, _memoize.default)(getSplitLineSegments, function (_ref2) {
+  var path = _ref2.path,
+      segments = _ref2.segments,
+      sampleRate = _ref2.sampleRate;
+  return path + "_" + segments.length + "_" + segments.map(function (segment) {
+    return segment.length;
+  }).join('-') + "_" + sampleRate;
+});
+
+exports.default = _default;
+},{"lodash/memoize":"4xgqb"}],"4xgqb":[function(require,module,exports) {
+var MapCache = require('./_MapCache');
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/**
+ * Creates a function that memoizes the result of `func`. If `resolver` is
+ * provided, it determines the cache key for storing the result based on the
+ * arguments provided to the memoized function. By default, the first argument
+ * provided to the memoized function is used as the map cache key. The `func`
+ * is invoked with the `this` binding of the memoized function.
+ *
+ * **Note:** The cache is exposed as the `cache` property on the memoized
+ * function. Its creation may be customized by replacing the `_.memoize.Cache`
+ * constructor with one whose instances implement the
+ * [`Map`](http://ecma-international.org/ecma-262/7.0/#sec-properties-of-the-map-prototype-object)
+ * method interface of `clear`, `delete`, `get`, `has`, and `set`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to have its output memoized.
+ * @param {Function} [resolver] The function to resolve the cache key.
+ * @returns {Function} Returns the new memoized function.
+ * @example
+ *
+ * var object = { 'a': 1, 'b': 2 };
+ * var other = { 'c': 3, 'd': 4 };
+ *
+ * var values = _.memoize(_.values);
+ * values(object);
+ * // => [1, 2]
+ *
+ * values(other);
+ * // => [3, 4]
+ *
+ * object.a = 2;
+ * values(object);
+ * // => [1, 2]
+ *
+ * // Modify the result cache.
+ * values.cache.set(object, ['a', 'b']);
+ * values(object);
+ * // => ['a', 'b']
+ *
+ * // Replace `_.memoize.Cache`.
+ * _.memoize.Cache = WeakMap;
+ */
+function memoize(func, resolver) {
+  if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  var memoized = function() {
+    var args = arguments,
+        key = resolver ? resolver.apply(this, args) : args[0],
+        cache = memoized.cache;
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+    var result = func.apply(this, args);
+    memoized.cache = cache.set(key, result) || cache;
+    return result;
+  };
+  memoized.cache = new (memoize.Cache || MapCache);
+  return memoized;
+}
+
+// Expose `MapCache`.
+memoize.Cache = MapCache;
+
+module.exports = memoize;
+
+},{"./_MapCache":"4kfOI"}],"4kfOI":[function(require,module,exports) {
+var mapCacheClear = require('./_mapCacheClear'),
+    mapCacheDelete = require('./_mapCacheDelete'),
+    mapCacheGet = require('./_mapCacheGet'),
+    mapCacheHas = require('./_mapCacheHas'),
+    mapCacheSet = require('./_mapCacheSet');
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+module.exports = MapCache;
+
+},{"./_mapCacheClear":"65n46","./_mapCacheDelete":"5rRPZ","./_mapCacheGet":"2DFEZ","./_mapCacheHas":"6Id8e","./_mapCacheSet":"6KiQg"}],"65n46":[function(require,module,exports) {
+var Hash = require('./_Hash'),
+    ListCache = require('./_ListCache'),
+    Map = require('./_Map');
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.size = 0;
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map || ListCache),
+    'string': new Hash
+  };
+}
+
+module.exports = mapCacheClear;
+
+},{"./_Hash":"5rZTT","./_ListCache":"6v6Y1","./_Map":"fUxq1"}],"5rZTT":[function(require,module,exports) {
+var hashClear = require('./_hashClear'),
+    hashDelete = require('./_hashDelete'),
+    hashGet = require('./_hashGet'),
+    hashHas = require('./_hashHas'),
+    hashSet = require('./_hashSet');
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+module.exports = Hash;
+
+},{"./_hashClear":"3g8mO","./_hashDelete":"2JzLs","./_hashGet":"5lhIj","./_hashHas":"1HDgT","./_hashSet":"6J6zv"}],"3g8mO":[function(require,module,exports) {
+var nativeCreate = require('./_nativeCreate');
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  this.size = 0;
+}
+
+module.exports = hashClear;
+
+},{"./_nativeCreate":"xlIFf"}],"xlIFf":[function(require,module,exports) {
+var getNative = require('./_getNative');
+
+/* Built-in method references that are verified to be native. */
+var nativeCreate = getNative(Object, 'create');
+
+module.exports = nativeCreate;
+
+},{"./_getNative":"1WJqJ"}],"1WJqJ":[function(require,module,exports) {
+var baseIsNative = require('./_baseIsNative'),
+    getValue = require('./_getValue');
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+module.exports = getNative;
+
+},{"./_baseIsNative":"23XEX","./_getValue":"4qa4z"}],"23XEX":[function(require,module,exports) {
+var isFunction = require('./isFunction'),
+    isMasked = require('./_isMasked'),
+    isObject = require('./isObject'),
+    toSource = require('./_toSource');
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = isFunction(value) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+module.exports = baseIsNative;
+
+},{"./isFunction":"3ciSx","./_isMasked":"6ikdr","./isObject":"3LQRi","./_toSource":"6kSOh"}],"3ciSx":[function(require,module,exports) {
+var baseGetTag = require('./_baseGetTag'),
+    isObject = require('./isObject');
+
+/** `Object#toString` result references. */
+var asyncTag = '[object AsyncFunction]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    proxyTag = '[object Proxy]';
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  if (!isObject(value)) {
+    return false;
+  }
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 9 which returns 'object' for typed arrays and other constructors.
+  var tag = baseGetTag(value);
+  return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+}
+
+module.exports = isFunction;
+
+},{"./_baseGetTag":"6QPjr","./isObject":"3LQRi"}],"6QPjr":[function(require,module,exports) {
+var Symbol = require('./_Symbol'),
+    getRawTag = require('./_getRawTag'),
+    objectToString = require('./_objectToString');
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+},{"./_Symbol":"5ra8b","./_getRawTag":"6SREv","./_objectToString":"6PiFp"}],"5ra8b":[function(require,module,exports) {
+var root = require('./_root');
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+},{"./_root":"39kx4"}],"39kx4":[function(require,module,exports) {
+var freeGlobal = require('./_freeGlobal');
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+},{"./_freeGlobal":"7HuYr"}],"7HuYr":[function(require,module,exports) {
+var global = arguments[3];
+/** Detect free variable `global` from Node.js.*/
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+module.exports = freeGlobal;
+
+},{}],"6SREv":[function(require,module,exports) {
+var Symbol = require('./_Symbol');
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+},{"./_Symbol":"5ra8b"}],"6PiFp":[function(require,module,exports) {
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+},{}],"3LQRi":[function(require,module,exports) {
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+},{}],"6ikdr":[function(require,module,exports) {
+var coreJsData = require('./_coreJsData');
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+module.exports = isMasked;
+
+},{"./_coreJsData":"4sHEq"}],"4sHEq":[function(require,module,exports) {
+var root = require('./_root');
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+module.exports = coreJsData;
+
+},{"./_root":"39kx4"}],"6kSOh":[function(require,module,exports) {
+/** Used for built-in method references. */
+var funcProto = Function.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to convert.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+module.exports = toSource;
+
+},{}],"4qa4z":[function(require,module,exports) {
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+module.exports = getValue;
+
+},{}],"2JzLs":[function(require,module,exports) {
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  var result = this.has(key) && delete this.__data__[key];
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = hashDelete;
+
+},{}],"5lhIj":[function(require,module,exports) {
+var nativeCreate = require('./_nativeCreate');
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+module.exports = hashGet;
+
+},{"./_nativeCreate":"xlIFf"}],"1HDgT":[function(require,module,exports) {
+var nativeCreate = require('./_nativeCreate');
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? (data[key] !== undefined) : hasOwnProperty.call(data, key);
+}
+
+module.exports = hashHas;
+
+},{"./_nativeCreate":"xlIFf"}],"6J6zv":[function(require,module,exports) {
+var nativeCreate = require('./_nativeCreate');
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  this.size += this.has(key) ? 0 : 1;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
+}
+
+module.exports = hashSet;
+
+},{"./_nativeCreate":"xlIFf"}],"6v6Y1":[function(require,module,exports) {
+var listCacheClear = require('./_listCacheClear'),
+    listCacheDelete = require('./_listCacheDelete'),
+    listCacheGet = require('./_listCacheGet'),
+    listCacheHas = require('./_listCacheHas'),
+    listCacheSet = require('./_listCacheSet');
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+      length = entries == null ? 0 : entries.length;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+module.exports = ListCache;
+
+},{"./_listCacheClear":"2C84k","./_listCacheDelete":"11s32","./_listCacheGet":"286iD","./_listCacheHas":"1wxGe","./_listCacheSet":"2dndv"}],"2C84k":[function(require,module,exports) {
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+  this.size = 0;
+}
+
+module.exports = listCacheClear;
+
+},{}],"11s32":[function(require,module,exports) {
+var assocIndexOf = require('./_assocIndexOf');
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype;
+
+/** Built-in value references. */
+var splice = arrayProto.splice;
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  --this.size;
+  return true;
+}
+
+module.exports = listCacheDelete;
+
+},{"./_assocIndexOf":"2AWrG"}],"2AWrG":[function(require,module,exports) {
+var eq = require('./eq');
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+module.exports = assocIndexOf;
+
+},{"./eq":"J0MWH"}],"J0MWH":[function(require,module,exports) {
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+module.exports = eq;
+
+},{}],"286iD":[function(require,module,exports) {
+var assocIndexOf = require('./_assocIndexOf');
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  return index < 0 ? undefined : data[index][1];
+}
+
+module.exports = listCacheGet;
+
+},{"./_assocIndexOf":"2AWrG"}],"1wxGe":[function(require,module,exports) {
+var assocIndexOf = require('./_assocIndexOf');
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+module.exports = listCacheHas;
+
+},{"./_assocIndexOf":"2AWrG"}],"2dndv":[function(require,module,exports) {
+var assocIndexOf = require('./_assocIndexOf');
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    ++this.size;
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+module.exports = listCacheSet;
+
+},{"./_assocIndexOf":"2AWrG"}],"fUxq1":[function(require,module,exports) {
+var getNative = require('./_getNative'),
+    root = require('./_root');
+
+/* Built-in method references that are verified to be native. */
+var Map = getNative(root, 'Map');
+
+module.exports = Map;
+
+},{"./_getNative":"1WJqJ","./_root":"39kx4"}],"5rRPZ":[function(require,module,exports) {
+var getMapData = require('./_getMapData');
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  var result = getMapData(this, key)['delete'](key);
+  this.size -= result ? 1 : 0;
+  return result;
+}
+
+module.exports = mapCacheDelete;
+
+},{"./_getMapData":"4qYa0"}],"4qYa0":[function(require,module,exports) {
+var isKeyable = require('./_isKeyable');
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
+}
+
+module.exports = getMapData;
+
+},{"./_isKeyable":"41Yxl"}],"41Yxl":[function(require,module,exports) {
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
+}
+
+module.exports = isKeyable;
+
+},{}],"2DFEZ":[function(require,module,exports) {
+var getMapData = require('./_getMapData');
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+module.exports = mapCacheGet;
+
+},{"./_getMapData":"4qYa0"}],"6Id8e":[function(require,module,exports) {
+var getMapData = require('./_getMapData');
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+module.exports = mapCacheHas;
+
+},{"./_getMapData":"4qYa0"}],"6KiQg":[function(require,module,exports) {
+var getMapData = require('./_getMapData');
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  var data = getMapData(this, key),
+      size = data.size;
+
+  data.set(key, value);
+  this.size += data.size == size ? 0 : 1;
+  return this;
+}
+
+module.exports = mapCacheSet;
+
+},{"./_getMapData":"4qYa0"}],"4uk4h":[function(require,module,exports) {
+"use strict";
+},{}],"2nkDq":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.getStringWidth = exports.Text = void 0;
+
+var _Text = _interopRequireDefault(require("./Text"));
+
+exports.Text = _Text.default;
+
+var _getStringWidth = _interopRequireDefault(require("./util/getStringWidth"));
+
+exports.getStringWidth = _getStringWidth.default;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Text":"18cMW","./util/getStringWidth":"2A4sD"}],"18cMW":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reduceCssCalc = _interopRequireDefault(require("reduce-css-calc"));
+
+var _getStringWidth = _interopRequireDefault(require("./util/getStringWidth"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var SVG_STYLE = {
+  overflow: 'visible'
+};
+
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+function isValidXOrY(xOrY) {
+  return (// number that is not NaN or Infinity
+    typeof xOrY === 'number' && Number.isFinite(xOrY) || // for percentage
+    typeof xOrY === 'string'
+  );
+}
+
+var Text = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(Text, _React$Component);
+
+  function Text() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      wordsByLines: []
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "wordsWithWidth", []);
+
+    _defineProperty(_assertThisInitialized(_this), "spaceWidth", 0);
+
+    return _this;
+  }
+
+  var _proto = Text.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.updateWordsByLines(this.props, true);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+    // We calculated a new state, break out of the loop.
+    if (prevState.wordsByLines !== this.state.wordsByLines) {
+      return;
+    }
+
+    var needCalculate = prevProps.children !== this.props.children || prevProps.style !== this.props.style;
+    this.updateWordsByLines(this.props, needCalculate);
+  };
+
+  _proto.updateWordsByLines = function updateWordsByLines(props, needCalculate) {
+    if (needCalculate === void 0) {
+      needCalculate = false;
+    }
+
+    // Only perform calculations if using features that require them (multiline, scaleToFit)
+    if (props.width || props.scaleToFit) {
+      if (needCalculate) {
+        var words = props.children ? props.children.toString().split(/(?:(?!\u00A0+)\s+)/) : [];
+        this.wordsWithWidth = words.map(function (word) {
+          return {
+            word: word,
+            width: (0, _getStringWidth.default)(word, props.style) || 0
+          };
+        });
+        this.spaceWidth = (0, _getStringWidth.default)("\xA0", props.style) || 0;
+      }
+
+      var wordsByLines = this.calculateWordsByLines(this.wordsWithWidth, this.spaceWidth, props.width);
+      this.setState({
+        wordsByLines: wordsByLines
+      });
+    } else {
+      this.updateWordsWithoutCalculate(props);
+    }
+  };
+
+  _proto.updateWordsWithoutCalculate = function updateWordsWithoutCalculate(props) {
+    var words = props.children ? props.children.toString().split(/(?:(?!\u00A0+)\s+)/) : [];
+    this.setState({
+      wordsByLines: [{
+        words: words
+      }]
+    });
+  };
+
+  _proto.calculateWordsByLines = function calculateWordsByLines(wordsWithWidth, spaceWidth, lineWidth) {
+    var scaleToFit = this.props.scaleToFit;
+    return wordsWithWidth.reduce(function (result, _ref) {
+      var word = _ref.word,
+          width = _ref.width;
+      var currentLine = result[result.length - 1];
+
+      if (currentLine && (lineWidth == null || scaleToFit || (currentLine.width || 0) + width + spaceWidth < lineWidth)) {
+        // Word can be added to an existing line
+        currentLine.words.push(word);
+        currentLine.width = currentLine.width || 0;
+        currentLine.width += width + spaceWidth;
+      } else {
+        // Add first word to line or word is too long to scaleToFit on existing line
+        var newLine = {
+          words: [word],
+          width: width
+        };
+        result.push(newLine);
+      }
+
+      return result;
+    }, []);
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        dx = _this$props.dx,
+        dy = _this$props.dy,
+        textAnchor = _this$props.textAnchor,
+        verticalAnchor = _this$props.verticalAnchor,
+        scaleToFit = _this$props.scaleToFit,
+        angle = _this$props.angle,
+        lineHeight = _this$props.lineHeight,
+        capHeight = _this$props.capHeight,
+        innerRef = _this$props.innerRef,
+        width = _this$props.width,
+        textProps = _objectWithoutPropertiesLoose(_this$props, ["dx", "dy", "textAnchor", "verticalAnchor", "scaleToFit", "angle", "lineHeight", "capHeight", "innerRef", "width"]);
+
+    var wordsByLines = this.state.wordsByLines;
+    var x = textProps.x,
+        y = textProps.y; // Cannot render <text> if x or y is invalid
+
+    if (!isValidXOrY(x) || !isValidXOrY(y)) {
+      return /*#__PURE__*/_react.default.createElement("svg", {
+        ref: innerRef,
+        x: dx,
+        y: dy,
+        fontSize: textProps.fontSize,
+        style: SVG_STYLE
+      });
+    }
+
+    var startDy;
+
+    if (verticalAnchor === 'start') {
+      startDy = (0, _reduceCssCalc.default)("calc(" + capHeight + ")");
+    } else if (verticalAnchor === 'middle') {
+      startDy = (0, _reduceCssCalc.default)("calc(" + (wordsByLines.length - 1) / 2 + " * -" + lineHeight + " + (" + capHeight + " / 2))");
+    } else {
+      startDy = (0, _reduceCssCalc.default)("calc(" + (wordsByLines.length - 1) + " * -" + lineHeight + ")");
+    }
+
+    var transforms = [];
+
+    if (isNumber(x) && isNumber(y) && isNumber(width) && scaleToFit && wordsByLines.length > 0) {
+      var lineWidth = wordsByLines[0].width || 1;
+      var sx = width / lineWidth;
+      var sy = sx;
+      var originX = x - sx * x;
+      var originY = y - sy * y;
+      transforms.push("matrix(" + sx + ", 0, 0, " + sy + ", " + originX + ", " + originY + ")");
+    }
+
+    if (angle) {
+      transforms.push("rotate(" + angle + ", " + x + ", " + y + ")");
+    }
+
+    var transform = transforms.length > 0 ? transforms.join(' ') : undefined;
+    return /*#__PURE__*/_react.default.createElement("svg", {
+      ref: innerRef,
+      x: dx,
+      y: dy,
+      fontSize: textProps.fontSize,
+      style: SVG_STYLE
+    }, /*#__PURE__*/_react.default.createElement("text", _extends({
+      transform: transform
+    }, textProps, {
+      textAnchor: textAnchor
+    }), wordsByLines.map(function (line, index) {
+      return /*#__PURE__*/_react.default.createElement("tspan", {
+        key: index,
+        x: x,
+        dy: index === 0 ? startDy : lineHeight
+      }, line.words.join(' '));
+    })));
+  };
+
+  return Text;
+}(_react.default.Component);
+
+_defineProperty(Text, "propTypes", {
+  className: _propTypes.default.string,
+  scaleToFit: _propTypes.default.bool,
+  angle: _propTypes.default.number,
+  textAnchor: _propTypes.default.oneOf(['start', 'middle', 'end', 'inherit']),
+  verticalAnchor: _propTypes.default.oneOf(['start', 'middle', 'end']),
+  innerRef: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.func, _propTypes.default.object]),
+  x: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  y: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  dx: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  dy: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  fontSize: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  fontFamily: _propTypes.default.string,
+  fill: _propTypes.default.string,
+  width: _propTypes.default.number,
+  children: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
+});
+
+_defineProperty(Text, "defaultProps", {
+  x: 0,
+  y: 0,
+  dx: 0,
+  dy: 0,
+  lineHeight: '1em',
+  capHeight: '0.71em',
+  // Magic number from d3
+  scaleToFit: false,
+  textAnchor: 'start',
+  verticalAnchor: 'end' // default SVG behavior
+
+});
+
+var _default = Text;
+exports.default = _default;
+},{"prop-types":"4dfy5","react":"3b2NM","reduce-css-calc":"0indp","./util/getStringWidth":"2A4sD"}],"0indp":[function(require,module,exports) {
+/**
+ * Module dependencies
+ */
+var balanced = require("balanced-match")
+var reduceFunctionCall = require("reduce-function-call")
+var mexp = require("math-expression-evaluator")
+
+/**
+ * Constantes
+ */
+var MAX_STACK = 100 // should be enough for a single calc()...
+var NESTED_CALC_RE = /(\+|\-|\*|\\|[^a-z]|)(\s*)(\()/g
+
+/**
+ * Global variables
+ */
+var stack
+
+/**
+ * Expose reduceCSSCalc plugin
+ *
+ * @type {Function}
+ */
+module.exports = reduceCSSCalc
+
+/**
+ * Reduce CSS calc() in a string, whenever it's possible
+ *
+ * @param {String} value css input
+ */
+function reduceCSSCalc(value, decimalPrecision) {
+  stack = 0
+  decimalPrecision = Math.pow(10, decimalPrecision === undefined ? 5 : decimalPrecision)
+
+  // Allow calc() on multiple lines
+  value = value.replace(/\n+/g, " ")
+
+  /**
+   * Evaluates an expression
+   *
+   * @param {String} expression
+   * @returns {String}
+   */
+  function evaluateExpression (expression, functionIdentifier, call) {
+    if (stack++ > MAX_STACK) {
+      stack = 0
+      throw new Error("Call stack overflow for " + call)
+    }
+
+    if (expression === "") {
+      throw new Error(functionIdentifier + "(): '" + call + "' must contain a non-whitespace string")
+    }
+
+    expression = evaluateNestedExpression(expression, call)
+
+    var units = getUnitsInExpression(expression)
+
+    // If the expression contains multiple units or CSS variables,
+    // then let the expression be (i.e. browser calc())
+    if (units.length > 1 || expression.indexOf("var(") > -1) {
+      return functionIdentifier + "(" + expression + ")"
+    }
+
+    var unit = units[0] || ""
+
+    if (unit === "%") {
+      // Convert percentages to numbers, to handle expressions like: 50% * 50% (will become: 25%):
+      // console.log(expression)
+      expression = expression.replace(/\b[0-9\.]+%/g, function(percent) {
+        return parseFloat(percent.slice(0, -1)) * 0.01
+      })
+    }
+
+    // Remove units in expression:
+    var toEvaluate = expression.replace(new RegExp(unit, "gi"), "")
+    var result
+
+    try {
+      result = mexp.eval(toEvaluate)
+    }
+    catch (e) {
+      return functionIdentifier + "(" + expression + ")"
+    }
+
+    // Transform back to a percentage result:
+    if (unit === "%") {
+      result *= 100
+    }
+
+    // adjust rounding shit
+    // (0.1 * 0.2 === 0.020000000000000004)
+    if (functionIdentifier.length || unit === "%") {
+      result = Math.round(result * decimalPrecision) / decimalPrecision
+    }
+
+    // Add unit
+    result += unit
+
+    return result
+  }
+
+  /**
+   * Evaluates nested expressions
+   *
+   * @param {String} expression
+   * @returns {String}
+   */
+  function evaluateNestedExpression(expression, call) {
+    // Remove the calc part from nested expressions to ensure
+    // better browser compatibility
+    expression = expression.replace(/((?:\-[a-z]+\-)?calc)/g, "")
+    var evaluatedPart = ""
+    var nonEvaluatedPart = expression
+    var matches
+    while ((matches = NESTED_CALC_RE.exec(nonEvaluatedPart))) {
+      if (matches[0].index > 0) {
+        evaluatedPart += nonEvaluatedPart.substring(0, matches[0].index)
+      }
+
+      var balancedExpr = balanced("(", ")", nonEvaluatedPart.substring([0].index))
+      if (balancedExpr.body === "") {
+        throw new Error("'" + expression + "' must contain a non-whitespace string")
+      }
+
+      var evaluated = evaluateExpression(balancedExpr.body, "", call)
+
+      evaluatedPart += balancedExpr.pre + evaluated
+      nonEvaluatedPart = balancedExpr.post
+    }
+
+    return evaluatedPart + nonEvaluatedPart
+  }
+
+  return reduceFunctionCall(value, /((?:\-[a-z]+\-)?calc)\(/, evaluateExpression)
+}
+
+/**
+ * Checks what units are used in an expression
+ *
+ * @param {String} expression
+ * @returns {Array}
+ */
+
+function getUnitsInExpression(expression) {
+  var uniqueUnits = []
+  var uniqueLowerCaseUnits = []
+  var unitRegEx = /[\.0-9]([%a-z]+)/gi
+  var matches = unitRegEx.exec(expression)
+
+  while (matches) {
+    if (!matches || !matches[1]) {
+      continue
+    }
+
+    if (uniqueLowerCaseUnits.indexOf(matches[1].toLowerCase()) === -1) {
+      uniqueUnits.push(matches[1])
+      uniqueLowerCaseUnits.push(matches[1].toLowerCase())
+    }
+
+    matches = unitRegEx.exec(expression)
+  }
+
+  return uniqueUnits
+}
+
+},{"balanced-match":"2DwDb","reduce-function-call":"2FEcM","math-expression-evaluator":"7ztAv"}],"2DwDb":[function(require,module,exports) {
+module.exports = balanced;
+function balanced(a, b, str) {
+  if (a instanceof RegExp) a = maybeMatch(a, str);
+  if (b instanceof RegExp) b = maybeMatch(b, str);
+
+  var r = range(a, b, str);
+
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + a.length, r[1]),
+    post: str.slice(r[1] + b.length)
+  };
+}
+
+function maybeMatch(reg, str) {
+  var m = str.match(reg);
+  return m ? m[0] : null;
+}
+
+balanced.range = range;
+function range(a, b, str) {
+  var begs, beg, left, right, result;
+  var ai = str.indexOf(a);
+  var bi = str.indexOf(b, ai + 1);
+  var i = ai;
+
+  if (ai >= 0 && bi > 0) {
+    begs = [];
+    left = str.length;
+
+    while (i >= 0 && !result) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result = [ begs.pop(), bi ];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+
+        bi = str.indexOf(b, i + 1);
+      }
+
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+
+    if (begs.length) {
+      result = [ left, right ];
+    }
+  }
+
+  return result;
+}
+
+},{}],"2FEcM":[function(require,module,exports) {
+/*
+ * Module dependencies
+ */
+var balanced = require("balanced-match")
+
+/**
+ * Expose `reduceFunctionCall`
+ *
+ * @type {Function}
+ */
+module.exports = reduceFunctionCall
+
+/**
+ * Walkthrough all expressions, evaluate them and insert them into the declaration
+ *
+ * @param {Array} expressions
+ * @param {Object} declaration
+ */
+
+function reduceFunctionCall(string, functionRE, callback) {
+  var call = string
+  return getFunctionCalls(string, functionRE).reduce(function(string, obj) {
+    return string.replace(obj.functionIdentifier + "(" + obj.matches.body + ")", evalFunctionCall(obj.matches.body, obj.functionIdentifier, callback, call, functionRE))
+  }, string)
+}
+
+/**
+ * Parses expressions in a value
+ *
+ * @param {String} value
+ * @returns {Array}
+ * @api private
+ */
+
+function getFunctionCalls(call, functionRE) {
+  var expressions = []
+
+  var fnRE = typeof functionRE === "string" ? new RegExp("\\b(" + functionRE + ")\\(") : functionRE
+  do {
+    var searchMatch = fnRE.exec(call)
+    if (!searchMatch) {
+      return expressions
+    }
+    if (searchMatch[1] === undefined) {
+      throw new Error("Missing the first couple of parenthesis to get the function identifier in " + functionRE)
+    }
+    var fn = searchMatch[1]
+    var startIndex = searchMatch.index
+    var matches = balanced("(", ")", call.substring(startIndex))
+
+    if (!matches || matches.start !== searchMatch[0].length - 1) {
+      throw new SyntaxError(fn + "(): missing closing ')' in the value '" + call + "'")
+    }
+
+    expressions.push({matches: matches, functionIdentifier: fn})
+    call = matches.post
+  }
+  while (fnRE.test(call))
+
+  return expressions
+}
+
+/**
+ * Evaluates an expression
+ *
+ * @param {String} expression
+ * @returns {String}
+ * @api private
+ */
+
+function evalFunctionCall (string, functionIdentifier, callback, call, functionRE) {
+  // allow recursivity
+  return callback(reduceFunctionCall(string, functionRE, callback), functionIdentifier, call)
+}
+
+},{"balanced-match":"zJvgp"}],"zJvgp":[function(require,module,exports) {
+'use strict';
+module.exports = balanced;
+function balanced(a, b, str) {
+  if (a instanceof RegExp) a = maybeMatch(a, str);
+  if (b instanceof RegExp) b = maybeMatch(b, str);
+
+  var r = range(a, b, str);
+
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + a.length, r[1]),
+    post: str.slice(r[1] + b.length)
+  };
+}
+
+function maybeMatch(reg, str) {
+  var m = str.match(reg);
+  return m ? m[0] : null;
+}
+
+balanced.range = range;
+function range(a, b, str) {
+  var begs, beg, left, right, result;
+  var ai = str.indexOf(a);
+  var bi = str.indexOf(b, ai + 1);
+  var i = ai;
+
+  if (ai >= 0 && bi > 0) {
+    if(a===b) {
+      return [ai, bi];
+    }
+    begs = [];
+    left = str.length;
+
+    while (i >= 0 && !result) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result = [ begs.pop(), bi ];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+
+        bi = str.indexOf(b, i + 1);
+      }
+
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+
+    if (begs.length) {
+      result = [ left, right ];
+    }
+  }
+
+  return result;
+}
+
+},{}],"7ztAv":[function(require,module,exports) {
+var Mexp=require('./postfix_evaluator.js');
+Mexp.prototype.formulaEval = function () {
+	"use strict";
+	var stack=[],pop1,pop2,pop3;
+	var disp=[];
+	var temp='';
+	var arr=this.value;
+	for(var i=0;i<arr.length;i++){
+		if(arr[i].type===1||arr[i].type===3){
+			disp.push({value:arr[i].type===3?arr[i].show:arr[i].value,type:1});
+		}
+		else if(arr[i].type===13){
+			disp.push({value:arr[i].show,type:1});
+		}
+		else if(arr[i].type===0){
+			disp[disp.length-1]={value:arr[i].show+(arr[i].show!="-"?"(":"")+disp[disp.length-1].value+(arr[i].show!="-"?")":""),type:0};
+		}
+		else if(arr[i].type===7){
+			disp[disp.length-1]={value:(disp[disp.length-1].type!=1?"(":"")+disp[disp.length-1].value+(disp[disp.length-1].type!=1?")":"")+arr[i].show,type:7};
+		}
+		else if(arr[i].type===10){
+			pop1=disp.pop();
+			pop2=disp.pop();
+			if(arr[i].show==='P'||arr[i].show==='C')disp.push({value:"<sup>"+pop2.value+"</sup>"+arr[i].show+"<sub>"+pop1.value+"</sub>",type:10});
+			else disp.push({value:(pop2.type!=1?"(":"")+pop2.value+(pop2.type!=1?")":"")+"<sup>"+pop1.value+"</sup>",type:1});
+		}
+		else if(arr[i].type===2||arr[i].type===9){
+			pop1=disp.pop();
+			pop2=disp.pop();
+			disp.push({value:(pop2.type!=1?"(":"")+pop2.value+(pop2.type!=1?")":"")+arr[i].show+(pop1.type!=1?"(":"")+pop1.value+(pop1.type!=1?")":""),type:arr[i].type});
+		}
+		else if(arr[i].type===12){
+			pop1=disp.pop();
+			pop2=disp.pop();
+			pop3=disp.pop();
+			disp.push({value:arr[i].show+"("+pop3.value+","+pop2.value+","+pop1.value+")",type:12});
+		}
+	}
+	return disp[0].value;
+};
+module.exports=Mexp;
+},{"./postfix_evaluator.js":"43WO4"}],"43WO4":[function(require,module,exports) {
+var Mexp=require('./postfix.js');
+Mexp.prototype.postfixEval = function (UserDefined) {
+	'use strict';
+	UserDefined=UserDefined||{};
+	UserDefined.PI=Math.PI;
+	UserDefined.E=Math.E;
+	var stack=[],pop1,pop2,pop3;
+	var disp=[];
+	var temp='';
+	var arr=this.value;
+	var bool=(typeof UserDefined.n!=="undefined");
+	for(var i=0;i<arr.length;i++){
+		if(arr[i].type===1){
+			stack.push({value:arr[i].value,type:1});
+		}
+		else if(arr[i].type===3){
+			stack.push({value:UserDefined[arr[i].value],type:1});
+		}
+		else if(arr[i].type===0){
+			if(typeof stack[stack.length-1].type==="undefined"){
+				stack[stack.length-1].value.push(arr[i]);
+			}
+			else stack[stack.length-1].value=arr[i].value(stack[stack.length-1].value);
+		}
+		else if(arr[i].type===7){
+			if(typeof stack[stack.length-1].type==="undefined"){
+				stack[stack.length-1].value.push(arr[i]);
+			}
+			else stack[stack.length-1].value=arr[i].value(stack[stack.length-1].value);
+		}
+		else if(arr[i].type===8){
+			pop1=stack.pop();
+			pop2=stack.pop();
+			stack.push({type:1,value:arr[i].value(pop2.value,pop1.value)});
+		}
+		else if(arr[i].type===10){
+			pop1=stack.pop();
+			pop2=stack.pop();
+			if(typeof pop2.type==="undefined"){
+				pop2.value=pop2.concat(pop1);
+				pop2.value.push(arr[i]);
+				stack.push(pop2);
+			}
+			else if (typeof pop1.type==="undefined") {
+				pop1.unshift(pop2);
+				pop1.push(arr[i]);
+				stack.push(pop1);
+			}
+			else{
+				stack.push({type:1,value:arr[i].value(pop2.value,pop1.value)});
+            }
+		}
+		else if(arr[i].type===2||arr[i].type===9){
+			pop1=stack.pop();
+			pop2=stack.pop();
+			if(typeof pop2.type==="undefined"){
+				pop2=pop2.concat(pop1);
+				pop2.push(arr[i]);
+				stack.push(pop2);
+			}
+			else if (typeof pop1.type==="undefined") {
+				pop1.unshift(pop2);
+				pop1.push(arr[i]);
+				stack.push(pop1);
+			}
+			else{
+				stack.push({type:1,value:arr[i].value(pop2.value,pop1.value)});
+			}
+		}
+		else if(arr[i].type===12){
+			pop1=stack.pop();
+			if (typeof pop1.type!=="undefined") {
+				pop1=[pop1];
+			}
+			pop2=stack.pop();
+			pop3=stack.pop();
+			stack.push({type:1,value:arr[i].value(pop3.value,pop2.value,new Mexp(pop1))});
+		}
+		else if(arr[i].type===13){
+			if(bool){
+				stack.push({value:UserDefined[arr[i].value],type:3});
+			}
+			else stack.push([arr[i]]);
+		}
+	}
+	if (stack.length>1) {
+		throw(new Mexp.Exception("Uncaught Syntax error"));
+	}
+	return stack[0].value>1000000000000000?"Infinity":parseFloat(stack[0].value.toFixed(15));
+};
+Mexp.eval=function(str,tokens,obj){
+	if (typeof tokens==="undefined") {
+		return this.lex(str).toPostfix().postfixEval();
+	}
+	else if (typeof obj==="undefined") {
+		if (typeof tokens.length!=="undefined") 
+			return this.lex(str,tokens).toPostfix().postfixEval();
+		else
+			return this.lex(str).toPostfix().postfixEval(tokens);
+	}
+	else
+		return this.lex(str,tokens).toPostfix().postfixEval(obj);
+};
+module.exports=Mexp;
+},{"./postfix.js":"1KZUY"}],"1KZUY":[function(require,module,exports) {
+
+var Mexp = require('./lexer.js');
+
+Mexp.prototype.toPostfix = function () {
+	'use strict';
+	var post = [], elem, popped, prep, pre, ele;
+	var stack = [{ value: "(", type: 4, pre: 0 }];
+	var arr = this.value;
+	for (var i = 1; i < arr.length; i++) {
+		if (arr[i].type === 1 || arr[i].type === 3 || arr[i].type === 13) {	//if token is number,constant,or n(which is also a special constant in our case)
+			if (arr[i].type === 1)
+				arr[i].value = Number(arr[i].value);
+			post.push(arr[i]);
+		}
+		else if (arr[i].type === 4) {
+			stack.push(arr[i]);
+		}
+		else if (arr[i].type === 5) {
+			while ((popped = stack.pop()).type !== 4) {
+				post.push(popped);
+			}
+		}
+		else if (arr[i].type === 11) {
+			while ((popped = stack.pop()).type !== 4) {
+				post.push(popped);
+			}
+			stack.push(popped);
+		}
+		else {
+			elem = arr[i];
+			pre = elem.pre;
+			ele = stack[stack.length - 1];
+			prep = ele.pre;
+			var flag = ele.value == 'Math.pow' && elem.value == 'Math.pow';
+			if (pre > prep) stack.push(elem);
+			else {
+				while (prep >= pre && !flag || flag && pre < prep) {
+					popped = stack.pop();
+					ele = stack[stack.length - 1];
+					post.push(popped);
+					prep = ele.pre;
+					flag = elem.value == 'Math.pow' && ele.value == 'Math.pow';
+				}
+				stack.push(elem);
+			}
+		}
+	}
+	return new Mexp(post);
+};
+module.exports = Mexp;
+},{"./lexer.js":"2Ey19"}],"2Ey19":[function(require,module,exports) {
+"use strict";
+var Mexp = require('./math_function.js')
+function inc(arr, val) {
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] += val
+  }
+  return arr
+}
+var token = ['sin', 'cos', 'tan', 'pi', '(', ')', 'P', 'C', ' ',
+  'asin', 'acos', 'atan', '7', '8', '9', 'int',
+  'cosh', 'acosh', 'ln', '^', 'root', '4', '5', '6', '/', '!',
+  'tanh', 'atanh', 'Mod', '1', '2', '3', '*',
+  'sinh', 'asinh', 'e', 'log', '0', '.', '+', '-', ',', 'Sigma', 'n', 'Pi', 'pow']
+var show = ['sin', 'cos', 'tan', '&pi;', '(', ')', 'P', 'C', ' ',
+  'asin', 'acos', 'atan', '7', '8', '9', 'Int',
+  'cosh', 'acosh', ' ln', '^', 'root', '4', '5', '6', '&divide;', '!',
+  'tanh', 'atanh', ' Mod ', '1', '2', '3', '&times;',
+  'sinh', 'asinh', 'e', ' log', '0', '.', '+', '-', ',', '&Sigma;', 'n', '&Pi;', 'pow']
+var eva = [Mexp.math.sin, Mexp.math.cos, Mexp.math.tan, 'PI', '(', ')', Mexp.math.P, Mexp.math.C, ' '.anchor,
+Mexp.math.asin, Mexp.math.acos, Mexp.math.atan, '7', '8', '9', Math.floor,
+Mexp.math.cosh, Mexp.math.acosh, Math.log, Math.pow, Math.sqrt, '4', '5', '6', Mexp.math.div, Mexp.math.fact,
+Mexp.math.tanh, Mexp.math.atanh, Mexp.math.mod, '1', '2', '3', Mexp.math.mul,
+Mexp.math.sinh, Mexp.math.asinh, 'E', Mexp.math.log, '0', '.', Mexp.math.add, Mexp.math.sub, ',', Mexp.math.sigma, 'n', Mexp.math.Pi, Math.pow]
+var preced = {
+  0: 11,
+  1: 0,
+  2: 3,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 0,
+  7: 11,
+  8: 11,
+  9: 1,
+  10: 10,
+  11: 0,
+  12: 11,
+  13: 0,
+  14: -1 // will be filtered after lexer
+} // stores precedence by types
+var type = [0, 0, 0, 3, 4, 5, 10, 10, 14,
+  0, 0, 0, 1, 1, 1, 0,
+  0, 0, 0, 10, 0, 1, 1, 1, 2, 7,
+  0, 0, 2, 1, 1, 1, 2,
+  0, 0, 3, 0, 1, 6, 9, 9, 11, 12, 13, 12, 8]
+/*
+0 : function with syntax function_name(Maths_exp)
+1 : numbers
+2 : binary operators like * / Mod left associate and same precedence
+3 : Math constant values like e,pi,Cruncher ans
+4 : opening bracket
+5 : closing bracket
+6 : decimal
+7 : function with syntax (Math_exp)function_name
+8: function with syntax function_name(Math_exp1,Math_exp2)
+9 : binary operator like +,-
+10: binary operator like P C or ^
+11: ,
+12: function with , seperated three parameters and third parameter is a string that will be mexp string
+13: variable of Sigma function
+*/
+var type0 = {
+  0: true,
+  1: true,
+  3: true,
+  4: true,
+  6: true,
+  8: true,
+  9: true,
+  12: true,
+  13: true,
+  14: true
+} // type2:true,type4:true,type9:true,type11:true,type21:true,type22
+var type1 = {
+  0: true,
+  1: true,
+  2: true,
+  3: true,
+  4: true,
+  5: true,
+  6: true,
+  7: true,
+  8: true,
+  9: true,
+  10: true,
+  11: true,
+  12: true,
+  13: true
+} // type3:true,type5:true,type7:true,type23
+var type1Asterick = {
+  0: true,
+  3: true,
+  4: true,
+  8: true,
+  12: true,
+  13: true
+}
+var empty = {}
+var type3Asterick = {
+  0: true,
+  1: true,
+  3: true,
+  4: true,
+  6: true,
+  8: true,
+  12: true,
+  13: true
+} // type_5:true,type_7:true,type_23
+var type6 = {
+  1: true
+}
+var newAr = [
+  [],
+  ['1', '2', '3', '7', '8', '9', '4', '5', '6', '+', '-', '*', '/', '(', ')', '^', '!', 'P', 'C', 'e', '0', '.', ',', 'n', ' '],
+  ['pi', 'ln', 'Pi'],
+  ['sin', 'cos', 'tan', 'Del', 'int', 'Mod', 'log', 'pow'],
+  ['asin', 'acos', 'atan', 'cosh', 'root', 'tanh', 'sinh'],
+  ['acosh', 'atanh', 'asinh', 'Sigma']
+]
+
+function match(str1, str2, i, x) {
+  for (var f = 0; f < x; f++) {
+    if (str1[i + f] !== str2[f]) {
+      return false
+    }
+  }
+  return true
+}
+Mexp.addToken = function (tokens) {
+  for (var i = 0; i < tokens.length; i++) {
+    var x = tokens[i].token.length
+    var temp = -1
+
+    // newAr is a specially designed data structure index of 1d array = length of tokens
+    newAr[x] = newAr[x] || [];
+    for (var y = 0; y < newAr[x].length; y++) {
+      if (tokens[i].token === newAr[x][y]) {
+        temp = token.indexOf(newAr[x][y])
+        break
+      }
+    }
+    if (temp === -1) {
+      token.push(tokens[i].token)
+      type.push(tokens[i].type)
+      if (newAr.length <= tokens[i].token.length) {
+        newAr[tokens[i].token.length] = []
+      }
+      newAr[tokens[i].token.length].push(tokens[i].token)
+      eva.push(tokens[i].value)
+      show.push(tokens[i].show)
+    } else { // overwrite
+      token[temp] = tokens[i].token
+      type[temp] = tokens[i].type
+      eva[temp] = tokens[i].value
+      show[temp] = tokens[i].show
+    }
+  }
+}
+
+function tokenize(string) {
+  var nodes = [];
+  var length = string.length;
+  var key, x, y;
+  for (var i = 0; i < length; i++) {
+    if (i < length - 1 && string[i] === ' ' && string[i + 1] === ' ') {
+      continue
+    }
+    key = ''
+    for (x = (string.length - i > (newAr.length - 2) ? newAr.length - 1 : string.length - i); x > 0; x--) {
+      if (newAr[x] === undefined) continue;
+      for (y = 0; y < newAr[x].length; y++) {
+        if (match(string, newAr[x][y], i, x)) {
+          key = newAr[x][y]
+          y = newAr[x].length
+          x = 0
+        }
+      }
+    }
+    i += key.length - 1
+    if (key === '') {
+      throw (new Mexp.Exception('Can\'t understand after ' + string.slice(i)))
+    }
+    var index = token.indexOf(key);
+    nodes.push({
+      index: index,
+      token: key,
+      type: type[index],
+      eval: eva[index],
+      precedence: preced[type[index]],
+      show: show[index]
+    })
+  }
+  return nodes;
+}
+
+Mexp.lex = function (inp, tokens) {
+  'use strict'
+
+
+  var changeSignObj = {
+    value: Mexp.math.changeSign,
+    type: 0,
+    pre: 21,
+    show: '-'
+  }
+  var closingParObj = {
+    value: ')',
+    show: ')',
+    type: 5,
+    pre: 0
+  }
+  var openingParObj = {
+    value: '(',
+    type: 4,
+    pre: 0,
+    show: '('
+  }
+  var str = [openingParObj]
+
+  var ptc = [] // Parenthesis to close at the beginning is after one token
+  var inpStr = inp
+  var allowed = type0
+  var bracToClose = 0
+  var asterick = empty
+  var prevKey = ''
+  var i;
+  if (typeof tokens !== 'undefined') {
+    Mexp.addToken(tokens)
+  }
+  var obj = {}
+  var nodes = tokenize(inpStr);
+  for (i = 0; i < nodes.length; i++) {
+    var node = nodes[i];
+    if (node.type === 14) {
+      if (i > 0 &&
+        i < nodes.length - 1 &&
+        nodes[i + 1].type === 1 &&
+        (nodes[i - 1].type === 1 || nodes[i - 1].type === 6))
+        throw new Mexp.Exception('Unexpected Space')
+      continue
+    }
+
+    var index = node.index
+    var cToken = node.token
+    var cType = node.type
+    var cEv = node.eval
+    var cPre = node.precedence
+    var cShow = node.show
+    var pre = str[str.length - 1]
+    var j
+    for (j = ptc.length; j--;) { // loop over ptc
+      if (ptc[j] === 0) {
+        if ([0, 2, 3, 4, 5, 9, 11, 12, 13].indexOf(cType) !== -1) {
+          if (allowed[cType] !== true) {
+            console.log(inp, node, nodes, allowed)
+            throw (new Mexp.Exception(cToken + ' is not allowed after ' + prevKey))
+          }
+          str.push(closingParObj)
+          allowed = type1
+          asterick = type3Asterick
+          inc(ptc, -1).pop()
+        }
+      } else break
+    }
+    if (allowed[cType] !== true) {
+      throw (new Mexp.Exception(cToken + ' is not allowed after ' + prevKey))
+    }
+    if (asterick[cType] === true) {
+      cType = 2
+      cEv = Mexp.math.mul
+      cShow = '&times;'
+      cPre = 3
+      i = i - cToken.length
+    }
+    obj = {
+      value: cEv,
+      type: cType,
+      pre: cPre,
+      show: cShow
+    }
+    if (cType === 0) {
+      allowed = type0
+      asterick = empty
+      inc(ptc, 2).push(2)
+      str.push(obj)
+      str.push(openingParObj)
+    } else if (cType === 1) {
+      if (pre.type === 1) {
+        pre.value += cEv
+        inc(ptc, 1)
+      } else {
+        str.push(obj)
+      }
+      allowed = type1
+      asterick = type1Asterick
+    } else if (cType === 2) {
+      allowed = type0
+      asterick = empty
+      inc(ptc, 2)
+      str.push(obj)
+    } else if (cType === 3) { // constant
+      str.push(obj)
+      allowed = type1
+      asterick = type3Asterick
+    } else if (cType === 4) {
+      inc(ptc, 1)
+      bracToClose++
+      allowed = type0
+      asterick = empty
+      str.push(obj)
+    } else if (cType === 5) {
+      if (!bracToClose) {
+        throw (new Mexp.Exception('Closing parenthesis are more than opening one, wait What!!!'))
+      }
+      bracToClose--
+      allowed = type1
+      asterick = type3Asterick
+      str.push(obj)
+      inc(ptc, 1)
+    } else if (cType === 6) {
+      if (pre.hasDec) {
+        throw (new Mexp.Exception('Two decimals are not allowed in one number'))
+      }
+      if (pre.type !== 1) {
+        pre = {
+          value: 0,
+          type: 1,
+          pre: 0
+        } // pre needs to be changed as it will the last value now to be safe in later code
+        str.push(pre)
+        inc(ptc, -1)
+      }
+      allowed = type6
+      inc(ptc, 1)
+      asterick = empty
+      pre.value += cEv
+      pre.hasDec = true
+    } else if (cType === 7) {
+      allowed = type1
+      asterick = type3Asterick
+      inc(ptc, 1)
+      str.push(obj)
+    }
+    if (cType === 8) {
+      allowed = type0
+      asterick = empty
+      inc(ptc, 4).push(4)
+      str.push(obj)
+      str.push(openingParObj)
+    } else if (cType === 9) {
+      if (pre.type === 9) {
+        if (pre.value === Mexp.math.add) {
+          pre.value = cEv
+          pre.show = cShow
+          inc(ptc, 1)
+        } else if (pre.value === Mexp.math.sub && cShow === '-') {
+          pre.value = Mexp.math.add
+          pre.show = '+'
+          inc(ptc, 1)
+        }
+      } else if (pre.type !== 5 && pre.type !== 7 && pre.type !== 1 && pre.type !== 3 && pre.type !== 13) { // changesign only when negative is found
+        if (cToken === '-') { // do nothing for + token
+          // don't add with the above if statement as that will run the else statement of parent if on Ctoken +
+          allowed = type0
+          asterick = empty
+          inc(ptc, 2).push(2)
+          str.push(changeSignObj)
+          str.push(openingParObj)
+        }
+      } else {
+        str.push(obj)
+        inc(ptc, 2)
+      }
+      allowed = type0
+      asterick = empty
+    } else if (cType === 10) {
+      allowed = type0
+      asterick = empty
+      inc(ptc, 2)
+      str.push(obj)
+    } else if (cType === 11) {
+      allowed = type0
+      asterick = empty
+      str.push(obj)
+    } else if (cType === 12) {
+      allowed = type0
+      asterick = empty
+      inc(ptc, 6).push(6)
+      str.push(obj)
+      str.push(openingParObj)
+    } else if (cType === 13) {
+      allowed = type1
+      asterick = type3Asterick
+      str.push(obj)
+    }
+    inc(ptc, -1)
+    prevKey = cToken
+  }
+  for (j = ptc.length; j--;) { // loop over ptc
+    if (ptc[j] === 0) {
+      str.push(closingParObj)
+      inc(ptc, -1).pop()
+    } else break  // if it is not zero so before ptc also cant be zero
+  }
+  if (allowed[5] !== true) {
+    throw (new Mexp.Exception('complete the expression'))
+  }
+  while (bracToClose--) {
+    str.push(closingParObj)
+  }
+
+  str.push(closingParObj)
+  //        console.log(str);
+  return new Mexp(str)
+}
+module.exports = Mexp
+
+},{"./math_function.js":"68oT6"}],"68oT6":[function(require,module,exports) {
+"use strict";
+var Mexp = function (parsed) {
+  this.value = parsed
+}
+
+Mexp.math = {
+  isDegree: true, // mode of calculator
+  acos: function (x) {
+    return (Mexp.math.isDegree ? 180 / Math.PI * Math.acos(x) : Math.acos(x))
+  },
+  add: function (a, b) {
+    return a + b
+  },
+  asin: function (x) {
+    return (Mexp.math.isDegree ? 180 / Math.PI * Math.asin(x) : Math.asin(x))
+  },
+  atan: function (x) {
+    return (Mexp.math.isDegree ? 180 / Math.PI * Math.atan(x) : Math.atan(x))
+  },
+  acosh: function (x) {
+    return Math.log(x + Math.sqrt(x * x - 1))
+  },
+  asinh: function (x) {
+    return Math.log(x + Math.sqrt(x * x + 1))
+  },
+  atanh: function (x) {
+    return Math.log((1 + x) / (1 - x))
+  },
+  C: function (n, r) {
+    var pro = 1
+    var other = n - r
+    var choice = r
+    if (choice < other) {
+      choice = other
+      other = r
+    }
+    for (var i = choice + 1; i <= n; i++) {
+      pro *= i
+    }
+    return pro / Mexp.math.fact(other)
+  },
+  changeSign: function (x) {
+    return -x
+  },
+  cos: function (x) {
+    if (Mexp.math.isDegree) x = Mexp.math.toRadian(x)
+    return Math.cos(x)
+  },
+  cosh: function (x) {
+    return (Math.pow(Math.E, x) + Math.pow(Math.E, -1 * x)) / 2
+  },
+  div: function (a, b) {
+    return a / b
+  },
+  fact: function (n) {
+    if (n % 1 !== 0) return 'NaN'
+    var pro = 1
+    for (var i = 2; i <= n; i++) {
+      pro *= i
+    }
+    return pro
+  },
+  inverse: function (x) {
+    return 1 / x
+  },
+  log: function (i) {
+    return Math.log(i) / Math.log(10)
+  },
+  mod: function (a, b) {
+    return a % b
+  },
+  mul: function (a, b) {
+    return a * b
+  },
+  P: function (n, r) {
+    var pro = 1
+    for (var i = Math.floor(n) - Math.floor(r) + 1; i <= Math.floor(n); i++) {
+      pro *= i
+    }
+    return pro
+  },
+  Pi: function (low, high, ex) {
+    var pro = 1
+    for (var i = low; i <= high; i++) {
+      pro *= Number(ex.postfixEval({
+        n: i
+      }))
+    }
+    return pro
+  },
+  pow10x: function (e) {
+    var x = 1
+    while (e--) {
+      x *= 10
+    }
+    return x
+  },
+  sigma: function (low, high, ex) {
+    var sum = 0
+    for (var i = low; i <= high; i++) {
+      sum += Number(ex.postfixEval({
+        n: i
+      }))
+    }
+    return sum
+  },
+  sin: function (x) {
+    if (Mexp.math.isDegree) x = Mexp.math.toRadian(x)
+    return Math.sin(x)
+  },
+  sinh: function (x) {
+    return (Math.pow(Math.E, x) - Math.pow(Math.E, -1 * x)) / 2
+  },
+  sub: function (a, b) {
+    return a - b
+  },
+  tan: function (x) {
+    if (Mexp.math.isDegree) x = Mexp.math.toRadian(x)
+    return Math.tan(x)
+  },
+  tanh: function (x) {
+    return Mexp.sinha(x) / Mexp.cosha(x)
+  },
+  toRadian: function (x) {
+    return x * Math.PI / 180
+  }
+}
+Mexp.Exception = function (message) {
+  this.message = message
+}
+module.exports = Mexp
+
+},{}],"2A4sD":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _memoize = _interopRequireDefault(require("lodash/memoize"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MEASUREMENT_ELEMENT_ID = '__react_svg_text_measurement_id';
+
+function getStringWidth(str, style) {
+  try {
+    // Calculate length of each word to be used to determine number of words per line
+    var textEl = document.getElementById(MEASUREMENT_ELEMENT_ID);
+
+    if (!textEl) {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.style.width = '0';
+      svg.style.height = '0';
+      svg.style.position = 'absolute';
+      svg.style.top = '-100%';
+      svg.style.left = '-100%';
+      textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      textEl.setAttribute('id', MEASUREMENT_ELEMENT_ID);
+      svg.appendChild(textEl);
+      document.body.appendChild(svg);
+    }
+
+    Object.assign(textEl.style, style);
+    textEl.textContent = str;
+    return textEl.getComputedTextLength();
+  } catch (e) {
+    return null;
+  }
+}
+
+var _default = (0, _memoize.default)(getStringWidth, function (str, style) {
+  return str + "_" + JSON.stringify(style);
+});
+
+exports.default = _default;
+},{"lodash/memoize":"4xgqb"}],"6P5dd":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = getLabelTransform;
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getLabelTransform(_ref) {
+  var labelOffset = _ref.labelOffset,
+      labelProps = _ref.labelProps,
+      orientation = _ref.orientation,
+      range = _ref.range,
+      tickLabelFontSize = _ref.tickLabelFontSize,
+      tickLength = _ref.tickLength;
+  var sign = orientation === _orientation.default.left || orientation === _orientation.default.top ? -1 : 1;
+  var x;
+  var y;
+  var transform;
+
+  if (orientation === _orientation.default.top || orientation === _orientation.default.bottom) {
+    var yBottomOffset = orientation === _orientation.default.bottom && typeof labelProps.fontSize === 'number' ? labelProps.fontSize : 0;
+    x = (Number(range[0]) + Number(range[range.length - 1])) / 2;
+    y = sign * (tickLength + labelOffset + tickLabelFontSize + yBottomOffset);
+  } else {
+    x = sign * ((Number(range[0]) + Number(range[range.length - 1])) / 2);
+    y = -(tickLength + labelOffset);
+    transform = "rotate(" + sign * 90 + ")";
+  }
+
+  return {
+    x: x,
+    y: y,
+    transform: transform
+  };
+}
+},{"../constants/orientation":"28066"}],"28066":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+var Orientation = {
+  top: 'top',
+  left: 'left',
+  right: 'right',
+  bottom: 'bottom'
+};
+var _default = Orientation;
+exports.default = _default;
+},{}],"5UEJw":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Ticks;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _shape = require("@vx/shape");
+
+var _group = require("@vx/group");
+
+var _text = require("@vx/text");
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function Ticks(_ref) {
+  var hideTicks = _ref.hideTicks,
+      horizontal = _ref.horizontal,
+      orientation = _ref.orientation,
+      tickClassName = _ref.tickClassName,
+      tickComponent = _ref.tickComponent,
+      allTickLabelProps = _ref.tickLabelProps,
+      _ref$tickStroke = _ref.tickStroke,
+      tickStroke = _ref$tickStroke === void 0 ? '#222' : _ref$tickStroke,
+      tickTransform = _ref.tickTransform,
+      ticks = _ref.ticks;
+  return ticks.map(function (_ref2) {
+    var _allTickLabelProps$in;
+
+    var value = _ref2.value,
+        index = _ref2.index,
+        from = _ref2.from,
+        to = _ref2.to,
+        formattedValue = _ref2.formattedValue;
+    var tickLabelProps = (_allTickLabelProps$in = allTickLabelProps[index]) != null ? _allTickLabelProps$in : {};
+    var tickLabelFontSize = Math.max(10, typeof tickLabelProps.fontSize === 'number' && tickLabelProps.fontSize || 0);
+    var tickYCoord = to.y + (horizontal && orientation !== _orientation.default.top ? tickLabelFontSize : 0);
+    return /*#__PURE__*/_react.default.createElement(_group.Group, {
+      key: "vx-tick-" + value + "-" + index,
+      className: (0, _classnames.default)('vx-axis-tick', tickClassName),
+      transform: tickTransform
+    }, !hideTicks && /*#__PURE__*/_react.default.createElement(_shape.Line, {
+      from: from,
+      to: to,
+      stroke: tickStroke,
+      strokeLinecap: "square"
+    }), tickComponent ? tickComponent(_extends({}, tickLabelProps, {
+      x: to.x,
+      y: tickYCoord,
+      formattedValue: formattedValue
+    })) : /*#__PURE__*/_react.default.createElement(_text.Text, _extends({
+      x: to.x,
+      y: tickYCoord
+    }, tickLabelProps), formattedValue));
+  });
+}
+},{"react":"3b2NM","classnames":"5aJRc","@vx/shape":"1mqSb","@vx/group":"6phi6","@vx/text":"2nkDq","../constants/orientation":"28066"}],"Lf4hr":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = getTickPosition;
+
+/**
+ * Create a function that returns a tick position for the given tick value
+ */
+function getTickPosition(scale, align) {
+  if (align === void 0) {
+    align = 'center';
+  }
+
+  // Broaden type before using 'xxx' in s as typeguard.
+  var s = scale; // For point or band scales,
+  // have to add offset to make the tick at center or end.
+
+  if (align !== 'start' && 'bandwidth' in s) {
+    var offset = s.bandwidth();
+    if (align === 'center') offset /= 2;
+    if (s.round()) offset = Math.round(offset);
+    return function (d) {
+      var scaledValue = s(d);
+      return typeof scaledValue === 'number' ? scaledValue + offset : scaledValue;
+    };
+  }
+
+  return scale;
+}
+},{}],"43uwO":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = getTickFormatter;
+
+var _scale = require("@vx/scale");
+
+/**
+ * Returns a tick position for the given tick value
+ */
+function getTickFormatter(scale) {
+  // Broaden type before using 'xxx' in s as typeguard.
+  var s = scale; // For point or band scales,
+  // have to add offset to make the tick centered.
+
+  if ('tickFormat' in s) {
+    return s.tickFormat();
+  }
+
+  return _scale.toString;
+}
+},{"@vx/scale":"7H3DO"}],"3gR9T":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = createPoint;
+
+var _point = require("@vx/point");
+
+function createPoint(_ref, horizontal) {
+  var x = _ref.x,
+      y = _ref.y;
+  return new _point.Point(horizontal ? {
+    x: x,
+    y: y
+  } : {
+    x: y,
+    y: x
+  });
+}
+},{"@vx/point":"4SXWw"}],"4SXWw":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.Point = void 0;
+
+var _Point = _interopRequireDefault(require("./Point"));
+
+exports.Point = _Point.default;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./Point":"4HAUF"}],"4HAUF":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Point = /*#__PURE__*/function () {
+  function Point(_ref) {
+    var _ref$x = _ref.x,
+        x = _ref$x === void 0 ? 0 : _ref$x,
+        _ref$y = _ref.y,
+        y = _ref$y === void 0 ? 0 : _ref$y;
+
+    _defineProperty(this, "x", 0);
+
+    _defineProperty(this, "y", 0);
+
+    this.x = x;
+    this.y = y;
+  }
+
+  var _proto = Point.prototype;
+
+  _proto.value = function value() {
+    return {
+      x: this.x,
+      y: this.y
+    };
+  };
+
+  _proto.toArray = function toArray() {
+    return [this.x, this.y];
+  };
+
+  return Point;
+}();
+
+exports.default = Point;
+},{}],"4Gkn1":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AxisLeft;
+exports.leftTickLabelProps = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Axis = _interopRequireDefault(require("./Axis"));
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var leftTickLabelProps = function leftTickLabelProps() {
+  return (
+    /** tickValue, index */
+    {
+      dx: '-0.25em',
+      dy: '0.25em',
+      fill: '#222',
+      fontFamily: 'Arial',
+      fontSize: 10,
+      textAnchor: 'end'
+    }
+  );
+};
+
+exports.leftTickLabelProps = leftTickLabelProps;
+
+function AxisLeft(_ref) {
+  var axisClassName = _ref.axisClassName,
+      _ref$labelOffset = _ref.labelOffset,
+      labelOffset = _ref$labelOffset === void 0 ? 36 : _ref$labelOffset,
+      _ref$tickLabelProps = _ref.tickLabelProps,
+      tickLabelProps = _ref$tickLabelProps === void 0 ? leftTickLabelProps : _ref$tickLabelProps,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["axisClassName", "labelOffset", "tickLabelProps", "tickLength"]);
+
+  return /*#__PURE__*/_react.default.createElement(_Axis.default, _extends({
+    axisClassName: (0, _classnames.default)('vx-axis-left', axisClassName),
+    labelOffset: labelOffset,
+    orientation: _orientation.default.left,
+    tickLabelProps: tickLabelProps,
+    tickLength: tickLength
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","./Axis":"5wfZb","../constants/orientation":"28066"}],"4dekt":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AxisRight;
+exports.rightTickLabelProps = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Axis = _interopRequireDefault(require("./Axis"));
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var rightTickLabelProps = function rightTickLabelProps() {
+  return (
+    /** tickValue, index */
+    {
+      dx: '0.25em',
+      dy: '0.25em',
+      fill: '#222',
+      fontFamily: 'Arial',
+      fontSize: 10,
+      textAnchor: 'start'
+    }
+  );
+};
+
+exports.rightTickLabelProps = rightTickLabelProps;
+
+function AxisRight(_ref) {
+  var axisClassName = _ref.axisClassName,
+      _ref$labelOffset = _ref.labelOffset,
+      labelOffset = _ref$labelOffset === void 0 ? 36 : _ref$labelOffset,
+      _ref$tickLabelProps = _ref.tickLabelProps,
+      tickLabelProps = _ref$tickLabelProps === void 0 ? rightTickLabelProps : _ref$tickLabelProps,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["axisClassName", "labelOffset", "tickLabelProps", "tickLength"]);
+
+  return /*#__PURE__*/_react.default.createElement(_Axis.default, _extends({
+    axisClassName: (0, _classnames.default)('vx-axis-right', axisClassName),
+    labelOffset: labelOffset,
+    orientation: _orientation.default.right,
+    tickLabelProps: tickLabelProps,
+    tickLength: tickLength
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","./Axis":"5wfZb","../constants/orientation":"28066"}],"2lv0p":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AxisTop;
+exports.topTickLabelProps = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Axis = _interopRequireDefault(require("./Axis"));
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var topTickLabelProps = function topTickLabelProps() {
+  return (
+    /** tickValue, index */
+    {
+      dy: '-0.75em',
+      fill: '#222',
+      fontFamily: 'Arial',
+      fontSize: 10,
+      textAnchor: 'middle'
+    }
+  );
+};
+
+exports.topTickLabelProps = topTickLabelProps;
+
+function AxisTop(_ref) {
+  var axisClassName = _ref.axisClassName,
+      _ref$labelOffset = _ref.labelOffset,
+      labelOffset = _ref$labelOffset === void 0 ? 8 : _ref$labelOffset,
+      _ref$tickLabelProps = _ref.tickLabelProps,
+      tickLabelProps = _ref$tickLabelProps === void 0 ? topTickLabelProps : _ref$tickLabelProps,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["axisClassName", "labelOffset", "tickLabelProps", "tickLength"]);
+
+  return /*#__PURE__*/_react.default.createElement(_Axis.default, _extends({
+    axisClassName: (0, _classnames.default)('vx-axis-top', axisClassName),
+    labelOffset: labelOffset,
+    orientation: _orientation.default.top,
+    tickLabelProps: tickLabelProps,
+    tickLength: tickLength
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","./Axis":"5wfZb","../constants/orientation":"28066"}],"OorfP":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = AxisBottom;
+exports.bottomTickLabelProps = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Axis = _interopRequireDefault(require("./Axis"));
+
+var _orientation = _interopRequireDefault(require("../constants/orientation"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+var bottomTickLabelProps = function bottomTickLabelProps() {
+  return (
+    /** tickValue, index */
+    {
+      dy: '0.25em',
+      fill: '#222',
+      fontFamily: 'Arial',
+      fontSize: 10,
+      textAnchor: 'middle'
+    }
+  );
+};
+
+exports.bottomTickLabelProps = bottomTickLabelProps;
+
+function AxisBottom(_ref) {
+  var axisClassName = _ref.axisClassName,
+      _ref$labelOffset = _ref.labelOffset,
+      labelOffset = _ref$labelOffset === void 0 ? 8 : _ref$labelOffset,
+      _ref$tickLabelProps = _ref.tickLabelProps,
+      tickLabelProps = _ref$tickLabelProps === void 0 ? bottomTickLabelProps : _ref$tickLabelProps,
+      _ref$tickLength = _ref.tickLength,
+      tickLength = _ref$tickLength === void 0 ? 8 : _ref$tickLength,
+      restProps = _objectWithoutPropertiesLoose(_ref, ["axisClassName", "labelOffset", "tickLabelProps", "tickLength"]);
+
+  return /*#__PURE__*/_react.default.createElement(_Axis.default, _extends({
+    axisClassName: (0, _classnames.default)('vx-axis-bottom', axisClassName),
+    labelOffset: labelOffset,
+    orientation: _orientation.default.bottom,
+    tickLabelProps: tickLabelProps,
+    tickLength: tickLength
+  }, restProps));
+}
+},{"react":"3b2NM","classnames":"5aJRc","./Axis":"5wfZb","../constants/orientation":"28066"}],"1F27S":[function(require,module,exports) {
+"use strict";
+},{}],"7INAJ":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.PatternOrientation = exports.PatternPath = exports.PatternHexagons = exports.PatternWaves = exports.PatternCircles = exports.PatternLines = exports.Pattern = void 0;
+
+var _Pattern = _interopRequireDefault(require("./patterns/Pattern"));
+
+exports.Pattern = _Pattern.default;
+
+var _Lines = _interopRequireDefault(require("./patterns/Lines"));
+
+exports.PatternLines = _Lines.default;
+
+var _Circles = _interopRequireDefault(require("./patterns/Circles"));
+
+exports.PatternCircles = _Circles.default;
+
+var _Waves = _interopRequireDefault(require("./patterns/Waves"));
+
+exports.PatternWaves = _Waves.default;
+
+var _Hexagons = _interopRequireDefault(require("./patterns/Hexagons"));
+
+exports.PatternHexagons = _Hexagons.default;
+
+var _Path = _interopRequireDefault(require("./patterns/Path"));
+
+exports.PatternPath = _Path.default;
+
+var _constants = require("./constants");
+
+exports.PatternOrientation = _constants.PatternOrientation;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./patterns/Pattern":"6IoPC","./patterns/Lines":"5BGr9","./patterns/Circles":"2PD5U","./patterns/Waves":"3Haws","./patterns/Hexagons":"6SBP2","./patterns/Path":"6uOli","./constants":"7eW9z"}],"6IoPC":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Pattern;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Pattern(_ref) {
+  var id = _ref.id,
+      width = _ref.width,
+      height = _ref.height,
+      children = _ref.children;
+  return /*#__PURE__*/_react.default.createElement("defs", null, /*#__PURE__*/_react.default.createElement("pattern", {
+    id: id,
+    width: width,
+    height: height,
+    patternUnits: "userSpaceOnUse"
+  }, children));
+}
+
+Pattern.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  children: _propTypes.default.node.isRequired
+};
+},{"prop-types":"4dfy5","react":"3b2NM"}],"5BGr9":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.pathForOrientation = pathForOrientation;
+exports.default = Lines;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Pattern = _interopRequireDefault(require("./Pattern"));
+
+var _constants = require("../constants");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function pathForOrientation(_ref) {
+  var height = _ref.height,
+      orientation = _ref.orientation;
+
+  switch (orientation) {
+    case _constants.PatternOrientation.vertical:
+      return "M " + height / 2 + ", 0 l 0, " + height;
+
+    case _constants.PatternOrientation.horizontal:
+      return "M 0," + height / 2 + " l " + height + ",0";
+
+    case _constants.PatternOrientation.diagonal:
+      return "M 0," + height + " l " + height + "," + -height + " M " + -height / 4 + "," + height / 4 + " l " + height / 2 + "," + -height / 2 + "\n             M " + 3 / 4 * height + "," + 5 / 4 * height + " l " + height / 2 + "," + -height / 2;
+
+    case _constants.PatternOrientation.diagonalRightToLeft:
+      return "M 0,0 l " + height + "," + height + "\n        M " + -height / 4 + "," + 3 / 4 * height + " l " + height / 2 + "," + height / 2 + "\n        M " + 3 / 4 * height + "," + -height / 4 + " l " + height / 2 + "," + height / 2;
+
+    default:
+      return "M " + height / 2 + ", 0 l 0, " + height;
+  }
+}
+
+function Lines(_ref2) {
+  var id = _ref2.id,
+      width = _ref2.width,
+      height = _ref2.height,
+      stroke = _ref2.stroke,
+      strokeWidth = _ref2.strokeWidth,
+      strokeDasharray = _ref2.strokeDasharray,
+      _ref2$strokeLinecap = _ref2.strokeLinecap,
+      strokeLinecap = _ref2$strokeLinecap === void 0 ? 'square' : _ref2$strokeLinecap,
+      _ref2$shapeRendering = _ref2.shapeRendering,
+      shapeRendering = _ref2$shapeRendering === void 0 ? 'auto' : _ref2$shapeRendering,
+      _ref2$orientation = _ref2.orientation,
+      orientation = _ref2$orientation === void 0 ? ['vertical'] : _ref2$orientation,
+      background = _ref2.background,
+      className = _ref2.className;
+  var orientations = Array.isArray(orientation) ? orientation : [orientation];
+  return /*#__PURE__*/_react.default.createElement(_Pattern.default, {
+    id: id,
+    width: width,
+    height: height
+  }, !!background && /*#__PURE__*/_react.default.createElement("rect", {
+    className: (0, _classnames.default)('vx-pattern-line-background'),
+    width: width,
+    height: height,
+    fill: background
+  }), orientations.map(function (o, i) {
+    return /*#__PURE__*/_react.default.createElement("path", {
+      key: "vx-" + id + "-line-" + o + "-" + i,
+      className: (0, _classnames.default)('vx-pattern-line', className),
+      d: pathForOrientation({
+        orientation: o,
+        height: height
+      }),
+      stroke: stroke,
+      strokeWidth: strokeWidth,
+      strokeDasharray: strokeDasharray,
+      strokeLinecap: strokeLinecap,
+      shapeRendering: shapeRendering
+    });
+  }));
+}
+
+Lines.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  className: _propTypes.default.string,
+  background: _propTypes.default.string,
+  stroke: _propTypes.default.string,
+  strokeWidth: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  strokeDasharray: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  strokeLinecap: _propTypes.default.oneOf(['square', 'butt', 'round', 'inherit']),
+  shapeRendering: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  orientation: _propTypes.default.array
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","./Pattern":"6IoPC","../constants":"7eW9z"}],"7eW9z":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.PatternOrientation = void 0;
+var PatternOrientation = {
+  horizontal: 'horizontal',
+  vertical: 'vertical',
+  diagonal: 'diagonal',
+  diagonalRightToLeft: 'diagonalRightToLeft'
+};
+exports.PatternOrientation = PatternOrientation;
+},{}],"2PD5U":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Circles;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Pattern = _interopRequireDefault(require("./Pattern"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Circles(_ref) {
+  var id = _ref.id,
+      width = _ref.width,
+      height = _ref.height,
+      _ref$radius = _ref.radius,
+      radius = _ref$radius === void 0 ? 2 : _ref$radius,
+      fill = _ref.fill,
+      stroke = _ref.stroke,
+      strokeWidth = _ref.strokeWidth,
+      strokeDasharray = _ref.strokeDasharray,
+      background = _ref.background,
+      _ref$complement = _ref.complement,
+      complement = _ref$complement === void 0 ? false : _ref$complement,
+      className = _ref.className;
+  var corners;
+
+  if (complement) {
+    corners = [[0, 0], [0, height], [width, 0], [width, height]];
+  }
+
+  return /*#__PURE__*/_react.default.createElement(_Pattern.default, {
+    id: id,
+    width: width,
+    height: height
+  }, !!background && /*#__PURE__*/_react.default.createElement("rect", {
+    width: width,
+    height: height,
+    fill: background
+  }), /*#__PURE__*/_react.default.createElement("circle", {
+    className: (0, _classnames.default)('vx-pattern-circle', className),
+    cx: width / 2,
+    cy: height / 2,
+    r: radius,
+    fill: fill,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
+    strokeDasharray: strokeDasharray
+  }), corners && corners.map(function (_ref2) {
+    var cornerX = _ref2[0],
+        cornerY = _ref2[1];
+    return /*#__PURE__*/_react.default.createElement("circle", {
+      key: id + "-complement-" + cornerX + "-" + cornerY,
+      className: (0, _classnames.default)('vx-pattern-circle vx-pattern-circle-complement', className),
+      cx: cornerX,
+      cy: cornerY,
+      r: radius,
+      fill: fill,
+      stroke: stroke,
+      strokeWidth: strokeWidth,
+      strokeDasharray: strokeDasharray
+    });
+  }));
+}
+
+Circles.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  radius: _propTypes.default.number,
+  fill: _propTypes.default.string,
+  className: _propTypes.default.string,
+  stroke: _propTypes.default.string,
+  strokeWidth: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  strokeDasharray: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  complement: _propTypes.default.bool,
+  background: _propTypes.default.string
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","./Pattern":"6IoPC"}],"3Haws":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Waves;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Path = _interopRequireDefault(require("./Path"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Waves(_ref) {
+  var id = _ref.id,
+      width = _ref.width,
+      height = _ref.height,
+      fill = _ref.fill,
+      stroke = _ref.stroke,
+      strokeWidth = _ref.strokeWidth,
+      strokeDasharray = _ref.strokeDasharray,
+      strokeLinecap = _ref.strokeLinecap,
+      shapeRendering = _ref.shapeRendering,
+      background = _ref.background,
+      className = _ref.className;
+  return /*#__PURE__*/_react.default.createElement(_Path.default, {
+    className: (0, _classnames.default)('vx-pattern-wave', className),
+    path: "M 0 " + height / 2 + " c " + height / 8 + " " + -height / 4 + " , " + height * 3 / 8 + " " + -height / 4 + " , " + height / 2 + " 0\n             c " + height / 8 + " " + height / 4 + " , " + height * 3 / 8 + " " + height / 4 + " , " + height / 2 + " 0 M " + -height / 2 + " " + height / 2 + "\n             c " + height / 8 + " " + height / 4 + " , " + height * 3 / 8 + " " + height / 4 + " , " + height / 2 + " 0 M " + height + " " + height / 2 + "\n             c " + height / 8 + " " + -height / 4 + " , " + height * 3 / 8 + " " + -height / 4 + " , " + height / 2 + " 0",
+    id: id,
+    width: width,
+    height: height,
+    fill: fill,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
+    strokeDasharray: strokeDasharray,
+    strokeLinecap: strokeLinecap,
+    shapeRendering: shapeRendering,
+    background: background
+  });
+}
+
+Waves.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  fill: _propTypes.default.string,
+  className: _propTypes.default.string,
+  background: _propTypes.default.string,
+  stroke: _propTypes.default.string,
+  strokeWidth: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  strokeDasharray: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  strokeLinecap: _propTypes.default.oneOf(['square', 'butt', 'round', 'inherit']),
+  shapeRendering: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","./Path":"6uOli"}],"6uOli":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Path;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Pattern = _interopRequireDefault(require("./Pattern"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Path(_ref) {
+  var id = _ref.id,
+      width = _ref.width,
+      height = _ref.height,
+      path = _ref.path,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === void 0 ? 'transparent' : _ref$fill,
+      stroke = _ref.stroke,
+      strokeWidth = _ref.strokeWidth,
+      strokeDasharray = _ref.strokeDasharray,
+      _ref$strokeLinecap = _ref.strokeLinecap,
+      strokeLinecap = _ref$strokeLinecap === void 0 ? 'square' : _ref$strokeLinecap,
+      _ref$shapeRendering = _ref.shapeRendering,
+      shapeRendering = _ref$shapeRendering === void 0 ? 'auto' : _ref$shapeRendering,
+      background = _ref.background,
+      className = _ref.className;
+  return /*#__PURE__*/_react.default.createElement(_Pattern.default, {
+    id: id,
+    width: width,
+    height: height
+  }, !!background && /*#__PURE__*/_react.default.createElement("rect", {
+    width: width,
+    height: height,
+    fill: background
+  }), /*#__PURE__*/_react.default.createElement("path", {
+    className: (0, _classnames.default)('vx-pattern-path', className),
+    d: path,
+    fill: fill,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
+    strokeDasharray: strokeDasharray,
+    strokeLinecap: strokeLinecap,
+    shapeRendering: shapeRendering
+  }));
+}
+
+Path.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  width: _propTypes.default.number.isRequired,
+  height: _propTypes.default.number.isRequired,
+  path: _propTypes.default.string,
+  fill: _propTypes.default.string,
+  className: _propTypes.default.string,
+  background: _propTypes.default.string,
+  stroke: _propTypes.default.string,
+  strokeWidth: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  strokeDasharray: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  strokeLinecap: _propTypes.default.oneOf(['square', 'butt', 'round', 'inherit']),
+  shapeRendering: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","./Pattern":"6IoPC"}],"6SBP2":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+exports.default = Hexagons;
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _Path = _interopRequireDefault(require("./Path"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Hexagons(_ref) {
+  var id = _ref.id,
+      height = _ref.height,
+      fill = _ref.fill,
+      stroke = _ref.stroke,
+      strokeWidth = _ref.strokeWidth,
+      strokeDasharray = _ref.strokeDasharray,
+      strokeLinecap = _ref.strokeLinecap,
+      shapeRendering = _ref.shapeRendering,
+      background = _ref.background,
+      className = _ref.className,
+      _ref$size = _ref.size,
+      size = _ref$size === void 0 ? 3 : _ref$size;
+  var sqrtSize = Math.sqrt(size);
+  return /*#__PURE__*/_react.default.createElement(_Path.default, {
+    className: (0, _classnames.default)('vx-pattern-hexagon', className),
+    path: "M " + height + ",0 l " + height + ",0 l " + height / 2 + "," + height * sqrtSize / 2 + " l " + -height / 2 + "," + height * sqrtSize / 2 + " l " + -height + ",0 l " + -height / 2 + "," + -height * sqrtSize / 2 + " Z M 0," + height * sqrtSize / 2 + " l " + height / 2 + ",0 M " + 3 * height + "," + height * sqrtSize / 2 + " l " + -height / 2 + ",0",
+    id: id,
+    width: size,
+    height: sqrtSize,
+    fill: fill,
+    stroke: stroke,
+    strokeWidth: strokeWidth,
+    strokeDasharray: strokeDasharray,
+    strokeLinecap: strokeLinecap,
+    shapeRendering: shapeRendering,
+    background: background
+  });
+}
+
+Hexagons.propTypes = {
+  id: _propTypes.default.string.isRequired,
+  height: _propTypes.default.number.isRequired,
+  size: _propTypes.default.number,
+  fill: _propTypes.default.string,
+  className: _propTypes.default.string,
+  background: _propTypes.default.string,
+  stroke: _propTypes.default.string,
+  strokeWidth: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.string]),
+  strokeDasharray: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  strokeLinecap: _propTypes.default.oneOf(['square', 'butt', 'round', 'inherit']),
+  shapeRendering: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
+};
+},{"prop-types":"4dfy5","react":"3b2NM","classnames":"5aJRc","./Path":"6uOli"}],"44uys":[function(require,module,exports) {
+var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require('react');
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Home.js";
+  const Home = () => {
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 5,
+          columnNumber: 5
+        }
+      }, "Click on one of the assignments above!")
+    );
+  };
+  _c = Home;
+  exports.default = Home;
+  var _c;
+  $RefreshReg$(_c, "Home");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5GTF8":[function() {},{}]},["1j6wU","3Imd1","5rkFb"], "5rkFb", "parcelRequireaa24")
 
 //# sourceMappingURL=index.3fafb3e2.js.map
