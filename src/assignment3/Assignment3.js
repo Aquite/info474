@@ -876,7 +876,7 @@ const Assignment3 = () => {
               stroke={"#333333"}
               tickTextFill={"#333333"}
               numTicks={26}
-              label={"World Average"}
+              label={"World Average (Click any year or scrub my timeline!)"}
             />
             {[...Array(27).keys()].map((value) => {
               return yearRange[0] == yearRange[1] &&
