@@ -1,7 +1,0 @@
-* {
-  box-sizing: border-box;
-}
-
-.header {
-  background-color: #0e2f44;
-}

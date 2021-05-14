@@ -554,12 +554,12 @@ const Assignment3 = () => {
     .range(["#b54646", "#f2f2f2", "#46b557"]);
 
   //line plot stuff
-
+   
   let highlightArray = [...highlight];
   //console.log(highlightArray);
 
-  const minYear = 1991; //set to a random year for testing
-  const maxYear = 2017; //set to a random year for testing
+  const minYear = yearRange[0]; //set to a random year for testing
+  const maxYear = yearRange[1]; //set to a random year for testing
   let xAxisLength = s - m - 45;
   let xintervalLength = xAxisLength / (maxYear - minYear);
   function getXForYear(year) {
@@ -600,15 +600,26 @@ const Assignment3 = () => {
     return row.dots;
   });
 
+  const timeScaleLineGraph = scaleTime()
+    .domain([new Date(yearRange[0], 1, 1), new Date(yearRange[1], 1, 1)])
+    .range([45, s-m]);
+
   const Linegraph = (
     <svg width={s} height={s}>
       {yLabels(50)}
       <line y1={m} y2={s - m} x1={45} x2={45} stroke="black" />
       <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black" />
       {dots}
+      <AxisBottom
+              scale={timeScaleLineGraph}
+              top={s  - m }
+              stroke={"#333333"}
+              tickTextFill={"#333333"}
+            />
     </svg>
   );
   //end of line plot stuff
+
 
   return (
     <div>
