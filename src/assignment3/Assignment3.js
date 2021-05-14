@@ -562,25 +562,27 @@ const Assignment3 = () => {
       let nextYear = parseInt(year) + 1;
       if (year < maxYear && countryData[nextYear] !== undefined) {
         // || year === minYear + 1)
-        return (
-          <line
-            key={countryCode + year + "line"}
-            x1={getXForYear(year)}
-            y1={getYForPercentage(countryData[year])}
-            x2={getXForYear(nextYear)}
-            y2={getYForPercentage(countryData[nextYear])}
-            stroke="#776865"
-          >
-            <title>
-              {countryName +
-                ", " +
-                year +
-                ": " +
-                Math.round(countryData[year] * 100) / 100 +
-                "%"}
-            </title>
-          </line>
-        );
+        if (countryData[year] != 0 && countryData[nextYear] != 0) {
+          return (
+            <line
+              key={countryCode + year + "line"}
+              x1={getXForYear(year)}
+              y1={getYForPercentage(countryData[year])}
+              x2={getXForYear(nextYear)}
+              y2={getYForPercentage(countryData[nextYear])}
+              stroke="#776865"
+            >
+              <title>
+                {countryName +
+                  ", " +
+                  year +
+                  ": " +
+                  Math.round(countryData[year] * 100) / 100 +
+                  "%"}
+              </title>
+            </line>
+          );
+        }
       }
     });
     return {
