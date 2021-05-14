@@ -3,7 +3,7 @@ import { useFetch } from "./hooks/useFetch";
 import { extent, max, bin, rollup, group, mean } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { scaleTime } from "@vx/scale";
-import { AxisBottom } from "@vx/axis";
+import { AxisBottom, AxisLeft } from "@vx/axis";
 import { PatternLines } from "@vx/pattern";
 import {
   ComposableMap,
@@ -390,7 +390,7 @@ const Assignment3 = () => {
 
   // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
   // Do not use setHighlight because you won't do it properly. See the below function
-  const [highlight, setHighlight] = useState(new Set(groupings[3].codes));
+  const [highlight, setHighlight] = useState(new Set(groupings[0].codes));
 
   // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
   const toggleHighlight = (c) => {
@@ -522,6 +522,14 @@ const Assignment3 = () => {
     .domain([new Date(1991, 01, 01), new Date(2018, 01, 01)])
     .range([20, 980]);
 
+  const worldLineScale = scaleLinear()
+    .domain([0, 100])
+    .range([s / 4 - m * 2, m]);
+
+  const worldLineScaleReversed = scaleLinear()
+    .domain([s / 4 - m * 2, m])
+    .range([0, 90]);
+
   // Right Side: Choropleth
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -532,6 +540,14 @@ const Assignment3 = () => {
   const highlightScale = scaleLinear()
     .domain([0, 70])
     .range(["#fff0f0", "#b54646"]);
+
+  const worldData = data
+    .filter((d) => {
+      return d["Country Code"] == "WLD";
+    })
+    .sort((d, e) => {
+      return +d.Year > +e.Year;
+    });
 
   const changeScale = scaleLinear()
     .domain([-15, 0, 15])
@@ -643,7 +659,14 @@ const Assignment3 = () => {
             Linegraph
           ) : (
             <svg width={s} height={s}>
-              {yLabels(s / 2 - halfCodeWidth)}
+              <AxisLeft
+                scale={yScale}
+                top={0}
+                left={s / 2 - m * 2}
+                stroke={"#333333"}
+                tickTextFill={"#333333"}
+                label={"% of Workforce is Women in " + yearRange[0]}
+              />
               {dataYearOnly(yearRange[0]).map((d, i) => {
                 if (d[women] != 0) {
                   const h = highlight.has(d["Country Code"]) === true;
@@ -760,7 +783,7 @@ const Assignment3 = () => {
             <text
               x={s - m}
               textAnchor="end"
-              y={s - m}
+              y={m}
               style={{ fontSize: 10, fontFamily: "Gill Sans, sans serif" }}
             >
               {yearRange[0] == yearRange[1]
@@ -771,6 +794,29 @@ const Assignment3 = () => {
           <ReactTooltip>{tooltipContent}</ReactTooltip>
           <br />
           <svg width={s * 2} height={s / 4} className="timeline">
+            {worldData.map((d, i) => {
+              if (i > 1) {
+                return (
+                  <line
+                    x1={timeScaleReverse(new Date(d.Year - 1, 01, 01))}
+                    y1={worldLineScale(worldData[i - 1][women])}
+                    x2={timeScaleReverse(new Date(d.Year, 01, 01))}
+                    y2={worldLineScale(d[women])}
+                    stroke="steelblue"
+                  >
+                    <title>{"World: " + worldData[i - 1][women]}</title>
+                  </line>
+                );
+              }
+            })}
+            <AxisLeft
+              scale={worldLineScale}
+              top={0}
+              left={s * 2 - m}
+              stroke={"#333333"}
+              tickTextFill={"#333333"}
+              numTicks={5}
+            />
             <AxisBottom
               scale={timeScaleReverse}
               top={s / 4 - m * 2}
@@ -778,6 +824,7 @@ const Assignment3 = () => {
               stroke={"#333333"}
               tickTextFill={"#333333"}
               numTicks={26}
+              label={"World Average"}
             />
             {[...Array(27).keys()].map((value) => {
               return yearRange[0] == yearRange[1] &&
