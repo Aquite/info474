@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 26049
+=======
+26045
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-minify-font-values\node_modules\chalk\templates.js121436361000000000 0
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-overlays\cjs\manageAriaHidden.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\symbol\to-primitive.js121436361000000000 0
@@ -10,6 +14,24 @@
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-colormin\node_modules\supports-color\index.js121436361000000000 0
 63C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\randomfill132636079397739153 1
 86C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\purgecss\node_modules\postcss\lib132636079282881240 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@types\lodash\fp\cloneWith.d.ts132652764880000000 0
+44C:\Users\Pavel\Desktop\INFO\474\info474\dist132654365797382230 1
+75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\cssesc\LICENSE-MIT.txt121436361000000000 0
+91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\number\parse-float.js121436361000000000 0
+73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\relateurl\lib\relate132636079285661237 1
+77C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\emojis-list\package.json132636079415191959 0
+108C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-merge-rules\node_modules\postcss\docs\syntax.md121436361000000000 0
+88C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\es-abstract\2016\QuoteJSONString.js121436361000000000 0
+111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\cssnano-preset-default\node_modules\chalk\types\index.d.ts121436361000000000 0
+76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\htmlnano\lib\helpers.js121436361000000000 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\des.js\lib\des132636079302788136 1
+91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\terser\node_modules\commander\index.js121436361000000000 0
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 51C:\Users\Pavel\Desktop\INFO\474\info474\src\App.css132653255418259904 0
 84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@types\lodash\fp\functions.d.ts132652764890000000 0
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-router-dom\package.json132636097012186755 0
@@ -73,7 +95,15 @@
 112C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\snapdragon-node\node_modules\is-accessor-descriptor\LICENSE131539902610000000 0
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\svgo\plugins\convertColors.js121436361000000000 0
 85C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\sshpk\lib\formats\ssh-private.js131837759770000000 0
+<<<<<<< HEAD
 70C:\Users\Pavel\Desktop\INFO\474\info474\src\assignment3\Assignment3.js132654413420717967 0
+=======
+<<<<<<< HEAD
+70C:\Users\Pavel\Desktop\INFO\474\info474\src\assignment3\Assignment3.js132654412994905213 0
+=======
+70C:\Users\Pavel\Desktop\INFO\474\info474\src\assignment3\Assignment3.js132654363620322153 0
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 110C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\uncss\node_modules\postcss-selector-parser\dist\parser.js121436361000000000 0
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\uncss\node_modules\has-flag132636079391109058 1
 69C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\flake.nix121436361000000000 0
@@ -96,7 +126,15 @@
 78C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\http-signature\CHANGES.md131480975920000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\is-generator-function\package.json132654404121238791 0
 106C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\caniuse-lite\data\features\upgradeinsecurerequests.js121436361000000000 0
+<<<<<<< HEAD
 44C:\Users\Pavel\Desktop\INFO\474\info474\docs132654413420818072 1
+=======
+<<<<<<< HEAD
+44C:\Users\Pavel\Desktop\INFO\474\info474\docs132654409760487920 1
+=======
+44C:\Users\Pavel\Desktop\INFO\474\info474\docs132653350150106256 1
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 110C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-normalize-display-values\node_modules\ansi-styles132636079401889148 1
 119C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\unset-value\node_modules\has-value\node_modules\isobject\README.md131060918360000000 0
 96C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\triggerBrowserReflow.js121436361000000000 0
@@ -233,7 +271,11 @@
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\es-abstract\2016\ToBoolean.js121436361000000000 0
 64C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\randombytes132636079397799143 1
 132C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-unique-selectors\node_modules\chalk\node_modules\supports-color\license131408182550000000 0
+<<<<<<< HEAD
 55C:\Users\Pavel\Desktop\INFO\474\info474\src\assignment3132654413420707961 1
+=======
+55C:\Users\Pavel\Desktop\INFO\474\info474\src\assignment3132654412994905213 1
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-array\src\permute.js121436361000000000 0
 121C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\uncss\node_modules\postcss-selector-parser\dist\__tests__\postcss.js121436361000000000 0
 108C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\jsdom\lib\jsdom\living\nodes\HTMLHeadingElement-impl.js121436361000000000 0
@@ -7382,7 +7424,10 @@
 84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\async-iterator132654404104888740 1
 79C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\resolve\test\shadowed_core132636079307338110 1
 100C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-normalize-charset\node_modules\has-flag132636079402009160 1
+<<<<<<< HEAD
 62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.ce476a7e.js132654413420767978 0
+=======
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 97C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\features\string\virtual\match-all.js121436361000000000 0
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\resolve\test\shadowed_core.js121436361000000000 0
 113C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-reduce-transforms\node_modules\ansi-styles\readme.md131628273600000000 0
@@ -9449,8 +9494,18 @@
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\ProgressBar.js121436361000000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\typed-array\join.js121436361000000000 0
 62C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\debug\src132636079300938136 1
+<<<<<<< HEAD
 63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css132654409252030417 0
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\array132654404105358770 1
+=======
+<<<<<<< HEAD
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css132654409252030417 0
+73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\array132654404105358770 1
+=======
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css132653348824310945 0
+73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\array132636079326678123 1
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 91C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\ResponsiveEmbed.js121436361000000000 0
 81C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\esm\Row.d.ts121436361000000000 0
 107C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@babel\plugin-proposal-class-static-block\package.json132654404121238791 0
@@ -9596,7 +9651,10 @@
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\define-property\LICENSE131614657800000000 0
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\cjs\FigureImage.js121436361000000000 0
 89C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\highlight.js\scss\androidstudio.scss121436361000000000 0
+<<<<<<< HEAD
 66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.2647431d.js.map132654413417928729 0
+=======
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\cjs\Form.d.ts121436361000000000 0
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\cjs\Form.js121436361000000000 0
 85C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\react-bootstrap\cjs\FormCheck.js121436361000000000 0
@@ -13289,6 +13347,7 @@
 101C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-dsv\node_modules\commander\typings\index.d.ts121436361000000000 0
 116C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\package-manager\test\fixtures\packages\foo-2.0\index.js121436361000000000 0
 85C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-time-format\locale\pt-BR.json131162447570000000 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.fb7eece5.js132653350149926221 0
 111C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-merge-longhand\node_modules\color-convert\index.js121436361000000000 0
 102C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@babel\core\src\config\resolve-targets-browser.ts121012626000000000 0
 112C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\postcss-merge-longhand\node_modules\color-convert\README.md121436361000000000 0
@@ -15522,6 +15581,7 @@
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-format\locale\ar-IL.json121436361000000000 0
 68C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\curry.js121436361000000000 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\date.js121436361000000000 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.2647431d.js.map132654297414006995 0
 69C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\deburr.js121436361000000000 0
 71C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\is-buffer\index.js131534404580000000 0
 71C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\defaults.js121436361000000000 0
@@ -16125,7 +16185,10 @@
 78C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\es-abstract\5\ToUint32.js121436361000000000 0
 71C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\fp\chain.js121436361000000000 0
 75C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\fp\cloneDeep.js121436361000000000 0
+<<<<<<< HEAD
 66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.9a61763b.js.map132654413418418687 0
+=======
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 79C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\fp\cloneDeepWith.js121436361000000000 0
 102C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\core-js\stable\typed-array\uint8-clamped-array.js121436361000000000 0
 76C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\lodash\fp\complement.js121436361000000000 0
@@ -16524,7 +16587,15 @@
 87C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema-traverse\spec\fixtures132636079303748146 1
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema-traverse\spec\index.spec.js131702816850000000 0
 80C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-format\locale\ar-EH.json121436361000000000 0
+<<<<<<< HEAD
 55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132654413418608689 0
+=======
+<<<<<<< HEAD
+55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132654409760157928 0
+=======
+55C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.html132653350149846264 0
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-00132636079306238131 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-01132636079303388119 1
 73C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\json-schema\draft-03132636079305008142 1
@@ -17375,7 +17446,10 @@
 104C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\icss-utils\node_modules\postcss\docs\source-maps.md121436361000000000 0
 77C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\fs\src\NodeFS.js121436361000000000 0
 99C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\icss-utils\node_modules\postcss\docs\syntax.md121436361000000000 0
+<<<<<<< HEAD
 62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.2647431d.js132654413417798822 0
+=======
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 110C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\icss-utils\node_modules\postcss\docs\guidelines\plugin.md121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\d3-transition\src\transition\index.js132426849630000000 0
 93C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\icss-utils\node_modules\has-flag\license131408182550000000 0
@@ -24124,6 +24198,13 @@
 110C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\getOppositeVariationPlacement.js121436361000000000 0
 115C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\getOppositeVariationPlacement.js.flow121436361000000000 0
 93C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\getVariation.js121436361000000000 0
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.96c14fcb.css.map132654365797252231 0
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 85C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\math.js121436361000000000 0
 90C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\math.js.flow121436361000000000 0
 92C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@popperjs\core\lib\utils\mergeByName.js121436361000000000 0
@@ -24351,7 +24432,10 @@
 78C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\glob.js121436361000000000 0
 84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\countLines.js121436361000000000 0
 84C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\DefaultMap.js121436361000000000 0
+<<<<<<< HEAD
 66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.ce476a7e.js.map132654413418598719 0
+=======
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
 82C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\Deferred.js121436361000000000 0
 94C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\generateBuildMetrics.js121436361000000000 0
 88C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\@parcel\utils\src\getCertificate.js121436361000000000 0
@@ -26042,9 +26126,39 @@
 62C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uuid132636079427541948 0
 66C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\uuid.ps1132636079427541948 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\node_modules\.bin\which.ps1132636079427631968 0
+<<<<<<< HEAD
 62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132654413418138688 0
 66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132654413418238694 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132654409252180525 0
 63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css132654409760217957 0
 67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css.map132654409760307903 0
 62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.9a61763b.js132654413418288688 0
+=======
+<<<<<<< HEAD
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132654409252290524 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132654409252370526 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132654409252180525 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css132654409760217957 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css.map132654409760307903 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.b6898a82.js132654409760257928 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.b6898a82.js.map132654409760467923 0
+=======
+62C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js132653348824601000 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.3fafb3e2.js.map132653348824700975 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.542a857c.css.map132653348824510959 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css132653350149906213 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.96c14fcb.css.map132653350150006268 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\docs\index.fb7eece5.js.map132653350150096206 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.2647431d.js132654297411931463 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js132654365527397841 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.3fafb3e2.js.map132654365527477834 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css132654365527117889 0
+67C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.542a857c.css.map132654365527277824 0
+63C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.96c14fcb.css132654365797162285 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.9a61763b.js132654351736366356 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.9a61763b.js.map132654351738096376 0
+62C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.ce476a7e.js132654365797192344 0
+66C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.ce476a7e.js.map132654365797362282 0
+55C:\Users\Pavel\Desktop\INFO\474\info474\dist\index.html132654365797102244 0
+>>>>>>> parent of 0ef0e92 (axes)
+>>>>>>> 974aaef7b22ea0c487d2e922c7b5897b25c48bbc
