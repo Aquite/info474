@@ -66,6 +66,12 @@ const Assignment3 = () => {
   // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
   const [yearRange, setYearRange] = useState([2017, 2017]);
 
+  const changeYear = (y) => {
+    if (yearRange[0] != y && yearRange[1] != y) {
+      setYearRange([y, y]);
+    }
+  };
+
   // Wrangling
   // Isolate to countries
 
@@ -272,7 +278,7 @@ const Assignment3 = () => {
         )
           return (
             <circle
-              key={index}
+              key={index + " circle"}
               cx={getXForYear(row["Year"])}
               cy={getYForPercentage(row[women])}
               r="3"
@@ -314,7 +320,7 @@ const Assignment3 = () => {
                   const h = highlight.has(d["Country Code"]) === true;
                   return (
                     <line
-                      key={i}
+                      key={i + " barcode"}
                       x1={s / 2 - halfCodeWidth}
                       y1={yScale(d[women])}
                       x2={s / 2 + halfCodeWidth + (h ? 10 : 0)}
@@ -456,6 +462,29 @@ const Assignment3 = () => {
               tickTextFill={"#333333"}
               numTicks={26}
             />
+            {[...Array(27).keys()].map((value) => {
+              return yearRange[0] == yearRange[1] &&
+                yearRange[0] == value + 1991 ? (
+                <rect
+                  key={value}
+                  x={timeScaleReverse(new Date(value + 1991, 01, 01)) - 15}
+                  y={s / 4 - m * 2 + 5}
+                  height={30}
+                  width={30}
+                  style={{ fill: "steelblue", fillOpacity: "0.15" }}
+                />
+              ) : (
+                <rect
+                  key={value}
+                  x={timeScaleReverse(new Date(value + 1991, 01, 01)) - 15}
+                  y={s / 4 - m * 2 + 5}
+                  height={30}
+                  width={30}
+                  style={{ fillOpacity: "0" }}
+                  onClick={() => setYearRange([1991 + value, 1991 + value])}
+                />
+              );
+            })}
             <SVGBrush
               brushType="x"
               getEventMouse={(event) => {
