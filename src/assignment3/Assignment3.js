@@ -556,10 +556,13 @@ const Assignment3 = () => {
   //line plot stuff
 
   let highlightArray = [...highlight];
-  //console.log(highlightArray);
 
-  const minYear = 1991; //set to a random year for testing
-  const maxYear = 2017; //set to a random year for testing
+  const minYear = yearRange[0]; //set to a random year for testing
+  let maxYear = yearRange[1]; //set to a random year for testing
+  if((yearRange[0] + 5) > yearRange[1])
+  {
+    maxYear = yearRange[0] + 5;
+  }
   let xAxisLength = s - m - 45;
   let xintervalLength = xAxisLength / (maxYear - minYear);
   function getXForYear(year) {
@@ -572,40 +575,91 @@ const Assignment3 = () => {
   const xScale = scaleLinear()
     .domain([minYear, maxYear])
     .range([m, s - m]);
+  
+  let [constLineplotColors, updateLineplotColors] = useState({});
+
   let highLightedCountryData = highlightArray.map(function (countryCode) {
-    let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    let countryData = {};
+    let countryName = "Unknown Country";
+    data.forEach(function(row){
+      if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear)
+      {
+        countryData[parseInt(row["Year"])] = row[women];
+        countryName = row["Country Name"];
+        if(constLineplotColors[countryCode] === undefined)
+        {
+          constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+          updateLineplotColors({...constLineplotColors});
+        }
+      }
+    })
+    let color = constLineplotColors[countryCode];
+    if(countryCode === "TCA")
+      console.log(countryData)
+    let countryDots = Object.keys(countryData).map(function(year){
+      return (
+        <circle
+          key={countryCode + year + " circle"}
+          cx={getXForYear(year)}
+          cy={getYForPercentage(countryData[year])}
+          r="3"
+          stroke="black"
+          fill={color}
+        >
+          <title>{countryName + ", " + year + ": " + countryData[year]}</title>
+        </circle>
+      );
+    })
+    let countryLines = Object.keys(countryData).map(function(year, index){
+      let nextYear = parseInt(year) + 1;
+      if(year < maxYear && countryData[nextYear] !== undefined)// || year === minYear + 1)
+      {
+        return (
+          <line
+            key={countryCode + year + "line"}
+            x1={getXForYear(year)}
+            y1={getYForPercentage(countryData[year])}
+            x2={getXForYear(nextYear)}
+            y2={getYForPercentage(countryData[nextYear])}
+            stroke="black"
+          > 
+            <title>{countryName}</title>
+          </line>
+        );
+      }
+    })
     return {
       country: countryCode,
       countryColor: color,
-      dots: data.map(function (row, index) {
-        if (
-          row["Country Code"] === countryCode &&
-          row["Year"] >= minYear &&
-          row["Year"] <= maxYear
-        )
-          return (
-            <circle
-              key={index + " circle"}
-              cx={getXForYear(row["Year"])}
-              cy={getYForPercentage(row[women])}
-              r="3"
-              stroke="black"
-              fill={color}
-            />
-          );
-      }),
+      dots: countryDots,
+      lines: countryLines
     };
   });
   let dots = highLightedCountryData.map(function (row, index) {
     return row.dots;
   });
+  let lines = highLightedCountryData.map(function (row, index) {
+    return row.lines;
+  });
+
+  const timeScaleLineGraph = scaleTime()
+    .domain([new Date(minYear, 1, 1), new Date(maxYear, 1, 1)])
+    .range([45, s-m]);
 
   const Linegraph = (
     <svg width={s} height={s}>
       {yLabels(50)}
       <line y1={m} y2={s - m} x1={45} x2={45} stroke="black" />
       <line x1={45} x2={s - m} y1={s - m} y2={s - m} stroke="black" />
+      {lines}
       {dots}
+      <AxisBottom
+              scale={timeScaleLineGraph}
+              top={s  - m }
+              stroke={"#333333"}
+              tickTextFill={"#333333"}
+            />
     </svg>
   );
   //end of line plot stuff

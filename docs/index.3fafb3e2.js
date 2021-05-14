@@ -1056,7 +1056,7 @@ try {
   var _AppDefault = _parcelHelpers.interopDefault(_App);
   require("bootstrap/dist/css/bootstrap.min.css");
   var _reactRouterDom = require("react-router-dom");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\index.js";
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/index.js";
   _reactDomDefault.default.render(/*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.StrictMode, {
     __self: undefined,
     __source: {
@@ -26298,7 +26298,7 @@ try {
   var _assignment3Assignment3JsDefault = _parcelHelpers.interopDefault(_assignment3Assignment3Js);
   var _HomeJs = require("./Home.js");
   var _HomeJsDefault = _parcelHelpers.interopDefault(_HomeJs);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\App.js";
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/App.js";
   const App = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -30335,7 +30335,7 @@ try {
   var _reactBootstrapNav = require("react-bootstrap/Nav");
   var _reactBootstrapNavDefault = _parcelHelpers.interopDefault(_reactBootstrapNav);
   var _reactRouterBootstrap = require("react-router-bootstrap");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Header.js";
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/Header.js";
   const Header = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -33872,7 +33872,7 @@ try {
   var _d3Array = require("d3-array");
   var _d3Scale = require("d3-scale");
   var _reactSimpleMaps = require("react-simple-maps");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/assignment2/Assignment2.js", _s = $RefreshSig$();
   const Assignment2 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -45730,7 +45730,7 @@ try {
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
   var _reactSvgBrush = require("react-svg-brush");
   var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment3\\Assignment3.js", _s = $RefreshSig$();
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/assignment3/Assignment3.js", _s = $RefreshSig$();
   const Assignment3 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -45934,11 +45934,13 @@ try {
     const changeScale = _d3Scale.scaleLinear().domain([-15, 0, 15]).range(["#b54646", "#f2f2f2", "#46b557"]);
     // line plot stuff
     let highlightArray = [...highlight];
-    // console.log(highlightArray);
-    const minYear = 1991;
+    const minYear = yearRange[0];
     // set to a random year for testing
-    const maxYear = 2017;
+    let maxYear = yearRange[1];
     // set to a random year for testing
+    if (yearRange[0] + 5 > yearRange[1]) {
+      maxYear = yearRange[0] + 5;
+    }
     let xAxisLength = s - m - 45;
     let xintervalLength = xAxisLength / (maxYear - minYear);
     function getXForYear(year) {
@@ -45949,41 +45951,99 @@ try {
       return s - m - yAxisLength * (percentage / 100);
     }
     const xScale = _d3Scale.scaleLinear().domain([minYear, maxYear]).range([m, s - m]);
+    let [constLineplotColors, updateLineplotColors] = _react.useState({});
     let highLightedCountryData = highlightArray.map(function (countryCode) {
-      let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-      return {
-        country: countryCode,
-        countryColor: color,
-        dots: data.map(function (row, index) {
-          if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) return (
-            /*#__PURE__*/_reactDefault.default.createElement("circle", {
-              key: index + " circle",
-              cx: getXForYear(row["Year"]),
-              cy: getYForPercentage(row[women]),
-              r: "3",
+      let countryData = {};
+      let countryName = "Unknown Country";
+      data.forEach(function (row) {
+        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
+          countryData[parseInt(row["Year"])] = row[women];
+          countryName = row["Country Name"];
+          if (constLineplotColors[countryCode] === undefined) {
+            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            updateLineplotColors({
+              ...constLineplotColors
+            });
+          }
+        }
+      });
+      let color = constLineplotColors[countryCode];
+      if (countryCode === "TCA") console.log(countryData);
+      let countryDots = Object.keys(countryData).map(function (year) {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: countryCode + year + " circle",
+            cx: getXForYear(year),
+            cy: getYForPercentage(countryData[year]),
+            r: "3",
+            stroke: "black",
+            fill: color,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 602,
+              columnNumber: 9
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 610,
+              columnNumber: 11
+            }
+          }, countryName + ", " + year + ": " + countryData[year]))
+        );
+      });
+      let countryLines = Object.keys(countryData).map(function (year, index) {
+        let nextYear = parseInt(year) + 1;
+        if (year < maxYear && countryData[nextYear] !== undefined) // || year === minYear + 1)
+        {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: countryCode + year + "line",
+              x1: getXForYear(year),
+              y1: getYForPercentage(countryData[year]),
+              x2: getXForYear(nextYear),
+              y2: getYForPercentage(countryData[nextYear]),
               stroke: "black",
-              fill: color,
               __self: this,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 587,
+                lineNumber: 619,
+                columnNumber: 11
+              }
+            }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+              __self: this,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 627,
                 columnNumber: 13
               }
-            })
+            }, countryName))
           );
-        })
+        }
+      });
+      return {
+        country: countryCode,
+        countryColor: color,
+        dots: countryDots,
+        lines: countryLines
       };
     });
     let dots = highLightedCountryData.map(function (row, index) {
       return row.dots;
     });
+    let lines = highLightedCountryData.map(function (row, index) {
+      return row.lines;
+    });
+    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear, 1, 1)]).range([45, s - m]);
     const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
       width: s,
       height: s,
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 604,
+        lineNumber: 651,
         columnNumber: 5
       }
     }, yLabels(50), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -45995,7 +46055,7 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 606,
+        lineNumber: 653,
         columnNumber: 7
       }
     }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -46007,31 +46067,42 @@ try {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 607,
+        lineNumber: 654,
         columnNumber: 7
       }
-    }), dots);
+    }), lines, dots, /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+      scale: timeScaleLineGraph,
+      top: s - m,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 657,
+        columnNumber: 7
+      }
+    }));
     // end of line plot stuff
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 614,
+          lineNumber: 668,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 615,
+          lineNumber: 669,
           columnNumber: 7
         }
       }, "Assignment 3"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 617,
+          lineNumber: 671,
           columnNumber: 7
         }
       }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement("h2", {
@@ -46039,28 +46110,28 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 621,
+          lineNumber: 675,
           columnNumber: 7
         }
       }, "Main Questions Investigated"), /*#__PURE__*/_reactDefault.default.createElement("ol", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 622,
+          lineNumber: 676,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 623,
+          lineNumber: 677,
           columnNumber: 9
         }
       }, "What trends are there in the change of female labor force participation over time?", " "), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 627,
+          lineNumber: 681,
           columnNumber: 9
         }
       }, "Are there any geographical trends tied to the amount of women in the labor force?", " ")), /*#__PURE__*/_reactDefault.default.createElement("h2", {
@@ -46068,56 +46139,56 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 632,
+          lineNumber: 686,
           columnNumber: 7
         }
       }, "Design Rationale"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 633,
+          lineNumber: 687,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 634,
+          lineNumber: 688,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 635,
+          lineNumber: 689,
           columnNumber: 11
         }
       }, "How did we choose our particular visual encodings and interaction techniques?", " "), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 639,
+          lineNumber: 693,
           columnNumber: 11
         }
       }, " ", "First, we discussed what kind of data we would need to visualize in order to answer our initial questions. We decided to use a chloropleth map of the world to easily compare and contrast the labor force participation rates between countries and easily discover larger regional/continental trends. This map uses shades of blue to indicate a country's rate of female labor force participation, where a higher percentage of women in the workforce is encoded as a darker shade of blue. We chose to include this color encoding to encourage users to select countries that visually stood out to them to further explore their data in the other two visualizations. To make these comparisons between countries easier, we created a bar code graph that showed the ratio of women to men in each country's labor force. This visualization lets users see comparisons faster than the chloropleth map. To answer our first question about labor force participation rates over time, we added an interactive timeline that changed the views on the visualizations above it. Users can select beginning and end points on the timeline to see how their selected countries' female labor force participation rates changed over time. When a user has set a range of dates, the barcode graph changes into a line graph to show countries' female labor force participation rates year after year. This lets users more easily visualize the differences and trends in labor force participation rates in each selected country.", " ")), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 666,
+          lineNumber: 720,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 667,
+          lineNumber: 721,
           columnNumber: 11
         }
       }, "What alternatives did you consider and how did you arrive at your ultimate choices?"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 671,
+          lineNumber: 725,
           columnNumber: 11
         }
       }, " ", "We initially considered making all of our visualizations on a single chloropleth map with different views the user could choose from to look at different aspects of the data. We realized it would be harder to visually encode changes over time in a map, so we decided to make a line chart to show these changes instead. We also considered making visualizations on other parts of the data that could have partially explained the female labor force participation rates, but we realized that too many factors go into these statistics, many of which are not easily quantifiable such as cultural values and labor laws. We narrowed the scope of our visualizations to highlight differences between countries, because explaining how or why these differences came to be is better suited for another medium, like a book or lecture series.", " "))), /*#__PURE__*/_reactDefault.default.createElement("h2", {
@@ -46125,70 +46196,70 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 689,
+          lineNumber: 743,
           columnNumber: 7
         }
       }, "Development Process"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 690,
+          lineNumber: 744,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 691,
+          lineNumber: 745,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 692,
+          lineNumber: 746,
           columnNumber: 11
         }
       }, "Roughly how much time did you spend developing your application (in people-hours)?", " "), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 696,
+          lineNumber: 750,
           columnNumber: 11
         }
       }, " ", "We divided the work in a way where everyone paired up to make one visualization and its interactive elements. In total, we spent about 20-25 people-hours working on this application. We were able to meet early on and decide on a direction to take the visualizations in so everyone could spend the rest of the week working on their code.", " ")), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 705,
+          lineNumber: 759,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 706,
+          lineNumber: 760,
           columnNumber: 11
         }
       }, "What aspects took the most time?"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 707,
+          lineNumber: 761,
           columnNumber: 11
         }
       }, " ", "Getting the line graph to display countries that were selected by the user on the chloropleth map took the most amount of time. Finding a time to meet outside of class to plan for the assignment took some time as well, due to our conflicting class schedules. The most difficult part was optimizing react for tooltips, which we ended up not being able to do. We used to have tooltips on the map that displayed the country and respective data, but every time it entered or left a country the entire map rebuilt, lagging it out. Instead, we had to use a non-fancy title element. We also had the same issue for live-scrubbing, so we instead chose to update scrubbing only at the end."))), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 724,
+          lineNumber: 778,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 726,
+          lineNumber: 780,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -46197,7 +46268,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 727,
+          lineNumber: 781,
           columnNumber: 11
         }
       }, groupings.map((g, i) => {
@@ -46207,7 +46278,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 730,
+              lineNumber: 784,
               columnNumber: 17
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("circle", {
@@ -46224,7 +46295,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 731,
+              lineNumber: 785,
               columnNumber: 19
             }
           }), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -46241,7 +46312,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 746,
+              lineNumber: 800,
               columnNumber: 19
             }
           }, g.name))
@@ -46250,7 +46321,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 764,
+          lineNumber: 818,
           columnNumber: 11
         }
       }), yearRange[0] != yearRange[1] ? Linegraph : /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -46259,7 +46330,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 768,
+          lineNumber: 822,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
@@ -46272,7 +46343,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 769,
+          lineNumber: 823,
           columnNumber: 15
         }
       }), dataYearOnly(yearRange[0]).map((d, i) => {
@@ -46292,14 +46363,14 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 781,
+                lineNumber: 835,
                 columnNumber: 21
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("title", {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 792,
+                lineNumber: 846,
                 columnNumber: 23
               }
             }, d["Country Name"]))
@@ -46311,7 +46382,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 799,
+          lineNumber: 853,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
@@ -46323,14 +46394,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 800,
+          lineNumber: 854,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ZoomableGroup, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 807,
+          lineNumber: 861,
           columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_vxPattern.PatternLines, {
@@ -46343,7 +46414,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 808,
+          lineNumber: 862,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
@@ -46352,7 +46423,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 816,
+          lineNumber: 870,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
@@ -46360,7 +46431,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 817,
+          lineNumber: 871,
           columnNumber: 17
         }
       }, ({geographies}) => geographies.map(geo => {
@@ -46380,7 +46451,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 834,
+              lineNumber: 888,
               columnNumber: 25
             }
           }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
@@ -46391,14 +46462,14 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 835,
+              lineNumber: 889,
               columnNumber: 27
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("title", {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 847,
+              lineNumber: 901,
               columnNumber: 29
             }
           }, d ? d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[women] : c[0][1][women] - d[women]) * 100) / 100 + "%" : "No data")), h ? /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
@@ -46409,21 +46480,21 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 862,
+              lineNumber: 916,
               columnNumber: 29
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("title", {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 868,
+              lineNumber: 922,
               columnNumber: 31
             }
           }, d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[women] : c[0][1][women] - d[women]) * 100) / 100 + "%")) : /*#__PURE__*/_reactDefault.default.createElement("div", {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 881,
+              lineNumber: 935,
               columnNumber: 29
             }
           }))
@@ -46439,21 +46510,21 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 890,
+          lineNumber: 944,
           columnNumber: 13
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 901,
+          lineNumber: 955,
           columnNumber: 11
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 902,
+          lineNumber: 956,
           columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -46463,7 +46534,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 903,
+          lineNumber: 957,
           columnNumber: 11
         }
       }, worldData.map((d, i) => {
@@ -46478,14 +46549,14 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 907,
+                lineNumber: 961,
                 columnNumber: 19
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("title", {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 914,
+                lineNumber: 968,
                 columnNumber: 21
               }
             }, "World: " + worldData[i - 1][women]))
@@ -46501,7 +46572,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 919,
+          lineNumber: 973,
           columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
@@ -46515,7 +46586,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 927,
+          lineNumber: 981,
           columnNumber: 13
         }
       }), [...Array(27).keys()].map(value => {
@@ -46532,7 +46603,7 @@ try {
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 939,
+            lineNumber: 993,
             columnNumber: 17
           }
         }) : /*#__PURE__*/_reactDefault.default.createElement("rect", {
@@ -46548,7 +46619,7 @@ try {
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 948,
+            lineNumber: 1002,
             columnNumber: 17
           }
         });
@@ -46571,13 +46642,13 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 959,
+          lineNumber: 1013,
           columnNumber: 13
         }
       }))))
     );
   };
-  _s(Assignment3, "2mqFPsXKG/QESD3eOMh0n/wjD68=", false, function () {
+  _s(Assignment3, "d9LSci7H2ry5pfG3AEPt8XxRfrA=", false, function () {
     return [_hooksUseFetch.useFetch];
   });
   _c = Assignment3;
@@ -60015,7 +60086,7 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require('react');
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Home.js";
+  var _jsxFileName = "/mnt/c/info474/newclone2/info474/src/Home.js";
   const Home = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
