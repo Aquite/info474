@@ -22,58 +22,319 @@ const Assignment3 = () => {
     "https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv"
   );
 
-  // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
-  // Do not use setHighlight because you won't do it properly. See the below function
-  const [highlight, setHighlight] = useState(
-    new Set([
-      "PSE",
-      "DZA",
-      "BHR",
-      "EGY",
-      "IRN",
-      "IRQ",
-      "ISR",
-      "JOR",
-      "KWT",
-      "LBN",
-      "LBY",
-      "MAR",
-      "OMN",
-      "QAT",
-      "SAU",
-      "SYR",
-      "TUN",
-      "ARE",
-      "YEM",
-    ])
-  );
-
-  // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
-  const toggleHighlight = (c) => {
-    if (c != null) {
-      if (highlight.has(c["Country Code"])) {
-        highlight.delete(c["Country Code"]);
-        setHighlight(new Set(highlight));
-      } else {
-        setHighlight(new Set(highlight.add(c["Country Code"])));
-      }
-    }
-  };
-
-  // Use this with onMouseEnter and onMouseLeave to highlight areas you want
-  const [tooltipContent, setTooltipContent] = useState("");
-
-  // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
-  const [yearRange, setYearRange] = useState([2017, 2017]);
-
-  const changeYear = (y) => {
-    if (yearRange[0] != y && yearRange[1] != y) {
-      setYearRange([y, y]);
-    }
-  };
-
-  // Wrangling
-  // Isolate to countries
+  // Have fun scrolling
+  const groupings = [
+    { name: "World", codes: new Set([]) },
+    {
+      name: "North America",
+      codes: new Set([
+        "ABW",
+        "AIA",
+        "ATG",
+        "BES",
+        "BHS",
+        "BLM",
+        "BLZ",
+        "BMU",
+        "BRB",
+        "CAN",
+        "CRI",
+        "CUB",
+        "CUW",
+        "CYM",
+        "DMA",
+        "DOM",
+        "GLP",
+        "GRD",
+        "GRL",
+        "GTM",
+        "HND",
+        "HTI",
+        "JAM",
+        "KNA",
+        "LCA",
+        "MAF",
+        "MEX",
+        "MSR",
+        "MTQ",
+        "NIC",
+        "PAN",
+        "PRI",
+        "SLV",
+        "SPM",
+        "SXM",
+        "TCA",
+        "TTO",
+        "UMI",
+        "USA",
+        "VCT",
+        "VGB",
+        "VIR",
+      ]),
+    },
+    {
+      name: "South America",
+      codes: new Set([
+        "ARG",
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "ECU",
+        "FLK",
+        "GUF",
+        "GUY",
+        "PER",
+        "PRY",
+        "SUR",
+        "URY",
+        "VEN",
+      ]),
+    },
+    {
+      name: "Europe",
+      codes: new Set([
+        "ALA",
+        "ALB",
+        "AND",
+        "ARM",
+        "AUT",
+        "AZE",
+        "BEL",
+        "BGR",
+        "BIH",
+        "BLR",
+        "CHE",
+        "CYP",
+        "CZE",
+        "DEU",
+        "DNK",
+        "ESP",
+        "EST",
+        "FIN",
+        "FRA",
+        "FRO",
+        "GBR",
+        "GEO",
+        "GGY",
+        "GIB",
+        "GRC",
+        "HRV",
+        "HUN",
+        "IMN",
+        "IRL",
+        "ISL",
+        "ITA",
+        "JEY",
+        "KAZ",
+        "LIE",
+        "LTU",
+        "LUX",
+        "LVA",
+        "MCO",
+        "MDA",
+        "MKD",
+        "MLT",
+        "MNE",
+        "NLD",
+        "NOR",
+        "POL",
+        "PRT",
+        "ROU",
+        "RUS",
+        "SJM",
+        "SMR",
+        "SRB",
+        "SVK",
+        "SVN",
+        "SWE",
+        "TUR",
+        "UKR",
+        "VAT",
+        "XKX",
+      ]),
+    },
+    {
+      name: "MENA",
+      codes: new Set([
+        "PSE",
+        "DZA",
+        "BHR",
+        "EGY",
+        "IRN",
+        "IRQ",
+        "ISR",
+        "JOR",
+        "KWT",
+        "LBN",
+        "LBY",
+        "MAR",
+        "OMN",
+        "QAT",
+        "SAU",
+        "SYR",
+        "TUN",
+        "ARE",
+        "YEM",
+      ]),
+    },
+    {
+      name: "Asia",
+      codes: new Set([
+        "AFG",
+        "ARE",
+        "ARM",
+        "AZE",
+        "BGD",
+        "BHR",
+        "BRN",
+        "BTN",
+        "CCK",
+        "CHN",
+        "CXR",
+        "CYP",
+        "EGY",
+        "GEO",
+        "HKG",
+        "IDN",
+        "IND",
+        "IRN",
+        "IRQ",
+        "ISR",
+        "JOR",
+        "JPN",
+        "KAZ",
+        "KGZ",
+        "KHM",
+        "KOR",
+        "KWT",
+        "LAO",
+        "LBN",
+        "LKA",
+        "MAC",
+        "MDV",
+        "MMR",
+        "MNG",
+        "MYS",
+        "NPL",
+        "OMN",
+        "PAK",
+        "PHL",
+        "PRK",
+        "PSE",
+        "QAT",
+        "RUS",
+        "SAU",
+        "SGP",
+        "SYR",
+        "THA",
+        "TJK",
+        "TKM",
+        "TLS",
+        "TUR",
+        "TWN",
+        "UZB",
+        "VNM",
+        "YEM",
+      ]),
+    },
+    {
+      name: "Africa",
+      codes: new Set([
+        "AGO",
+        "ATF",
+        "BDI",
+        "BEN",
+        "BFA",
+        "BWA",
+        "CAF",
+        "CIV",
+        "CMR",
+        "COD",
+        "COG",
+        "COM",
+        "CPV",
+        "DJI",
+        "DZA",
+        "EGY",
+        "ERI",
+        "ESH",
+        "ETH",
+        "GAB",
+        "GHA",
+        "GIN",
+        "GMB",
+        "GNB",
+        "GNQ",
+        "IOT",
+        "KEN",
+        "LBR",
+        "LBY",
+        "LSO",
+        "MAR",
+        "MDG",
+        "MLI",
+        "MOZ",
+        "MRT",
+        "MUS",
+        "MWI",
+        "MYT",
+        "NAM",
+        "NER",
+        "NGA",
+        "REU",
+        "RWA",
+        "SDN",
+        "SEN",
+        "SHN",
+        "SLE",
+        "SOM",
+        "SSD",
+        "STP",
+        "SWZ",
+        "SYC",
+        "TCD",
+        "TGO",
+        "TUN",
+        "TZA",
+        "UGA",
+        "ZAF",
+        "ZMB",
+        "ZWE",
+      ]),
+    },
+    {
+      name: "Oceania",
+      codes: new Set([
+        "ASM",
+        "AUS",
+        "COK",
+        "FJI",
+        "FSM",
+        "GUM",
+        "KIR",
+        "MHL",
+        "MNP",
+        "NCL",
+        "NFK",
+        "NIU",
+        "NRU",
+        "NZL",
+        "PCN",
+        "PLW",
+        "PNG",
+        "PYF",
+        "SLB",
+        "TKL",
+        "TON",
+        "TUV",
+        "UMI",
+        "VUT",
+        "WLF",
+        "WSM",
+      ]),
+    },
+  ];
 
   // List of country codes that aren't countries
   // Should not be included in the data set
@@ -126,6 +387,34 @@ const Assignment3 = () => {
     "MIC",
     "UMC",
   ];
+
+  // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
+  // Do not use setHighlight because you won't do it properly. See the below function
+  const [highlight, setHighlight] = useState(new Set(groupings[3].codes));
+
+  // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
+  const toggleHighlight = (c) => {
+    if (c != null) {
+      if (highlight.has(c["Country Code"])) {
+        highlight.delete(c["Country Code"]);
+        setHighlight(new Set(highlight));
+      } else {
+        setHighlight(new Set(highlight.add(c["Country Code"])));
+      }
+    }
+  };
+
+  // Use this with onMouseEnter and onMouseLeave to highlight areas you want
+  const [tooltipContent, setTooltipContent] = useState("");
+
+  // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
+  const [yearRange, setYearRange] = useState([2017, 2017]);
+
+  const changeYear = (y) => {
+    if (yearRange[0] != y && yearRange[1] != y) {
+      setYearRange([y, y]);
+    }
+  };
 
   // Checks whether a country's code is included in the dataset
   const checkCode = (d) => {
@@ -312,6 +601,44 @@ const Assignment3 = () => {
         <p>loading data...</p>
       ) : (
         <div>
+          <svg width={s * 2} height={s / 4}>
+            {groupings.map((g, i) => {
+              return (
+                <React.Fragment key={i + " frag"}>
+                  <circle
+                    cx={(s / groupings.length) * 2 * i + s / groupings.length}
+                    cy={s / 8}
+                    r={50}
+                    style={{ fill: "steelblue" }}
+                    fillOpacity={
+                      [...highlight].every((e) => g.codes.has(e)) &&
+                      [...g.codes].every((e) => highlight.has(e))
+                        ? "0.5"
+                        : "0.15"
+                    }
+                    onClick={() => {
+                      setHighlight(new Set(g.codes));
+                    }}
+                  />
+                  <text
+                    x={(s / groupings.length) * 2 * i + s / groupings.length}
+                    y={s / 8}
+                    textAnchor="middle"
+                    style={{
+                      fontSize: 14,
+                      fontFamily: "Gill Sans, sans-serif",
+                    }}
+                    onClick={() => {
+                      setHighlight(new Set(g.codes));
+                    }}
+                  >
+                    {g.name}
+                  </text>
+                </React.Fragment>
+              );
+            })}
+          </svg>
+          <br />
           {yearRange[0] != yearRange[1] ? (
             Linegraph
           ) : (
@@ -330,7 +657,10 @@ const Assignment3 = () => {
                       fill="none"
                       stroke={h ? "#776865" : "steelblue"}
                       strokeOpacity={h ? 0.5 : 0.33}
-                    />
+                      onClick={() => toggleHighlight(d)}
+                    >
+                      <title>{d["Country Name"]}</title>
+                    </line>
                   );
                 }
               })}
@@ -374,24 +704,6 @@ const Assignment3 = () => {
                         <React.Fragment key={geo.rsmKey + "frag"}>
                           <Geography
                             onClick={() => toggleHighlight(d)}
-                            onMouseEnter={() => {
-                              if (d != null) {
-                                setTooltipContent(
-                                  d["Country Name"] +
-                                    ": " +
-                                    Math.round(
-                                      (yearRange[0] == yearRange[1]
-                                        ? d[women]
-                                        : c[0][1][women] - d[women]) * 100
-                                    ) /
-                                      100 +
-                                    "%"
-                                );
-                              }
-                            }}
-                            onMouseLeave={() => {
-                              setTooltipContent("");
-                            }}
                             key={geo.rsmKey}
                             geography={geo}
                             fill={
@@ -401,32 +713,40 @@ const Assignment3 = () => {
                                   : colorScale(d[women])
                                 : "#F5F4F6"
                             }
-                          />
+                          >
+                            <title>
+                              {d
+                                ? d["Country Name"] +
+                                  ": " +
+                                  Math.round(
+                                    (yearRange[0] == yearRange[1]
+                                      ? d[women]
+                                      : c[0][1][women] - d[women]) * 100
+                                  ) /
+                                    100 +
+                                  "%"
+                                : "No data"}
+                            </title>
+                          </Geography>
                           {h ? (
                             <Geography
                               onClick={() => toggleHighlight(d)}
-                              onMouseEnter={() => {
-                                if (d != null) {
-                                  setTooltipContent(
-                                    d["Country Name"] +
-                                      ": " +
-                                      Math.round(
-                                        (yearRange[0] == yearRange[1]
-                                          ? d[women]
-                                          : c[0][1][women] - d[women]) * 100
-                                      ) /
-                                        100 +
-                                      "%"
-                                  );
-                                }
-                              }}
-                              onMouseLeave={() => {
-                                setTooltipContent("");
-                              }}
                               key={geo.rsmKey + "highlight"}
                               geography={geo}
                               fill={"url('#lines')"}
-                            />
+                            >
+                              <title>
+                                {d["Country Name"] +
+                                  ": " +
+                                  Math.round(
+                                    (yearRange[0] == yearRange[1]
+                                      ? d[women]
+                                      : c[0][1][women] - d[women]) * 100
+                                  ) /
+                                    100 +
+                                  "%"}
+                              </title>
+                            </Geography>
                           ) : (
                             <div />
                           )}
@@ -515,3 +835,23 @@ const Assignment3 = () => {
 };
 
 export default Assignment3;
+
+/*                            onMouseEnter={() => {
+                              if (d != null) {
+                                setTooltipContent(
+                                  d["Country Name"] +
+                                    ": " +
+                                    Math.round(
+                                      (yearRange[0] == yearRange[1]
+                                        ? d[women]
+                                        : c[0][1][women] - d[women]) * 100
+                                    ) /
+                                      100 +
+                                    "%"
+                                );
+                              }
+                            }}
+                            onMouseLeave={() => {
+                              setTooltipContent("");
+                            }}
+                            */
