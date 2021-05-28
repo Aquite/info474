@@ -22,6 +22,9 @@ export const Header = () => {
             <LinkContainer to="/assignment3">
               <Nav.Link>Assignment 3</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/final">
+              <Nav.Link>Final</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
