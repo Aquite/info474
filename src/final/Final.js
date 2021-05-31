@@ -12,6 +12,7 @@ import Barcode from "./components/Barcode.js";
 import Timeline from "./components/Timeline.js";
 import { cols } from "./ColumnNames.js";
 import Form from "react-bootstrap/Form";
+import Linegraph from "./components/Linegraph.js";
 import Col from "react-bootstrap/esm/Col";
 
 const Final = () => {
@@ -125,145 +126,11 @@ const Final = () => {
   };
 
   // Alternate Left Side: line plot stuff
-
-  let highlightArray = [...highlight];
-
-  const minYear = yearRange[0]; //set to a random year for testing
-  const maxYear = yearRange[1]; //set to a random year for testing
-  /*if (yearRange[0] + 5 > yearRange[1]) {
-    maxYear = yearRange[0] + 5;
-  }*/
-  let xAxisLength = s - m - 45;
-  let xintervalLength = xAxisLength / (maxYear - minYear);
-  function getXForYear(year) {
-    return 45 + xintervalLength * (year - minYear);
-  }
-  let yAxisLength = s - m + t - (m + t);
-  function getYForPercentage(percentage) {
-    return s - m - yAxisLength * (percentage / 100);
-  }
-  const xScale = scaleLinear()
-    .domain([minYear, maxYear])
-    .range([m, s - m]);
-
-  let [constLineplotColors, updateLineplotColors] = useState({});
-
-  let highLightedCountryData = highlightArray.map(function (countryCode) {
-    let countryData = {};
-    let countryName = "Unknown Country";
-    data.forEach(function (row) {
-      if (
-        row["Country Code"] === countryCode &&
-        row["Year"] >= minYear &&
-        row["Year"] <= maxYear
-      ) {
-        countryData[parseInt(row["Year"])] = row[women];
-        countryName = row["Country Name"];
-        if (constLineplotColors[countryCode] === undefined) {
-          constLineplotColors[countryCode] =
-            "#" + Math.floor(Math.random() * 16777215).toString(16);
-          updateLineplotColors({ ...constLineplotColors });
-        }
-      }
+  const dataInDateRange = (minYear, maxYear) => {
+    return dataCountriesOnly.filter((d) => {
+      return d.Year >= minYear && d.Year <= maxYear;
     });
-    let color = constLineplotColors[countryCode];
-    let countryDots = Object.keys(countryData).map(function (year) {
-      return (
-        <circle
-          key={countryCode + year + " circle"}
-          cx={getXForYear(year)}
-          cy={getYForPercentage(countryData[year])}
-          r="3"
-          stroke="black"
-          fill={color}
-        >
-          <title>{countryName + ", " + year + ": " + countryData[year]}</title>
-        </circle>
-      );
-    });
-    let countryLines = Object.keys(countryData).map(function (year, index) {
-      let nextYear = parseInt(year) + 1;
-      if (year < maxYear && countryData[nextYear] !== undefined) {
-        // || year === minYear + 1)
-        if (countryData[year] != 0 && countryData[nextYear] != 0) {
-          return (
-            <line
-              key={countryCode + year + "line"}
-              x1={getXForYear(year) - 1}
-              y1={getYForPercentage(countryData[year]) + 1}
-              x2={getXForYear(nextYear) - 1}
-              y2={getYForPercentage(countryData[nextYear]) + 1}
-              stroke="#776865"
-            >
-              <title>
-                {countryName +
-                  ", " +
-                  year +
-                  ": " +
-                  Math.round(countryData[year] * 100) / 100 +
-                  "%"}
-              </title>
-            </line>
-          );
-        }
-      }
-    });
-    return {
-      country: countryCode,
-      countryColor: color,
-      dots: countryDots,
-      lines: countryLines,
-    };
-  });
-  let dots = highLightedCountryData.map(function (row, index) {
-    return row.dots;
-  });
-  let lines = highLightedCountryData.map(function (row, index) {
-    return row.lines;
-  });
-
-  const timeScaleLineGraph = scaleTime()
-    .domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)])
-    .range([45, s - m]);
-
-  const Linegraph = (
-    <svg width={s} height={s}>
-      {lines}
-      {highlight.size == 0 ? (
-        <text
-          textAnchor="middle"
-          style={{
-            fontSize: 14,
-            fontFamily: "Gill Sans, sans-serif",
-          }}
-          x={s / 2}
-          y={s / 2}
-        >
-          Choose some countries above or on the map
-        </text>
-      ) : (
-        <React.Fragment />
-      )}
-      <AxisBottom
-        scale={timeScaleLineGraph}
-        top={s - m - 1}
-        stroke={"#333333"}
-        tickTextFill={"#333333"}
-        numTicks={
-          maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear
-        }
-      />
-      <AxisLeft
-        scale={yScale}
-        top={-1}
-        left={2 * m + 5}
-        stroke={"#333333"}
-        tickTextFill={"#333333"}
-        numTicks={5}
-      />
-    </svg>
-  );
-  //end of line plot stuff
+  };
 
   return (
     <div>
@@ -292,67 +159,77 @@ const Final = () => {
       {loading ? (
         <p>loading data...</p>
       ) : (
-        <div>
-          <Timeline
-            s={s}
-            m={m}
-            col={col}
-            worldData={worldData}
-            yearRange={yearRange}
-            setYearRange={setYearRange}
-            dataRangedHighlight={dataRangedHighlight}
-          />
-          <br />
+          <div>
+            <Timeline
+              s={s}
+              m={m}
+              col={col}
+              worldData={worldData}
+              yearRange={yearRange}
+              setYearRange={setYearRange}
+              dataRangedHighlight={dataRangedHighlight}
+            />
+            <br />
 
-          {yearRange[0] != yearRange[1] ? (
-            Linegraph
-          ) : (
-            <React.Fragment>
-              <Barcode
+            {yearRange[0] != yearRange[1] ? (
+              <Linegraph
                 s={s}
                 m={m}
-                col={col}
+                t={t}
                 yScale={yScale}
                 yearRange={yearRange}
                 highlight={highlight}
                 toggleHighlight={toggleHighlight}
-                dataYearOnly={dataYearOnly}
+                dataInDateRange={dataInDateRange}
+                setTooltipContent={setTooltipContent}
               />
-              <ReactTooltip id={"line"}></ReactTooltip>
-            </React.Fragment>
-          )}
-          <svg width={s} height={s}>
-            <WorldMap
-              col={col}
-              dataRangedEnds={dataRangedEnds}
-              setTooltipContent={setTooltipContent}
-              yearRange={yearRange}
-              highlight={highlight}
-              toggleHighlight={toggleHighlight}
-            />
+            ) : (
+                <React.Fragment>
+                  <Barcode
+                    s={s}
+                    m={m}
+                    col={col}
+                    yScale={yScale}
+                    yearRange={yearRange}
+                    highlight={highlight}
+                    toggleHighlight={toggleHighlight}
+                    dataYearOnly={dataYearOnly}
+                  />
+                  <ReactTooltip id={"line"}></ReactTooltip>
+                </React.Fragment>
+              )}
+            <svg width={s} height={s}>
+              <WorldMap
+                col={col}
+                dataRangedEnds={dataRangedEnds}
+                setTooltipContent={setTooltipContent}
+                yearRange={yearRange}
+                highlight={highlight}
+                toggleHighlight={toggleHighlight}
+              />
 
-            <text
-              x={s - m}
-              textAnchor="end"
-              y={m}
-              style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
-            >
-              {yearRange[0] == yearRange[1]
-                ? yearRange[0]
-                : yearRange[0] + " - " + yearRange[1]}
-            </text>
-          </svg>
-          <ReactTooltip>{tooltipContent}</ReactTooltip>
-          <br />
-          <ControlGroups
-            groupings={groupings}
-            s={s}
-            highlight={highlight}
-            setHighlight={setHighlight}
-          />
-          <br />
-        </div>
-      )}
+              <text
+                x={s - m}
+                textAnchor="end"
+                y={m}
+                style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
+              >
+                {yearRange[0] == yearRange[1]
+                  ? yearRange[0]
+                  : yearRange[0] + " - " + yearRange[1]}
+              </text>
+            </svg>
+            <ReactTooltip>{tooltipContent}</ReactTooltip>
+            <br />
+            <ControlGroups
+              groupings={groupings}
+              s={s}
+              highlight={highlight}
+              setHighlight={setHighlight}
+            />
+            <br />
+          </div>
+        )}
     </div>
   );
 };

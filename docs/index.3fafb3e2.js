@@ -1056,7 +1056,7 @@ try {
   var _AppDefault = _parcelHelpers.interopDefault(_App);
   require("bootstrap/dist/css/bootstrap.min.css");
   var _reactRouterDom = require("react-router-dom");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\index.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/index.js";
   _reactDomDefault.default.render(/*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.StrictMode, {
     __self: undefined,
     __source: {
@@ -26300,7 +26300,7 @@ try {
   var _finalFinalJsDefault = _parcelHelpers.interopDefault(_finalFinalJs);
   var _HomeJs = require("./Home.js");
   var _HomeJsDefault = _parcelHelpers.interopDefault(_HomeJs);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\App.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/App.js";
   const App = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -30347,7 +30347,7 @@ try {
   var _reactBootstrapNav = require("react-bootstrap/Nav");
   var _reactBootstrapNavDefault = _parcelHelpers.interopDefault(_reactBootstrapNav);
   var _reactRouterBootstrap = require("react-router-bootstrap");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Header.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/Header.js";
   const Header = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -33899,7 +33899,7 @@ try {
   var _d3Array = require("d3-array");
   var _d3Scale = require("d3-scale");
   var _reactSimpleMaps = require("react-simple-maps");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/assignment2/Assignment2.js", _s = $RefreshSig$();
   const Assignment2 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -45756,7 +45756,7 @@ try {
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
   var _reactSvgBrush = require("react-svg-brush");
   var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment3\\Assignment3.js", _s = $RefreshSig$();
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/assignment3/Assignment3.js", _s = $RefreshSig$();
   const Assignment3 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -60032,8 +60032,8 @@ try {
   var _hooksUseFetch = require("./hooks/useFetch");
   var _d3Scale = require("d3-scale");
   var _d3Array = require("d3-array");
-  var _vxScale = require("@vx/scale");
-  var _vxAxis = require("@vx/axis");
+  require("@vx/scale");
+  require("@vx/axis");
   var _componentsWorldMapJs = require("./components/WorldMap.js");
   var _componentsWorldMapJsDefault = _parcelHelpers.interopDefault(_componentsWorldMapJs);
   var _reactTooltip = require("react-tooltip");
@@ -60048,8 +60048,10 @@ try {
   var _ColumnNamesJs = require("./ColumnNames.js");
   var _reactBootstrapForm = require("react-bootstrap/Form");
   var _reactBootstrapFormDefault = _parcelHelpers.interopDefault(_reactBootstrapForm);
+  var _componentsLinegraphJs = require("./components/Linegraph.js");
+  var _componentsLinegraphJsDefault = _parcelHelpers.interopDefault(_componentsLinegraphJs);
   require("react-bootstrap/esm/Col");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\Final.js", _s = $RefreshSig$();
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/Final.js", _s = $RefreshSig$();
   const Final = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -60125,195 +60127,38 @@ try {
       });
     };
     // Alternate Left Side: line plot stuff
-    let highlightArray = [...highlight];
-    const minYear = yearRange[0];
-    // set to a random year for testing
-    const maxYear = yearRange[1];
-    // set to a random year for testing
-    /*if (yearRange[0] + 5 > yearRange[1]) {
-    maxYear = yearRange[0] + 5;
-    }*/
-    let xAxisLength = s - m - 45;
-    let xintervalLength = xAxisLength / (maxYear - minYear);
-    function getXForYear(year) {
-      return 45 + xintervalLength * (year - minYear);
-    }
-    let yAxisLength = s - m + t - (m + t);
-    function getYForPercentage(percentage) {
-      return s - m - yAxisLength * (percentage / 100);
-    }
-    const xScale = _d3Scale.scaleLinear().domain([minYear, maxYear]).range([m, s - m]);
-    let [constLineplotColors, updateLineplotColors] = _react.useState({});
-    let highLightedCountryData = highlightArray.map(function (countryCode) {
-      let countryData = {};
-      let countryName = "Unknown Country";
-      data.forEach(function (row) {
-        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
-          countryData[parseInt(row["Year"])] = row[women];
-          countryName = row["Country Name"];
-          if (constLineplotColors[countryCode] === undefined) {
-            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-            updateLineplotColors({
-              ...constLineplotColors
-            });
-          }
-        }
+    const dataInDateRange = (minYear, maxYear) => {
+      return dataCountriesOnly.filter(d => {
+        return d.Year >= minYear && d.Year <= maxYear;
       });
-      let color = constLineplotColors[countryCode];
-      let countryDots = Object.keys(countryData).map(function (year) {
-        return (
-          /*#__PURE__*/_reactDefault.default.createElement("circle", {
-            key: countryCode + year + " circle",
-            cx: getXForYear(year),
-            cy: getYForPercentage(countryData[year]),
-            r: "3",
-            stroke: "black",
-            fill: color,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 172,
-              columnNumber: 9
-            }
-          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 180,
-              columnNumber: 11
-            }
-          }, countryName + ", " + year + ": " + countryData[year]))
-        );
-      });
-      let countryLines = Object.keys(countryData).map(function (year, index) {
-        let nextYear = parseInt(year) + 1;
-        if (year < maxYear && countryData[nextYear] !== undefined) {
-          // || year === minYear + 1)
-          if (countryData[year] != 0 && countryData[nextYear] != 0) {
-            return (
-              /*#__PURE__*/_reactDefault.default.createElement("line", {
-                key: countryCode + year + "line",
-                x1: getXForYear(year) - 1,
-                y1: getYForPercentage(countryData[year]) + 1,
-                x2: getXForYear(nextYear) - 1,
-                y2: getYForPercentage(countryData[nextYear]) + 1,
-                stroke: "#776865",
-                __self: this,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 190,
-                  columnNumber: 13
-                }
-              }, /*#__PURE__*/_reactDefault.default.createElement("title", {
-                __self: this,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 198,
-                  columnNumber: 15
-                }
-              }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
-            );
-          }
-        }
-      });
-      return {
-        country: countryCode,
-        countryColor: color,
-        dots: countryDots,
-        lines: countryLines
-      };
-    });
-    let dots = highLightedCountryData.map(function (row, index) {
-      return row.dots;
-    });
-    let lines = highLightedCountryData.map(function (row, index) {
-      return row.lines;
-    });
-    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)]).range([45, s - m]);
-    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
-      width: s,
-      height: s,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 230,
-        columnNumber: 5
-      }
-    }, lines, highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
-      textAnchor: "middle",
-      style: {
-        fontSize: 14,
-        fontFamily: "Gill Sans, sans-serif"
-      },
-      x: s / 2,
-      y: s / 2,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 233,
-        columnNumber: 9
-      }
-    }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 245,
-        columnNumber: 9
-      }
-    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
-      scale: timeScaleLineGraph,
-      top: s - m - 1,
-      stroke: "#333333",
-      tickTextFill: "#333333",
-      numTicks: maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 247,
-        columnNumber: 7
-      }
-    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
-      scale: yScale,
-      top: -1,
-      left: 2 * m + 5,
-      stroke: "#333333",
-      tickTextFill: "#333333",
-      numTicks: 5,
-      __self: undefined,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 256,
-        columnNumber: 7
-      }
-    }));
-    // end of line plot stuff
+    };
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 269,
+          lineNumber: 136,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 270,
+          lineNumber: 137,
           columnNumber: 7
         }
       }, "Final"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 272,
+          lineNumber: 139,
           columnNumber: 7
         }
       }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 276,
+          lineNumber: 143,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -60321,14 +60166,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 277,
+          lineNumber: 144,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278,
+          lineNumber: 145,
           columnNumber: 11
         }
       }, "Example select"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -60340,7 +60185,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279,
+          lineNumber: 146,
           columnNumber: 11
         }
       }, Object.values(_ColumnNamesJs.cols).map(c => {
@@ -60349,7 +60194,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 287,
+              lineNumber: 154,
               columnNumber: 22
             }
           }, c)
@@ -60358,15 +60203,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 293,
+          lineNumber: 160,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 295,
-          columnNumber: 9
+          lineNumber: 162,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
         s: s,
@@ -60379,22 +60224,38 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 296,
-          columnNumber: 11
+          lineNumber: 163,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 305,
-          columnNumber: 11
+          lineNumber: 172,
+          columnNumber: 13
         }
-      }), yearRange[0] != yearRange[1] ? Linegraph : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      }), yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
+        s: s,
+        m: m,
+        t: t,
+        yScale: yScale,
+        yearRange: yearRange,
+        highlight: highlight,
+        toggleHighlight: toggleHighlight,
+        dataInDateRange: dataInDateRange,
+        setTooltipContent: setTooltipContent,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 310,
-          columnNumber: 13
+          lineNumber: 175,
+          columnNumber: 15
+        }
+      }) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 187,
+          columnNumber: 17
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
         s: s,
@@ -60408,16 +60269,16 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 311,
-          columnNumber: 15
+          lineNumber: 188,
+          columnNumber: 19
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         id: "line",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 321,
-          columnNumber: 15
+          lineNumber: 198,
+          columnNumber: 19
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -60425,8 +60286,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 324,
-          columnNumber: 11
+          lineNumber: 201,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
         col: col,
@@ -60438,8 +60299,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 325,
-          columnNumber: 13
+          lineNumber: 202,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m,
@@ -60452,22 +60313,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 334,
-          columnNumber: 13
+          lineNumber: 211,
+          columnNumber: 15
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 345,
-          columnNumber: 11
+          lineNumber: 222,
+          columnNumber: 13
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 346,
-          columnNumber: 11
+          lineNumber: 223,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
         groupings: _GroupingsJs.groupings,
@@ -60477,20 +60338,20 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 347,
-          columnNumber: 11
+          lineNumber: 224,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 353,
-          columnNumber: 11
+          lineNumber: 230,
+          columnNumber: 13
         }
       })))
     );
   };
-  _s(Final, "p2Y5xU/GDD9X3CY4zjjdTQz6yIc=", false, function () {
+  _s(Final, "02ZSeQSwfLuWR3U0qXcaNwhs/sY=", false, function () {
     return [_hooksUseFetch.useFetch];
   });
   _c = Final;
@@ -60503,7 +60364,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","@vx/scale":"7H3DO","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./Groupings.js":"5MyzG","./components/WorldMap.js":"34ExX","d3-array":"7CLUA","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","react-bootstrap/esm/Col":"6Rf6k"}],"6TPbf":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","react-bootstrap/esm/Col":"6Rf6k","./components/Linegraph.js":"1r9HO"}],"6TPbf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60538,49 +60399,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"d3-fetch":"3eyo6","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5MyzG":[function(require,module,exports) {
-var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-_parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "groupings", function () {
-  return groupings;
-});
-_parcelHelpers.export(exports, "badCodes", function () {
-  return badCodes;
-});
-_parcelHelpers.export(exports, "col", function () {
-  return col;
-});
-const groupings = [{
-  name: "World",
-  codes: new Set([])
-}, {
-  name: "North America",
-  codes: new Set(["ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR"])
-}, {
-  name: "South America",
-  codes: new Set(["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN"])
-}, {
-  name: "Europe",
-  codes: new Set(["ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX"])
-}, {
-  name: "MENA",
-  codes: new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"])
-}, {
-  name: "Asia",
-  codes: new Set(["AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM"])
-}, {
-  name: "Africa",
-  codes: new Set(["AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
-}, {
-  name: "Oceania",
-  codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM"])
-}];
-const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
-const col = {
-  women: "Labor force, female (% of total labor force)"
-};
-
-},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"34ExX":[function(require,module,exports) {
+},{"d3-fetch":"3eyo6","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"34ExX":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60593,7 +60412,7 @@ try {
   var _reactSimpleMaps = require("react-simple-maps");
   var _d3Scale = require("d3-scale");
   var _vxPattern = require("@vx/pattern");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\WorldMap.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/WorldMap.js";
   // Relevant constants
   const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const colorScale = _d3Scale.scaleLinear().domain([0, 70]).range(["aliceblue", "steelblue"]);
@@ -60748,7 +60567,49 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","react-simple-maps":"5OxNq","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-scale":"2UZ4X","@vx/pattern":"7INAJ"}],"4SqrA":[function(require,module,exports) {
+},{"react":"3b2NM","react-simple-maps":"5OxNq","d3-scale":"2UZ4X","@vx/pattern":"7INAJ","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5MyzG":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "groupings", function () {
+  return groupings;
+});
+_parcelHelpers.export(exports, "badCodes", function () {
+  return badCodes;
+});
+_parcelHelpers.export(exports, "col", function () {
+  return col;
+});
+const groupings = [{
+  name: "World",
+  codes: new Set([])
+}, {
+  name: "North America",
+  codes: new Set(["ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR"])
+}, {
+  name: "South America",
+  codes: new Set(["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN"])
+}, {
+  name: "Europe",
+  codes: new Set(["ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX"])
+}, {
+  name: "MENA",
+  codes: new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"])
+}, {
+  name: "Asia",
+  codes: new Set(["AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM"])
+}, {
+  name: "Africa",
+  codes: new Set(["AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
+}, {
+  name: "Oceania",
+  codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM"])
+}];
+const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+const col = {
+  women: "Labor force, female (% of total labor force)"
+};
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"4SqrA":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60758,7 +60619,7 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require("react");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\ControlGroups.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/ControlGroups.js";
   const ControlGroups = ({groupings, s, highlight, setHighlight}) => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -60840,7 +60701,7 @@ try {
   var _react = require("react");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
   var _vxAxis = require("@vx/axis");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Barcode.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Barcode.js";
   const halfCodeWidth = 30;
   const women = "Labor force, female (% of total labor force)";
   const Barcode = ({s, m, col, yScale, yearRange, highlight, toggleHighlight, dataYearOnly}) => {
@@ -60920,7 +60781,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/axis":"L6nNU"}],"47xHJ":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"47xHJ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60936,7 +60797,7 @@ try {
   var _d3Scale = require("d3-scale");
   var _vxAxis = require("@vx/axis");
   require("d3-array");
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Timeline.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Timeline.js";
   const women = "Labor force, female (% of total labor force)";
   const Timeline = ({s, m, col, worldData, yearRange, setYearRange, dataRangedHighlight}) => {
     const binData = dataRangedHighlight([1991, 2017]);
@@ -61074,7 +60935,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","react-svg-brush":"4bkEt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/scale":"7H3DO","d3-scale":"2UZ4X","@vx/axis":"L6nNU","d3-array":"7CLUA"}],"5KpvG":[function(require,module,exports) {
+},{"react":"3b2NM","react-svg-brush":"4bkEt","@vx/scale":"7H3DO","d3-scale":"2UZ4X","@vx/axis":"L6nNU","d3-array":"7CLUA","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5KpvG":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "cols", function () {
@@ -62078,7 +61939,205 @@ function createBootstrapComponent(Component, opts) {
 }
 exports.default = ThemeProvider;
 
-},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"44uys":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1r9HO":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  require("../hooks/useFetch");
+  require("d3-scale");
+  require("d3-array");
+  var _vxScale = require("@vx/scale");
+  var _vxAxis = require("@vx/axis");
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Linegraph.js", _s = $RefreshSig$();
+  function Linegraph(props) {
+    _s();
+    const women = "Labor force, female (% of total labor force)";
+    let s = props.s;
+    let m = props.m;
+    let t = props.t;
+    let yScale = props.yScale;
+    let yearRange = props.yearRange;
+    let highlight = props.highlight;
+    let dataInDateRange = props.dataInDateRange;
+    let setTooltipContent = props.setTooltipContent;
+    let toggleHighlight = props.toggleHighlight;
+    let highlightArray = [...highlight];
+    const minYear = yearRange[0];
+    // set to a random year for testing
+    const maxYear = yearRange[1];
+    // set to a random year for testing
+    let xAxisLength = s - m - 45;
+    let xintervalLength = xAxisLength / (maxYear - minYear);
+    function getXForYear(year) {
+      return 45 + xintervalLength * (year - minYear);
+    }
+    let yAxisLength = s - m + t - (m + t);
+    function getYForPercentage(percentage) {
+      return s - m - yAxisLength * (percentage / 100);
+    }
+    let [constLineplotColors, updateLineplotColors] = _react.useState({});
+    let highLightedCountryData = highlightArray.map(function (countryCode) {
+      let countryData = {};
+      let countryName = "Unknown Country";
+      dataInDateRange(minYear, maxYear).forEach(function (row) {
+        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
+          countryData[parseInt(row["Year"])] = row[women];
+          countryName = row["Country Name"];
+          if (constLineplotColors[countryCode] === undefined) {
+            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            updateLineplotColors({
+              ...constLineplotColors
+            });
+          }
+        }
+      });
+      let color = constLineplotColors[countryCode];
+      let countryDots = Object.keys(countryData).map(function (year) {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: countryCode + year + " circle",
+            cx: getXForYear(year),
+            cy: getYForPercentage(countryData[year]),
+            r: "3",
+            stroke: "black",
+            fill: color,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 60,
+              columnNumber: 9
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 68,
+              columnNumber: 11
+            }
+          }, countryName + ", " + year + ": " + countryData[year]))
+        );
+      });
+      let countryLines = Object.keys(countryData).map(function (year, index) {
+        let nextYear = parseInt(year) + 1;
+        if (year < maxYear && countryData[nextYear] !== undefined) {
+          // || year === minYear + 1)
+          if (countryData[year] != 0 && countryData[nextYear] != 0) {
+            return (
+              /*#__PURE__*/_reactDefault.default.createElement("line", {
+                key: countryCode + year + "line",
+                x1: getXForYear(year) - 1,
+                y1: getYForPercentage(countryData[year]) + 1,
+                x2: getXForYear(nextYear) - 1,
+                y2: getYForPercentage(countryData[nextYear]) + 1,
+                stroke: "#776865",
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 78,
+                  columnNumber: 13
+                }
+              }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 86,
+                  columnNumber: 15
+                }
+              }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
+            );
+          }
+        }
+      });
+      return {
+        country: countryCode,
+        countryColor: color,
+        dots: countryDots,
+        lines: countryLines
+      };
+    });
+    let dots = highLightedCountryData.map(function (row, index) {
+      return row.dots;
+    });
+    let lines = highLightedCountryData.map(function (row, index) {
+      return row.lines;
+    });
+    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)]).range([45, s - m]);
+    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
+      width: s,
+      height: s,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 118,
+        columnNumber: 5
+      }
+    }, lines, highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
+      textAnchor: "middle",
+      style: {
+        fontSize: 14,
+        fontFamily: "Gill Sans, sans-serif"
+      },
+      x: s / 2,
+      y: s / 2,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 121,
+        columnNumber: 9
+      }
+    }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 133,
+        columnNumber: 11
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+      scale: timeScaleLineGraph,
+      top: s - m - 1,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 135,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+      scale: yScale,
+      top: -1,
+      left: 2 * m + 5,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: 5,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 144,
+        columnNumber: 7
+      }
+    }));
+    return Linegraph;
+  }
+  exports.default = Linegraph;
+  _s(Linegraph, "fCyS0E0dKgEZdMW8uJ+fHKDRSe8=");
+  _c = Linegraph;
+  var _c;
+  $RefreshReg$(_c, "Linegraph");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","../hooks/useFetch":"6TPbf"}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -62088,7 +62147,7 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require('react');
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Home.js";
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/Home.js";
   const Home = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
