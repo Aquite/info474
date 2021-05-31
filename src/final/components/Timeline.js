@@ -40,6 +40,7 @@ const Timeline = ({
               height={worldLineScale(100 - y[1]) - 20}
               x={timeScaleReverse(new Date(y[0], 01, 01))}
               y={worldLineScale(y[1])}
+              fill={"#776865"}
             />
             {/*<line
               x1={timeScaleReverse(new Date(d.Year - 1, 01, 01))}
