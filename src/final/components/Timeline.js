@@ -10,6 +10,7 @@ const women = "Labor force, female (% of total labor force)";
 const Timeline = ({
   s,
   m,
+  col,
   worldData,
   yearRange,
   setYearRange,
@@ -70,7 +71,7 @@ const Timeline = ({
         stroke={"#333333"}
         tickTextFill={"#333333"}
         numTicks={26}
-        label={"World Average (Click any year or scrub my timeline!)"}
+        label={col + " in selected countries"}
       />
       {[...Array(27).keys()].map((value) => {
         return yearRange[0] == yearRange[1] && yearRange[0] == value + 1991 ? (

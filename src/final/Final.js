@@ -10,11 +10,16 @@ import { groupings, badCodes } from "./Groupings.js";
 import ControlGroups from "./components/ControlGroups.js";
 import Barcode from "./components/Barcode.js";
 import Timeline from "./components/Timeline.js";
+import { cols } from "./ColumnNames.js";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/esm/Col";
 
 const Final = () => {
   const [data, loading] = useFetch(
     "https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv"
   );
+
+  const [col, setCol] = useState(cols.womLab);
 
   // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
   // Do not use setHighlight because you won't do it properly. See the below function
@@ -114,7 +119,7 @@ const Final = () => {
         (d) => +d.Year
       )
     ).map((y) => {
-      y[1] = mean(y[1], (c) => +c[women]);
+      y[1] = mean(y[1], (c) => +c[col]);
       return y;
     });
   };
@@ -262,12 +267,28 @@ const Final = () => {
 
   return (
     <div>
-      <h2>Assignment 3</h2>
+      <h2>Final</h2>
 
       <p>
         Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro
         Steinmann Petrasso, and Nikki Demmel
       </p>
+      <Form>
+        <Form.Group controlId="exampleForm.ControlSelect1">
+          <Form.Label>Example select</Form.Label>
+          <Form.Control
+            as="select"
+            value={col}
+            onChange={(e) => {
+              setCol(e.target.value);
+            }}
+          >
+            {Object.values(cols).map((c) => {
+              return <option>{c}</option>;
+            })}
+          </Form.Control>
+        </Form.Group>
+      </Form>
       {loading ? (
         <p>loading data...</p>
       ) : (
@@ -275,6 +296,7 @@ const Final = () => {
           <Timeline
             s={s}
             m={m}
+            col={col}
             worldData={worldData}
             yearRange={yearRange}
             setYearRange={setYearRange}
@@ -289,18 +311,19 @@ const Final = () => {
               <Barcode
                 s={s}
                 m={m}
+                col={col}
                 yScale={yScale}
                 yearRange={yearRange}
                 highlight={highlight}
                 toggleHighlight={toggleHighlight}
                 dataYearOnly={dataYearOnly}
-                setTooltipContent={setTooltipContent}
               />
               <ReactTooltip id={"line"}></ReactTooltip>
             </React.Fragment>
           )}
           <svg width={s} height={s}>
             <WorldMap
+              col={col}
               dataRangedEnds={dataRangedEnds}
               setTooltipContent={setTooltipContent}
               yearRange={yearRange}

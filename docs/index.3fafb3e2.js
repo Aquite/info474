@@ -26296,6 +26296,8 @@ try {
   var _assignment2Assignment2JsDefault = _parcelHelpers.interopDefault(_assignment2Assignment2Js);
   var _assignment3Assignment3Js = require("./assignment3/Assignment3.js");
   var _assignment3Assignment3JsDefault = _parcelHelpers.interopDefault(_assignment3Assignment3Js);
+  var _finalFinalJs = require("./final/Final.js");
+  var _finalFinalJsDefault = _parcelHelpers.interopDefault(_finalFinalJs);
   var _HomeJs = require("./Home.js");
   var _HomeJsDefault = _parcelHelpers.interopDefault(_HomeJs);
   var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\App.js";
@@ -26306,28 +26308,28 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 12,
+          lineNumber: 13,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_HeaderJs.Header, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 13,
+          lineNumber: 14,
           columnNumber: 7
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("main", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 14,
+          lineNumber: 15,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Switch, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15,
+          lineNumber: 16,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26337,7 +26339,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16,
+          lineNumber: 17,
           columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26347,7 +26349,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17,
+          lineNumber: 18,
           columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
@@ -26357,7 +26359,17 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18,
+          lineNumber: 19,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/final",
+        component: _finalFinalJsDefault.default,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20,
           columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterDom.Redirect, {
@@ -26365,7 +26377,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 19,
+          lineNumber: 21,
           columnNumber: 11
         }
       }))))
@@ -26381,7 +26393,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./App.css":"h6p59","react-router-dom":"1PMSK","bootstrap/dist/css/bootstrap.min.css":"5GTF8","./Header.js":"6RY8l","./assignment2/Assignment2.js":"3i3xx","./assignment3/Assignment3.js":"6mjNJ","./Home.js":"44uys","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"h6p59":[function() {},{}],"1PMSK":[function(require,module,exports) {
+},{"react":"3b2NM","./App.css":"h6p59","react-router-dom":"1PMSK","bootstrap/dist/css/bootstrap.min.css":"5GTF8","./Header.js":"6RY8l","./assignment2/Assignment2.js":"3i3xx","./assignment3/Assignment3.js":"6mjNJ","./final/Final.js":"5LJru","./Home.js":"44uys","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"h6p59":[function() {},{}],"1PMSK":[function(require,module,exports) {
 "use strict";
 if ("development" === "production") {
   module.exports = require("./cjs/react-router-dom.min.js");
@@ -30440,7 +30452,22 @@ try {
           lineNumber: 23,
           columnNumber: 15
         }
-      }, "Assignment 3"))))))
+      }, "Assignment 3")), /*#__PURE__*/_reactDefault.default.createElement(_reactRouterBootstrap.LinkContainer, {
+        to: "/final",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapNavDefault.default.Link, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 26,
+          columnNumber: 15
+        }
+      }, "Final"))))))
     );
   };
   _c = Header;
@@ -59992,7 +60019,2066 @@ var define;
   }]);
 });
 
-},{"react":"3b2NM"}],"44uys":[function(require,module,exports) {
+},{"react":"3b2NM"}],"5LJru":[function(require,module,exports) {
+var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _hooksUseFetch = require("./hooks/useFetch");
+  var _d3Scale = require("d3-scale");
+  var _d3Array = require("d3-array");
+  var _vxScale = require("@vx/scale");
+  var _vxAxis = require("@vx/axis");
+  var _componentsWorldMapJs = require("./components/WorldMap.js");
+  var _componentsWorldMapJsDefault = _parcelHelpers.interopDefault(_componentsWorldMapJs);
+  var _reactTooltip = require("react-tooltip");
+  var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
+  var _GroupingsJs = require("./Groupings.js");
+  var _componentsControlGroupsJs = require("./components/ControlGroups.js");
+  var _componentsControlGroupsJsDefault = _parcelHelpers.interopDefault(_componentsControlGroupsJs);
+  var _componentsBarcodeJs = require("./components/Barcode.js");
+  var _componentsBarcodeJsDefault = _parcelHelpers.interopDefault(_componentsBarcodeJs);
+  var _componentsTimelineJs = require("./components/Timeline.js");
+  var _componentsTimelineJsDefault = _parcelHelpers.interopDefault(_componentsTimelineJs);
+  var _ColumnNamesJs = require("./ColumnNames.js");
+  var _reactBootstrapForm = require("react-bootstrap/Form");
+  var _reactBootstrapFormDefault = _parcelHelpers.interopDefault(_reactBootstrapForm);
+  require("react-bootstrap/esm/Col");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\Final.js", _s = $RefreshSig$();
+  const Final = () => {
+    _s();
+    const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
+    const [col, setCol] = _react.useState(_ColumnNamesJs.cols.womLab);
+    // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
+    // Do not use setHighlight because you won't do it properly. See the below function
+    const [highlight, setHighlight] = _react.useState(new Set(_GroupingsJs.groupings[0].codes));
+    // Use this to toggle the highlight by calling toggleHighlight(c) like if someone clicks on a specific thing.
+    const toggleHighlight = c => {
+      if (c != null) {
+        if (highlight.has(c["Country Code"])) {
+          highlight.delete(c["Country Code"]);
+          setHighlight(new Set(highlight));
+        } else {
+          setHighlight(new Set(highlight.add(c["Country Code"])));
+        }
+      }
+    };
+    // Use this with onMouseEnter and onMouseLeave to highlight areas you want
+    const [tooltipContent, setTooltipContent] = _react.useState("");
+    // Use this to set the years the data set focuses on. Use if(yearRange[0] == yearRange[1] to determine whether line or bar)
+    const [yearRange, setYearRange] = _react.useState([2017, 2017]);
+    const changeYear = y => {
+      if (yearRange[0] != y && yearRange[1] != y) {
+        setYearRange([y, y]);
+      }
+    };
+    // Checks whether a country's code is included in the dataset
+    const checkCode = d => {
+      return !_GroupingsJs.badCodes.includes(d["Country Code"]);
+    };
+    // The data we want to work with
+    const dataCountriesOnly = data.filter(checkCode);
+    const dataYearOnly = y => {
+      return dataCountriesOnly.filter(d => {
+        return d.Year == y;
+      });
+    };
+    // filters the range of data to endyears based on years
+    // Column names. used in d[women] to pull column
+    const women = "Labor force, female (% of total labor force)";
+    // Border designs. 500x500 but working area is 460 x 460
+    const s = 500;
+    // viz size
+    const m = 20;
+    // margin size
+    const t = 4;
+    // text alignment factor
+    const yScale = _d3Scale.scaleLinear().domain([0, 100]).range([s - m, m]);
+    // Right Side: Choropleth
+    const worldData = data.filter(d => {
+      return d["Country Code"] == "WLD";
+    }).sort((d, e) => {
+      return +d.Year > +e.Year;
+    });
+    const dataRangedEnds = r => {
+      return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+        return +d.Year == r[0] || +d.Year == r[1];
+      }), d => d["Country Code"])).map(d => {
+        return d[1].sort((a, b) => {
+          return +a.Year > +b.Year;
+        });
+      }).filter(d => {
+        return r[0] != r[1] ? d.length == r.length : d.length == 1;
+      });
+    };
+    const dataRangedHighlight = r => {
+      return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+        return highlight.has(d["Country Code"]) && +d.Year >= r[0] && +d.Year <= r[1];
+      }), d => +d.Year)).map(y => {
+        y[1] = _d3Array.mean(y[1], c => +c[col]);
+        return y;
+      });
+    };
+    // Alternate Left Side: line plot stuff
+    let highlightArray = [...highlight];
+    const minYear = yearRange[0];
+    // set to a random year for testing
+    const maxYear = yearRange[1];
+    // set to a random year for testing
+    /*if (yearRange[0] + 5 > yearRange[1]) {
+    maxYear = yearRange[0] + 5;
+    }*/
+    let xAxisLength = s - m - 45;
+    let xintervalLength = xAxisLength / (maxYear - minYear);
+    function getXForYear(year) {
+      return 45 + xintervalLength * (year - minYear);
+    }
+    let yAxisLength = s - m + t - (m + t);
+    function getYForPercentage(percentage) {
+      return s - m - yAxisLength * (percentage / 100);
+    }
+    const xScale = _d3Scale.scaleLinear().domain([minYear, maxYear]).range([m, s - m]);
+    let [constLineplotColors, updateLineplotColors] = _react.useState({});
+    let highLightedCountryData = highlightArray.map(function (countryCode) {
+      let countryData = {};
+      let countryName = "Unknown Country";
+      data.forEach(function (row) {
+        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
+          countryData[parseInt(row["Year"])] = row[women];
+          countryName = row["Country Name"];
+          if (constLineplotColors[countryCode] === undefined) {
+            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            updateLineplotColors({
+              ...constLineplotColors
+            });
+          }
+        }
+      });
+      let color = constLineplotColors[countryCode];
+      let countryDots = Object.keys(countryData).map(function (year) {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: countryCode + year + " circle",
+            cx: getXForYear(year),
+            cy: getYForPercentage(countryData[year]),
+            r: "3",
+            stroke: "black",
+            fill: color,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 172,
+              columnNumber: 9
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 180,
+              columnNumber: 11
+            }
+          }, countryName + ", " + year + ": " + countryData[year]))
+        );
+      });
+      let countryLines = Object.keys(countryData).map(function (year, index) {
+        let nextYear = parseInt(year) + 1;
+        if (year < maxYear && countryData[nextYear] !== undefined) {
+          // || year === minYear + 1)
+          if (countryData[year] != 0 && countryData[nextYear] != 0) {
+            return (
+              /*#__PURE__*/_reactDefault.default.createElement("line", {
+                key: countryCode + year + "line",
+                x1: getXForYear(year) - 1,
+                y1: getYForPercentage(countryData[year]) + 1,
+                x2: getXForYear(nextYear) - 1,
+                y2: getYForPercentage(countryData[nextYear]) + 1,
+                stroke: "#776865",
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 190,
+                  columnNumber: 13
+                }
+              }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 198,
+                  columnNumber: 15
+                }
+              }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
+            );
+          }
+        }
+      });
+      return {
+        country: countryCode,
+        countryColor: color,
+        dots: countryDots,
+        lines: countryLines
+      };
+    });
+    let dots = highLightedCountryData.map(function (row, index) {
+      return row.dots;
+    });
+    let lines = highLightedCountryData.map(function (row, index) {
+      return row.lines;
+    });
+    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)]).range([45, s - m]);
+    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
+      width: s,
+      height: s,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 230,
+        columnNumber: 5
+      }
+    }, lines, highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
+      textAnchor: "middle",
+      style: {
+        fontSize: 14,
+        fontFamily: "Gill Sans, sans-serif"
+      },
+      x: s / 2,
+      y: s / 2,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 233,
+        columnNumber: 9
+      }
+    }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 245,
+        columnNumber: 9
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+      scale: timeScaleLineGraph,
+      top: s - m - 1,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 247,
+        columnNumber: 7
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+      scale: yScale,
+      top: -1,
+      left: 2 * m + 5,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: 5,
+      __self: undefined,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 256,
+        columnNumber: 7
+      }
+    }));
+    // end of line plot stuff
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 269,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 270,
+          columnNumber: 7
+        }
+      }, "Final"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 272,
+          columnNumber: 7
+        }
+      }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 276,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
+        controlId: "exampleForm.ControlSelect1",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 277,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 278,
+          columnNumber: 11
+        }
+      }, "Example select"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
+        as: "select",
+        value: col,
+        onChange: e => {
+          setCol(e.target.value);
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 279,
+          columnNumber: 11
+        }
+      }, Object.values(_ColumnNamesJs.cols).map(c => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("option", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 287,
+              columnNumber: 22
+            }
+          }, c)
+        );
+      })))), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 293,
+          columnNumber: 9
+        }
+      }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 295,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
+        s: s,
+        m: m,
+        col: col,
+        worldData: worldData,
+        yearRange: yearRange,
+        setYearRange: setYearRange,
+        dataRangedHighlight: dataRangedHighlight,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 296,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 305,
+          columnNumber: 11
+        }
+      }), yearRange[0] != yearRange[1] ? Linegraph : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 310,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
+        s: s,
+        m: m,
+        col: col,
+        yScale: yScale,
+        yearRange: yearRange,
+        highlight: highlight,
+        toggleHighlight: toggleHighlight,
+        dataYearOnly: dataYearOnly,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 311,
+          columnNumber: 15
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        id: "line",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 321,
+          columnNumber: 15
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 324,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
+        col: col,
+        dataRangedEnds: dataRangedEnds,
+        setTooltipContent: setTooltipContent,
+        yearRange: yearRange,
+        highlight: highlight,
+        toggleHighlight: toggleHighlight,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 325,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+        x: s - m,
+        textAnchor: "end",
+        y: m,
+        style: {
+          fontSize: 10,
+          fontFamily: "Gill Sans, sans-serif"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 334,
+          columnNumber: 13
+        }
+      }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 345,
+          columnNumber: 11
+        }
+      }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 346,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
+        groupings: _GroupingsJs.groupings,
+        s: s,
+        highlight: highlight,
+        setHighlight: setHighlight,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 347,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 353,
+          columnNumber: 11
+        }
+      })))
+    );
+  };
+  _s(Final, "p2Y5xU/GDD9X3CY4zjjdTQz6yIc=", false, function () {
+    return [_hooksUseFetch.useFetch];
+  });
+  _c = Final;
+  exports.default = Final;
+  var _c;
+  $RefreshReg$(_c, "Final");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","@vx/scale":"7H3DO","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./Groupings.js":"5MyzG","./components/WorldMap.js":"34ExX","d3-array":"7CLUA","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","react-bootstrap/esm/Col":"6Rf6k"}],"6TPbf":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "useFetch", function () {
+    return useFetch;
+  });
+  var _d3Fetch = require("d3-fetch");
+  var _react = require("react");
+  var _s = $RefreshSig$();
+  const useFetch = url => {
+    _s();
+    const [data, setData] = _react.useState([]);
+    const [loading, setLoading] = _react.useState(true);
+    async function fetchUrl() {
+      const response = await _d3Fetch.csv(url);
+      setData(response);
+      setLoading(false);
+    }
+    _react.useEffect(() => {
+      fetchUrl();
+    }, []);
+    return [data, loading];
+  };
+  _s(useFetch, "YP7e7Smzxlgf2d3MqLcgRZjo83U=");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"d3-fetch":"3eyo6","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5MyzG":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "groupings", function () {
+  return groupings;
+});
+_parcelHelpers.export(exports, "badCodes", function () {
+  return badCodes;
+});
+_parcelHelpers.export(exports, "col", function () {
+  return col;
+});
+const groupings = [{
+  name: "World",
+  codes: new Set([])
+}, {
+  name: "North America",
+  codes: new Set(["ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR"])
+}, {
+  name: "South America",
+  codes: new Set(["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN"])
+}, {
+  name: "Europe",
+  codes: new Set(["ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX"])
+}, {
+  name: "MENA",
+  codes: new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"])
+}, {
+  name: "Asia",
+  codes: new Set(["AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM"])
+}, {
+  name: "Africa",
+  codes: new Set(["AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
+}, {
+  name: "Oceania",
+  codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM"])
+}];
+const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
+const col = {
+  women: "Labor force, female (% of total labor force)"
+};
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"34ExX":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _reactSimpleMaps = require("react-simple-maps");
+  var _d3Scale = require("d3-scale");
+  var _vxPattern = require("@vx/pattern");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\WorldMap.js";
+  // Relevant constants
+  const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  const colorScale = _d3Scale.scaleLinear().domain([0, 70]).range(["aliceblue", "steelblue"]);
+  const changeScale = _d3Scale.scaleLinear().domain([-15, 0, 15]).range(["#b54646", "#f2f2f2", "#46b557"]);
+  // WorldMap builds the world map
+  const WorldMap = ({col, dataRangedEnds, setTooltipContent, yearRange, highlight, toggleHighlight}) => {
+    const data = dataRangedEnds(yearRange);
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, null, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
+        "data-tip": "",
+        projectionConfig: {
+          rotate: [-10, 0, 0],
+          scale: 147
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 35,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ZoomableGroup, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 42,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_vxPattern.PatternLines, {
+        id: "lines",
+        height: 4,
+        width: 4,
+        stroke: "#776865",
+        strokeWidth: 0.6,
+        orientation: ["diagonal"],
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 43,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
+        stroke: "#E4E5E6",
+        strokeWidth: 0.5,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51,
+          columnNumber: 11
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
+        geography: geoUrl,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52,
+          columnNumber: 11
+        }
+      }, ({geographies}) => geographies.map(geo => {
+        const c = data.filter(s => s[0]["Country Code"] === geo.properties.ISO_A3);
+        let d = null;
+        if (c[0] != null && c[0][0][col] != 0) {
+          d = c[0][0];
+          if (yearRange[0] != yearRange[1] && c[0][1][col] == 0) {
+            d = null;
+          }
+        }
+        let h = false;
+        if (d != null) {
+          h = highlight.has(d["Country Code"]) === true;
+        }
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+            key: geo.rsmKey + "frag",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 70,
+              columnNumber: 19
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            onClick: () => toggleHighlight(d),
+            onMouseEnter: () => {
+              if (d != null) {
+                setTooltipContent(d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[col] : c[0][1][col] - d[col]) * 100) / 100 + "%");
+              }
+            },
+            onMouseLeave: () => {
+              setTooltipContent("");
+            },
+            key: geo.rsmKey,
+            geography: geo,
+            fill: d ? yearRange[0] != yearRange[1] ? changeScale(+c[0][1][col] - +d[col]) : colorScale(d[col]) : "#F5F4F6",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 71,
+              columnNumber: 21
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 101,
+              columnNumber: 23
+            }
+          }, d ? d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[col] : c[0][1][col] - d[col]) * 100) / 100 + "%" : "No data")), h ? /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geography, {
+            onClick: () => toggleHighlight(d),
+            onMouseEnter: () => {
+              if (d != null) {
+                setTooltipContent(d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[col] : c[0][1][col] - d[col]) * 100) / 100 + "%");
+              }
+            },
+            onMouseLeave: () => {
+              setTooltipContent("");
+            },
+            key: geo.rsmKey + "highlight",
+            geography: geo,
+            fill: "url('#lines')",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 116,
+              columnNumber: 23
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 140,
+              columnNumber: 25
+            }
+          }, d["Country Name"] + ": " + Math.round((yearRange[0] == yearRange[1] ? d[col] : c[0][1][col] - d[col]) * 100) / 100 + "%")) : /*#__PURE__*/_reactDefault.default.createElement("div", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 153,
+              columnNumber: 23
+            }
+          }))
+        );
+      })))))
+    );
+  };
+  _c = WorldMap;
+  exports.default = _c2 = /*#__PURE__*/_react.memo(WorldMap);
+  var _c, _c2;
+  $RefreshReg$(_c, "WorldMap");
+  $RefreshReg$(_c2, "%default%");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","react-simple-maps":"5OxNq","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-scale":"2UZ4X","@vx/pattern":"7INAJ"}],"4SqrA":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\ControlGroups.js";
+  const ControlGroups = ({groupings, s, highlight, setHighlight}) => {
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s * 2,
+        height: s / 4,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 5,
+          columnNumber: 5
+        }
+      }, groupings.map((g, i) => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+            key: i + " frag",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 8,
+              columnNumber: 11
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            cx: s / groupings.length * 2 * i + s / groupings.length,
+            cy: s / 8,
+            r: 50,
+            style: {
+              fill: "steelblue"
+            },
+            fillOpacity: [...highlight].every(e => g.codes.has(e)) && [...g.codes].every(e => highlight.has(e)) ? "0.5" : "0.15",
+            onClick: () => {
+              setHighlight(new Set(g.codes));
+            },
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 9,
+              columnNumber: 13
+            }
+          }), /*#__PURE__*/_reactDefault.default.createElement("text", {
+            x: s / groupings.length * 2 * i + s / groupings.length,
+            y: s / 8,
+            textAnchor: "middle",
+            style: {
+              fontSize: 14,
+              fontFamily: "Gill Sans, sans-serif"
+            },
+            onClick: () => {
+              setHighlight(new Set(g.codes));
+            },
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 24,
+              columnNumber: 13
+            }
+          }, g.name))
+        );
+      }))
+    );
+  };
+  _c = ControlGroups;
+  exports.default = ControlGroups;
+  var _c;
+  $RefreshReg$(_c, "ControlGroups");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"1SJJK":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _vxAxis = require("@vx/axis");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Barcode.js";
+  const halfCodeWidth = 30;
+  const women = "Labor force, female (% of total labor force)";
+  const Barcode = ({s, m, col, yScale, yearRange, highlight, toggleHighlight, dataYearOnly}) => {
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+        scale: yScale,
+        top: 0,
+        left: s / 2 - m * 2,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        label: col + " in " + yearRange[0],
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 7
+        }
+      }), dataYearOnly(yearRange[0]).map((d, i) => {
+        if (d[col] != 0) {
+          const h = highlight.has(d["Country Code"]) === true;
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+              key: i,
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 30,
+                columnNumber: 13
+              }
+            }, /*#__PURE__*/_reactDefault.default.createElement("line", {
+              key: i + " barcode",
+              x1: s / 2 - halfCodeWidth - (h ? 10 : 0),
+              y1: yScale(d[col]),
+              x2: s / 2 + halfCodeWidth + (h ? 10 : 0),
+              y2: yScale(d[col]),
+              fill: "none",
+              stroke: h ? "#776865" : "steelblue",
+              strokeOpacity: h ? 0.5 : 0.33,
+              onClick: () => toggleHighlight(d),
+              "data-tip": d["Country Name"] + ": " + Math.round(d[col] * 100) / 100 + "%",
+              "data-for": "line",
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 31,
+                columnNumber: 15
+              }
+            }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 49,
+                columnNumber: 17
+              }
+            }, d["Country Name"])))
+          );
+        }
+      }))
+    );
+  };
+  _c = Barcode;
+  exports.default = Barcode;
+  var _c;
+  $RefreshReg$(_c, "Barcode");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/axis":"L6nNU"}],"47xHJ":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _reactSvgBrush = require("react-svg-brush");
+  var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
+  var _vxScale = require("@vx/scale");
+  var _d3Scale = require("d3-scale");
+  var _vxAxis = require("@vx/axis");
+  require("d3-array");
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Timeline.js";
+  const women = "Labor force, female (% of total labor force)";
+  const Timeline = ({s, m, col, worldData, yearRange, setYearRange, dataRangedHighlight}) => {
+    const binData = dataRangedHighlight([1991, 2017]);
+    const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2018]);
+    const timeScaleReverse = _vxScale.scaleTime().domain([new Date(1991, 01, 01), new Date(2018, 01, 01)]).range([20, 980]);
+    const worldLineScale = _d3Scale.scaleLinear().domain([0, 100]).range([s / 4 - m * 2, m]);
+    const worldLineScaleReversed = _d3Scale.scaleLinear().domain([s / 4 - m * 2, m]).range([0, 90]);
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s * 2,
+        height: s / 4,
+        className: "timeline",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 35,
+          columnNumber: 5
+        }
+      }, binData.map(y => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 38,
+              columnNumber: 11
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("rect", {
+            width: 30,
+            height: worldLineScale(100 - y[1]) - 20,
+            x: timeScaleReverse(new Date(y[0], 01, 01)),
+            y: worldLineScale(y[1]),
+            fill: "#776865",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39,
+              columnNumber: 13
+            }
+          }))
+        );
+      }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+        scale: worldLineScale,
+        top: 0,
+        left: s * 2 - m,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        numTicks: 5,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 59,
+          columnNumber: 7
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+        scale: timeScaleReverse,
+        top: s / 4 - m * 2,
+        left: 3,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        numTicks: 26,
+        label: col + " in selected countries",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67,
+          columnNumber: 7
+        }
+      }), [...Array(27).keys()].map(value => {
+        return yearRange[0] == yearRange[1] && yearRange[0] == value + 1991 ? /*#__PURE__*/_reactDefault.default.createElement("rect", {
+          key: value,
+          x: timeScaleReverse(new Date(value + 1991, 01, 01)) - 15,
+          y: s / 4 - m * 2 + 5,
+          height: 30,
+          width: 30,
+          style: {
+            fill: "steelblue",
+            fillOpacity: "0.15"
+          },
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 78,
+            columnNumber: 11
+          }
+        }) : /*#__PURE__*/_reactDefault.default.createElement("rect", {
+          key: value,
+          x: timeScaleReverse(new Date(value + 1991, 01, 01)) - 15,
+          y: s / 4 - m * 2 + 5,
+          height: 30,
+          width: 30,
+          style: {
+            fillOpacity: "0"
+          },
+          onMouseDown: () => setYearRange([1991 + value, 1991 + value]),
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 87,
+            columnNumber: 11
+          }
+        });
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactSvgBrushDefault.default, {
+        brushType: "x",
+        getEventMouse: event => {
+          const {clientX, clientY} = event;
+          const {left, top} = document.querySelector(".timeline").getBoundingClientRect();
+          return [clientX - left, clientY - top];
+        },
+        extent: [[m, m], [s * 2 - m - 1, s / 4 - m * 2]],
+        onBrushEnd: ({selection}) => {
+          if (selection != null) {
+            if (selection[1][0] > 979) {
+              selection[1][0] = 979;
+            }
+            setYearRange([Math.floor(timeScale(selection[0][0])), Math.floor(timeScale(selection[1][0]))]);
+          }
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 98,
+          columnNumber: 7
+        }
+      }))
+    );
+  };
+  _c = Timeline;
+  exports.default = Timeline;
+  var _c;
+  $RefreshReg$(_c, "Timeline");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","react-svg-brush":"4bkEt","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/scale":"7H3DO","d3-scale":"2UZ4X","@vx/axis":"L6nNU","d3-array":"7CLUA"}],"5KpvG":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "cols", function () {
+  return cols;
+});
+const cols = {
+  womLab: "Labor force, female (% of total labor force)",
+  womUnem: "Unemployment, female (% of female labor force) (national estimate)",
+  menUnem: "Unemployment, male (% of male labor force) (national estimate)",
+  totUnem: "Unemployment, total (% of total labor force) (national estimate)",
+  womUnemY: "Unemployment, youth female (% of female labor force ages 15-24) (national estimate)",
+  menUnemY: "Unemployment, youth male (% of male labor force ages 15-24) (national estimate)",
+  totUnemY: "Unemployment, youth total (% of total labor force ages 15-24) (national estimate)",
+  WomChEmp: "Children in employment, wage workers, female (% of female children in employment, ages 7-14)",
+  menChEmp: "Children in employment, wage workers, male (% of male children in employment, ages 7-14)",
+  totChEmp: "Children in employment, wage workers (% of children in employment, ages 7-14)"
+};
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"6A5ko":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _FormCheck = _interopRequireDefault(require("./FormCheck"));
+
+var _FormFile = _interopRequireDefault(require("./FormFile"));
+
+var _FormControl = _interopRequireDefault(require("./FormControl"));
+
+var _FormGroup = _interopRequireDefault(require("./FormGroup"));
+
+var _FormLabel = _interopRequireDefault(require("./FormLabel"));
+
+var _FormText = _interopRequireDefault(require("./FormText"));
+
+var _Switch = _interopRequireDefault(require("./Switch"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var _createWithBsPrefix = _interopRequireDefault(require("./createWithBsPrefix"));
+
+var FormRow = (0, _createWithBsPrefix.default)('form-row');
+var defaultProps = {
+  inline: false
+};
+
+var FormImpl = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      inline = _ref.inline,
+      className = _ref.className,
+      validated = _ref.validated,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'form' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "inline", "className", "validated", "as"]);
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'form');
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    className: (0, _classnames.default)(className, validated && 'was-validated', inline && bsPrefix + "-inline")
+  }));
+});
+
+FormImpl.displayName = 'Form';
+FormImpl.defaultProps = defaultProps;
+FormImpl.Row = FormRow;
+FormImpl.Group = _FormGroup.default;
+FormImpl.Control = _FormControl.default;
+FormImpl.Check = _FormCheck.default;
+FormImpl.File = _FormFile.default;
+FormImpl.Switch = _Switch.default;
+FormImpl.Label = _FormLabel.default;
+FormImpl.Text = _FormText.default;
+var _default = FormImpl;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormCheck":"6WcKM","./FormFile":"6mhKG","./FormControl":"573gP","./FormGroup":"120iJ","./FormLabel":"70qP9","./FormText":"2VsfR","./Switch":"5DfiR","./ThemeProvider":"4rz1S","./createWithBsPrefix":"2oVVc"}],"6WcKM":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _all = _interopRequireDefault(require("prop-types-extra/lib/all"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Feedback = _interopRequireDefault(require("./Feedback"));
+
+var _FormCheckInput = _interopRequireDefault(require("./FormCheckInput"));
+
+var _FormCheckLabel = _interopRequireDefault(require("./FormCheckLabel"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormCheck = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var id = _ref.id,
+      bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      _ref$inline = _ref.inline,
+      inline = _ref$inline === void 0 ? false : _ref$inline,
+      _ref$disabled = _ref.disabled,
+      disabled = _ref$disabled === void 0 ? false : _ref$disabled,
+      _ref$isValid = _ref.isValid,
+      isValid = _ref$isValid === void 0 ? false : _ref$isValid,
+      _ref$isInvalid = _ref.isInvalid,
+      isInvalid = _ref$isInvalid === void 0 ? false : _ref$isInvalid,
+      _ref$feedbackTooltip = _ref.feedbackTooltip,
+      feedbackTooltip = _ref$feedbackTooltip === void 0 ? false : _ref$feedbackTooltip,
+      feedback = _ref.feedback,
+      className = _ref.className,
+      style = _ref.style,
+      _ref$title = _ref.title,
+      title = _ref$title === void 0 ? '' : _ref$title,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'checkbox' : _ref$type,
+      label = _ref.label,
+      children = _ref.children,
+      propCustom = _ref.custom,
+      _ref$as = _ref.as,
+      as = _ref$as === void 0 ? 'input' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["id", "bsPrefix", "bsCustomPrefix", "inline", "disabled", "isValid", "isInvalid", "feedbackTooltip", "feedback", "className", "style", "title", "type", "label", "children", "custom", "as"]);
+  var custom = type === 'switch' ? true : propCustom;
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom-control'] : [bsPrefix, 'form-check'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId;
+
+  var innerFormContext = (0, _react.useMemo)(function () {
+    return {
+      controlId: id || controlId,
+      custom: custom
+    };
+  }, [controlId, custom, id]);
+  var hasLabel = custom || label != null && label !== false && !children;
+
+  var input = /*#__PURE__*/_react.default.createElement(_FormCheckInput.default, (0, _extends2.default)({}, props, {
+    type: type === 'switch' ? 'checkbox' : type,
+    ref: ref,
+    isValid: isValid,
+    isInvalid: isInvalid,
+    isStatic: !hasLabel,
+    disabled: disabled,
+    as: as
+  }));
+
+  return /*#__PURE__*/_react.default.createElement(_FormContext.default.Provider, {
+    value: innerFormContext
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    style: style,
+    className: (0, _classnames.default)(className, bsPrefix, custom && "custom-" + type, inline && bsPrefix + "-inline")
+  }, children || /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, input, hasLabel && /*#__PURE__*/_react.default.createElement(_FormCheckLabel.default, {
+    title: title
+  }, label), (isValid || isInvalid) && /*#__PURE__*/_react.default.createElement(_Feedback.default, {
+    type: isValid ? 'valid' : 'invalid',
+    tooltip: feedbackTooltip
+  }, feedback))));
+});
+
+FormCheck.displayName = 'FormCheck';
+FormCheck.Input = _FormCheckInput.default;
+FormCheck.Label = _FormCheckLabel.default;
+var _default = FormCheck;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","prop-types-extra/lib/all":"7gDS0","react":"3b2NM","./Feedback":"40O3n","./FormCheckInput":"3MfQl","./FormCheckLabel":"5aWG1","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"40O3n":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var propTypes = {
+  /**
+   * Specify whether the feedback is for valid or invalid fields
+   *
+   * @type {('valid'|'invalid')}
+   */
+  type: _propTypes.default.string,
+
+  /** Display feedback as a tooltip. */
+  tooltip: _propTypes.default.bool,
+  as: _propTypes.default.elementType
+};
+
+var Feedback = /*#__PURE__*/_react.default.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+function (_ref, ref) {
+  var _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      className = _ref.className,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'valid' : _ref$type,
+      _ref$tooltip = _ref.tooltip,
+      tooltip = _ref$tooltip === void 0 ? false : _ref$tooltip,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["as", "className", "type", "tooltip"]);
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    className: (0, _classnames.default)(className, type + "-" + (tooltip ? 'tooltip' : 'feedback'))
+  }));
+});
+
+Feedback.displayName = 'Feedback';
+Feedback.propTypes = propTypes;
+var _default = Feedback;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","prop-types":"4dfy5"}],"3MfQl":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormCheckInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var id = _ref.id,
+      bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      className = _ref.className,
+      _ref$type = _ref.type,
+      type = _ref$type === void 0 ? 'checkbox' : _ref$type,
+      _ref$isValid = _ref.isValid,
+      isValid = _ref$isValid === void 0 ? false : _ref$isValid,
+      _ref$isInvalid = _ref.isInvalid,
+      isInvalid = _ref$isInvalid === void 0 ? false : _ref$isInvalid,
+      isStatic = _ref.isStatic,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'input' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["id", "bsPrefix", "bsCustomPrefix", "className", "type", "isValid", "isInvalid", "isStatic", "as"]);
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId,
+      custom = _useContext.custom;
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom-control-input'] : [bsPrefix, 'form-check-input'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    type: type,
+    id: id || controlId,
+    className: (0, _classnames.default)(className, bsPrefix, isValid && 'is-valid', isInvalid && 'is-invalid', isStatic && 'position-static')
+  }));
+});
+
+FormCheckInput.displayName = 'FormCheckInput';
+var _default = FormCheckInput;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"72akU":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var FormContext = /*#__PURE__*/_react.default.createContext({
+  controlId: undefined
+});
+
+var _default = FormContext;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","react":"3b2NM"}],"5aWG1":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormCheckLabel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      className = _ref.className,
+      htmlFor = _ref.htmlFor,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "bsCustomPrefix", "className", "htmlFor"]);
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId,
+      custom = _useContext.custom;
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom-control-label'] : [bsPrefix, 'form-check-label'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  return /*#__PURE__*/_react.default.createElement("label", (0, _extends2.default)({}, props, {
+    ref: ref,
+    htmlFor: htmlFor || controlId,
+    className: (0, _classnames.default)(className, bsPrefix)
+  }));
+});
+
+FormCheckLabel.displayName = 'FormCheckLabel';
+var _default = FormCheckLabel;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"6mhKG":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _all = _interopRequireDefault(require("prop-types-extra/lib/all"));
+
+var _Feedback = _interopRequireDefault(require("./Feedback"));
+
+var _FormFileInput = _interopRequireDefault(require("./FormFileInput"));
+
+var _FormFileLabel = _interopRequireDefault(require("./FormFileLabel"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormFile = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var id = _ref.id,
+      bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      _ref$disabled = _ref.disabled,
+      disabled = _ref$disabled === void 0 ? false : _ref$disabled,
+      _ref$isValid = _ref.isValid,
+      isValid = _ref$isValid === void 0 ? false : _ref$isValid,
+      _ref$isInvalid = _ref.isInvalid,
+      isInvalid = _ref$isInvalid === void 0 ? false : _ref$isInvalid,
+      _ref$feedbackTooltip = _ref.feedbackTooltip,
+      feedbackTooltip = _ref$feedbackTooltip === void 0 ? false : _ref$feedbackTooltip,
+      feedback = _ref.feedback,
+      className = _ref.className,
+      style = _ref.style,
+      label = _ref.label,
+      children = _ref.children,
+      custom = _ref.custom,
+      lang = _ref.lang,
+      dataBrowse = _ref['data-browse'],
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      _ref$inputAs = _ref.inputAs,
+      inputAs = _ref$inputAs === void 0 ? 'input' : _ref$inputAs,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["id", "bsPrefix", "bsCustomPrefix", "disabled", "isValid", "isInvalid", "feedbackTooltip", "feedback", "className", "style", "label", "children", "custom", "lang", "data-browse", "as", "inputAs"]);
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom'] : [bsPrefix, 'form-file'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  var type = 'file';
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId;
+
+  var innerFormContext = (0, _react.useMemo)(function () {
+    return {
+      controlId: id || controlId,
+      custom: custom
+    };
+  }, [controlId, custom, id]);
+  var hasLabel = label != null && label !== false && !children;
+
+  var input = /*#__PURE__*/_react.default.createElement(_FormFileInput.default, (0, _extends2.default)({}, props, {
+    ref: ref,
+    isValid: isValid,
+    isInvalid: isInvalid,
+    disabled: disabled,
+    as: inputAs,
+    lang: lang
+  }));
+
+  return /*#__PURE__*/_react.default.createElement(_FormContext.default.Provider, {
+    value: innerFormContext
+  }, /*#__PURE__*/_react.default.createElement(Component, {
+    style: style,
+    className: (0, _classnames.default)(className, bsPrefix, custom && "custom-" + type)
+  }, children || /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, custom ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, input, hasLabel && /*#__PURE__*/_react.default.createElement(_FormFileLabel.default, {
+    "data-browse": dataBrowse
+  }, label)) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, hasLabel && /*#__PURE__*/_react.default.createElement(_FormFileLabel.default, null, label), input), (isValid || isInvalid) && /*#__PURE__*/_react.default.createElement(_Feedback.default, {
+    type: isValid ? 'valid' : 'invalid',
+    tooltip: feedbackTooltip
+  }, feedback))));
+});
+
+FormFile.displayName = 'FormFile';
+FormFile.Input = _FormFileInput.default;
+FormFile.Label = _FormFileLabel.default;
+var _default = FormFile;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","prop-types-extra/lib/all":"7gDS0","./Feedback":"40O3n","./FormFileInput":"5D05r","./FormFileLabel":"2ZRUF","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"5D05r":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormFileInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var id = _ref.id,
+      bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      className = _ref.className,
+      isValid = _ref.isValid,
+      isInvalid = _ref.isInvalid,
+      lang = _ref.lang,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'input' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["id", "bsPrefix", "bsCustomPrefix", "className", "isValid", "isInvalid", "lang", "as"]);
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId,
+      custom = _useContext.custom;
+
+  var type = 'file';
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom-file-input'] : [bsPrefix, 'form-control-file'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    id: id || controlId,
+    type: type,
+    lang: lang,
+    className: (0, _classnames.default)(className, bsPrefix, isValid && 'is-valid', isInvalid && 'is-invalid')
+  }));
+});
+
+FormFileInput.displayName = 'FormFileInput';
+var _default = FormFileInput;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"2ZRUF":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormFileLabel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      bsCustomPrefix = _ref.bsCustomPrefix,
+      className = _ref.className,
+      htmlFor = _ref.htmlFor,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "bsCustomPrefix", "className", "htmlFor"]);
+
+  var _useContext = (0, _react.useContext)(_FormContext.default),
+      controlId = _useContext.controlId,
+      custom = _useContext.custom;
+
+  var _ref2 = custom ? [bsCustomPrefix, 'custom-file-label'] : [bsPrefix, 'form-file-label'],
+      prefix = _ref2[0],
+      defaultPrefix = _ref2[1];
+
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  return /*#__PURE__*/_react.default.createElement("label", (0, _extends2.default)({}, props, {
+    ref: ref,
+    htmlFor: htmlFor || controlId,
+    className: (0, _classnames.default)(className, bsPrefix),
+    "data-browse": props['data-browse']
+  }));
+});
+
+FormFileLabel.displayName = 'FormFileLabel';
+var _default = FormFileLabel;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"573gP":[function(require,module,exports) {
+"use strict";
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.default = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _classnames = _interopRequireDefault(require("classnames"));
+var _all = _interopRequireDefault(require("prop-types-extra/lib/all"));
+var _react = _interopRequireWildcard(require("react"));
+var _warning = _interopRequireDefault(require("warning"));
+var _Feedback = _interopRequireDefault(require("./Feedback"));
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+var _ThemeProvider = require("./ThemeProvider");
+var FormControl = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix, bsCustomPrefix = _ref.bsCustomPrefix, type = _ref.type, size = _ref.size, htmlSize = _ref.htmlSize, id = _ref.id, className = _ref.className, _ref$isValid = _ref.isValid, isValid = _ref$isValid === void 0 ? false : _ref$isValid, _ref$isInvalid = _ref.isInvalid, isInvalid = _ref$isInvalid === void 0 ? false : _ref$isInvalid, plaintext = _ref.plaintext, readOnly = _ref.readOnly, custom = _ref.custom, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'input' : _ref$as, props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "bsCustomPrefix", "type", "size", "htmlSize", "id", "className", "isValid", "isInvalid", "plaintext", "readOnly", "custom", "as"]);
+  var _useContext = (0, _react.useContext)(_FormContext.default), controlId = _useContext.controlId;
+  var _ref2 = custom ? [bsCustomPrefix, 'custom'] : [bsPrefix, 'form-control'], prefix = _ref2[0], defaultPrefix = _ref2[1];
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(prefix, defaultPrefix);
+  var classes;
+  if (plaintext) {
+    var _classes;
+    classes = (_classes = {}, _classes[bsPrefix + "-plaintext"] = true, _classes);
+  } else if (type === 'file') {
+    var _classes2;
+    classes = (_classes2 = {}, _classes2[bsPrefix + "-file"] = true, _classes2);
+  } else if (type === 'range') {
+    var _classes3;
+    classes = (_classes3 = {}, _classes3[bsPrefix + "-range"] = true, _classes3);
+  } else if (Component === 'select' && custom) {
+    var _classes4;
+    classes = (_classes4 = {}, _classes4[bsPrefix + "-select"] = true, _classes4[bsPrefix + "-select-" + size] = size, _classes4);
+  } else {
+    var _classes5;
+    classes = (_classes5 = {}, _classes5[bsPrefix] = true, _classes5[bsPrefix + "-" + size] = size, _classes5);
+  }
+  "development" !== "production" ? (0, _warning.default)(controlId == null || !id, '`controlId` is ignored on `<FormControl>` when `id` is specified.') : void 0;
+  return (
+    /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+      type: type,
+      size: htmlSize,
+      ref: ref,
+      readOnly: readOnly,
+      id: id || controlId,
+      className: (0, _classnames.default)(className, classes, isValid && "is-valid", isInvalid && "is-invalid")
+    }))
+  );
+});
+FormControl.displayName = 'FormControl';
+var _default = Object.assign(FormControl, {
+  Feedback: _Feedback.default
+});
+exports.default = _default;
+module.exports = exports["default"];
+
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","prop-types-extra/lib/all":"7gDS0","react":"3b2NM","warning":"5jojS","./Feedback":"40O3n","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"120iJ":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormGroup = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      className = _ref.className,
+      children = _ref.children,
+      controlId = _ref.controlId,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "className", "children", "controlId", "as"]);
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'form-group');
+  var context = (0, _react.useMemo)(function () {
+    return {
+      controlId: controlId
+    };
+  }, [controlId]);
+  return /*#__PURE__*/_react.default.createElement(_FormContext.default.Provider, {
+    value: context
+  }, /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    className: (0, _classnames.default)(className, bsPrefix)
+  }), children));
+});
+
+FormGroup.displayName = 'FormGroup';
+var _default = FormGroup;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"70qP9":[function(require,module,exports) {
+"use strict";
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+exports.__esModule = true;
+exports.default = void 0;
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+var _classnames = _interopRequireDefault(require("classnames"));
+var _react = _interopRequireWildcard(require("react"));
+var _warning = _interopRequireDefault(require("warning"));
+var _Col = _interopRequireDefault(require("./Col"));
+var _FormContext = _interopRequireDefault(require("./FormContext"));
+var _ThemeProvider = require("./ThemeProvider");
+var defaultProps = {
+  column: false,
+  srOnly: false
+};
+var FormLabel = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var _ref$as = _ref.as, Component = _ref$as === void 0 ? 'label' : _ref$as, bsPrefix = _ref.bsPrefix, column = _ref.column, srOnly = _ref.srOnly, className = _ref.className, htmlFor = _ref.htmlFor, props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["as", "bsPrefix", "column", "srOnly", "className", "htmlFor"]);
+  var _useContext = (0, _react.useContext)(_FormContext.default), controlId = _useContext.controlId;
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'form-label');
+  var columnClass = 'col-form-label';
+  if (typeof column === 'string') columnClass = columnClass + " " + columnClass + "-" + column;
+  var classes = (0, _classnames.default)(className, bsPrefix, srOnly && 'sr-only', column && columnClass);
+  "development" !== "production" ? (0, _warning.default)(controlId == null || !htmlFor, '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.') : void 0;
+  htmlFor = htmlFor || controlId;
+  if (column) return (
+    /*#__PURE__*/_react.default.createElement(_Col.default, (0, _extends2.default)({
+      as: "label",
+      className: classes,
+      htmlFor: htmlFor
+    }, props))
+  );
+  return (
+    /*#__PURE__*/
+    // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
+    _react.default.createElement(Component, (0, _extends2.default)({
+      ref: ref,
+      className: classes,
+      htmlFor: htmlFor
+    }, props))
+  );
+});
+FormLabel.displayName = 'FormLabel';
+FormLabel.defaultProps = defaultProps;
+var _default = FormLabel;
+exports.default = _default;
+module.exports = exports["default"];
+
+},{"@babel/runtime/helpers/interopRequireWildcard":"28En5","@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","warning":"5jojS","./Col":"2D0r8","./FormContext":"72akU","./ThemeProvider":"4rz1S"}],"2D0r8":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
+
+var Col = /*#__PURE__*/_react.default.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      className = _ref.className,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'div' : _ref$as,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "className", "as"]);
+  var prefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'col');
+  var spans = [];
+  var classes = [];
+  DEVICE_SIZES.forEach(function (brkPoint) {
+    var propValue = props[brkPoint];
+    delete props[brkPoint];
+    var span;
+    var offset;
+    var order;
+
+    if (typeof propValue === 'object' && propValue != null) {
+      var _propValue$span = propValue.span;
+      span = _propValue$span === void 0 ? true : _propValue$span;
+      offset = propValue.offset;
+      order = propValue.order;
+    } else {
+      span = propValue;
+    }
+
+    var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
+    if (span) spans.push(span === true ? "" + prefix + infix : "" + prefix + infix + "-" + span);
+    if (order != null) classes.push("order" + infix + "-" + order);
+    if (offset != null) classes.push("offset" + infix + "-" + offset);
+  });
+
+  if (!spans.length) {
+    spans.push(prefix); // plain 'col'
+  }
+
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    className: _classnames.default.apply(void 0, [className].concat(spans, classes))
+  }));
+});
+
+Col.displayName = 'Col';
+var _default = Col;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S"}],"2VsfR":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _ThemeProvider = require("./ThemeProvider");
+
+var FormText = /*#__PURE__*/_react.default.forwardRef( // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix,
+      className = _ref.className,
+      _ref$as = _ref.as,
+      Component = _ref$as === void 0 ? 'small' : _ref$as,
+      muted = _ref.muted,
+      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "className", "as", "muted"]);
+  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'form-text');
+  return /*#__PURE__*/_react.default.createElement(Component, (0, _extends2.default)({}, props, {
+    ref: ref,
+    className: (0, _classnames.default)(className, bsPrefix, muted && 'text-muted')
+  }));
+});
+
+FormText.displayName = 'FormText';
+var _default = FormText;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","@babel/runtime/helpers/objectWithoutPropertiesLoose":"3Yx9V","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"4rz1S"}],"5DfiR":[function(require,module,exports) {
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+exports.__esModule = true;
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _FormCheck = _interopRequireDefault(require("./FormCheck"));
+
+var Switch = /*#__PURE__*/_react.default.forwardRef(function (props, ref) {
+  return /*#__PURE__*/_react.default.createElement(_FormCheck.default, (0, _extends2.default)({}, props, {
+    ref: ref,
+    type: "switch"
+  }));
+});
+
+Switch.displayName = 'Switch';
+Switch.Input = _FormCheck.default.Input;
+Switch.Label = _FormCheck.default.Label;
+var _default = Switch;
+exports.default = _default;
+module.exports = exports["default"];
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","react":"3b2NM","./FormCheck":"6WcKM"}],"6Rf6k":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");
+var _babelRuntimeHelpersEsmExtendsDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersEsmExtends);
+var _babelRuntimeHelpersEsmObjectWithoutPropertiesLoose = require("@babel/runtime/helpers/esm/objectWithoutPropertiesLoose");
+var _babelRuntimeHelpersEsmObjectWithoutPropertiesLooseDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersEsmObjectWithoutPropertiesLoose);
+var _classnames = require('classnames');
+var _classnamesDefault = _parcelHelpers.interopDefault(_classnames);
+var _react = require('react');
+var _reactDefault = _parcelHelpers.interopDefault(_react);
+var _ThemeProvider = require('./ThemeProvider');
+var DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
+var Col = /*#__PURE__*/_reactDefault.default.forwardRef(// Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+function (_ref, ref) {
+  var bsPrefix = _ref.bsPrefix, className = _ref.className, _ref$as = _ref.as, Component = _ref$as === void 0 ? 'div' : _ref$as, props = _babelRuntimeHelpersEsmObjectWithoutPropertiesLooseDefault.default(_ref, ["bsPrefix", "className", "as"]);
+  var prefix = _ThemeProvider.useBootstrapPrefix(bsPrefix, 'col');
+  var spans = [];
+  var classes = [];
+  DEVICE_SIZES.forEach(function (brkPoint) {
+    var propValue = props[brkPoint];
+    delete props[brkPoint];
+    var span;
+    var offset;
+    var order;
+    if (typeof propValue === 'object' && propValue != null) {
+      var _propValue$span = propValue.span;
+      span = _propValue$span === void 0 ? true : _propValue$span;
+      offset = propValue.offset;
+      order = propValue.order;
+    } else {
+      span = propValue;
+    }
+    var infix = brkPoint !== 'xs' ? "-" + brkPoint : '';
+    if (span) spans.push(span === true ? "" + prefix + infix : "" + prefix + infix + "-" + span);
+    if (order != null) classes.push("order" + infix + "-" + order);
+    if (offset != null) classes.push("offset" + infix + "-" + offset);
+  });
+  if (!spans.length) {
+    spans.push(prefix);
+  }
+  return (
+    /*#__PURE__*/_reactDefault.default.createElement(Component, _babelRuntimeHelpersEsmExtendsDefault.default({}, props, {
+      ref: ref,
+      className: _classnamesDefault.default.apply(void 0, [className].concat(spans, classes))
+    }))
+  );
+});
+Col.displayName = 'Col';
+exports.default = Col;
+
+},{"@babel/runtime/helpers/esm/extends":"5qnVv","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"6rNIl","classnames":"5aJRc","react":"3b2NM","./ThemeProvider":"6Pzum","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5qnVv":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+function _extends() {
+  _extends = Object.assign || (function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  });
+  return _extends.apply(this, arguments);
+}
+exports.default = _extends;
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"6rNIl":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+exports.default = _objectWithoutPropertiesLoose;
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"6Pzum":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "useBootstrapPrefix", function () {
+  return useBootstrapPrefix;
+});
+_parcelHelpers.export(exports, "createBootstrapComponent", function () {
+  return createBootstrapComponent;
+});
+_parcelHelpers.export(exports, "ThemeConsumer", function () {
+  return Consumer;
+});
+var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");
+var _babelRuntimeHelpersEsmExtendsDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersEsmExtends);
+var _react = require('react');
+var _reactDefault = _parcelHelpers.interopDefault(_react);
+var ThemeContext = /*#__PURE__*/_reactDefault.default.createContext({});
+var Consumer = ThemeContext.Consumer, Provider = ThemeContext.Provider;
+function ThemeProvider(_ref) {
+  var prefixes = _ref.prefixes, children = _ref.children;
+  var copiedPrefixes = _react.useMemo(function () {
+    return _babelRuntimeHelpersEsmExtendsDefault.default({}, prefixes);
+  }, [prefixes]);
+  return (
+    /*#__PURE__*/_reactDefault.default.createElement(Provider, {
+      value: copiedPrefixes
+    }, children)
+  );
+}
+function useBootstrapPrefix(prefix, defaultPrefix) {
+  var prefixes = _react.useContext(ThemeContext);
+  return prefix || prefixes[defaultPrefix] || defaultPrefix;
+}
+function createBootstrapComponent(Component, opts) {
+  if (typeof opts === 'string') opts = {
+    prefix: opts
+  };
+  var isClassy = Component.prototype && Component.prototype.isReactComponent;
+  // If it's a functional component make sure we don't break it with a ref
+  var _opts = opts, prefix = _opts.prefix, _opts$forwardRefAs = _opts.forwardRefAs, forwardRefAs = _opts$forwardRefAs === void 0 ? isClassy ? 'ref' : 'innerRef' : _opts$forwardRefAs;
+  var Wrapped = /*#__PURE__*/_reactDefault.default.forwardRef(function (_ref2, ref) {
+    var props = _babelRuntimeHelpersEsmExtendsDefault.default({}, _ref2);
+    props[forwardRefAs] = ref;
+    var bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement(Component, _babelRuntimeHelpersEsmExtendsDefault.default({}, props, {
+        bsPrefix: bsPrefix
+      }))
+    );
+  });
+  Wrapped.displayName = "Bootstrap(" + (Component.displayName || Component.name) + ")";
+  return Wrapped;
+}
+exports.default = ThemeProvider;
+
+},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

@@ -10,7 +10,6 @@ import { scaleLinear } from "d3-scale";
 import { PatternLines } from "@vx/pattern";
 
 // Relevant constants
-const women = "Labor force, female (% of total labor force)";
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const colorScale = scaleLinear()
@@ -23,6 +22,7 @@ const changeScale = scaleLinear()
 
 // WorldMap builds the world map
 const WorldMap = ({
+  col,
   dataRangedEnds,
   setTooltipContent,
   yearRange,
@@ -56,8 +56,11 @@ const WorldMap = ({
                   (s) => s[0]["Country Code"] === geo.properties.ISO_A3
                 );
                 let d = null;
-                if (c[0] != null) {
+                if (c[0] != null && c[0][0][col] != 0) {
                   d = c[0][0];
+                  if (yearRange[0] != yearRange[1] && c[0][1][col] == 0) {
+                    d = null;
+                  }
                 }
                 let h = false;
                 if (d != null) {
@@ -74,8 +77,8 @@ const WorldMap = ({
                               ": " +
                               Math.round(
                                 (yearRange[0] == yearRange[1]
-                                  ? d[women]
-                                  : c[0][1][women] - d[women]) * 100
+                                  ? d[col]
+                                  : c[0][1][col] - d[col]) * 100
                               ) /
                                 100 +
                               "%"
@@ -90,8 +93,8 @@ const WorldMap = ({
                       fill={
                         d
                           ? yearRange[0] != yearRange[1]
-                            ? changeScale(+c[0][1][women] - +d[women])
-                            : colorScale(d[women])
+                            ? changeScale(+c[0][1][col] - +d[col])
+                            : colorScale(d[col])
                           : "#F5F4F6"
                       }
                     >
@@ -101,8 +104,8 @@ const WorldMap = ({
                             ": " +
                             Math.round(
                               (yearRange[0] == yearRange[1]
-                                ? d[women]
-                                : c[0][1][women] - d[women]) * 100
+                                ? d[col]
+                                : c[0][1][col] - d[col]) * 100
                             ) /
                               100 +
                             "%"
@@ -119,8 +122,8 @@ const WorldMap = ({
                                 ": " +
                                 Math.round(
                                   (yearRange[0] == yearRange[1]
-                                    ? d[women]
-                                    : c[0][1][women] - d[women]) * 100
+                                    ? d[col]
+                                    : c[0][1][col] - d[col]) * 100
                                 ) /
                                   100 +
                                 "%"
@@ -139,8 +142,8 @@ const WorldMap = ({
                             ": " +
                             Math.round(
                               (yearRange[0] == yearRange[1]
-                                ? d[women]
-                                : c[0][1][women] - d[women]) * 100
+                                ? d[col]
+                                : c[0][1][col] - d[col]) * 100
                             ) /
                               100 +
                             "%"}
