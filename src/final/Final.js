@@ -176,6 +176,7 @@ const Final = () => {
                 s={s}
                 m={m}
                 t={t}
+                col={col}
                 yScale={yScale}
                 yearRange={yearRange}
                 highlight={highlight}
