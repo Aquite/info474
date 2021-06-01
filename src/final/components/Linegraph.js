@@ -14,6 +14,7 @@ export default function Linegraph(props) {
   let s = props.s;
   let m = props.m;
   let t = props.t;
+  let col = props.col;
   let yScale = props.yScale;
   let yearRange = props.yearRange;
   let highlight = props.highlight;
@@ -45,7 +46,7 @@ export default function Linegraph(props) {
         row["Year"] >= minYear &&
         row["Year"] <= maxYear
       ) {
-        countryData[parseInt(row["Year"])] = row[women];
+        countryData[parseInt(row["Year"])] = row[col];
         countryName = row["Country Name"];
         if (constLineplotColors[countryCode] === undefined) {
           constLineplotColors[countryCode] =
