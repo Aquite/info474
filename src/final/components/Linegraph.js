@@ -9,8 +9,7 @@ import ReactTooltip from "react-tooltip";
 
 export default function Linegraph(props) {
 
-  const ourToolTip = useState("We are in a state");
-  console.log(ourToolTip[0]);
+  
 
   let s = props.s;
   let m = props.m;
@@ -144,7 +143,8 @@ export default function Linegraph(props) {
   
 
   const toolTipYear = useState(1994);
-
+  const ourToolTip = useState(toolTipYear);
+  console.log(ourToolTip[0]);
   const Linegraph = (
     <React.Fragment>
       <svg width={s} height={s}>

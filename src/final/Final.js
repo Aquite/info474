@@ -203,6 +203,7 @@ const Final = () => {
               />
             </React.Fragment>
           ) : yearRange[0] != yearRange[1] ? (
+            <React.Fragment>
             <Linegraph
               s={s}
               m={m}
@@ -215,6 +216,8 @@ const Final = () => {
               dataInDateRange={dataInDateRange}
               setTooltipContent={setTooltipContent}
             />
+            <ReactTooltip>{tooltipContent}</ReactTooltip>
+            </React.Fragment>
           ) : (
             <React.Fragment>
               <Barcode
