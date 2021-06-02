@@ -9,6 +9,7 @@
 .parcel-cache
 .parcel-cache/*
 /.parcel-cache/*
+.cache
 
 # testing
 /coverage
