@@ -9,7 +9,7 @@ import ReactTooltip from "react-tooltip";
 
 export default function Linegraph(props) {
 
-  
+  const ourToolTip = useState("We are in a state");
 
   let s = props.s;
   let m = props.m;
@@ -123,7 +123,9 @@ export default function Linegraph(props) {
     });
     return {
       country: countryCode,
+      name:countryName,
       countryColor: color,
+      data: countryData,
       dots: countryDots,
       lines: countryLines,
       toolTipRegions: countrytToolTipRegions
@@ -143,8 +145,7 @@ export default function Linegraph(props) {
   
 
   const toolTipYear = useState(1994);
-  const ourToolTip = useState(toolTipYear);
-  console.log(ourToolTip[0]);
+
   const Linegraph = (
     <React.Fragment>
       <svg width={s} height={s}>
@@ -159,8 +160,21 @@ export default function Linegraph(props) {
         <rect data-tip="test"
           key={" toolTipRegionExample"}
           data-for={"scatternot"}
-          data-tip={""}
-          x={getXForYear(minYear) - (xintervalLength / 2)}
+          data-tip={ourToolTip[0]}
+          onMouseEnter={() => {
+            toolTipYear[1](minYear+1);
+            let toolTipLabel = ""
+            console.log(highLightedCountryData.map(function(country){
+              toolTipLabel = toolTipLabel + "<br/> " + country.name+": "+country.data[minYear+1];
+              return country.name+": "+country.data[minYear+1];
+            }))
+            ourToolTip[1](toolTipLabel);
+          }}
+          onMouseLeave={() => {
+            toolTipYear[1](minYear-2)
+            ourToolTip[1]("We are not in the rectangle");
+          }}
+          x={getXForYear(minYear+ 1) - (xintervalLength / 2)}
           y="0"
           width={xintervalLength}
           height={s}
@@ -201,7 +215,7 @@ export default function Linegraph(props) {
           numTicks={5}
         />
       </svg>
-      <ReactTooltip id={"scatternot"} multiline={true}>{ourToolTip[0]}</ReactTooltip>
+      <ReactTooltip id={"scatternot"} multiline={true}></ReactTooltip>
     </React.Fragment>
   );
 
