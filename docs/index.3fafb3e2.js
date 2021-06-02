@@ -60450,7 +60450,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./components/Scatterplot.js":"3eBDh"}],"6TPbf":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","./components/Scatterplot.js":"3eBDh","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6TPbf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60883,7 +60883,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"47xHJ":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"47xHJ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -61946,7 +61946,6 @@ try {
     function getYForPercentage(percentage) {
       return s - m - yAxisLength * (percentage / 100);
     }
-    let [constLineplotColors, updateLineplotColors] = _react.useState({});
     let highLightedCountryData = highlightArray.map(function (countryCode) {
       let countryData = {};
       let countryName = "Unknown Country";
@@ -61954,66 +61953,11 @@ try {
         if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
           countryData[parseInt(row["Year"])] = row[col];
           countryName = row["Country Name"];
-          if (constLineplotColors[countryCode] === undefined) {
-            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-            updateLineplotColors({
-              ...constLineplotColors
-            });
-          }
         }
-      });
-      let color = constLineplotColors[countryCode];
-      let countryDots = Object.keys(countryData).map(function (year) {
-        return (
-          /*#__PURE__*/_reactDefault.default.createElement("circle", {
-            key: countryCode + year + " circle",
-            cx: getXForYear(year),
-            cy: getYForPercentage(countryData[year]),
-            r: "3",
-            stroke: "black",
-            fill: color,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 69,
-              columnNumber: 9
-            }
-          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 77,
-              columnNumber: 11
-            }
-          }, countryName + ", " + year + ": " + countryData[year]))
-        );
-      });
-      let countrytToolTipRegions = Object.keys(countryData).map(function (year) {
-        return (
-          /*#__PURE__*/_reactDefault.default.createElement("rect", {
-            "data-tip": "test",
-            key: countryCode + year + " toolTipRegion",
-            "data-for": "scatternot",
-            "data-tip": "",
-            x: getXForYear(year) - xintervalLength / 2,
-            y: "0",
-            width: xintervalLength,
-            height: s,
-            fillOpacity: "0.15",
-            fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 83,
-              columnNumber: 9
-            }
-          })
-        );
       });
       let countryLines = Object.keys(countryData).map(function (year, index) {
         let nextYear = parseInt(year) + 1;
         if (year < maxYear && countryData[nextYear] !== undefined) {
-          // || year === minYear + 1)
           if (countryData[year] != 0 && countryData[nextYear] != 0) {
             return (
               /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -62028,14 +61972,14 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 102,
+                  lineNumber: 65,
                   columnNumber: 13
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement("title", {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 111,
+                  lineNumber: 74,
                   columnNumber: 15
                 }
               }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
@@ -62046,38 +61990,35 @@ try {
       return {
         country: countryCode,
         name: countryName,
-        countryColor: color,
         data: countryData,
-        dots: countryDots,
-        lines: countryLines,
-        toolTipRegions: countrytToolTipRegions
+        lines: countryLines
       };
     });
-    let dots = highLightedCountryData.map(function (row, index) {
-      return row.dots;
-    });
-    let lines = highLightedCountryData.map(function (row, index) {
+    let lines = highLightedCountryData.map(function (row) {
       return row.lines;
     });
-    let toolTipRegions = highLightedCountryData.map(function (row, index) {
-      return row.toolTipRegions;
-    });
-    const toolTipYear = _react.useState(1994);
+    const toolTipYear = _react.useState(minYear - 2);
     let arrayOfYears = [];
     for (let i = minYear; i <= maxYear; i++) {
       arrayOfYears.push(i);
     }
-    console.log(arrayOfYears);
     let toolTipRectangles = arrayOfYears.map(function (year) {
       return (
         /*#__PURE__*/_reactDefault.default.createElement("rect", {
-          key: " toolTipRegion" + year,
+          key: "toolTipRegion" + year,
           onMouseEnter: () => {
+            let toolTipLabel = " \"" + col + "\" data for " + year + "<br/> " + "<br/> ";
+            let toolTipData = highLightedCountryData.filter(function (country) {
+              return country.data[year] !== undefined && country.data[year] != 0;
+            });
+            toolTipData.sort(function (countryA, countryB) {
+              return countryB.data[year] - countryA.data[year];
+            });
+            toolTipData.forEach(function (country) {
+              toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[year];
+            });
+            ourToolTip[1](toolTipLabel);
             toolTipYear[1](year);
-          },
-          onMouseLeave: () => {
-            toolTipYear[1](minYear - 2);
-            ourToolTip[1]("We are not in the rectangle");
           },
           x: getXForYear(year) - xintervalLength / 2,
           y: "0",
@@ -62087,7 +62028,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 157,
+            lineNumber: 108,
             columnNumber: 7
           }
         })
@@ -62097,7 +62038,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 176,
+        lineNumber: 135,
         columnNumber: 5
       }
     }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -62106,10 +62047,10 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 177,
+        lineNumber: 136,
         columnNumber: 7
       }
-    }, lines, false && toolTipRegions, /*#__PURE__*/_reactDefault.default.createElement("line", {
+    }, lines, /*#__PURE__*/_reactDefault.default.createElement("line", {
       x1: getXForYear(toolTipYear[0]),
       x2: getXForYear(toolTipYear[0]),
       y1: getYForPercentage(0),
@@ -62118,26 +62059,18 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 180,
+        lineNumber: 138,
         columnNumber: 9
       }
-    }), toolTipRectangles, /*#__PURE__*/_reactDefault.default.createElement("rect", {
+    }), highlight.size !== 0 && toolTipRectangles, /*#__PURE__*/_reactDefault.default.createElement("rect", {
       "data-tip": "test",
       key: " toolTipRegionExample",
       "data-for": "scatternot",
       "data-tip": ourToolTip[0],
-      onMouseEnter: () => {
-        toolTipYear[1](toolTipYear[0]);
-        let toolTipLabel = "";
-        console.log(highLightedCountryData.map(function (country) {
-          toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[toolTipYear[0]];
-          return country.name + ": " + country.data[toolTipYear[0]];
-        }));
-        ourToolTip[1](toolTipLabel);
-      },
       onMouseLeave: () => {
         toolTipYear[1](minYear - 2);
-        ourToolTip[1]("We are not in the rectangle");
+        // a year that isnt in the graph, i.e. get rid of the highlight
+        ourToolTip[1]("No Year Highlighted");
       },
       x: getXForYear(toolTipYear[0]) - xintervalLength / 2,
       y: "0",
@@ -62147,7 +62080,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 187,
+        lineNumber: 145,
         columnNumber: 9
       }
     }), highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -62163,14 +62096,14 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 211,
+        lineNumber: 160,
         columnNumber: 11
       }
     }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 224,
+        lineNumber: 173,
         columnNumber: 13
       }
     }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
@@ -62182,7 +62115,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 226,
+        lineNumber: 175,
         columnNumber: 9
       }
     }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
@@ -62195,7 +62128,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 235,
+        lineNumber: 184,
         columnNumber: 9
       }
     })), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
@@ -62204,14 +62137,14 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 244,
+        lineNumber: 193,
         columnNumber: 7
       }
     }));
     return Linegraph;
   }
   exports.default = Linegraph;
-  _s(Linegraph, "jpukAEgSInOblPJ/jH0PEiHjGVg=");
+  _s(Linegraph, "IWYhyZi3eORMXqFURlizGqDhz9I=");
   _c = Linegraph;
   var _c;
   $RefreshReg$(_c, "Linegraph");
@@ -62221,7 +62154,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"6Rf6k":[function(require,module,exports) {
+},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6Rf6k":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");

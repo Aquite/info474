@@ -43,7 +43,6 @@ export default function Linegraph(props) {
   function getYForPercentage(percentage) {
     return s - m - yAxisLength * (percentage / 100);
   }
-  let [constLineplotColors, updateLineplotColors] = useState({});
 
   let highLightedCountryData = highlightArray.map(function (countryCode) {
     let countryData = {};
@@ -56,47 +55,11 @@ export default function Linegraph(props) {
       ) {
         countryData[parseInt(row["Year"])] = row[col];
         countryName = row["Country Name"];
-        if (constLineplotColors[countryCode] === undefined) {
-          constLineplotColors[countryCode] =
-            "#" + Math.floor(Math.random() * 16777215).toString(16);
-          updateLineplotColors({ ...constLineplotColors });
-        }
       }
-    });
-    let color = constLineplotColors[countryCode];
-    let countryDots = Object.keys(countryData).map(function (year) {
-      return (
-        <circle
-          key={countryCode + year + " circle"}
-          cx={getXForYear(year)}
-          cy={getYForPercentage(countryData[year])}
-          r="3"
-          stroke="black"
-          fill={color}
-        >
-          <title>{countryName + ", " + year + ": " + countryData[year]}</title>
-        </circle>
-      );
-    });
-    let countrytToolTipRegions = Object.keys(countryData).map(function (year) {
-      return (
-        <rect data-tip="test"
-          key={countryCode + year + " toolTipRegion"}
-          data-for={"scatternot"}
-          data-tip={""}
-          x={getXForYear(year) - (xintervalLength / 2)}
-          y="0"
-          width={xintervalLength}
-          height={s}
-          fillOpacity={"0.15"}
-          fill={"#" + Math.floor(Math.random() * 16777215).toString(16)}
-        />
-      );
     });
     let countryLines = Object.keys(countryData).map(function (year, index) {
       let nextYear = parseInt(year) + 1;
       if (year < maxYear && countryData[nextYear] !== undefined) {
-        // || year === minYear + 1)
         if (countryData[year] != 0 && countryData[nextYear] != 0) {
           return (
             <line
@@ -124,44 +87,40 @@ export default function Linegraph(props) {
     return {
       country: countryCode,
       name: countryName,
-      countryColor: color,
       data: countryData,
-      dots: countryDots,
-      lines: countryLines,
-      toolTipRegions: countrytToolTipRegions
+      lines: countryLines
     };
   });
-  let dots = highLightedCountryData.map(function (row, index) {
-    return row.dots;
-  });
-  let lines = highLightedCountryData.map(function (row, index) {
+  let lines = highLightedCountryData.map(function (row) {
     return row.lines;
   });
 
-  let toolTipRegions = highLightedCountryData.map(function (row, index) {
-    return row.toolTipRegions;
-  });
 
-
-
-  const toolTipYear = useState(1994);
+  const toolTipYear = useState(minYear - 2);
 
   let arrayOfYears = [];
   for (let i = minYear; i <= maxYear; i++) {
     arrayOfYears.push(i);
   }
-  console.log(arrayOfYears);
 
   let toolTipRectangles = arrayOfYears.map(function (year) {
     return (
       <rect
-        key={" toolTipRegion" + year}
+        key={"toolTipRegion" + year}
         onMouseEnter={() => {
+
+          let toolTipLabel = " \"" + col + "\" data for " + year + "<br/> " + "<br/> "
+          let toolTipData = highLightedCountryData.filter(function(country){
+            return (country.data[year]!== undefined) && (country.data[year]!= 0);
+          });
+          toolTipData.sort(function(countryA, countryB){
+            return countryB.data[year] - countryA.data[year]
+          })
+          toolTipData.forEach(function (country) {
+            toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[year];
+          })
+          ourToolTip[1](toolTipLabel);
           toolTipYear[1](year);
-        }}
-        onMouseLeave={() => {
-          toolTipYear[1](minYear - 2)
-          ourToolTip[1]("We are not in the rectangle");
         }}
         x={getXForYear(year) - (xintervalLength / 2)}
         y="0"
@@ -176,30 +135,20 @@ export default function Linegraph(props) {
     <React.Fragment>
       <svg width={s} height={s}>
         {lines}
-        {false && toolTipRegions}
         <line x1={getXForYear(toolTipYear[0])}
           x2={getXForYear(toolTipYear[0])}
           y1={getYForPercentage(0)}
           y2={getYForPercentage(100)}
           stroke="#776865"
         />
-        {toolTipRectangles}
+        {highlight.size !== 0 && toolTipRectangles}
         <rect data-tip="test"
           key={" toolTipRegionExample"}
           data-for={"scatternot"}
           data-tip={ourToolTip[0]}
-          onMouseEnter={() => {
-            toolTipYear[1](toolTipYear[0]);
-            let toolTipLabel = ""
-            console.log(highLightedCountryData.map(function (country) {
-              toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[toolTipYear[0]];
-              return country.name + ": " + country.data[toolTipYear[0]];
-            }))
-            ourToolTip[1](toolTipLabel);
-          }}
           onMouseLeave={() => {
-            toolTipYear[1](minYear - 2)
-            ourToolTip[1]("We are not in the rectangle");
+            toolTipYear[1](minYear - 2) //a year that isnt in the graph, i.e. get rid of the highlight
+            ourToolTip[1]("No Year Highlighted");
           }}
           x={getXForYear(toolTipYear[0]) - (xintervalLength / 2)}
           y="0"
