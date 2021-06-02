@@ -60033,7 +60033,6 @@ try {
   var _d3Scale = require("d3-scale");
   var _d3Array = require("d3-array");
   require("@vx/scale");
-  require("@vx/axis");
   var _componentsWorldMapJs = require("./components/WorldMap.js");
   var _componentsWorldMapJsDefault = _parcelHelpers.interopDefault(_componentsWorldMapJs);
   var _reactTooltip = require("react-tooltip");
@@ -60051,11 +60050,14 @@ try {
   var _componentsLinegraphJs = require("./components/Linegraph.js");
   var _componentsLinegraphJsDefault = _parcelHelpers.interopDefault(_componentsLinegraphJs);
   require("react-bootstrap/esm/Col");
+  var _componentsScatterplotJs = require("./components/Scatterplot.js");
+  var _componentsScatterplotJsDefault = _parcelHelpers.interopDefault(_componentsScatterplotJs);
   var _jsxFileName = "/mnt/c/info474/finalproject/src/final/Final.js", _s = $RefreshSig$();
   const Final = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
     const [col, setCol] = _react.useState(_ColumnNamesJs.cols.womLab);
+    const [col2, setCol2] = _react.useState("N/A");
     // Use `if highlight.has(c["Country Code"])` to test wether or not to highlight your country
     // Do not use setHighlight because you won't do it properly. See the below function
     const [highlight, setHighlight] = _react.useState(new Set(_GroupingsJs.groupings[0].codes));
@@ -60137,46 +60139,46 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 136,
+          lineNumber: 137,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 137,
+          lineNumber: 138,
           columnNumber: 7
         }
       }, "Final"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 139,
+          lineNumber: 140,
           columnNumber: 7
         }
       }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 143,
+          lineNumber: 144,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
-        controlId: "exampleForm.ControlSelect1",
+        controlId: "Form.col1",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 145,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 145,
+          lineNumber: 146,
           columnNumber: 11
         }
-      }, "Example select"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
+      }, "First Variable"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
         as: "select",
         value: col,
         onChange: e => {
@@ -60185,7 +60187,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 146,
+          lineNumber: 147,
           columnNumber: 11
         }
       }, Object.values(_ColumnNamesJs.cols).map(c => {
@@ -60194,7 +60196,59 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 154,
+              lineNumber: 155,
+              columnNumber: 22
+            }
+          }, c)
+        );
+      })))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 160,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
+        controlId: "Form.col2",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 161,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 162,
+          columnNumber: 11
+        }
+      }, "Second Variable (Optional)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
+        as: "select",
+        value: col2,
+        onChange: e => {
+          setCol2(e.target.value);
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 163,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("option", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 170,
+          columnNumber: 13
+        }
+      }, "N/A"), Object.values(_ColumnNamesJs.cols).map(c => {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("option", {
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 172,
               columnNumber: 22
             }
           }, c)
@@ -60203,15 +60257,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 160,
+          lineNumber: 178,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 162,
-          columnNumber: 11
+          lineNumber: 180,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
         s: s,
@@ -60224,20 +60278,50 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 163,
-          columnNumber: 13
+          lineNumber: 181,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 172,
+          lineNumber: 190,
+          columnNumber: 11
+        }
+      }), col2 != "N/A" ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 193,
           columnNumber: 13
         }
-      }), yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
+      }, /*#__PURE__*/_reactDefault.default.createElement(_componentsScatterplotJsDefault.default, {
+        s: s,
+        m: m,
+        col: col,
+        col2: col2,
+        yearRange: yearRange,
+        dataRangedEnds: dataRangedEnds,
+        highlight: highlight,
+        toggleHighlight: toggleHighlight,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 194,
+          columnNumber: 15
+        }
+      })) : yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 206,
+          columnNumber: 13
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
         s: s,
         m: m,
         t: t,
+        col: col,
         yScale: yScale,
         yearRange: yearRange,
         highlight: highlight,
@@ -60247,15 +60331,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 175,
-          columnNumber: 15
+          lineNumber: 207,
+          columnNumber: 13
         }
-      }) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 187,
-          columnNumber: 17
+          lineNumber: 219,
+          columnNumber: 13
+        }
+      }, tooltipContent)) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 222,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
         s: s,
@@ -60269,25 +60360,20 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 188,
-          columnNumber: 19
-        }
-      }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
-        id: "line",
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 198,
-          columnNumber: 19
+          lineNumber: 223,
+          columnNumber: 15
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
         height: s,
+        col: col,
+        col2: col2,
+        yearRange: yearRange,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 201,
-          columnNumber: 13
+          lineNumber: 235,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
         col: col,
@@ -60299,8 +60385,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 202,
-          columnNumber: 15
+          lineNumber: 236,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m,
@@ -60313,22 +60399,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 211,
-          columnNumber: 15
+          lineNumber: 245,
+          columnNumber: 13
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 222,
-          columnNumber: 13
+          lineNumber: 256,
+          columnNumber: 11
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 223,
-          columnNumber: 13
+          lineNumber: 257,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
         groupings: _GroupingsJs.groupings,
@@ -60338,20 +60424,20 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 224,
-          columnNumber: 13
+          lineNumber: 258,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 230,
-          columnNumber: 13
+          lineNumber: 264,
+          columnNumber: 11
         }
       })))
     );
   };
-  _s(Final, "02ZSeQSwfLuWR3U0qXcaNwhs/sY=", false, function () {
+  _s(Final, "ZlJL0+IuEm61Q6/zBXfnTzdcHBI=", false, function () {
     return [_hooksUseFetch.useFetch];
   });
   _c = Final;
@@ -60364,7 +60450,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","react-bootstrap/esm/Col":"6Rf6k","./components/Linegraph.js":"1r9HO"}],"6TPbf":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./components/Scatterplot.js":"3eBDh"}],"6TPbf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60701,19 +60787,27 @@ try {
   var _react = require("react");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
   var _vxAxis = require("@vx/axis");
+  var _reactTooltip = require("react-tooltip");
+  var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
   var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Barcode.js";
   const halfCodeWidth = 30;
-  const women = "Labor force, female (% of total labor force)";
   const Barcode = ({s, m, col, yScale, yearRange, highlight, toggleHighlight, dataYearOnly}) => {
     return (
-      /*#__PURE__*/_reactDefault.default.createElement("svg", {
+      /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
         height: s,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17,
-          columnNumber: 5
+          lineNumber: 19,
+          columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
         scale: yScale,
@@ -60725,8 +60819,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18,
-          columnNumber: 7
+          lineNumber: 20,
+          columnNumber: 9
         }
       }), dataYearOnly(yearRange[0]).map((d, i) => {
         if (d[col] != 0) {
@@ -60737,8 +60831,8 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 30,
-                columnNumber: 13
+                lineNumber: 32,
+                columnNumber: 15
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("line", {
               key: i + " barcode",
@@ -60755,18 +60849,26 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 31,
-                columnNumber: 15
+                lineNumber: 33,
+                columnNumber: 17
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("title", {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 49,
-                columnNumber: 17
+                lineNumber: 51,
+                columnNumber: 19
               }
             }, d["Country Name"])))
           );
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        id: "line",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 58,
+          columnNumber: 7
         }
       }))
     );
@@ -60781,7 +60883,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"47xHJ":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"47xHJ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -61797,7 +61899,329 @@ Switch.Label = _FormCheck.default.Label;
 var _default = Switch;
 exports.default = _default;
 module.exports = exports["default"];
-},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","react":"3b2NM","./FormCheck":"6WcKM"}],"6Rf6k":[function(require,module,exports) {
+},{"@babel/runtime/helpers/interopRequireDefault":"4ttVj","@babel/runtime/helpers/extends":"3krLJ","react":"3b2NM","./FormCheck":"6WcKM"}],"1r9HO":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require("react");
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  require("../hooks/useFetch");
+  require("d3-scale");
+  require("d3-array");
+  var _vxScale = require("@vx/scale");
+  var _vxAxis = require("@vx/axis");
+  var _reactTooltip = require("react-tooltip");
+  var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Linegraph.js", _s = $RefreshSig$();
+  function Linegraph(props) {
+    _s();
+    const ourToolTip = _react.useState("We are in a state");
+    let s = props.s;
+    let m = props.m;
+    let t = props.t;
+    let col = props.col;
+    let yScale = props.yScale;
+    let yearRange = props.yearRange;
+    let highlight = props.highlight;
+    let dataInDateRange = props.dataInDateRange;
+    let setTooltipContent = props.setTooltipContent;
+    let toggleHighlight = props.toggleHighlight;
+    let highlightArray = [...highlight];
+    const minYear = yearRange[0];
+    // set to a random year for testing
+    const maxYear = yearRange[1];
+    // set to a random year for testing
+    // let xAxisLength = s - m - 45;
+    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)]).range([45, s - m]);
+    let xintervalLength = timeScaleLineGraph(new Date(minYear, 12, 01)) - timeScaleLineGraph(new Date(minYear - 1, 12, 01));
+    function getXForYear(year) {
+      // return 45 + xintervalLength * (year - minYear);
+      return timeScaleLineGraph(new Date(year - 1, 12, 01));
+    }
+    let yAxisLength = s - m + t - (m + t);
+    function getYForPercentage(percentage) {
+      return s - m - yAxisLength * (percentage / 100);
+    }
+    let [constLineplotColors, updateLineplotColors] = _react.useState({});
+    let highLightedCountryData = highlightArray.map(function (countryCode) {
+      let countryData = {};
+      let countryName = "Unknown Country";
+      dataInDateRange(minYear, maxYear).forEach(function (row) {
+        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
+          countryData[parseInt(row["Year"])] = row[col];
+          countryName = row["Country Name"];
+          if (constLineplotColors[countryCode] === undefined) {
+            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            updateLineplotColors({
+              ...constLineplotColors
+            });
+          }
+        }
+      });
+      let color = constLineplotColors[countryCode];
+      let countryDots = Object.keys(countryData).map(function (year) {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("circle", {
+            key: countryCode + year + " circle",
+            cx: getXForYear(year),
+            cy: getYForPercentage(countryData[year]),
+            r: "3",
+            stroke: "black",
+            fill: color,
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 69,
+              columnNumber: 9
+            }
+          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 77,
+              columnNumber: 11
+            }
+          }, countryName + ", " + year + ": " + countryData[year]))
+        );
+      });
+      let countrytToolTipRegions = Object.keys(countryData).map(function (year) {
+        return (
+          /*#__PURE__*/_reactDefault.default.createElement("rect", {
+            "data-tip": "test",
+            key: countryCode + year + " toolTipRegion",
+            "data-for": "scatternot",
+            "data-tip": "",
+            x: getXForYear(year) - xintervalLength / 2,
+            y: "0",
+            width: xintervalLength,
+            height: s,
+            fillOpacity: "0.15",
+            fill: "#" + Math.floor(Math.random() * 16777215).toString(16),
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 83,
+              columnNumber: 9
+            }
+          })
+        );
+      });
+      let countryLines = Object.keys(countryData).map(function (year, index) {
+        let nextYear = parseInt(year) + 1;
+        if (year < maxYear && countryData[nextYear] !== undefined) {
+          // || year === minYear + 1)
+          if (countryData[year] != 0 && countryData[nextYear] != 0) {
+            return (
+              /*#__PURE__*/_reactDefault.default.createElement("line", {
+                "data-for": "scatternot",
+                "data-tip": "",
+                key: countryCode + year + "line",
+                x1: getXForYear(year) - 1,
+                y1: getYForPercentage(countryData[year]) + 1,
+                x2: getXForYear(nextYear) - 1,
+                y2: getYForPercentage(countryData[nextYear]) + 1,
+                stroke: "#776865",
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 102,
+                  columnNumber: 13
+                }
+              }, /*#__PURE__*/_reactDefault.default.createElement("title", {
+                __self: this,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 111,
+                  columnNumber: 15
+                }
+              }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
+            );
+          }
+        }
+      });
+      return {
+        country: countryCode,
+        name: countryName,
+        countryColor: color,
+        data: countryData,
+        dots: countryDots,
+        lines: countryLines,
+        toolTipRegions: countrytToolTipRegions
+      };
+    });
+    let dots = highLightedCountryData.map(function (row, index) {
+      return row.dots;
+    });
+    let lines = highLightedCountryData.map(function (row, index) {
+      return row.lines;
+    });
+    let toolTipRegions = highLightedCountryData.map(function (row, index) {
+      return row.toolTipRegions;
+    });
+    const toolTipYear = _react.useState(1994);
+    let arrayOfYears = [];
+    for (let i = minYear; i <= maxYear; i++) {
+      arrayOfYears.push(i);
+    }
+    console.log(arrayOfYears);
+    let toolTipRectangles = arrayOfYears.map(function (year) {
+      return (
+        /*#__PURE__*/_reactDefault.default.createElement("rect", {
+          key: " toolTipRegion" + year,
+          onMouseEnter: () => {
+            toolTipYear[1](year);
+          },
+          onMouseLeave: () => {
+            toolTipYear[1](minYear - 2);
+            ourToolTip[1]("We are not in the rectangle");
+          },
+          x: getXForYear(year) - xintervalLength / 2,
+          y: "0",
+          width: xintervalLength,
+          height: s,
+          fillOpacity: "0.0",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 157,
+            columnNumber: 7
+          }
+        })
+      );
+    });
+    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 176,
+        columnNumber: 5
+      }
+    }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
+      width: s,
+      height: s,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 177,
+        columnNumber: 7
+      }
+    }, lines, false && toolTipRegions, /*#__PURE__*/_reactDefault.default.createElement("line", {
+      x1: getXForYear(toolTipYear[0]),
+      x2: getXForYear(toolTipYear[0]),
+      y1: getYForPercentage(0),
+      y2: getYForPercentage(100),
+      stroke: "#776865",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 180,
+        columnNumber: 9
+      }
+    }), toolTipRectangles, /*#__PURE__*/_reactDefault.default.createElement("rect", {
+      "data-tip": "test",
+      key: " toolTipRegionExample",
+      "data-for": "scatternot",
+      "data-tip": ourToolTip[0],
+      onMouseEnter: () => {
+        toolTipYear[1](toolTipYear[0]);
+        let toolTipLabel = "";
+        console.log(highLightedCountryData.map(function (country) {
+          toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[toolTipYear[0]];
+          return country.name + ": " + country.data[toolTipYear[0]];
+        }));
+        ourToolTip[1](toolTipLabel);
+      },
+      onMouseLeave: () => {
+        toolTipYear[1](minYear - 2);
+        ourToolTip[1]("We are not in the rectangle");
+      },
+      x: getXForYear(toolTipYear[0]) - xintervalLength / 2,
+      y: "0",
+      width: xintervalLength,
+      height: s,
+      fillOpacity: "0.15",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 187,
+        columnNumber: 9
+      }
+    }), highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
+      "data-tip": true,
+      "data-for": "scatternot",
+      textAnchor: "middle",
+      style: {
+        fontSize: 14,
+        fontFamily: "Gill Sans, sans-serif"
+      },
+      x: s / 2,
+      y: s / 2,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 211,
+        columnNumber: 11
+      }
+    }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 224,
+        columnNumber: 13
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+      scale: timeScaleLineGraph,
+      top: s - m - 1,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 226,
+        columnNumber: 9
+      }
+    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+      scale: yScale,
+      top: -1,
+      left: 2 * m + 5,
+      stroke: "#333333",
+      tickTextFill: "#333333",
+      numTicks: 5,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 235,
+        columnNumber: 9
+      }
+    })), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+      id: "scatternot",
+      multiline: true,
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 244,
+        columnNumber: 7
+      }
+    }));
+    return Linegraph;
+  }
+  exports.default = Linegraph;
+  _s(Linegraph, "jpukAEgSInOblPJ/jH0PEiHjGVg=");
+  _c = Linegraph;
+  var _c;
+  $RefreshReg$(_c, "Linegraph");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"6Rf6k":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");
@@ -61939,7 +62363,7 @@ function createBootstrapComponent(Component, opts) {
 }
 exports.default = ThemeProvider;
 
-},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1r9HO":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"5qnVv","react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3eBDh":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -61949,195 +62373,117 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require("react");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  require("../hooks/useFetch");
-  require("d3-scale");
-  require("d3-array");
-  var _vxScale = require("@vx/scale");
   var _vxAxis = require("@vx/axis");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Linegraph.js", _s = $RefreshSig$();
-  function Linegraph(props) {
-    _s();
-    const women = "Labor force, female (% of total labor force)";
-    let s = props.s;
-    let m = props.m;
-    let t = props.t;
-    let yScale = props.yScale;
-    let yearRange = props.yearRange;
-    let highlight = props.highlight;
-    let dataInDateRange = props.dataInDateRange;
-    let setTooltipContent = props.setTooltipContent;
-    let toggleHighlight = props.toggleHighlight;
-    let highlightArray = [...highlight];
-    const minYear = yearRange[0];
-    // set to a random year for testing
-    const maxYear = yearRange[1];
-    // set to a random year for testing
-    let xAxisLength = s - m - 45;
-    let xintervalLength = xAxisLength / (maxYear - minYear);
-    function getXForYear(year) {
-      return 45 + xintervalLength * (year - minYear);
-    }
-    let yAxisLength = s - m + t - (m + t);
-    function getYForPercentage(percentage) {
-      return s - m - yAxisLength * (percentage / 100);
-    }
-    let [constLineplotColors, updateLineplotColors] = _react.useState({});
-    let highLightedCountryData = highlightArray.map(function (countryCode) {
-      let countryData = {};
-      let countryName = "Unknown Country";
-      dataInDateRange(minYear, maxYear).forEach(function (row) {
-        if (row["Country Code"] === countryCode && row["Year"] >= minYear && row["Year"] <= maxYear) {
-          countryData[parseInt(row["Year"])] = row[women];
-          countryName = row["Country Name"];
-          if (constLineplotColors[countryCode] === undefined) {
-            constLineplotColors[countryCode] = "#" + Math.floor(Math.random() * 16777215).toString(16);
-            updateLineplotColors({
-              ...constLineplotColors
-            });
-          }
+  var _d3Scale = require("d3-scale");
+  var _d3Array = require("d3-array");
+  var _reactTooltip = require("react-tooltip");
+  var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
+  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Scatterplot.js";
+  const Scatterplot = ({s, m, col, col2, yearRange, dataRangedEnds, highlight, toggleHighlight}) => {
+    const data = dataRangedEnds(yearRange);
+    const yr = yearRange[0] == yearRange[1];
+    const scatterYScale = _d3Scale.scaleLinear().domain(_d3Array.extent(data.map(d => {
+      return yr ? +d[0][col2] : +d[1][col2] - +d[0][col2];
+    }))).range([s - m * 3, m]);
+    const scatterXScale = _d3Scale.scaleLinear().domain(_d3Array.extent(data.map(d => {
+      return yr ? +d[0][col] : +d[1][col] - +d[0][col];
+    }))).range([m * 3, s - m]);
+    const radScale = _d3Scale.scaleSqrt().domain(_d3Array.extent(data.map(d => {
+      return yr ? +d[0]["Labor force, total"] : +d[0]["Labor force, total"] + +d[1]["Labor force, total"] / 2;
+    }))).range([2, 40]);
+    return (
+      /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 51,
+          columnNumber: 5
         }
-      });
-      let color = constLineplotColors[countryCode];
-      let countryDots = Object.keys(countryData).map(function (year) {
-        return (
-          /*#__PURE__*/_reactDefault.default.createElement("circle", {
-            key: countryCode + year + " circle",
-            cx: getXForYear(year),
-            cy: getYForPercentage(countryData[year]),
-            r: "3",
-            stroke: "black",
-            fill: color,
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 60,
-              columnNumber: 9
-            }
-          }, /*#__PURE__*/_reactDefault.default.createElement("title", {
-            __self: this,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 68,
-              columnNumber: 11
-            }
-          }, countryName + ", " + year + ": " + countryData[year]))
-        );
-      });
-      let countryLines = Object.keys(countryData).map(function (year, index) {
-        let nextYear = parseInt(year) + 1;
-        if (year < maxYear && countryData[nextYear] !== undefined) {
-          // || year === minYear + 1)
-          if (countryData[year] != 0 && countryData[nextYear] != 0) {
-            return (
-              /*#__PURE__*/_reactDefault.default.createElement("line", {
-                key: countryCode + year + "line",
-                x1: getXForYear(year) - 1,
-                y1: getYForPercentage(countryData[year]) + 1,
-                x2: getXForYear(nextYear) - 1,
-                y2: getYForPercentage(countryData[nextYear]) + 1,
-                stroke: "#776865",
-                __self: this,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 78,
-                  columnNumber: 13
-                }
-              }, /*#__PURE__*/_reactDefault.default.createElement("title", {
-                __self: this,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 86,
-                  columnNumber: 15
-                }
-              }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
-            );
-          }
+      }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
+        width: s,
+        height: s,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 52,
+          columnNumber: 7
         }
-      });
-      return {
-        country: countryCode,
-        countryColor: color,
-        dots: countryDots,
-        lines: countryLines
-      };
-    });
-    let dots = highLightedCountryData.map(function (row, index) {
-      return row.dots;
-    });
-    let lines = highLightedCountryData.map(function (row, index) {
-      return row.lines;
-    });
-    const timeScaleLineGraph = _vxScale.scaleTime().domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)]).range([45, s - m]);
-    const Linegraph = /*#__PURE__*/_reactDefault.default.createElement("svg", {
-      width: s,
-      height: s,
-      __self: this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 118,
-        columnNumber: 5
-      }
-    }, lines, highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
-      textAnchor: "middle",
-      style: {
-        fontSize: 14,
-        fontFamily: "Gill Sans, sans-serif"
-      },
-      x: s / 2,
-      y: s / 2,
-      __self: this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 121,
-        columnNumber: 9
-      }
-    }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
-      __self: this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 133,
-        columnNumber: 11
-      }
-    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
-      scale: timeScaleLineGraph,
-      top: s - m - 1,
-      stroke: "#333333",
-      tickTextFill: "#333333",
-      numTicks: maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear,
-      __self: this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 135,
-        columnNumber: 7
-      }
-    }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
-      scale: yScale,
-      top: -1,
-      left: 2 * m + 5,
-      stroke: "#333333",
-      tickTextFill: "#333333",
-      numTicks: 5,
-      __self: this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 144,
-        columnNumber: 7
-      }
-    }));
-    return Linegraph;
-  }
-  exports.default = Linegraph;
-  _s(Linegraph, "fCyS0E0dKgEZdMW8uJ+fHKDRSe8=");
-  _c = Linegraph;
+      }, data.map(c => {
+        const h = highlight.has(c[0]["Country Code"]) === true;
+        if (c[0][col] != 0 && c[0][col2] != 0 && (yr || c[1][col] != 0 && c[1][col2] != 0)) {
+          return (
+            /*#__PURE__*/_reactDefault.default.createElement("circle", {
+              cx: scatterXScale(yr ? c[0][col] : c[1][col] - c[0][col]),
+              cy: scatterYScale(yr ? c[0][col2] : c[1][col2] - c[0][col2]),
+              r: radScale(c[0]["Labor force, total"]),
+              stroke: h ? "#776865" : "steelblue",
+              fill: h ? "#776865" : "steelblue",
+              strokeOpacity: 0.4,
+              fillOpacity: 0.4,
+              onClick: () => toggleHighlight(c[0]),
+              "data-tip": c[0]["Country Name"] + "<br/>x: " + Math.round(100 * (yr ? c[0][col] : c[1][col] - c[0][col])) / 100 + "%<br/>y: " + Math.round(100 * (yr ? c[0][col2] : c[1][col2] - c[0][col2])) / 100 + "%",
+              "data-for": "scatterplot",
+              key: c["Country Code"],
+              __self: undefined,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 61,
+                columnNumber: 15
+              }
+            })
+          );
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
+        scale: scatterXScale,
+        top: s - m * 3,
+        left: 0,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        numTicks: 5,
+        label: col + (yr ? " in " + data[0][0].Year : ", net change from " + data[0][0].Year + " to " + data[0][1].Year),
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 88,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
+        scale: scatterYScale,
+        top: 0,
+        left: m * 3,
+        stroke: "#333333",
+        tickTextFill: "#333333",
+        numTicks: 5,
+        label: col2 + (yr ? " in " + data[0][0].Year : ", net change from " + data[0][0].Year + " to " + data[0][1].Year),
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 105,
+          columnNumber: 9
+        }
+      })), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
+        id: "scatterplot",
+        multiline: true,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 123,
+          columnNumber: 7
+        }
+      }))
+    );
+  };
+  _c = Scatterplot;
+  exports.default = Scatterplot;
   var _c;
-  $RefreshReg$(_c, "Linegraph");
+  $RefreshReg$(_c, "Scatterplot");
   helpers.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","../hooks/useFetch":"6TPbf"}],"44uys":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","d3-scale":"2UZ4X","d3-array":"7CLUA","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

@@ -123,7 +123,7 @@ export default function Linegraph(props) {
     });
     return {
       country: countryCode,
-      name:countryName,
+      name: countryName,
       countryColor: color,
       data: countryData,
       dots: countryDots,
@@ -142,9 +142,35 @@ export default function Linegraph(props) {
     return row.toolTipRegions;
   });
 
-  
+
 
   const toolTipYear = useState(1994);
+
+  let arrayOfYears = [];
+  for (let i = minYear; i <= maxYear; i++) {
+    arrayOfYears.push(i);
+  }
+  console.log(arrayOfYears);
+
+  let toolTipRectangles = arrayOfYears.map(function (year) {
+    return (
+      <rect
+        key={" toolTipRegion" + year}
+        onMouseEnter={() => {
+          toolTipYear[1](year);
+        }}
+        onMouseLeave={() => {
+          toolTipYear[1](minYear - 2)
+          ourToolTip[1]("We are not in the rectangle");
+        }}
+        x={getXForYear(year) - (xintervalLength / 2)}
+        y="0"
+        width={xintervalLength}
+        height={s}
+        fillOpacity={"0.0"}
+      />
+    )
+  });
 
   const Linegraph = (
     <React.Fragment>
@@ -157,29 +183,29 @@ export default function Linegraph(props) {
           y2={getYForPercentage(100)}
           stroke="#776865"
         />
+        {toolTipRectangles}
         <rect data-tip="test"
           key={" toolTipRegionExample"}
           data-for={"scatternot"}
           data-tip={ourToolTip[0]}
           onMouseEnter={() => {
-            toolTipYear[1](minYear+1);
+            toolTipYear[1](toolTipYear[0]);
             let toolTipLabel = ""
-            console.log(highLightedCountryData.map(function(country){
-              toolTipLabel = toolTipLabel + "<br/> " + country.name+": "+country.data[minYear+1];
-              return country.name+": "+country.data[minYear+1];
+            console.log(highLightedCountryData.map(function (country) {
+              toolTipLabel = toolTipLabel + "<br/> " + country.name + ": " + country.data[toolTipYear[0]];
+              return country.name + ": " + country.data[toolTipYear[0]];
             }))
             ourToolTip[1](toolTipLabel);
           }}
           onMouseLeave={() => {
-            toolTipYear[1](minYear-2)
+            toolTipYear[1](minYear - 2)
             ourToolTip[1]("We are not in the rectangle");
           }}
-          x={getXForYear(minYear+ 1) - (xintervalLength / 2)}
+          x={getXForYear(toolTipYear[0]) - (xintervalLength / 2)}
           y="0"
           width={xintervalLength}
           height={s}
           fillOpacity={"0.15"}
-          fill="rgb(0,0,255)"
         />
         {highlight.size == 0 ? (
           <text
