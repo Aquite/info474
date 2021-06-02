@@ -4,12 +4,13 @@ import { scaleLinear } from "d3-scale";
 import { group, mean } from "d3-array";
 import { scaleTime } from "@vx/scale";
 import { AxisBottom, AxisLeft } from "@vx/axis";
+import ReactTooltip from "react-tooltip";
 
 
 export default function Linegraph(props) {
 
-  
-  const women = "Labor force, female (% of total labor force)";
+  const ourToolTip = useState("We are in a state");
+  console.log(ourToolTip[0]);
 
   let s = props.s;
   let m = props.m;
@@ -26,10 +27,18 @@ export default function Linegraph(props) {
 
   const minYear = yearRange[0]; //set to a random year for testing
   const maxYear = yearRange[1]; //set to a random year for testing
-  let xAxisLength = s - m - 45;
-  let xintervalLength = xAxisLength / (maxYear - minYear);
+  //let xAxisLength = s - m - 45;
+
+  const timeScaleLineGraph = scaleTime()
+    .domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)])
+    .range([45, s - m]);
+
+  let xintervalLength = timeScaleLineGraph(new Date(minYear, 12, 01)) - timeScaleLineGraph(new Date(minYear - 1, 12, 01));
+
+
   function getXForYear(year) {
-    return 45 + xintervalLength * (year - minYear);
+    //return 45 + xintervalLength * (year - minYear);
+    return timeScaleLineGraph(new Date(year - 1, 12, 01))
   }
   let yAxisLength = s - m + t - (m + t);
   function getYForPercentage(percentage) {
@@ -70,6 +79,21 @@ export default function Linegraph(props) {
         </circle>
       );
     });
+    let countrytToolTipRegions = Object.keys(countryData).map(function (year) {
+      return (
+        <rect data-tip="test"
+          key={countryCode + year + " toolTipRegion"}
+          data-for={"scatternot"}
+          data-tip={""}
+          x={getXForYear(year) - (xintervalLength / 2)}
+          y="0"
+          width={xintervalLength}
+          height={s}
+          fillOpacity={"0.15"}
+          fill={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+        />
+      );
+    });
     let countryLines = Object.keys(countryData).map(function (year, index) {
       let nextYear = parseInt(year) + 1;
       if (year < maxYear && countryData[nextYear] !== undefined) {
@@ -77,6 +101,7 @@ export default function Linegraph(props) {
         if (countryData[year] != 0 && countryData[nextYear] != 0) {
           return (
             <line
+              data-for={"scatternot"} data-tip={""}
               key={countryCode + year + "line"}
               x1={getXForYear(year) - 1}
               y1={getYForPercentage(countryData[year]) + 1}
@@ -102,6 +127,7 @@ export default function Linegraph(props) {
       countryColor: color,
       dots: countryDots,
       lines: countryLines,
+      toolTipRegions: countrytToolTipRegions
     };
   });
   let dots = highLightedCountryData.map(function (row, index) {
@@ -111,48 +137,74 @@ export default function Linegraph(props) {
     return row.lines;
   });
 
-  const timeScaleLineGraph = scaleTime()
-    .domain([new Date(minYear, 1, 1), new Date(maxYear - 1, 12, 01)])
-    .range([45, s - m]);
+  let toolTipRegions = highLightedCountryData.map(function (row, index) {
+    return row.toolTipRegions;
+  });
+
+  
+
+  const toolTipYear = useState(1994);
 
   const Linegraph = (
-    <svg width={s} height={s}>
-      {lines}
-      {highlight.size == 0 ? (
-        <text
-          textAnchor="middle"
-          style={{
-            fontSize: 14,
-            fontFamily: "Gill Sans, sans-serif",
-          }}
-          x={s / 2}
-          y={s / 2}
-        >
-          Choose some countries above or on the map
-        </text>
-      ) : (
-          <React.Fragment />
-        )}
-      <AxisBottom
-        scale={timeScaleLineGraph}
-        top={s - m - 1}
-        stroke={"#333333"}
-        tickTextFill={"#333333"}
-        numTicks={
-          maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear
-        }
-      />
-      <AxisLeft
-        scale={yScale}
-        top={-1}
-        left={2 * m + 5}
-        stroke={"#333333"}
-        tickTextFill={"#333333"}
-        numTicks={5}
-      />
-    </svg>
+    <React.Fragment>
+      <svg width={s} height={s}>
+        {lines}
+        {false && toolTipRegions}
+        <line x1={getXForYear(toolTipYear[0])}
+          x2={getXForYear(toolTipYear[0])}
+          y1={getYForPercentage(0)}
+          y2={getYForPercentage(100)}
+          stroke="#776865"
+        />
+        <rect data-tip="test"
+          key={" toolTipRegionExample"}
+          data-for={"scatternot"}
+          data-tip={""}
+          x={getXForYear(minYear) - (xintervalLength / 2)}
+          y="0"
+          width={xintervalLength}
+          height={s}
+          fillOpacity={"0.15"}
+          fill="rgb(0,0,255)"
+        />
+        {highlight.size == 0 ? (
+          <text
+            data-tip data-for="scatternot"
+            textAnchor="middle"
+            style={{
+              fontSize: 14,
+              fontFamily: "Gill Sans, sans-serif",
+            }}
+            x={s / 2}
+            y={s / 2}
+          >
+            Choose some countries above or on the map
+          </text>
+        ) : (
+            <React.Fragment />
+          )}
+        <AxisBottom
+          scale={timeScaleLineGraph}
+          top={s - m - 1}
+          stroke={"#333333"}
+          tickTextFill={"#333333"}
+          numTicks={
+            maxYear - minYear > 15 ? (maxYear - minYear) / 2 : maxYear - minYear
+          }
+        />
+        <AxisLeft
+          scale={yScale}
+          top={-1}
+          left={2 * m + 5}
+          stroke={"#333333"}
+          tickTextFill={"#333333"}
+          numTicks={5}
+        />
+      </svg>
+      <ReactTooltip id={"scatternot"} multiline={true}>{ourToolTip[0]}</ReactTooltip>
+    </React.Fragment>
   );
-  
+
   return Linegraph;
 
 }
