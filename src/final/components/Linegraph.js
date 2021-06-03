@@ -37,7 +37,12 @@ export default function Linegraph(props) {
 
   function getXForYear(year) {
     //return 45 + xintervalLength * (year - minYear);
-    return timeScaleLineGraph(new Date(year - 1, 12, 01))
+    if(year === minYear){
+      return timeScaleLineGraph(new Date(year, 01, 01))
+    }
+    else {
+      return timeScaleLineGraph(new Date(year - 1, 12, 01))
+    }
   }
   let yAxisLength = s - m + t - (m + t);
   function getYForPercentage(percentage) {
