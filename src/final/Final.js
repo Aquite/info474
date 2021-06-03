@@ -109,21 +109,43 @@ const Final = () => {
   };
 
   const dataRangedHighlight = (r) => {
-    return Array.from(
-      group(
-        dataCountriesOnly.filter((d) => {
-          return (
-            highlight.has(d["Country Code"]) &&
-            +d.Year >= r[0] &&
-            +d.Year <= r[1]
-          );
-        }),
-        (d) => +d.Year
-      )
-    ).map((y) => {
-      y[1] = mean(y[1], (c) => +c[col]);
-      return y;
-    });
+    //this if block is for making it so the timeline will
+    //show an average of the whole world in its bins
+    // if the world group is clicked
+    if ([...highlight].every((e) => groupings[0].codes.has(e)) &&
+      [...groupings[0].codes].every((e) => highlight.has(e)))
+    {
+      return Array.from(
+        group(
+          dataCountriesOnly.filter((d) => {
+            return (
+              +d.Year >= r[0] &&
+              +d.Year <= r[1]
+            );
+          }),
+          (d) => +d.Year
+        )
+      ).map((y) => {
+        y[1] = mean(y[1], (c) => +c[col]);
+        return y;
+      });
+    }
+    else
+      return Array.from(
+        group(
+          dataCountriesOnly.filter((d) => {
+            return (
+              highlight.has(d["Country Code"]) &&
+              +d.Year >= r[0] &&
+              +d.Year <= r[1]
+            );
+          }),
+          (d) => +d.Year
+        )
+      ).map((y) => {
+        y[1] = mean(y[1], (c) => +c[col]);
+        return y;
+      });
   };
 
   // Alternate Left Side: line plot stuff
@@ -177,93 +199,93 @@ const Final = () => {
       {loading ? (
         <p>loading data...</p>
       ) : (
-        <div>
-          <Timeline
-            s={s}
-            m={m}
-            col={col}
-            worldData={worldData}
-            yearRange={yearRange}
-            setYearRange={setYearRange}
-            dataRangedHighlight={dataRangedHighlight}
-          />
-          <br />
-
-          {col2 != "N/A" ? (
-            <React.Fragment>
-              <Scatterplot
-                s={s}
-                m={m}
-                col={col}
-                col2={col2}
-                yearRange={yearRange}
-                dataRangedEnds={dataRangedEnds}
-                highlight={highlight}
-                toggleHighlight={toggleHighlight}
-              />
-            </React.Fragment>
-          ) : yearRange[0] != yearRange[1] ? (
-            <React.Fragment>
-            <Linegraph
+          <div>
+            <Timeline
               s={s}
               m={m}
-              t={t}
               col={col}
-              yScale={yScale}
+              worldData={worldData}
               yearRange={yearRange}
-              highlight={highlight}
-              toggleHighlight={toggleHighlight}
-              dataInDateRange={dataInDateRange}
-              setTooltipContent={setTooltipContent}
+              setYearRange={setYearRange}
+              dataRangedHighlight={dataRangedHighlight}
             />
-            <ReactTooltip>{tooltipContent}</ReactTooltip>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Barcode
-                s={s}
-                m={m}
+            <br />
+
+            {col2 != "N/A" ? (
+              <React.Fragment>
+                <Scatterplot
+                  s={s}
+                  m={m}
+                  col={col}
+                  col2={col2}
+                  yearRange={yearRange}
+                  dataRangedEnds={dataRangedEnds}
+                  highlight={highlight}
+                  toggleHighlight={toggleHighlight}
+                />
+              </React.Fragment>
+            ) : yearRange[0] != yearRange[1] ? (
+              <React.Fragment>
+                <Linegraph
+                  s={s}
+                  m={m}
+                  t={t}
+                  col={col}
+                  yScale={yScale}
+                  yearRange={yearRange}
+                  highlight={highlight}
+                  toggleHighlight={toggleHighlight}
+                  dataInDateRange={dataInDateRange}
+                  setTooltipContent={setTooltipContent}
+                />
+                <ReactTooltip>{tooltipContent}</ReactTooltip>
+              </React.Fragment>
+            ) : (
+                  <React.Fragment>
+                    <Barcode
+                      s={s}
+                      m={m}
+                      col={col}
+                      yScale={yScale}
+                      yearRange={yearRange}
+                      highlight={highlight}
+                      toggleHighlight={toggleHighlight}
+                      dataYearOnly={dataYearOnly}
+                    />
+                  </React.Fragment>
+                )}
+            <svg width={s} height={s} col={col} col2={col2} yearRange={yearRange}>
+              <WorldMap
                 col={col}
-                yScale={yScale}
+                dataRangedEnds={dataRangedEnds}
+                setTooltipContent={setTooltipContent}
                 yearRange={yearRange}
                 highlight={highlight}
                 toggleHighlight={toggleHighlight}
-                dataYearOnly={dataYearOnly}
               />
-            </React.Fragment>
-          )}
-          <svg width={s} height={s} col={col} col2={col2} yearRange={yearRange}>
-            <WorldMap
-              col={col}
-              dataRangedEnds={dataRangedEnds}
-              setTooltipContent={setTooltipContent}
-              yearRange={yearRange}
-              highlight={highlight}
-              toggleHighlight={toggleHighlight}
-            />
 
-            <text
-              x={s - m}
-              textAnchor="end"
-              y={m}
-              style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
-            >
-              {yearRange[0] == yearRange[1]
-                ? yearRange[0]
-                : yearRange[0] + " - " + yearRange[1]}
-            </text>
-          </svg>
-          <ReactTooltip>{tooltipContent}</ReactTooltip>
-          <br />
-          <ControlGroups
-            groupings={groupings}
-            s={s}
-            highlight={highlight}
-            setHighlight={setHighlight}
-          />
-          <br />
-        </div>
-      )}
+              <text
+                x={s - m}
+                textAnchor="end"
+                y={m}
+                style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
+              >
+                {yearRange[0] == yearRange[1]
+                  ? yearRange[0]
+                  : yearRange[0] + " - " + yearRange[1]}
+              </text>
+            </svg>
+            <ReactTooltip>{tooltipContent}</ReactTooltip>
+            <br />
+            <ControlGroups
+              groupings={groupings}
+              s={s}
+              highlight={highlight}
+              setHighlight={setHighlight}
+            />
+            <br />
+          </div>
+        )}
     </div>
   );
 };

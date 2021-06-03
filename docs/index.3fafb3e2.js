@@ -60121,7 +60121,17 @@ try {
       });
     };
     const dataRangedHighlight = r => {
-      return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+      // this if block is for making it so the timeline will
+      // show an average of the whole world in its bins
+      // if the world group is clicked
+      if ([...highlight].every(e => _GroupingsJs.groupings[0].codes.has(e)) && [..._GroupingsJs.groupings[0].codes].every(e => highlight.has(e))) {
+        return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
+          return +d.Year >= r[0] && +d.Year <= r[1];
+        }), d => +d.Year)).map(y => {
+          y[1] = _d3Array.mean(y[1], c => +c[col]);
+          return y;
+        });
+      } else return Array.from(_d3Array.group(dataCountriesOnly.filter(d => {
         return highlight.has(d["Country Code"]) && +d.Year >= r[0] && +d.Year <= r[1];
       }), d => +d.Year)).map(y => {
         y[1] = _d3Array.mean(y[1], c => +c[col]);
@@ -60139,28 +60149,28 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 137,
+          lineNumber: 159,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 138,
+          lineNumber: 160,
           columnNumber: 7
         }
       }, "Final"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 140,
+          lineNumber: 162,
           columnNumber: 7
         }
       }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 144,
+          lineNumber: 166,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -60168,14 +60178,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 145,
+          lineNumber: 167,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 146,
+          lineNumber: 168,
           columnNumber: 11
         }
       }, "First Variable"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -60187,7 +60197,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 147,
+          lineNumber: 169,
           columnNumber: 11
         }
       }, Object.values(_ColumnNamesJs.cols).map(c => {
@@ -60196,7 +60206,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 155,
+              lineNumber: 177,
               columnNumber: 22
             }
           }, c)
@@ -60205,7 +60215,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 160,
+          lineNumber: 182,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
@@ -60213,14 +60223,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 161,
+          lineNumber: 183,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 162,
+          lineNumber: 184,
           columnNumber: 11
         }
       }, "Second Variable (Optional)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
@@ -60232,14 +60242,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 163,
+          lineNumber: 185,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("option", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 170,
+          lineNumber: 192,
           columnNumber: 13
         }
       }, "N/A"), Object.values(_ColumnNamesJs.cols).map(c => {
@@ -60248,7 +60258,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 172,
+              lineNumber: 194,
               columnNumber: 22
             }
           }, c)
@@ -60257,15 +60267,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 178,
+          lineNumber: 200,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 180,
-          columnNumber: 9
+          lineNumber: 202,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
         s: s,
@@ -60278,22 +60288,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 181,
-          columnNumber: 11
+          lineNumber: 203,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 190,
-          columnNumber: 11
+          lineNumber: 212,
+          columnNumber: 13
         }
       }), col2 != "N/A" ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 193,
-          columnNumber: 13
+          lineNumber: 215,
+          columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsScatterplotJsDefault.default, {
         s: s,
@@ -60307,15 +60317,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 194,
-          columnNumber: 15
+          lineNumber: 216,
+          columnNumber: 17
         }
       })) : yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 206,
-          columnNumber: 13
+          lineNumber: 228,
+          columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
         s: s,
@@ -60331,22 +60341,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 207,
-          columnNumber: 13
+          lineNumber: 229,
+          columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 219,
-          columnNumber: 13
+          lineNumber: 241,
+          columnNumber: 17
         }
       }, tooltipContent)) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 222,
-          columnNumber: 13
+          lineNumber: 244,
+          columnNumber: 19
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
         s: s,
@@ -60360,8 +60370,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 223,
-          columnNumber: 15
+          lineNumber: 245,
+          columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -60372,8 +60382,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 235,
-          columnNumber: 11
+          lineNumber: 257,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
         col: col,
@@ -60385,8 +60395,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 236,
-          columnNumber: 13
+          lineNumber: 258,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m,
@@ -60399,22 +60409,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 245,
-          columnNumber: 13
+          lineNumber: 267,
+          columnNumber: 15
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 256,
-          columnNumber: 11
+          lineNumber: 278,
+          columnNumber: 13
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 257,
-          columnNumber: 11
+          lineNumber: 279,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
         groupings: _GroupingsJs.groupings,
@@ -60424,15 +60434,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 258,
-          columnNumber: 11
+          lineNumber: 280,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 264,
-          columnNumber: 11
+          lineNumber: 286,
+          columnNumber: 13
         }
       })))
     );
@@ -60668,7 +60678,7 @@ _parcelHelpers.export(exports, "col", function () {
 const groupings = [{
   name: "World",
   icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/world.png",
-  codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM", "ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR", "ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX", "ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN", "PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM", "AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM", "AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
+  codes: new Set([])
 }, {
   name: "North America",
   icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/North_America.png",
