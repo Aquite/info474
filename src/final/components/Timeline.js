@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import SVGBrush from "react-svg-brush";
 import { scaleTime } from "@vx/scale";
 import { scaleLinear } from "d3-scale";
@@ -30,6 +30,33 @@ const Timeline = ({
   const worldLineScaleReversed = scaleLinear()
     .domain([s / 4 - m * 2, m])
     .range([0, 90]);
+
+
+  //this function is meant to expand the behavior of SVGBrush, so that we can
+  //clear the selection when a year is clicked.
+  //It returns an object and two functions, in that order
+  // (the selection prop of an SVGBrush must be set to the 
+  //obkect for proper use, and the two functions are the additional
+  //functionality). When the first function , the lockingFunction,
+  //is called, the current selection of the SVG Brush is cleared and 
+  //the SVGBrush is prevented from allowing new brushing. The second function,
+  //the unlockingFunction, restores the most recent selection and allows for new
+  //selections (basically, it undoes the effects of the first function). If the 
+  //unlockingfunction is set to be the SVGBrush's onBrushStart callback, 
+  //then the brush will always allow new selections. 
+  //
+  function clearableBrush(){
+    const [selection, setSelection] = useState(undefined);
+    function lockingFunction(){
+      setSelection(null);
+    }
+    function unlockingFunction(){
+      setSelection(undefined);
+    }
+    return [selection, lockingFunction, unlockingFunction];
+  }
+
+  const [brush, lockBrush, unlockBrush] = clearableBrush();
 
   return (
     <svg width={s * 2} height={s / 4} className="timeline">
@@ -72,6 +99,7 @@ const Timeline = ({
         tickTextFill={"#333333"}
         numTicks={26}
         label={col + " in selected countries"}
+        onM
       />
       {[...Array(27).keys()].map((value) => {
         return yearRange[0] == yearRange[1] && yearRange[0] == value + 1991 ? (
@@ -91,12 +119,17 @@ const Timeline = ({
             height={30}
             width={30}
             style={{ fillOpacity: "0" }}
-            onMouseDown={() => setYearRange([1991 + value, 1991 + value])}
+            onMouseDown={() => 
+              {
+                lockBrush();
+                setYearRange([1991 + value, 1991 + value])
+              }}
           />
         );
       })}
       <SVGBrush
         brushType="x"
+        selection={brush}
         getEventMouse={(event) => {
           const { clientX, clientY } = event;
           const { left, top } = document
@@ -108,6 +141,7 @@ const Timeline = ({
           [m, m],
           [s * 2 - m - 1, s / 4 - m * 2],
         ]}
+        onBrushStart={unlockBrush}
         onBrushEnd={({ selection }) => {
           if (selection != null) {
             if (selection[1][0] > 979) {
