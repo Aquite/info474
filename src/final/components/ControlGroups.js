@@ -4,6 +4,7 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
   return (
     <svg width={s * 2} height={s / 4}>
       {groupings.map((g, i) => {
+        
         return (
           <React.Fragment key={i + " frag"}>
             <circle
@@ -33,8 +34,11 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
                 setHighlight(new Set(g.codes));
               }}
             >
-              {g.name}
+                  
             </text>
+            <img
+                  src={g.icon}
+                  ></img>
           </React.Fragment>
         );
       })}
