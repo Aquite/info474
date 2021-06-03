@@ -4,7 +4,7 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
   return (
     <svg width={s * 2} height={s / 4}>
       {groupings.map((g, i) => {
-        
+
         return (
           <React.Fragment key={i + " frag"}>
             <circle
@@ -14,7 +14,7 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
               style={{ fill: "steelblue" }}
               fillOpacity={
                 [...highlight].every((e) => g.codes.has(e)) &&
-                [...g.codes].every((e) => highlight.has(e))
+                  [...g.codes].every((e) => highlight.has(e))
                   ? "0.5"
                   : "0.15"
               }
@@ -34,11 +34,16 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
                 setHighlight(new Set(g.codes));
               }}
             >
-                  
+              {g.name}
             </text>
-            <img
-                  src={g.icon}
-                  ></img>
+            <image href={g.icon}
+              x={(s / groupings.length) * 2 * i + s / groupings.length - 25}
+              y={(s / 8) - 25}
+              onClick={() => {
+                setHighlight(new Set(g.codes));
+              }} 
+              height="50px"
+              width="50px" />
           </React.Fragment>
         );
       })}

@@ -1,6 +1,6 @@
 export const groupings = [
   { name: "World", 
-    icon: "src\final\icons\world.jpg",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/world.png",
     codes: new Set([
     "ASM",
       "AUS",
@@ -279,6 +279,7 @@ export const groupings = [
   ]) },
   {
     name: "North America",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/North_America.png",
     codes: new Set([
       "ABW",
       "AIA",
@@ -326,6 +327,7 @@ export const groupings = [
   },
   {
     name: "South America",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/South_America.png",
     codes: new Set([
       "ARG",
       "BOL",
@@ -345,6 +347,7 @@ export const groupings = [
   },
   {
     name: "Europe",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Europe.png",
     codes: new Set([
       "ALA",
       "ALB",
@@ -408,6 +411,7 @@ export const groupings = [
   },
   {
     name: "MENA",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/MENA.png",
     codes: new Set([
       "PSE",
       "DZA",
@@ -432,6 +436,7 @@ export const groupings = [
   },
   {
     name: "Asia",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Asia.png",
     codes: new Set([
       "AFG",
       "ARE",
@@ -492,6 +497,7 @@ export const groupings = [
   },
   {
     name: "Africa",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Africa.png",
     codes: new Set([
       "AGO",
       "ATF",
@@ -557,6 +563,7 @@ export const groupings = [
   },
   {
     name: "Oceania",
+    icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Oceania.png",
     codes: new Set([
       "ASM",
       "AUS",
