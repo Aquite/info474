@@ -24,10 +24,10 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
             />
             <text
               x={(s / groupings.length) * 2 * i + s / groupings.length}
-              y={s / 8}
+              y={(s / 8) + 30}
               textAnchor="middle"
               style={{
-                fontSize: 14,
+                fontSize: 11,
                 fontFamily: "Gill Sans, sans-serif",
               }}
               onClick={() => {
@@ -38,7 +38,7 @@ const ControlGroups = ({ groupings, s, highlight, setHighlight }) => {
             </text>
             <image href={g.icon}
               x={(s / groupings.length) * 2 * i + s / groupings.length - 25}
-              y={(s / 8) - 25}
+              y={(s / 8) - 37.5}
               onClick={() => {
                 setHighlight(new Set(g.codes));
               }} 

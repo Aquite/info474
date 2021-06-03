@@ -152,7 +152,7 @@ export default function Linegraph(props) {
           data-for={"scatternot"}
           data-tip={ourToolTip[0]}
           onMouseLeave={() => {
-            toolTipYear[1](minYear - 2) //a year that isnt in the graph, i.e. get rid of the highlight
+            toolTipYear[1](null) //a year that isnt in the graph, i.e. get rid of the highlight
             ourToolTip[1]("No Year Highlighted");
           }}
           x={getXForYear(toolTipYear[0]) - (xintervalLength / 2)}

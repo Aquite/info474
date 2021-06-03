@@ -60667,27 +60667,35 @@ _parcelHelpers.export(exports, "col", function () {
 });
 const groupings = [{
   name: "World",
-  codes: new Set([])
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/world.png",
+  codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM", "ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR", "ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX", "ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN", "PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM", "AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM", "AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
 }, {
   name: "North America",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/North_America.png",
   codes: new Set(["ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BLZ", "BMU", "BRB", "CAN", "CRI", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD", "GRL", "GTM", "HND", "HTI", "JAM", "KNA", "LCA", "MAF", "MEX", "MSR", "MTQ", "NIC", "PAN", "PRI", "SLV", "SPM", "SXM", "TCA", "TTO", "UMI", "USA", "VCT", "VGB", "VIR"])
 }, {
   name: "South America",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/South_America.png",
   codes: new Set(["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PER", "PRY", "SUR", "URY", "VEN"])
 }, {
   name: "Europe",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Europe.png",
   codes: new Set(["ALA", "ALB", "AND", "ARM", "AUT", "AZE", "BEL", "BGR", "BIH", "BLR", "CHE", "CYP", "CZE", "DEU", "DNK", "ESP", "EST", "FIN", "FRA", "FRO", "GBR", "GEO", "GGY", "GIB", "GRC", "HRV", "HUN", "IMN", "IRL", "ISL", "ITA", "JEY", "KAZ", "LIE", "LTU", "LUX", "LVA", "MCO", "MDA", "MKD", "MLT", "MNE", "NLD", "NOR", "POL", "PRT", "ROU", "RUS", "SJM", "SMR", "SRB", "SVK", "SVN", "SWE", "TUR", "UKR", "VAT", "XKX"])
 }, {
   name: "MENA",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/MENA.png",
   codes: new Set(["PSE", "DZA", "BHR", "EGY", "IRN", "IRQ", "ISR", "JOR", "KWT", "LBN", "LBY", "MAR", "OMN", "QAT", "SAU", "SYR", "TUN", "ARE", "YEM"])
 }, {
   name: "Asia",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Asia.png",
   codes: new Set(["AFG", "ARE", "ARM", "AZE", "BGD", "BHR", "BRN", "BTN", "CCK", "CHN", "CXR", "CYP", "EGY", "GEO", "HKG", "IDN", "IND", "IRN", "IRQ", "ISR", "JOR", "JPN", "KAZ", "KGZ", "KHM", "KOR", "KWT", "LAO", "LBN", "LKA", "MAC", "MDV", "MMR", "MNG", "MYS", "NPL", "OMN", "PAK", "PHL", "PRK", "PSE", "QAT", "RUS", "SAU", "SGP", "SYR", "THA", "TJK", "TKM", "TLS", "TUR", "TWN", "UZB", "VNM", "YEM"])
 }, {
   name: "Africa",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Africa.png",
   codes: new Set(["AGO", "ATF", "BDI", "BEN", "BFA", "BWA", "CAF", "CIV", "CMR", "COD", "COG", "COM", "CPV", "DJI", "DZA", "EGY", "ERI", "ESH", "ETH", "GAB", "GHA", "GIN", "GMB", "GNB", "GNQ", "IOT", "KEN", "LBR", "LBY", "LSO", "MAR", "MDG", "MLI", "MOZ", "MRT", "MUS", "MWI", "MYT", "NAM", "NER", "NGA", "REU", "RWA", "SDN", "SEN", "SHN", "SLE", "SOM", "SSD", "STP", "SWZ", "SYC", "TCD", "TGO", "TUN", "TZA", "UGA", "ZAF", "ZMB", "ZWE"])
 }, {
   name: "Oceania",
+  icon: "https://raw.githubusercontent.com/Aquite/info474/master/src/final/icons/Oceania.png",
   codes: new Set(["ASM", "AUS", "COK", "FJI", "FSM", "GUM", "KIR", "MHL", "MNP", "NCL", "NFK", "NIU", "NRU", "NZL", "PCN", "PLW", "PNG", "PYF", "SLB", "TKL", "TON", "TUV", "UMI", "VUT", "WLF", "WSM"])
 }];
 const badCodes = ["WLD", "ARB", "CSS", "CEB", "EAS", "EAP", "EMU", "ECS", "TEC", "ECA", "EUU", "FCS", "HPC", "LCN", "LAC", "LDC", "TMN", "MNA", "MEA", "NAC", "OED", "OSS", "PSS", "PST", "LTE", "EAR", "PRE", "SST", "TSA", "SAS", "TEA", "TLA", "TSS", "TEC", "IDA", "IDB", "IBD", "IBT", "IDX", "SSA", "SSF", "HIC", "LMY", "LIC", "LMC", "MIC", "UMC"];
@@ -60724,7 +60732,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 8,
+              lineNumber: 9,
               columnNumber: 11
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("circle", {
@@ -60741,15 +60749,15 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 9,
+              lineNumber: 10,
               columnNumber: 13
             }
           }), /*#__PURE__*/_reactDefault.default.createElement("text", {
             x: s / groupings.length * 2 * i + s / groupings.length,
-            y: s / 8,
+            y: s / 8 + 30,
             textAnchor: "middle",
             style: {
-              fontSize: 14,
+              fontSize: 11,
               fontFamily: "Gill Sans, sans-serif"
             },
             onClick: () => {
@@ -60758,10 +60766,25 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 24,
+              lineNumber: 25,
               columnNumber: 13
             }
-          }, g.name))
+          }, g.name), /*#__PURE__*/_reactDefault.default.createElement("image", {
+            href: g.icon,
+            x: s / groupings.length * 2 * i + s / groupings.length - 25,
+            y: s / 8 - 37.5,
+            onClick: () => {
+              setHighlight(new Set(g.codes));
+            },
+            height: "50px",
+            width: "50px",
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39,
+              columnNumber: 13
+            }
+          }))
         );
       }))
     );
@@ -60902,11 +60925,38 @@ try {
   var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Timeline.js";
   const women = "Labor force, female (% of total labor force)";
   const Timeline = ({s, m, col, worldData, yearRange, setYearRange, dataRangedHighlight}) => {
+    var _s = $RefreshSig$();
     const binData = dataRangedHighlight([1991, 2017]);
     const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2018]);
     const timeScaleReverse = _vxScale.scaleTime().domain([new Date(1991, 01, 01), new Date(2018, 01, 01)]).range([20, 980]);
     const worldLineScale = _d3Scale.scaleLinear().domain([0, 100]).range([s / 4 - m * 2, m]);
     const worldLineScaleReversed = _d3Scale.scaleLinear().domain([s / 4 - m * 2, m]).range([0, 90]);
+    // this function is meant to expand the behavior of SVGBrush, so that we can
+    // clear the selection when a year is clicked.
+    // It returns an object and two functions, in that order
+    // (the selection prop of an SVGBrush must be set to the
+    // obkect for proper use, and the two functions are the additional
+    // functionality). When the first function , the lockingFunction,
+    // is called, the current selection of the SVG Brush is cleared and
+    // the SVGBrush is prevented from allowing new brushing. The second function,
+    // the unlockingFunction, restores the most recent selection and allows for new
+    // selections (basically, it undoes the effects of the first function). If the
+    // unlockingfunction is set to be the SVGBrush's onBrushStart callback,
+    // then the brush will always allow new selections.
+    // 
+    function clearableBrush() {
+      _s();
+      const [selection, setSelection] = _react.useState(undefined);
+      function lockingFunction() {
+        setSelection(null);
+      }
+      function unlockingFunction() {
+        setSelection(undefined);
+      }
+      return [selection, lockingFunction, unlockingFunction];
+    }
+    _s(clearableBrush, "T+9/tRA3RWRau9hao6lkLXKh7bU=");
+    const [brush, lockBrush, unlockBrush] = clearableBrush();
     return (
       /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s * 2,
@@ -60915,7 +60965,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 35,
+          lineNumber: 62,
           columnNumber: 5
         }
       }, binData.map(y => {
@@ -60924,7 +60974,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 38,
+              lineNumber: 65,
               columnNumber: 11
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("rect", {
@@ -60936,7 +60986,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 39,
+              lineNumber: 66,
               columnNumber: 13
             }
           }))
@@ -60951,7 +61001,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59,
+          lineNumber: 86,
           columnNumber: 7
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
@@ -60962,10 +61012,11 @@ try {
         tickTextFill: "#333333",
         numTicks: 26,
         label: col + " in selected countries",
+        onM: true,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 67,
+          lineNumber: 94,
           columnNumber: 7
         }
       }), [...Array(27).keys()].map(value => {
@@ -60982,7 +61033,7 @@ try {
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 78,
+            lineNumber: 106,
             columnNumber: 11
           }
         }) : /*#__PURE__*/_reactDefault.default.createElement("rect", {
@@ -60994,22 +61045,27 @@ try {
           style: {
             fillOpacity: "0"
           },
-          onMouseDown: () => setYearRange([1991 + value, 1991 + value]),
+          onMouseDown: () => {
+            lockBrush();
+            setYearRange([1991 + value, 1991 + value]);
+          },
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87,
+            lineNumber: 115,
             columnNumber: 11
           }
         });
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSvgBrushDefault.default, {
         brushType: "x",
+        selection: brush,
         getEventMouse: event => {
           const {clientX, clientY} = event;
           const {left, top} = document.querySelector(".timeline").getBoundingClientRect();
           return [clientX - left, clientY - top];
         },
         extent: [[m, m], [s * 2 - m - 1, s / 4 - m * 2]],
+        onBrushStart: unlockBrush,
         onBrushEnd: ({selection}) => {
           if (selection != null) {
             if (selection[1][0] > 979) {
@@ -61021,7 +61077,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 98,
+          lineNumber: 130,
           columnNumber: 7
         }
       }))
@@ -61940,7 +61996,11 @@ try {
     let xintervalLength = timeScaleLineGraph(new Date(minYear, 12, 01)) - timeScaleLineGraph(new Date(minYear - 1, 12, 01));
     function getXForYear(year) {
       // return 45 + xintervalLength * (year - minYear);
-      return timeScaleLineGraph(new Date(year - 1, 12, 01));
+      if (year === minYear) {
+        return timeScaleLineGraph(new Date(year, 01, 01));
+      } else {
+        return timeScaleLineGraph(new Date(year - 1, 12, 01));
+      }
     }
     let yAxisLength = s - m + t - (m + t);
     function getYForPercentage(percentage) {
@@ -61972,14 +62032,14 @@ try {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 65,
+                  lineNumber: 70,
                   columnNumber: 13
                 }
               }, /*#__PURE__*/_reactDefault.default.createElement("title", {
                 __self: this,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 74,
+                  lineNumber: 79,
                   columnNumber: 15
                 }
               }, countryName + ", " + year + ": " + Math.round(countryData[year] * 100) / 100 + "%"))
@@ -62028,7 +62088,7 @@ try {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108,
+            lineNumber: 113,
             columnNumber: 7
           }
         })
@@ -62038,7 +62098,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 135,
+        lineNumber: 140,
         columnNumber: 5
       }
     }, /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -62047,7 +62107,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 136,
+        lineNumber: 141,
         columnNumber: 7
       }
     }, lines, /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -62059,7 +62119,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 138,
+        lineNumber: 143,
         columnNumber: 9
       }
     }), highlight.size !== 0 && toolTipRectangles, /*#__PURE__*/_reactDefault.default.createElement("rect", {
@@ -62068,7 +62128,7 @@ try {
       "data-for": "scatternot",
       "data-tip": ourToolTip[0],
       onMouseLeave: () => {
-        toolTipYear[1](minYear - 2);
+        toolTipYear[1](null);
         // a year that isnt in the graph, i.e. get rid of the highlight
         ourToolTip[1]("No Year Highlighted");
       },
@@ -62080,7 +62140,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 145,
+        lineNumber: 150,
         columnNumber: 9
       }
     }), highlight.size == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -62096,14 +62156,14 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 160,
+        lineNumber: 165,
         columnNumber: 11
       }
     }, "Choose some countries above or on the map") : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 173,
+        lineNumber: 178,
         columnNumber: 13
       }
     }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
@@ -62115,7 +62175,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 175,
+        lineNumber: 180,
         columnNumber: 9
       }
     }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisLeft, {
@@ -62128,7 +62188,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 184,
+        lineNumber: 189,
         columnNumber: 9
       }
     })), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
@@ -62137,7 +62197,7 @@ try {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 193,
+        lineNumber: 198,
         columnNumber: 7
       }
     }));
