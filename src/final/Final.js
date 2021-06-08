@@ -286,7 +286,17 @@ const Final = () => {
             <br />
           </div>
         )}
+            <p>Changes from Assignment 3: <br></br>
+              <ul>
+                <li>Users can now select up to two variables to compare on the world choropleth map and the scatterplot</li>
+                <li>The original line graph was altered to become a scatterplot when 2 variables are selected by the user</li>
+                <li>A histogram was created and placed on the timeline, which changes depending on the first variable and countries selected</li>
+                <li>A tooltip was added for each country on the univariate bar code chart and choropleth map</li>
+              </ul> 
+            </p>
     </div>
+
+
   );
 };
 
