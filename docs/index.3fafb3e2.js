@@ -60263,18 +60263,50 @@ try {
             }
           }, c)
         );
-      })))), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+      })))), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 200,
+          lineNumber: 199,
+          columnNumber: 7
+        }
+      }, `Functionality -`, /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 199,
+          columnNumber: 29
+        }
+      }), `The main question that our visualisation addresses is to look at the trends in the change of 
+      certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). 
+      The user can also explore how any variable is related to many 9f the other 
+      labor force-relateds variables. `, /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 203,
+          columnNumber: 41
+        }
+      }), `
+      The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down
+       (again with the female labor force participation being the default) and the user can select the year whose data they want to view. 
+      On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis 
+      of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the 
+      name of the country and its values. When the user selects a point or points on the scatterplot the respective countries 
+      are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the 
+      choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. 
+      Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 213,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 202,
+          lineNumber: 215,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
@@ -60288,21 +60320,21 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 203,
+          lineNumber: 216,
           columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 212,
+          lineNumber: 225,
           columnNumber: 13
         }
       }), col2 != "N/A" ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 215,
+          lineNumber: 228,
           columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsScatterplotJsDefault.default, {
@@ -60317,14 +60349,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 216,
+          lineNumber: 229,
           columnNumber: 17
         }
       })) : yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 228,
+          lineNumber: 241,
           columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
@@ -60341,21 +60373,21 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229,
+          lineNumber: 242,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 241,
+          lineNumber: 254,
           columnNumber: 17
         }
       }, tooltipContent)) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 244,
+          lineNumber: 257,
           columnNumber: 19
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
@@ -60370,7 +60402,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 245,
+          lineNumber: 258,
           columnNumber: 21
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -60382,7 +60414,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 257,
+          lineNumber: 270,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
@@ -60395,7 +60427,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 258,
+          lineNumber: 271,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -60409,21 +60441,21 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 267,
+          lineNumber: 280,
           columnNumber: 15
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278,
+          lineNumber: 291,
           columnNumber: 13
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279,
+          lineNumber: 292,
           columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
@@ -60434,17 +60466,66 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 280,
+          lineNumber: 293,
           columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 286,
+          lineNumber: 299,
           columnNumber: 13
         }
-      })))
+      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 302,
+          columnNumber: 13
+        }
+      }, "Changes from Assignment 3: ", /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 302,
+          columnNumber: 43
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("ul", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 303,
+          columnNumber: 15
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 304,
+          columnNumber: 17
+        }
+      }, "Users can now select up to two variables to compare on the world choropleth map and the scatterplot"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 305,
+          columnNumber: 17
+        }
+      }, "The original line graph was altered to become a scatterplot when 2 variables are selected by the user"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 306,
+          columnNumber: 17
+        }
+      }, "A histogram was created and placed on the timeline, which changes depending on the first variable and countries selected"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 307,
+          columnNumber: 17
+        }
+      }, "A tooltip was added for each country on the univariate bar code chart and choropleth map"))))
     );
   };
   _s(Final, "ZlJL0+IuEm61Q6/zBXfnTzdcHBI=", false, function () {

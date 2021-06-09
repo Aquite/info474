@@ -196,6 +196,19 @@ const Final = () => {
           </Form.Control>
         </Form.Group>
       </Form>
+      <p>{`Functionality -`}<br />
+      {`The main question that our visualisation addresses is to look at the trends in the change of 
+      certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). 
+      The user can also explore how any variable is related to many 9f the other 
+      labor force-relateds variables. `}<br />{`
+      The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down
+       (again with the female labor force participation being the default) and the user can select the year whose data they want to view. 
+      On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis 
+      of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the 
+      name of the country and its values. When the user selects a point or points on the scatterplot the respective countries 
+      are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the 
+      choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. 
+      Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`}</p>
       {loading ? (
         <p>loading data...</p>
       ) : (
