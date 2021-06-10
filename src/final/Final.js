@@ -242,96 +242,104 @@ const Final = () => {
           </Form.Group>
         </Form>
       </div>
-      {loading ? (
-        <p>loading data...</p>
-      ) : (
-        <div>
-          <Timeline
-            s={s}
-            m={m}
-            col={col}
-            worldData={worldData}
-            yearRange={yearRange}
-            setYearRange={setYearRange}
-            dataRangedHighlight={dataRangedHighlight}
-          />
-          <br />
-
-          {col2 != "N/A" ? (
-            <React.Fragment>
-              <Scatterplot
-                s={s}
-                m={m}
-                col={col}
-                col2={col2}
-                yearRange={yearRange}
-                dataRangedEnds={dataRangedEnds}
-                highlight={highlight}
-                toggleHighlight={toggleHighlight}
-              />
-            </React.Fragment>
-          ) : yearRange[0] != yearRange[1] ? (
-            <React.Fragment>
-              <Linegraph
-                s={s}
-                m={m}
-                t={t}
-                col={col}
-                yScale={yScale}
-                yearRange={yearRange}
-                highlight={highlight}
-                toggleHighlight={toggleHighlight}
-                dataInDateRange={dataInDateRange}
-                setTooltipContent={setTooltipContent}
-              />
-              <ReactTooltip>{tooltipContent}</ReactTooltip>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Barcode
-                s={s}
-                m={m}
-                col={col}
-                yScale={yScale}
-                yearRange={yearRange}
-                highlight={highlight}
-                toggleHighlight={toggleHighlight}
-                dataYearOnly={dataYearOnly}
-              />
-            </React.Fragment>
-          )}
-          <svg width={s} height={s} col={col} col2={col2} yearRange={yearRange}>
-            <WorldMap
+      <div style={{ margin: "0 auto", maxWidth: "1000px" }}>
+        {loading ? (
+          <p>loading data...</p>
+        ) : (
+          <div>
+            <Timeline
+              s={s}
+              m={m}
               col={col}
-              dataRangedEnds={dataRangedEnds}
-              setTooltipContent={setTooltipContent}
+              worldData={worldData}
               yearRange={yearRange}
-              highlight={highlight}
-              toggleHighlight={toggleHighlight}
+              setYearRange={setYearRange}
+              dataRangedHighlight={dataRangedHighlight}
             />
+            <br />
 
-            <text
-              x={s - m}
-              textAnchor="end"
-              y={m}
-              style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
+            {col2 != "N/A" ? (
+              <React.Fragment>
+                <Scatterplot
+                  s={s}
+                  m={m}
+                  col={col}
+                  col2={col2}
+                  yearRange={yearRange}
+                  dataRangedEnds={dataRangedEnds}
+                  highlight={highlight}
+                  toggleHighlight={toggleHighlight}
+                />
+              </React.Fragment>
+            ) : yearRange[0] != yearRange[1] ? (
+              <React.Fragment>
+                <Linegraph
+                  s={s}
+                  m={m}
+                  t={t}
+                  col={col}
+                  yScale={yScale}
+                  yearRange={yearRange}
+                  highlight={highlight}
+                  toggleHighlight={toggleHighlight}
+                  dataInDateRange={dataInDateRange}
+                  setTooltipContent={setTooltipContent}
+                />
+                <ReactTooltip>{tooltipContent}</ReactTooltip>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Barcode
+                  s={s}
+                  m={m}
+                  col={col}
+                  yScale={yScale}
+                  yearRange={yearRange}
+                  highlight={highlight}
+                  toggleHighlight={toggleHighlight}
+                  dataYearOnly={dataYearOnly}
+                />
+              </React.Fragment>
+            )}
+            <svg
+              width={s}
+              height={s}
+              col={col}
+              col2={col2}
+              yearRange={yearRange}
             >
-              {yearRange[0] == yearRange[1]
-                ? yearRange[0]
-                : yearRange[0] + " - " + yearRange[1]}
-            </text>
-          </svg>
-          <ReactTooltip>{tooltipContent}</ReactTooltip>
-          <br />
-          <ControlGroups
-            groupings={groupings}
-            s={s}
-            highlight={highlight}
-            setHighlight={setHighlight}
-          />
-          <br />
-        </div>
-      )}
+              <WorldMap
+                col={col}
+                dataRangedEnds={dataRangedEnds}
+                setTooltipContent={setTooltipContent}
+                yearRange={yearRange}
+                highlight={highlight}
+                toggleHighlight={toggleHighlight}
+              />
+
+              <text
+                x={s - m}
+                textAnchor="end"
+                y={m}
+                style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
+              >
+                {yearRange[0] == yearRange[1]
+                  ? yearRange[0]
+                  : yearRange[0] + " - " + yearRange[1]}
+              </text>
+            </svg>
+            <ReactTooltip>{tooltipContent}</ReactTooltip>
+            <br />
+            <ControlGroups
+              groupings={groupings}
+              s={s}
+              highlight={highlight}
+              setHighlight={setHighlight}
+            />
+            <br />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

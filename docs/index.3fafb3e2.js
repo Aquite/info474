@@ -60191,14 +60191,14 @@ try {
           lineNumber: 165,
           columnNumber: 9
         }
-      }, "The main question that our visualisation addresses is to look at the trends in the change of certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). The user can also explore how any variable is related to many 9f the other labor force-relateds variables."), /*#__PURE__*/_reactDefault.default.createElement("p", {
+      }, "The main question that our visualisation addresses is to look at the trends in the change of certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). The user can also explore how any variable is related to many of the other labor force-relateds variables."), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 172,
           columnNumber: 9
         }
-      }, "The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down (again with the female labor force participation being the default) and the user can select the year whose data they want to view. On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the name of the country and its values. When the user selects a point or points on the scatterplot the respective countries are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`}"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+      }, "The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down (again with the female labor force participation being the default) and the user can select the year whose data they want to view. On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the name of the country and its values. When the user selects a point or points on the scatterplot the respective countries are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries."), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
@@ -60344,19 +60344,30 @@ try {
             }
           }, c)
         );
-      }))))), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+      }))))), /*#__PURE__*/_reactDefault.default.createElement("div", {
+        style: {
+          margin: "0 auto",
+          maxWidth: "1000px"
+        },
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 246,
-          columnNumber: 9
+          lineNumber: 245,
+          columnNumber: 7
+        }
+      }, loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 247,
+          columnNumber: 11
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 248,
-          columnNumber: 9
+          lineNumber: 249,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
         s: s,
@@ -60369,22 +60380,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 249,
-          columnNumber: 11
+          lineNumber: 250,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 258,
-          columnNumber: 11
+          lineNumber: 259,
+          columnNumber: 13
         }
       }), col2 != "N/A" ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 261,
-          columnNumber: 13
+          lineNumber: 262,
+          columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsScatterplotJsDefault.default, {
         s: s,
@@ -60398,15 +60409,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 262,
-          columnNumber: 15
+          lineNumber: 263,
+          columnNumber: 17
         }
       })) : yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 274,
-          columnNumber: 13
+          lineNumber: 275,
+          columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
         s: s,
@@ -60422,22 +60433,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 275,
-          columnNumber: 15
+          lineNumber: 276,
+          columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 287,
-          columnNumber: 15
+          lineNumber: 288,
+          columnNumber: 17
         }
       }, tooltipContent)) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 290,
-          columnNumber: 13
+          lineNumber: 291,
+          columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
         s: s,
@@ -60451,8 +60462,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 291,
-          columnNumber: 15
+          lineNumber: 292,
+          columnNumber: 17
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -60463,8 +60474,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 303,
-          columnNumber: 11
+          lineNumber: 304,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
         col: col,
@@ -60476,8 +60487,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 304,
-          columnNumber: 13
+          lineNumber: 311,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m,
@@ -60490,22 +60501,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 313,
-          columnNumber: 13
+          lineNumber: 320,
+          columnNumber: 15
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 324,
-          columnNumber: 11
+          lineNumber: 331,
+          columnNumber: 13
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 325,
-          columnNumber: 11
+          lineNumber: 332,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
         groupings: _GroupingsJs.groupings,
@@ -60515,17 +60526,17 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 326,
-          columnNumber: 11
+          lineNumber: 333,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 332,
-          columnNumber: 11
+          lineNumber: 339,
+          columnNumber: 13
         }
-      })))
+      }))))
     );
   };
   _s(Final, "ZlJL0+IuEm61Q6/zBXfnTzdcHBI=", false, function () {
@@ -60541,7 +60552,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./components/Scatterplot.js":"3eBDh"}],"6TPbf":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","./components/Scatterplot.js":"3eBDh","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6TPbf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60997,7 +61008,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"47xHJ":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"47xHJ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -61188,7 +61199,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","react-svg-brush":"4bkEt","@vx/scale":"7H3DO","d3-scale":"2UZ4X","@vx/axis":"L6nNU","d3-array":"7CLUA","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5KpvG":[function(require,module,exports) {
+},{"react":"3b2NM","react-svg-brush":"4bkEt","@vx/scale":"7H3DO","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5KpvG":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "cols", function () {
@@ -62309,7 +62320,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"6Rf6k":[function(require,module,exports) {
+},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6Rf6k":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");
@@ -62571,7 +62582,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/axis":"L6nNU","d3-scale":"2UZ4X","d3-array":"7CLUA","react-tooltip":"2diLT"}],"44uys":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","d3-scale":"2UZ4X","d3-array":"7CLUA","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
