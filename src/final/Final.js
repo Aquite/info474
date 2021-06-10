@@ -112,16 +112,14 @@ const Final = () => {
     //this if block is for making it so the timeline will
     //show an average of the whole world in its bins
     // if the world group is clicked
-    if ([...highlight].every((e) => groupings[0].codes.has(e)) &&
-      [...groupings[0].codes].every((e) => highlight.has(e)))
-    {
+    if (
+      [...highlight].every((e) => groupings[0].codes.has(e)) &&
+      [...groupings[0].codes].every((e) => highlight.has(e))
+    ) {
       return Array.from(
         group(
           dataCountriesOnly.filter((d) => {
-            return (
-              +d.Year >= r[0] &&
-              +d.Year <= r[1]
-            );
+            return +d.Year >= r[0] && +d.Year <= r[1];
           }),
           (d) => +d.Year
         )
@@ -129,8 +127,7 @@ const Final = () => {
         y[1] = mean(y[1], (c) => +c[col]);
         return y;
       });
-    }
-    else
+    } else
       return Array.from(
         group(
           dataCountriesOnly.filter((d) => {
@@ -157,159 +154,185 @@ const Final = () => {
 
   return (
     <div>
-      <h2>Final</h2>
+      <div style={{ margin: "0 auto", maxWidth: "50em" }}>
+        <h2>Final</h2>
 
-      <p>
-        Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro
-        Steinmann Petrasso, and Nikki Demmel
-      </p>
-      <Form>
-        <Form.Group controlId="Form.col1">
-          <Form.Label>First Variable</Form.Label>
-          <Form.Control
-            as="select"
-            value={col}
-            onChange={(e) => {
-              setCol(e.target.value);
-            }}
-          >
-            {Object.values(cols).map((c) => {
-              return <option>{c}</option>;
-            })}
-          </Form.Control>
-        </Form.Group>
-      </Form>
-      <Form>
-        <Form.Group controlId="Form.col2">
-          <Form.Label>Second Variable (Optional)</Form.Label>
-          <Form.Control
-            as="select"
-            value={col2}
-            onChange={(e) => {
-              setCol2(e.target.value);
-            }}
-          >
-            <option>N/A</option>
-            {Object.values(cols).map((c) => {
-              return <option>{c}</option>;
-            })}
-          </Form.Control>
-        </Form.Group>
-      </Form>
-      <p>{`Functionality -`}<br />
-      {`The main question that our visualisation addresses is to look at the trends in the change of 
-      certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). 
-      The user can also explore how any variable is related to many 9f the other 
-      labor force-relateds variables. `}<br />{`
-      The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down
-       (again with the female labor force participation being the default) and the user can select the year whose data they want to view. 
-      On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis 
-      of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the 
-      name of the country and its values. When the user selects a point or points on the scatterplot the respective countries 
-      are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the 
-      choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. 
-      Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`}</p>
+        <p>
+          Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro
+          Steinmann Petrasso, and Nikki Demmel
+        </p>
+        <h3>Functionality</h3>
+        <p>
+          The main question that our visualisation addresses is to look at the
+          trends in the change of certain variables that the World Bank's
+          tracks, such as the female labor force participation over time (which
+          is the default choice). The user can also explore how any variable is
+          related to many of the other labor force-relateds variables.
+        </p>
+        <p>
+          The user can now select two variables using our visualisation. The
+          histogram at the top shows the variable in the first drop down (again
+          with the female labor force participation being the default) and the
+          user can select the year whose data they want to view. On selecting
+          more than one variable, the line chart changes into a scatterplot. The
+          scatterplot changes on the basis of the year selected by the user on
+          the histogram. The user can hover over the points on the scatterplot
+          to see the name of the country and its values. When the user selects a
+          point or points on the scatterplot the respective countries are
+          highlighted on the choropleth map present to the right. The icons at
+          the bottom highlight the respective area on the choropleth map. The
+          user can zoom-in/zoom-out on the choropleth map to see the values of
+          individual countries closely. Any country that the user selects is
+          highlighted in stripes and the user has the ability to select multiple
+          countries.
+        </p>
+        <p>
+          Changes from Assignment 3: <br></br>
+          <ul>
+            <li>
+              Users can now select up to two variables to compare on the world
+              choropleth map and the scatterplot
+            </li>
+            <li>
+              The original line graph was altered to become a scatterplot when 2
+              variables are selected by the user
+            </li>
+            <li>
+              A histogram was created and placed on the timeline, which changes
+              depending on the first variable and countries selected
+            </li>
+            <li>
+              A tooltip was added for each country on the univariate bar code
+              chart and choropleth map
+            </li>
+          </ul>
+        </p>
+
+        <Form>
+          <Form.Group controlId="Form.col1">
+            <Form.Label>First Variable</Form.Label>
+            <Form.Control
+              as="select"
+              value={col}
+              onChange={(e) => {
+                setCol(e.target.value);
+              }}
+            >
+              {Object.values(cols).map((c) => {
+                return <option>{c}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Form>
+        <Form>
+          <Form.Group controlId="Form.col2">
+            <Form.Label>Second Variable (Optional)</Form.Label>
+            <Form.Control
+              as="select"
+              value={col2}
+              onChange={(e) => {
+                setCol2(e.target.value);
+              }}
+            >
+              <option>N/A</option>
+              {Object.values(cols).map((c) => {
+                return <option>{c}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Form>
+      </div>
       {loading ? (
         <p>loading data...</p>
       ) : (
-          <div>
-            <Timeline
-              s={s}
-              m={m}
-              col={col}
-              worldData={worldData}
-              yearRange={yearRange}
-              setYearRange={setYearRange}
-              dataRangedHighlight={dataRangedHighlight}
-            />
-            <br />
+        <div>
+          <Timeline
+            s={s}
+            m={m}
+            col={col}
+            worldData={worldData}
+            yearRange={yearRange}
+            setYearRange={setYearRange}
+            dataRangedHighlight={dataRangedHighlight}
+          />
+          <br />
 
-            {col2 != "N/A" ? (
-              <React.Fragment>
-                <Scatterplot
-                  s={s}
-                  m={m}
-                  col={col}
-                  col2={col2}
-                  yearRange={yearRange}
-                  dataRangedEnds={dataRangedEnds}
-                  highlight={highlight}
-                  toggleHighlight={toggleHighlight}
-                />
-              </React.Fragment>
-            ) : yearRange[0] != yearRange[1] ? (
-              <React.Fragment>
-                <Linegraph
-                  s={s}
-                  m={m}
-                  t={t}
-                  col={col}
-                  yScale={yScale}
-                  yearRange={yearRange}
-                  highlight={highlight}
-                  toggleHighlight={toggleHighlight}
-                  dataInDateRange={dataInDateRange}
-                  setTooltipContent={setTooltipContent}
-                />
-                <ReactTooltip>{tooltipContent}</ReactTooltip>
-              </React.Fragment>
-            ) : (
-                  <React.Fragment>
-                    <Barcode
-                      s={s}
-                      m={m}
-                      col={col}
-                      yScale={yScale}
-                      yearRange={yearRange}
-                      highlight={highlight}
-                      toggleHighlight={toggleHighlight}
-                      dataYearOnly={dataYearOnly}
-                    />
-                  </React.Fragment>
-                )}
-            <svg width={s} height={s} col={col} col2={col2} yearRange={yearRange}>
-              <WorldMap
+          {col2 != "N/A" ? (
+            <React.Fragment>
+              <Scatterplot
+                s={s}
+                m={m}
                 col={col}
-                dataRangedEnds={dataRangedEnds}
-                setTooltipContent={setTooltipContent}
+                col2={col2}
                 yearRange={yearRange}
+                dataRangedEnds={dataRangedEnds}
                 highlight={highlight}
                 toggleHighlight={toggleHighlight}
               />
-
-              <text
-                x={s - m}
-                textAnchor="end"
-                y={m}
-                style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
-              >
-                {yearRange[0] == yearRange[1]
-                  ? yearRange[0]
-                  : yearRange[0] + " - " + yearRange[1]}
-              </text>
-            </svg>
-            <ReactTooltip>{tooltipContent}</ReactTooltip>
-            <br />
-            <ControlGroups
-              groupings={groupings}
-              s={s}
+            </React.Fragment>
+          ) : yearRange[0] != yearRange[1] ? (
+            <React.Fragment>
+              <Linegraph
+                s={s}
+                m={m}
+                t={t}
+                col={col}
+                yScale={yScale}
+                yearRange={yearRange}
+                highlight={highlight}
+                toggleHighlight={toggleHighlight}
+                dataInDateRange={dataInDateRange}
+                setTooltipContent={setTooltipContent}
+              />
+              <ReactTooltip>{tooltipContent}</ReactTooltip>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Barcode
+                s={s}
+                m={m}
+                col={col}
+                yScale={yScale}
+                yearRange={yearRange}
+                highlight={highlight}
+                toggleHighlight={toggleHighlight}
+                dataYearOnly={dataYearOnly}
+              />
+            </React.Fragment>
+          )}
+          <svg width={s} height={s} col={col} col2={col2} yearRange={yearRange}>
+            <WorldMap
+              col={col}
+              dataRangedEnds={dataRangedEnds}
+              setTooltipContent={setTooltipContent}
+              yearRange={yearRange}
               highlight={highlight}
-              setHighlight={setHighlight}
+              toggleHighlight={toggleHighlight}
             />
-            <br />
-          </div>
-        )}
-            <p>Changes from Assignment 3: <br></br>
-              <ul>
-                <li>Users can now select up to two variables to compare on the world choropleth map and the scatterplot</li>
-                <li>The original line graph was altered to become a scatterplot when 2 variables are selected by the user</li>
-                <li>A histogram was created and placed on the timeline, which changes depending on the first variable and countries selected</li>
-                <li>A tooltip was added for each country on the univariate bar code chart and choropleth map</li>
-              </ul> 
-            </p>
+
+            <text
+              x={s - m}
+              textAnchor="end"
+              y={m}
+              style={{ fontSize: 10, fontFamily: "Gill Sans, sans-serif" }}
+            >
+              {yearRange[0] == yearRange[1]
+                ? yearRange[0]
+                : yearRange[0] + " - " + yearRange[1]}
+            </text>
+          </svg>
+          <ReactTooltip>{tooltipContent}</ReactTooltip>
+          <br />
+          <ControlGroups
+            groupings={groupings}
+            s={s}
+            highlight={highlight}
+            setHighlight={setHighlight}
+          />
+          <br />
+        </div>
+      )}
     </div>
-
-
   );
 };
 

@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SVGBrush from "react-svg-brush";
 import { scaleTime } from "@vx/scale";
 import { scaleLinear } from "d3-scale";
+import { max } from "d3-array";
 import { AxisBottom, AxisLeft } from "@vx/axis";
 import { bin, group } from "d3-array";
 
@@ -18,39 +19,45 @@ const Timeline = ({
 }) => {
   const binData = dataRangedHighlight([1991, 2017]);
 
+  const myMax = max(
+    binData.map((d) => {
+      return +d[1];
+    })
+  );
+
   const timeScale = scaleLinear().domain([20, 980]).range([1991, 2018]);
   const timeScaleReverse = scaleTime()
     .domain([new Date(1991, 01, 01), new Date(2018, 01, 01)])
     .range([20, 980]);
 
+  console.log(binData);
   const worldLineScale = scaleLinear()
-    .domain([0, 100])
+    .domain([0, myMax])
     .range([s / 4 - m * 2, m]);
 
   const worldLineScaleReversed = scaleLinear()
     .domain([s / 4 - m * 2, m])
     .range([0, 90]);
 
-
   //this function is meant to expand the behavior of SVGBrush, so that we can
   //clear the selection when a year is clicked.
   //It returns an object and two functions, in that order
-  // (the selection prop of an SVGBrush must be set to the 
+  // (the selection prop of an SVGBrush must be set to the
   //obkect for proper use, and the two functions are the additional
   //functionality). When the first function , the lockingFunction,
-  //is called, the current selection of the SVG Brush is cleared and 
+  //is called, the current selection of the SVG Brush is cleared and
   //the SVGBrush is prevented from allowing new brushing. The second function,
   //the unlockingFunction, restores the most recent selection and allows for new
-  //selections (basically, it undoes the effects of the first function). If the 
-  //unlockingfunction is set to be the SVGBrush's onBrushStart callback, 
-  //then the brush will always allow new selections. 
+  //selections (basically, it undoes the effects of the first function). If the
+  //unlockingfunction is set to be the SVGBrush's onBrushStart callback,
+  //then the brush will always allow new selections.
   //
-  function clearableBrush(){
+  function clearableBrush() {
     const [selection, setSelection] = useState(undefined);
-    function lockingFunction(){
+    function lockingFunction() {
       setSelection(null);
     }
-    function unlockingFunction(){
+    function unlockingFunction() {
       setSelection(undefined);
     }
     return [selection, lockingFunction, unlockingFunction];
@@ -65,7 +72,7 @@ const Timeline = ({
           <React.Fragment>
             <rect
               width={30}
-              height={worldLineScale(100 - y[1]) - 20}
+              height={worldLineScale(myMax - y[1]) - 20}
               x={timeScaleReverse(new Date(y[0], 01, 01))}
               y={worldLineScale(y[1])}
               fill={"#776865"}
@@ -119,11 +126,10 @@ const Timeline = ({
             height={30}
             width={30}
             style={{ fillOpacity: "0" }}
-            onMouseDown={() => 
-              {
-                lockBrush();
-                setYearRange([1991 + value, 1991 + value])
-              }}
+            onMouseDown={() => {
+              lockBrush();
+              setYearRange([1991 + value, 1991 + value]);
+            }}
           />
         );
       })}

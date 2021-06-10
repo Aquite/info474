@@ -50,7 +50,7 @@ const Scatterplot = ({
   return (
     <React.Fragment>
       <svg width={s} height={s}>
-        {data.map((c) => {
+        {data.map((c, i) => {
           const h = highlight.has(c[0]["Country Code"]) === true;
           if (
             c[0][col] != 0 &&

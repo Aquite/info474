@@ -1056,7 +1056,7 @@ try {
   var _AppDefault = _parcelHelpers.interopDefault(_App);
   require("bootstrap/dist/css/bootstrap.min.css");
   var _reactRouterDom = require("react-router-dom");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/index.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\index.js";
   _reactDomDefault.default.render(/*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.StrictMode, {
     __self: undefined,
     __source: {
@@ -26300,7 +26300,7 @@ try {
   var _finalFinalJsDefault = _parcelHelpers.interopDefault(_finalFinalJs);
   var _HomeJs = require("./Home.js");
   var _HomeJsDefault = _parcelHelpers.interopDefault(_HomeJs);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/App.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\App.js";
   const App = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -30347,7 +30347,7 @@ try {
   var _reactBootstrapNav = require("react-bootstrap/Nav");
   var _reactBootstrapNavDefault = _parcelHelpers.interopDefault(_reactBootstrapNav);
   var _reactRouterBootstrap = require("react-router-bootstrap");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/Header.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Header.js";
   const Header = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
@@ -33899,7 +33899,7 @@ try {
   var _d3Array = require("d3-array");
   var _d3Scale = require("d3-scale");
   var _reactSimpleMaps = require("react-simple-maps");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/assignment2/Assignment2.js", _s = $RefreshSig$();
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment2\\Assignment2.js", _s = $RefreshSig$();
   const Assignment2 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -45756,7 +45756,7 @@ try {
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
   var _reactSvgBrush = require("react-svg-brush");
   var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/assignment3/Assignment3.js", _s = $RefreshSig$();
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\assignment3\\Assignment3.js", _s = $RefreshSig$();
   const Assignment3 = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -60052,7 +60052,7 @@ try {
   require("react-bootstrap/esm/Col");
   var _componentsScatterplotJs = require("./components/Scatterplot.js");
   var _componentsScatterplotJsDefault = _parcelHelpers.interopDefault(_componentsScatterplotJs);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/Final.js", _s = $RefreshSig$();
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\Final.js", _s = $RefreshSig$();
   const Final = () => {
     _s();
     const [data, loading] = _hooksUseFetch.useFetch("https://raw.githubusercontent.com/ZeningQu/World-Bank-Data-by-Indicators/master/social-protection-and-labor/social-protection-and-labor.csv");
@@ -60149,44 +60149,125 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 159,
+          lineNumber: 156,
           columnNumber: 5
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("div", {
+        style: {
+          margin: "0 auto",
+          maxWidth: "50em"
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 157,
+          columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 160,
-          columnNumber: 7
+          lineNumber: 158,
+          columnNumber: 9
         }
       }, "Final"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 162,
-          columnNumber: 7
+          lineNumber: 160,
+          columnNumber: 9
         }
-      }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
+      }, "Team: Pavel Batalov, Michael Doyle, Chandrashree Karnani, Ramiro Steinmann Petrasso, and Nikki Demmel"), /*#__PURE__*/_reactDefault.default.createElement("h3", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 166,
-          columnNumber: 7
+          lineNumber: 164,
+          columnNumber: 9
+        }
+      }, "Functionality"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 165,
+          columnNumber: 9
+        }
+      }, "The main question that our visualisation addresses is to look at the trends in the change of certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). The user can also explore how any variable is related to many 9f the other labor force-relateds variables."), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 172,
+          columnNumber: 9
+        }
+      }, "The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down (again with the female labor force participation being the default) and the user can select the year whose data they want to view. On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the name of the country and its values. When the user selects a point or points on the scatterplot the respective countries are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`}"), /*#__PURE__*/_reactDefault.default.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 189,
+          columnNumber: 9
+        }
+      }, "Changes from Assignment 3: ", /*#__PURE__*/_reactDefault.default.createElement("br", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 190,
+          columnNumber: 38
+        }
+      }), /*#__PURE__*/_reactDefault.default.createElement("ul", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 191,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 192,
+          columnNumber: 13
+        }
+      }, "Users can now select up to two variables to compare on the world choropleth map and the scatterplot"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 196,
+          columnNumber: 13
+        }
+      }, "The original line graph was altered to become a scatterplot when 2 variables are selected by the user"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 200,
+          columnNumber: 13
+        }
+      }, "A histogram was created and placed on the timeline, which changes depending on the first variable and countries selected"), /*#__PURE__*/_reactDefault.default.createElement("li", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 204,
+          columnNumber: 13
+        }
+      }, "A tooltip was added for each country on the univariate bar code chart and choropleth map"))), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 211,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
         controlId: "Form.col1",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 167,
-          columnNumber: 9
+          lineNumber: 212,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 168,
-          columnNumber: 11
+          lineNumber: 213,
+          columnNumber: 13
         }
       }, "First Variable"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
         as: "select",
@@ -60197,8 +60278,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 169,
-          columnNumber: 11
+          lineNumber: 214,
+          columnNumber: 13
         }
       }, Object.values(_ColumnNamesJs.cols).map(c => {
         return (
@@ -60206,8 +60287,8 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 177,
-              columnNumber: 22
+              lineNumber: 222,
+              columnNumber: 24
             }
           }, c)
         );
@@ -60215,23 +60296,23 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 182,
-          columnNumber: 7
+          lineNumber: 227,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Group, {
         controlId: "Form.col2",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 183,
-          columnNumber: 9
+          lineNumber: 228,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Label, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 184,
-          columnNumber: 11
+          lineNumber: 229,
+          columnNumber: 13
         }
       }, "Second Variable (Optional)"), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapFormDefault.default.Control, {
         as: "select",
@@ -60242,15 +60323,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 185,
-          columnNumber: 11
+          lineNumber: 230,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("option", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 192,
-          columnNumber: 13
+          lineNumber: 237,
+          columnNumber: 15
         }
       }, "N/A"), Object.values(_ColumnNamesJs.cols).map(c => {
         return (
@@ -60258,56 +60339,24 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 194,
-              columnNumber: 22
+              lineNumber: 239,
+              columnNumber: 24
             }
           }, c)
         );
-      })))), /*#__PURE__*/_reactDefault.default.createElement("p", {
+      }))))), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 199,
-          columnNumber: 7
-        }
-      }, `Functionality -`, /*#__PURE__*/_reactDefault.default.createElement("br", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 199,
-          columnNumber: 29
-        }
-      }), `The main question that our visualisation addresses is to look at the trends in the change of 
-      certain variables that the World Bank's tracks, such as the female labor force participation over time (which is the default choice). 
-      The user can also explore how any variable is related to many 9f the other 
-      labor force-relateds variables. `, /*#__PURE__*/_reactDefault.default.createElement("br", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 203,
-          columnNumber: 41
-        }
-      }), `
-      The user can now select two variables using our visualisation. The histogram at the top shows the variable in the first drop down
-       (again with the female labor force participation being the default) and the user can select the year whose data they want to view. 
-      On selecting more than one variable, the line chart changes into a scatterplot. The scatterplot changes on the basis 
-      of the year selected by the user on the histogram. The user can hover over the points on the scatterplot to see the 
-      name of the country and its values. When the user selects a point or points on the scatterplot the respective countries 
-      are highlighted on the choropleth map present to the right. The icons at the bottom highlight the respective area on the 
-      choropleth map. The user can zoom-in/zoom-out on the choropleth map to see the values of individual countries closely. 
-      Any country that the user selects is highlighted in stripes and the user has the ability to select multiple countries.`), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 213,
+          lineNumber: 246,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement("div", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 215,
-          columnNumber: 11
+          lineNumber: 248,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsTimelineJsDefault.default, {
         s: s,
@@ -60320,22 +60369,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 216,
-          columnNumber: 13
+          lineNumber: 249,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 225,
-          columnNumber: 13
+          lineNumber: 258,
+          columnNumber: 11
         }
       }), col2 != "N/A" ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 228,
-          columnNumber: 15
+          lineNumber: 261,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsScatterplotJsDefault.default, {
         s: s,
@@ -60349,15 +60398,15 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229,
-          columnNumber: 17
+          lineNumber: 262,
+          columnNumber: 15
         }
       })) : yearRange[0] != yearRange[1] ? /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 241,
-          columnNumber: 15
+          lineNumber: 274,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsLinegraphJsDefault.default, {
         s: s,
@@ -60373,22 +60422,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 242,
-          columnNumber: 17
+          lineNumber: 275,
+          columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 254,
-          columnNumber: 17
+          lineNumber: 287,
+          columnNumber: 15
         }
       }, tooltipContent)) : /*#__PURE__*/_reactDefault.default.createElement(_reactDefault.default.Fragment, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 257,
-          columnNumber: 19
+          lineNumber: 290,
+          columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsBarcodeJsDefault.default, {
         s: s,
@@ -60402,8 +60451,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 258,
-          columnNumber: 21
+          lineNumber: 291,
+          columnNumber: 15
         }
       })), /*#__PURE__*/_reactDefault.default.createElement("svg", {
         width: s,
@@ -60414,8 +60463,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 270,
-          columnNumber: 13
+          lineNumber: 303,
+          columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_componentsWorldMapJsDefault.default, {
         col: col,
@@ -60427,8 +60476,8 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 271,
-          columnNumber: 15
+          lineNumber: 304,
+          columnNumber: 13
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
         x: s - m,
@@ -60441,22 +60490,22 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 280,
-          columnNumber: 15
+          lineNumber: 313,
+          columnNumber: 13
         }
       }, yearRange[0] == yearRange[1] ? yearRange[0] : yearRange[0] + " - " + yearRange[1])), /*#__PURE__*/_reactDefault.default.createElement(_reactTooltipDefault.default, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 291,
-          columnNumber: 13
+          lineNumber: 324,
+          columnNumber: 11
         }
       }, tooltipContent), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 292,
-          columnNumber: 13
+          lineNumber: 325,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_componentsControlGroupsJsDefault.default, {
         groupings: _GroupingsJs.groupings,
@@ -60466,66 +60515,17 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 293,
-          columnNumber: 13
+          lineNumber: 326,
+          columnNumber: 11
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("br", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 299,
-          columnNumber: 13
+          lineNumber: 332,
+          columnNumber: 11
         }
-      })), /*#__PURE__*/_reactDefault.default.createElement("p", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 302,
-          columnNumber: 13
-        }
-      }, "Changes from Assignment 3: ", /*#__PURE__*/_reactDefault.default.createElement("br", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 302,
-          columnNumber: 43
-        }
-      }), /*#__PURE__*/_reactDefault.default.createElement("ul", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 303,
-          columnNumber: 15
-        }
-      }, /*#__PURE__*/_reactDefault.default.createElement("li", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 304,
-          columnNumber: 17
-        }
-      }, "Users can now select up to two variables to compare on the world choropleth map and the scatterplot"), /*#__PURE__*/_reactDefault.default.createElement("li", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 305,
-          columnNumber: 17
-        }
-      }, "The original line graph was altered to become a scatterplot when 2 variables are selected by the user"), /*#__PURE__*/_reactDefault.default.createElement("li", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 306,
-          columnNumber: 17
-        }
-      }, "A histogram was created and placed on the timeline, which changes depending on the first variable and countries selected"), /*#__PURE__*/_reactDefault.default.createElement("li", {
-        __self: undefined,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 307,
-          columnNumber: 17
-        }
-      }, "A tooltip was added for each country on the univariate bar code chart and choropleth map"))))
+      })))
     );
   };
   _s(Final, "ZlJL0+IuEm61Q6/zBXfnTzdcHBI=", false, function () {
@@ -60541,7 +60541,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","./components/Scatterplot.js":"3eBDh","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6TPbf":[function(require,module,exports) {
+},{"react":"3b2NM","./hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","./components/WorldMap.js":"34ExX","react-tooltip":"2diLT","./Groupings.js":"5MyzG","./components/ControlGroups.js":"4SqrA","./components/Barcode.js":"1SJJK","./components/Timeline.js":"47xHJ","./ColumnNames.js":"5KpvG","react-bootstrap/Form":"6A5ko","./components/Linegraph.js":"1r9HO","react-bootstrap/esm/Col":"6Rf6k","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./components/Scatterplot.js":"3eBDh"}],"6TPbf":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -60589,7 +60589,7 @@ try {
   var _reactSimpleMaps = require("react-simple-maps");
   var _d3Scale = require("d3-scale");
   var _vxPattern = require("@vx/pattern");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/WorldMap.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\WorldMap.js";
   // Relevant constants
   const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
   const colorScale = _d3Scale.scaleLinear().domain([0, 70]).range(["aliceblue", "steelblue"]);
@@ -60804,7 +60804,7 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require("react");
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/ControlGroups.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\ControlGroups.js";
   const ControlGroups = ({groupings, s, highlight, setHighlight}) => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -60903,7 +60903,7 @@ try {
   var _vxAxis = require("@vx/axis");
   var _reactTooltip = require("react-tooltip");
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Barcode.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Barcode.js";
   const halfCodeWidth = 30;
   const Barcode = ({s, m, col, yScale, yearRange, highlight, toggleHighlight, dataYearOnly}) => {
     return (
@@ -60997,7 +60997,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"47xHJ":[function(require,module,exports) {
+},{"react":"3b2NM","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"47xHJ":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -61011,16 +61011,20 @@ try {
   var _reactSvgBrushDefault = _parcelHelpers.interopDefault(_reactSvgBrush);
   var _vxScale = require("@vx/scale");
   var _d3Scale = require("d3-scale");
+  var _d3Array = require("d3-array");
   var _vxAxis = require("@vx/axis");
-  require("d3-array");
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Timeline.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Timeline.js";
   const women = "Labor force, female (% of total labor force)";
   const Timeline = ({s, m, col, worldData, yearRange, setYearRange, dataRangedHighlight}) => {
     var _s = $RefreshSig$();
     const binData = dataRangedHighlight([1991, 2017]);
+    const myMax = _d3Array.max(binData.map(d => {
+      return +d[1];
+    }));
     const timeScale = _d3Scale.scaleLinear().domain([20, 980]).range([1991, 2018]);
     const timeScaleReverse = _vxScale.scaleTime().domain([new Date(1991, 01, 01), new Date(2018, 01, 01)]).range([20, 980]);
-    const worldLineScale = _d3Scale.scaleLinear().domain([0, 100]).range([s / 4 - m * 2, m]);
+    console.log(binData);
+    const worldLineScale = _d3Scale.scaleLinear().domain([0, myMax]).range([s / 4 - m * 2, m]);
     const worldLineScaleReversed = _d3Scale.scaleLinear().domain([s / 4 - m * 2, m]).range([0, 90]);
     // this function is meant to expand the behavior of SVGBrush, so that we can
     // clear the selection when a year is clicked.
@@ -61056,7 +61060,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62,
+          lineNumber: 69,
           columnNumber: 5
         }
       }, binData.map(y => {
@@ -61065,19 +61069,19 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 65,
+              lineNumber: 72,
               columnNumber: 11
             }
           }, /*#__PURE__*/_reactDefault.default.createElement("rect", {
             width: 30,
-            height: worldLineScale(100 - y[1]) - 20,
+            height: worldLineScale(myMax - y[1]) - 20,
             x: timeScaleReverse(new Date(y[0], 01, 01)),
             y: worldLineScale(y[1]),
             fill: "#776865",
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 66,
+              lineNumber: 73,
               columnNumber: 13
             }
           }))
@@ -61092,7 +61096,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86,
+          lineNumber: 93,
           columnNumber: 7
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_vxAxis.AxisBottom, {
@@ -61107,7 +61111,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 94,
+          lineNumber: 101,
           columnNumber: 7
         }
       }), [...Array(27).keys()].map(value => {
@@ -61124,7 +61128,7 @@ try {
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 106,
+            lineNumber: 113,
             columnNumber: 11
           }
         }) : /*#__PURE__*/_reactDefault.default.createElement("rect", {
@@ -61143,7 +61147,7 @@ try {
           __self: undefined,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 115,
+            lineNumber: 122,
             columnNumber: 11
           }
         });
@@ -61168,7 +61172,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 130,
+          lineNumber: 136,
           columnNumber: 7
         }
       }))
@@ -62063,7 +62067,7 @@ try {
   var _vxAxis = require("@vx/axis");
   var _reactTooltip = require("react-tooltip");
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Linegraph.js", _s = $RefreshSig$();
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Linegraph.js", _s = $RefreshSig$();
   function Linegraph(props) {
     _s();
     const ourToolTip = _react.useState("We are in a state");
@@ -62305,7 +62309,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"6Rf6k":[function(require,module,exports) {
+},{"react":"3b2NM","../hooks/useFetch":"6TPbf","d3-scale":"2UZ4X","d3-array":"7CLUA","@vx/scale":"7H3DO","@vx/axis":"L6nNU","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-tooltip":"2diLT"}],"6Rf6k":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersEsmExtends = require("@babel/runtime/helpers/esm/extends");
@@ -62462,7 +62466,7 @@ try {
   var _d3Array = require("d3-array");
   var _reactTooltip = require("react-tooltip");
   var _reactTooltipDefault = _parcelHelpers.interopDefault(_reactTooltip);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/final/components/Scatterplot.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\final\\components\\Scatterplot.js";
   const Scatterplot = ({s, m, col, col2, yearRange, dataRangedEnds, highlight, toggleHighlight}) => {
     const data = dataRangedEnds(yearRange);
     const yr = yearRange[0] == yearRange[1];
@@ -62492,7 +62496,7 @@ try {
           lineNumber: 52,
           columnNumber: 7
         }
-      }, data.map(c => {
+      }, data.map((c, i) => {
         const h = highlight.has(c[0]["Country Code"]) === true;
         if (c[0][col] != 0 && c[0][col2] != 0 && (yr || c[1][col] != 0 && c[1][col2] != 0)) {
           return (
@@ -62567,7 +62571,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@vx/axis":"L6nNU","d3-scale":"2UZ4X","d3-array":"7CLUA","react-tooltip":"2diLT","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"44uys":[function(require,module,exports) {
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","@vx/axis":"L6nNU","d3-scale":"2UZ4X","d3-array":"7CLUA","react-tooltip":"2diLT"}],"44uys":[function(require,module,exports) {
 var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -62577,7 +62581,7 @@ try {
   _parcelHelpers.defineInteropFlag(exports);
   var _react = require('react');
   var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "/mnt/c/info474/finalproject/src/Home.js";
+  var _jsxFileName = "C:\\Users\\Pavel\\Desktop\\INFO\\474\\info474\\src\\Home.js";
   const Home = () => {
     return (
       /*#__PURE__*/_reactDefault.default.createElement("div", {
