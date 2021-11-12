@@ -33918,7 +33918,7 @@ try {
       return d.Year == 2017;
     });
     // Column names
-    const women = "Labor force, female (% of total labor force)";
+    const women = "average_value_Labor force, female (% of total labor force)";
     // Border designs. 500x500 but working area is 460 x 460
     const s = 500;
     // viz size
@@ -34035,7 +34035,7 @@ try {
     });
     // Visualization Six: Scatterplot
     const radScale = _d3Scale.scaleSqrt().domain(_d3Array.extent(dataFemChange.map(d => {
-      return +d[1][women] * 0.01 * +d[1]["Labor force, total"];
+      return +d[1][women] * 0.01 * +d[1]["average_value_Labor force, total"];
     }))).range([1, 30]);
     // Visualization Seven: Change in Deltas (histogram)
     const binForce = _d3Array.bin().thresholds(20);
@@ -34053,133 +34053,133 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 228,
+          lineNumber: 230,
           columnNumber: 5
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 229,
+          lineNumber: 231,
           columnNumber: 7
         }
       }, "Assignment 2"), /*#__PURE__*/_reactDefault.default.createElement("h4", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 230,
+          lineNumber: 232,
           columnNumber: 7
         }
       }, "Data Choice"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 231,
+          lineNumber: 233,
           columnNumber: 7
         }
       }, "For my exploratory data analysis, I took World Bank data on Social Protection and Labor, specifically focusing on the metric of the number of women in the workforce as a percentage of the total workforce."), /*#__PURE__*/_reactDefault.default.createElement("h4", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 236,
+          lineNumber: 238,
           columnNumber: 7
         }
       }, "Questions"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 237,
+          lineNumber: 239,
           columnNumber: 7
         }
       }, "I had many questions about the dataset, specifically focusing on issues regarding inequality in the workforce:"), /*#__PURE__*/_reactDefault.default.createElement("ul", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 241,
+          lineNumber: 243,
           columnNumber: 7
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 242,
+          lineNumber: 244,
           columnNumber: 9
         }
       }, "What is the percentage of women in the workforce of the total workforce globally?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 246,
+          lineNumber: 248,
           columnNumber: 9
         }
       }, "How does this percentage vary by country?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 247,
+          lineNumber: 249,
           columnNumber: 9
         }
       }, "How has this percentage varied over time"), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 248,
+          lineNumber: 250,
           columnNumber: 9
         }
       }, "Do specific geopolitical regions have lower percentages of women versus men in their workforce?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 252,
+          lineNumber: 254,
           columnNumber: 9
         }
       }, "Does the size of the workforce alter the female percentage?"), /*#__PURE__*/_reactDefault.default.createElement("li", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 253,
+          lineNumber: 255,
           columnNumber: 9
         }
       }, "What can we do to reach 50% globally?")), /*#__PURE__*/_reactDefault.default.createElement("h4", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 255,
+          lineNumber: 257,
           columnNumber: 7
         }
       }, "Analysis Process"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 256,
+          lineNumber: 258,
           columnNumber: 7
         }
       }, "This dataset was somewhat difficult to work with. It was formatted to work in Tableau, which unfortunately resulted in all \"null\" values being inputed as \"0\". Logically, I can assume that none of the fields I worked with would actually be zero, but it is still awkward to filter out data points at \"0\" instead of null. The other difficult part about working with this data is that it included entries for entities that were not countries. Including this data, with the European Union for example, would double-count some countries. I couldn't find a comprehensive list of codes this applies to on the World Bank website so I had to manually find and remove them."), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 268,
+          lineNumber: 270,
           columnNumber: 7
         }
       }, "To prepare this data set for analysis, after filtering out the 0 values and entries with bad codes, I performed different functions for some of my visualizations. For most of the visualizations, I filtered the data to only include entries from 2017. For one visualization, I used a rollup function to take the mean of all countries for each year. For ones comparing data from 1991 and 2017, I filtered the data for both years and organized it into a two-dimensional array. I used a bin function after eliminating two outliers to create my histogram."), /*#__PURE__*/_reactDefault.default.createElement("h4", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 278,
+          lineNumber: 280,
           columnNumber: 7
         }
       }, "Lessons Learned"), /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 279,
+          lineNumber: 281,
           columnNumber: 7
         }
       }, "I learned that in most countries, just under 50% of the workforce is female. The size of the workforce does not appear to affect this percentage, however the geographical location is correlated, with MENA countries having significantly smaller percentage of the workforce being female. The percentage has increased slightly over time, but individual countries may vary wildly. Future analysis could focus on countries that saw a decrease in this percentage, and countries at the lower end of the scale. It would be interesting to see whether countries with robust FMLA leave and support for working parents see an increase in this percentage."), loading ? /*#__PURE__*/_reactDefault.default.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 292,
+          lineNumber: 294,
           columnNumber: 9
         }
       }, "loading data...") : /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabsDefault.default, {
@@ -34188,7 +34188,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 294,
+          lineNumber: 296,
           columnNumber: 9
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34197,14 +34197,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 295,
+          lineNumber: 297,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 296,
+          lineNumber: 298,
           columnNumber: 13
         }
       }, "Female labor force as a percentage of the total labor force in 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34216,7 +34216,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 300,
+          lineNumber: 302,
           columnNumber: 13
         }
       }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
@@ -34234,7 +34234,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 305,
+                lineNumber: 307,
                 columnNumber: 21
               }
             })
@@ -34244,7 +34244,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 319,
+          lineNumber: 321,
           columnNumber: 13
         }
       }, "This chart shows the female to male ratio of the world labor force. Each line on the bar graph represents a country. Most countries appear to be roughly evenly divided, with just under 50% of the workforce being female. However, the data also skews left, indicating many countries contain few women in the workforce while no countries contain few men.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34253,14 +34253,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 328,
+          lineNumber: 330,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 332,
+          lineNumber: 334,
           columnNumber: 13
         }
       }, "Female labor force as a percentage of the total labor force in 2017 with the MENA region in red"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34272,7 +34272,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 336,
+          lineNumber: 338,
           columnNumber: 13
         }
       }, yLabels(s / 2 - halfCodeWidth), data2017.map((d, i) => {
@@ -34291,7 +34291,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 342,
+                lineNumber: 344,
                 columnNumber: 21
               }
             })
@@ -34301,7 +34301,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 356,
+          lineNumber: 358,
           columnNumber: 13
         }
       }, "The MENA region consists of countries from the Middle East and North Africa. I've highlighted those countries in red and extended them to be visible without requiring color. All of the MENA countries fail to pass 25% female workforce, with the solitary of outlier of Israel at around 46%. Palestine is not included in the dataset.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34310,14 +34310,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 365,
+          lineNumber: 367,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 369,
+          lineNumber: 371,
           columnNumber: 13
         }
       }, "Average female labor force among recorded countries as a percentage of total labor force among recorded countries from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34329,7 +34329,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 374,
+          lineNumber: 376,
           columnNumber: 13
         }
       }, yLabels(m + 30), femaleWorldTimeline.map((d, i) => {
@@ -34339,7 +34339,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 379,
+                lineNumber: 381,
                 columnNumber: 21
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34353,7 +34353,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 380,
+                lineNumber: 382,
                 columnNumber: 23
               }
             }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34368,7 +34368,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 389,
+                lineNumber: 391,
                 columnNumber: 23
               }
             }), d[0] % 5 == 0 ? /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34383,14 +34383,14 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 400,
+                lineNumber: 402,
                 columnNumber: 25
               }
             }, d[0]) : /*#__PURE__*/_reactDefault.default.createElement("text", {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 413,
+                lineNumber: 415,
                 columnNumber: 25
               }
             }))
@@ -34401,7 +34401,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 419,
+                lineNumber: 421,
                 columnNumber: 21
               }
             }, /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34416,7 +34416,7 @@ try {
               __self: undefined,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 420,
+                lineNumber: 422,
                 columnNumber: 23
               }
             }))
@@ -34426,7 +34426,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 435,
+          lineNumber: 437,
           columnNumber: 13
         }
       }, "Although we can see the female labor force roughly increasing, it isn't at a significant enough pace to reach 50% anytime soon. This indicates that globally, the world is unequal. Note: this is an average of all countries, not weighted by population, so it is not the percentage of the world labor force that is female.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34435,14 +34435,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 443,
+          lineNumber: 445,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 447,
+          lineNumber: 449,
           columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34454,7 +34454,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 451,
+          lineNumber: 453,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34466,7 +34466,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 452,
+          lineNumber: 454,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34478,7 +34478,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 453,
+          lineNumber: 455,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34492,7 +34492,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 460,
+          lineNumber: 462,
           columnNumber: 15
         }
       }, "1991"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34506,7 +34506,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 471,
+          lineNumber: 473,
           columnNumber: 15
         }
       }, "2017"), yLabels(s / 4), dataFemChange.map((d, i) => {
@@ -34524,7 +34524,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 486,
+              lineNumber: 488,
               columnNumber: 19
             }
           })
@@ -34533,7 +34533,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 499,
+          lineNumber: 501,
           columnNumber: 13
         }
       }, "This chart shows the net change in female labor force as a percentage of the total labor force by country between 1991 and 2017. Countries that increased the percentage of women in the workforce are depicted in blue while countries that decreased the percentage are depicted in red. Despite the previous observation's findings that the total percentage barely changed, from this graph we can see that individual countries frequently changed significantly.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34542,14 +34542,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 510,
+          lineNumber: 512,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 514,
+          lineNumber: 516,
           columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017 (MENA)"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34561,7 +34561,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 518,
+          lineNumber: 520,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34573,7 +34573,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 519,
+          lineNumber: 521,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34585,7 +34585,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 520,
+          lineNumber: 522,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34599,7 +34599,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 527,
+          lineNumber: 529,
           columnNumber: 15
         }
       }, "1991"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34613,7 +34613,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 538,
+          lineNumber: 540,
           columnNumber: 15
         }
       }, "2017"), yLabels(s / 4), dataFemChange.filter(d => {
@@ -34633,7 +34633,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 557,
+              lineNumber: 559,
               columnNumber: 21
             }
           })
@@ -34642,7 +34642,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 570,
+          lineNumber: 572,
           columnNumber: 13
         }
       }, "This chart is identical to the previous chart, except filtered for MENA countries. While MENA countries still remain significantly lower than average, most increased the female percentage of their workforce. More data is needed as to why, but we can say MENA as a whole is slightly improving.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34651,14 +34651,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 578,
+          lineNumber: 580,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 582,
+          lineNumber: 584,
           columnNumber: 13
         }
       }, "Change in female labor force as a percentage of total labor force from 1991 to 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34670,7 +34670,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 586,
+          lineNumber: 588,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34684,7 +34684,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 587,
+          lineNumber: 589,
           columnNumber: 15
         }
       }, "100%"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34698,7 +34698,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 595,
+          lineNumber: 597,
           columnNumber: 15
         }
       }, "0%"), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34710,7 +34710,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 603,
+          lineNumber: 605,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34722,7 +34722,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 604,
+          lineNumber: 606,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("line", {
@@ -34734,7 +34734,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 605,
+          lineNumber: 607,
           columnNumber: 15
         }
       }), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34748,7 +34748,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 606,
+          lineNumber: 608,
           columnNumber: 15
         }
       }, "2017"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34762,7 +34762,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 617,
+          lineNumber: 619,
           columnNumber: 15
         }
       }, "1991"), dataFemChange.map((d, i) => {
@@ -34772,7 +34772,7 @@ try {
             key: "changescatter" + i,
             cx: s - yScale(+d[0][women]),
             cy: yScale(+d[1][women]),
-            r: radScale(+d[1]["Labor force, total"] * +d[1][women] * 0.01),
+            r: radScale(+d[1]["average_value_Labor force, total"] * +d[1][women] * 0.01),
             fill: highlight ? "steelblue" : "palevioletred",
             stroke: highlight ? "steelblue" : "palevioletred",
             strokeOpacity: 0.4,
@@ -34780,7 +34780,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 631,
+              lineNumber: 633,
               columnNumber: 19
             }
           })
@@ -34789,7 +34789,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 646,
+          lineNumber: 650,
           columnNumber: 13
         }
       }, "This chart shows the net change in female labor force as a percentage of the total labor force by country between 1991 and 2017. Countries that increased the % of women in their labor force are higher than they are farther, and are represented in blue above the dividing line. Points further from the line have the biggest change. I also set the radius of the circles to represent the raw number of female workers in 2017.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34798,14 +34798,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 656,
+          lineNumber: 660,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 660,
+          lineNumber: 664,
           columnNumber: 13
         }
       }, "Net change in female labor force as a percentage of total labor force from 1991 to 2017", " "), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34817,7 +34817,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 664,
+          lineNumber: 668,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34831,7 +34831,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 665,
+          lineNumber: 669,
           columnNumber: 15
         }
       }, "-12"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34845,7 +34845,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 676,
+          lineNumber: 680,
           columnNumber: 15
         }
       }, "0"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34859,7 +34859,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 687,
+          lineNumber: 691,
           columnNumber: 15
         }
       }, "+14"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34873,7 +34873,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 698,
+          lineNumber: 702,
           columnNumber: 15
         }
       }, "27"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34889,7 +34889,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 709,
+          lineNumber: 713,
           columnNumber: 15
         }
       }, "# of Countries"), /*#__PURE__*/_reactDefault.default.createElement("text", {
@@ -34903,7 +34903,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 722,
+          lineNumber: 726,
           columnNumber: 15
         }
       }, "Change from 1991-2017"), bucketsForce.map((bin, i) => {
@@ -34919,7 +34919,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 736,
+              lineNumber: 740,
               columnNumber: 19
             }
           })
@@ -34928,7 +34928,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 747,
+          lineNumber: 751,
           columnNumber: 13
         }
       }, "This chart depicts a histogram of the percentage of the labor force that is female in 1997 subtracted from the same number in 2017. Most countries experienced a slight shift higher. This chart, with other data removed, makes it easy to see that most countries experienced a positive shift, with positive changes in blue and negative changes in red.")), /*#__PURE__*/_reactDefault.default.createElement(_reactBootstrapTabDefault.default, {
@@ -34937,14 +34937,14 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 756,
+          lineNumber: 760,
           columnNumber: 11
         }
       }, /*#__PURE__*/_reactDefault.default.createElement("h5", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 757,
+          lineNumber: 761,
           columnNumber: 13
         }
       }, "Female labor force as a percentage of the total labor force in 2017"), /*#__PURE__*/_reactDefault.default.createElement("svg", {
@@ -34956,7 +34956,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 761,
+          lineNumber: 765,
           columnNumber: 13
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.ComposableMap, {
@@ -34967,7 +34967,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 762,
+          lineNumber: 766,
           columnNumber: 15
         }
       }, /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Sphere, {
@@ -34976,7 +34976,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 768,
+          lineNumber: 772,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Graticule, {
@@ -34985,7 +34985,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 769,
+          lineNumber: 773,
           columnNumber: 17
         }
       }), /*#__PURE__*/_reactDefault.default.createElement(_reactSimpleMaps.Geographies, {
@@ -34993,7 +34993,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 770,
+          lineNumber: 774,
           columnNumber: 17
         }
       }, ({geographies}) => geographies.map(geo => {
@@ -35006,7 +35006,7 @@ try {
             __self: undefined,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 777,
+              lineNumber: 781,
               columnNumber: 25
             }
           })
@@ -35015,7 +35015,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 788,
+          lineNumber: 792,
           columnNumber: 13
         }
       }, "This is a choropleth map of female to male ratio of the world labor force. The darker the map color the higher ratio of women, capping at 60% with the color 'steelblue'. My predictions about the MENA region holding the lowest ration turned out to be correct, with a visible lighter belt from it's neighbors. No data exists for some countries like Greenland, denoted in an off-white color. I used react-simple-maps to build my map because I'd rather not deal with topojson, thanks, so sue me."))))
@@ -45836,7 +45836,7 @@ try {
       });
     };
     // Column names. used in d[women] to pull column
-    const women = "Labor force, female (% of total labor force)";
+    const women = "average_value_Labor force, female (% of total labor force)";
     // Border designs. 500x500 but working area is 460 x 460
     const s = 500;
     // viz size
@@ -60094,7 +60094,7 @@ try {
     };
     // filters the range of data to endyears based on years
     // Column names. used in d[women] to pull column
-    const women = "Labor force, female (% of total labor force)";
+    const women = "average_value_Labor force, female (% of total labor force)";
     // Border designs. 500x500 but working area is 460 x 460
     const s = 500;
     // viz size
@@ -61206,16 +61206,16 @@ _parcelHelpers.export(exports, "cols", function () {
   return cols;
 });
 const cols = {
-  womLab: "Labor force, female (% of total labor force)",
-  womUnem: "Unemployment, female (% of female labor force) (national estimate)",
-  menUnem: "Unemployment, male (% of male labor force) (national estimate)",
-  totUnem: "Unemployment, total (% of total labor force) (national estimate)",
-  womUnemY: "Unemployment, youth female (% of female labor force ages 15-24) (national estimate)",
-  menUnemY: "Unemployment, youth male (% of male labor force ages 15-24) (national estimate)",
-  totUnemY: "Unemployment, youth total (% of total labor force ages 15-24) (national estimate)",
-  WomChEmp: "Children in employment, wage workers, female (% of female children in employment, ages 7-14)",
-  menChEmp: "Children in employment, wage workers, male (% of male children in employment, ages 7-14)",
-  totChEmp: "Children in employment, wage workers (% of children in employment, ages 7-14)"
+  womLab: "average_value_Labor force, female (% of total labor force)",
+  womUnem: "average_value_Unemployment, female (% of female labor force) (national estimate)",
+  menUnem: "average_value_Unemployment, male (% of male labor force) (national estimate)",
+  totUnem: "average_value_Unemployment, total (% of total labor force) (national estimate)",
+  womUnemY: "average_value_Unemployment, youth female (% of female labor force ages 15-24) (national estimate)",
+  menUnemY: "average_value_Unemployment, youth male (% of male labor force ages 15-24) (national estimate)",
+  totUnemY: "average_value_Unemployment, youth total (% of total labor force ages 15-24) (national estimate)",
+  WomChEmp: "average_value_Children in employment, wage workers, female (% of female children in employment, ages 7-14)",
+  menChEmp: "average_value_Children in employment, wage workers, male (% of male children in employment, ages 7-14)",
+  totChEmp: "average_value_Children in employment, wage workers (% of children in employment, ages 7-14)"
 };
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"6A5ko":[function(require,module,exports) {

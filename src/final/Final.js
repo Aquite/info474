@@ -68,7 +68,7 @@ const Final = () => {
   // filters the range of data to endyears based on years
 
   // Column names. used in d[women] to pull column
-  const women = "Labor force, female (% of total labor force)";
+  const women = "average_value_Labor force, female (% of total labor force)";
 
   // Border designs. 500x500 but working area is 460 x 460
   const s = 500; // viz size

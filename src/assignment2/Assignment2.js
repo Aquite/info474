@@ -85,7 +85,7 @@ const Assignment2 = () => {
   });
 
   // Column names
-  const women = "Labor force, female (% of total labor force)";
+  const women = "average_value_Labor force, female (% of total labor force)";
 
   // Border designs. 500x500 but working area is 460 x 460
   const s = 500; // viz size
@@ -194,7 +194,9 @@ const Assignment2 = () => {
     .domain(
       extent(
         dataFemChange.map((d) => {
-          return +d[1][women] * 0.01 * +d[1]["Labor force, total"];
+          return (
+            +d[1][women] * 0.01 * +d[1]["average_value_Labor force, total"]
+          );
         })
       )
     )
@@ -633,7 +635,9 @@ const Assignment2 = () => {
                     cx={s - yScale(+d[0][women])}
                     cy={yScale(+d[1][women])}
                     r={radScale(
-                      +d[1]["Labor force, total"] * +d[1][women] * 0.01
+                      +d[1]["average_value_Labor force, total"] *
+                        +d[1][women] *
+                        0.01
                     )}
                     fill={highlight ? "steelblue" : "palevioletred"}
                     stroke={highlight ? "steelblue" : "palevioletred"}
